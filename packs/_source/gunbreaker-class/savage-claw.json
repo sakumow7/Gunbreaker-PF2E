@@ -1,0 +1,52 @@
+{
+    "_id": "c92a9a4f65aed576",
+    "name": "Savage Claw",
+    "type": "feat",
+    "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Requirements</strong> <em>Gnashing Fang</em> combo effect.</p><p>Make a gunblade Strike with a +3d8 bonus. You gain <em>Ready to Tear</em> (@UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.d2e7e82195b0d940]{Abdomen Tear}) and the <em>Savage Claw</em> effect, enabling @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.901295e96cdc5cc2]{Wicked Talon}.</p><p><strong>Damage:</strong> @Damage[3d8[slashing]]</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 6
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.14d57475c050642d"
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.b79130079a98d5e0"
+            }
+        ]
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

@@ -1,0 +1,64 @@
+{
+    "_id": "7ea8bba45957ea76",
+    "name": "Gunblade Weapon Mastery",
+    "type": "feat",
+    "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p>Your practice with the gunblade is unmatched. You become an <strong>expert</strong> with simple weapons, martial weapons, and gunblades. Your critical specialization effects with the sword group are always active.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 5
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [
+            {
+                "key": "MartialProficiency",
+                "label": "Gunblade Mastery (Simple/Martial)",
+                "slug": "gnb-weapon-mastery-sm",
+                "definition": [
+                    "item:category:simple",
+                    "or",
+                    "item:category:martial"
+                ],
+                "value": 3
+            },
+            {
+                "key": "MartialProficiency",
+                "label": "Gunblade Mastery",
+                "slug": "gnb-weapon-mastery",
+                "definition": [
+                    "item:group:sword"
+                ],
+                "value": 3
+            }
+        ]
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

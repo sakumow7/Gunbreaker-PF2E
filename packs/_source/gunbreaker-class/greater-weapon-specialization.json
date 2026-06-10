@@ -1,0 +1,72 @@
+{
+    "_id": "5ee5fcd559eedf13",
+    "name": "Greater Weapon Specialization",
+    "type": "feat",
+    "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p>Your damage bonus from @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a40dd44fb62beb04]{Weapon Specialization} increases to 4 with weapons in which you're a master, and 6 if legendary.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 15
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [
+            {
+                "key": "AdjustModifier",
+                "mode": "upgrade",
+                "slug": "weapon-specialization",
+                "selectors": [
+                    "weapon-damage",
+                    "unarmed-damage"
+                ],
+                "predicate": [
+                    "item:proficiency:rank:3"
+                ],
+                "value": 4,
+                "priority": 1
+            },
+            {
+                "key": "AdjustModifier",
+                "mode": "upgrade",
+                "slug": "weapon-specialization",
+                "selectors": [
+                    "weapon-damage",
+                    "unarmed-damage"
+                ],
+                "predicate": [
+                    "item:proficiency:rank:4"
+                ],
+                "value": 6,
+                "priority": 1
+            }
+        ]
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

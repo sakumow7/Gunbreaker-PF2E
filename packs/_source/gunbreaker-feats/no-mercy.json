@@ -1,0 +1,56 @@
+{
+    "_id": "4b87be96d6c648d2",
+    "name": "No Mercy",
+    "type": "feat",
+    "img": "icons/magic/control/buff-flight-wings-runes-purple.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Frequency</strong> once per minute.</p><p>You gain a +2 status bonus to weapon damage rolls for 2 rounds and gain <em>Ready to Break</em>, enabling @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.fd0cd59b38944c65]{Sonic Break}.</p><p><strong>Apply:</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.698e269ba38bcb47]{No Mercy (+2 dmg)} @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.de55178b35fdfb4c]{Ready to Break}</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 2
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.698e269ba38bcb47"
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.de55178b35fdfb4c"
+            }
+        ],
+        "frequency": {
+            "max": 1,
+            "per": "PT1M"
+        }
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

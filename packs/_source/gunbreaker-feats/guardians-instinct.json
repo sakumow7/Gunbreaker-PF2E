@@ -1,0 +1,47 @@
+{
+    "_id": "2fedcd38de2a7855",
+    "name": "Guardian's Instinct",
+    "type": "feat",
+    "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Trigger</strong> An ally within 30 feet would take damage.</p><p><strong>Frequency</strong> once per round. You interpose covering fire, granting the ally resistance to that damage equal to half your level. </p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 16
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "reaction"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [],
+        "frequency": {
+            "max": 1,
+            "per": "round"
+        }
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

@@ -1,0 +1,58 @@
+{
+    "_id": "39542260a7548fc5",
+    "name": "Bloodfest",
+    "type": "feat",
+    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Frequency</strong> once per minute.</p><p>Draw aetheric energy from a target within 25 feet: immediately fill your @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.fe03ab566ecd7e59]{Powder Gauge} by 3 cartridges and raise your maximum to <strong>6</strong> until the end of the encounter. You also gain <em>Ready to Reign</em>, enabling @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.d2baacee6625134d]{Reign of Beasts} at higher levels.</p><p><strong>Cartridges:</strong> Build 3 (adjusted automatically when this is used).</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 10
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [
+            {
+                "key": "ActiveEffectLike",
+                "mode": "override",
+                "path": "system.resources.cartridges.max",
+                "value": 6
+            }
+        ],
+        "frequency": {
+            "max": 1,
+            "per": "PT1M"
+        }
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {
+        "gunbreaker-pf2e": {
+            "cartridge": 3
+        }
+    }
+}

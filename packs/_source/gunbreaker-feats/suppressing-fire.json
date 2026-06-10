@@ -1,0 +1,47 @@
+{
+    "_id": "a94257a79a9f51d7",
+    "name": "Suppressing Fire",
+    "type": "feat",
+    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Frequency</strong> once per round.</p><p>You lay down covering fire to control the battlefield. Choose a 10-foot burst within 60 feet; until the start of your next turn, the first time each enemy enters or starts its turn in that area it must succeed at a Will save against your class DC or become off-guard to you until the end of its turn. This represents the Gunbreaker drawing aggression with threatening fire.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 1
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [],
+        "frequency": {
+            "max": 1,
+            "per": "round"
+        }
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

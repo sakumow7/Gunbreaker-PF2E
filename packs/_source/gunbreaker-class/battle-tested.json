@@ -1,0 +1,57 @@
+{
+    "_id": "571c5710dc92e12d",
+    "name": "Battle-Tested",
+    "type": "feat",
+    "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+    "system": {
+        "description": {
+            "value": "<p>Your reflexes are honed by countless frontline encounters. Your proficiency in Reflex saves increases to <strong>expert</strong>, and when you roll a success on a Reflex save you get a critical success instead.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 13
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [
+            {
+                "key": "ActiveEffectLike",
+                "mode": "upgrade",
+                "path": "system.saves.reflex.rank",
+                "value": 2
+            },
+            {
+                "key": "AdjustDegreeOfSuccess",
+                "selector": "reflex",
+                "adjustment": {
+                    "success": "one-degree-better"
+                }
+            }
+        ]
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

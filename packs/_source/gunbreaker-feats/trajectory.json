@@ -1,0 +1,48 @@
+{
+    "_id": "f686a3539d9ebe62",
+    "name": "Trajectory",
+    "type": "feat",
+    "img": "icons/skills/movement/figure-running-gray.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Frequency</strong> twice per minute.</p><p>Stride up to your Speed toward a targeted enemy within 60 feet, ending adjacent if possible and generating enmity.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 10
+        },
+        "traits": {
+            "value": [
+                "move",
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [],
+        "frequency": {
+            "max": 2,
+            "per": "PT1M"
+        }
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

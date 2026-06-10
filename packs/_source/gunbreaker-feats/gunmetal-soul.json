@@ -1,0 +1,47 @@
+{
+    "_id": "f9d4caba9fc5e062",
+    "name": "Gunmetal Soul",
+    "type": "feat",
+    "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Frequency</strong> once per day.</p><p>The Gunbreaker's ultimate expression of protection. You and all allies within 60 feet reduce all damage taken by half (to a minimum of 1 per instance) until the start of your next turn. This can be used even while otherwise unable to act.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 20
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 2
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [],
+        "frequency": {
+            "max": 1,
+            "per": "day"
+        }
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

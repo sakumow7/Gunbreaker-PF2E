@@ -1,0 +1,46 @@
+{
+    "_id": "d2baacee6625134d",
+    "name": "Reign of Beasts",
+    "type": "feat",
+    "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Requirements</strong> You have <em>Ready to Reign</em> (from @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.39542260a7548fc5]{Bloodfest}).</p><p>Capstone combo. Make a gunblade Strike against a target and all enemies adjacent to it with a <strong>+4d10</strong> bonus (secondary targets take half the bonus). On your next two turns this becomes Noble Blood (+5d10) and then Lion Heart (+6d10), escalating the chain.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 18
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": [
+                "@UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.39542260a7548fc5]{Bloodfest}",
+                "Ready to Reign"
+            ]
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": []
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

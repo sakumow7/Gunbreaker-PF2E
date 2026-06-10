@@ -1,0 +1,64 @@
+{
+    "_id": "a7bcbcad2fd2a303",
+    "name": "Lion's Legend",
+    "type": "feat",
+    "img": "icons/magic/light/explosion-star-glow-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p>You stand among the greatest gunblade wielders to ever live. Your proficiency with simple weapons, martial weapons, and gunblades increases to <strong>legendary</strong>, and you gain access to the capstone combo @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.d2baacee6625134d]{Reign of Beasts} if you do not already have it. Once per day you may treat your Powder Gauge as full (3 cartridges, or 6 if @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.39542260a7548fc5]{Bloodfest} is active) at the start of an encounter.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 19
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [
+            {
+                "key": "MartialProficiency",
+                "label": "Lion's Legend (Simple/Martial)",
+                "slug": "gnb-lions-legend-sm",
+                "definition": [
+                    "item:category:simple",
+                    "or",
+                    "item:category:martial"
+                ],
+                "value": 5
+            },
+            {
+                "key": "MartialProficiency",
+                "label": "Lion's Legend",
+                "slug": "gnb-lions-legend",
+                "definition": [
+                    "item:group:sword"
+                ],
+                "value": 5
+            }
+        ]
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

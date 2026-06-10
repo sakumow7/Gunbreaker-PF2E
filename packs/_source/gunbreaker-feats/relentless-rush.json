@@ -1,0 +1,47 @@
+{
+    "_id": "dfeb44d09e34a0f3",
+    "name": "Relentless Rush",
+    "type": "feat",
+    "img": "icons/magic/light/explosion-star-glow-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Frequency</strong> once per 10 minutes.</p><p>Unleash a flurry of blade strikes on enemies in a 5-foot emanation, dealing 2d8 fire damage at the start of each of your turns for 2 rounds and reducing damage you take by an amount equal to your level until the effect ends. When it expires, deliver a finishing blast dealing 8d8 fire damage to all enemies still in range (basic Reflex save vs. your class DC), leaving those who fail flat-footed for 1 round.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 18
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 2
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [],
+        "frequency": {
+            "max": 1,
+            "per": "PT10M"
+        }
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

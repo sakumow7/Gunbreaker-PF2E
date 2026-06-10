@@ -1,0 +1,56 @@
+{
+    "_id": "81fc94e9fc8dcc22",
+    "name": "Gunbreaker Mastery",
+    "type": "feat",
+    "img": "icons/magic/light/explosion-star-glow-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p>Your mastery of the gunblade arts is total. Your proficiency in your Gunbreaker class DC increases to <strong>master</strong>, and your Will save increases to <strong>expert</strong>.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 17
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [
+            {
+                "key": "ActiveEffectLike",
+                "mode": "upgrade",
+                "path": "system.attributes.classDC.rank",
+                "value": 3
+            },
+            {
+                "key": "ActiveEffectLike",
+                "mode": "upgrade",
+                "path": "system.saves.will.rank",
+                "value": 2
+            }
+        ]
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

@@ -1,0 +1,64 @@
+{
+    "_id": "a5ca84e5a87ea0ea",
+    "name": "Gunblade Legend",
+    "type": "feat",
+    "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p>You are a living legend of the gunblade. Your proficiency with simple weapons, martial weapons, and gunblades increases to <strong>master</strong>. You also become an expert in advanced weapons of the sword group.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 13
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [
+            {
+                "key": "MartialProficiency",
+                "label": "Gunblade Legend (Simple/Martial)",
+                "slug": "gnb-legend-sm",
+                "definition": [
+                    "item:category:simple",
+                    "or",
+                    "item:category:martial"
+                ],
+                "value": 4
+            },
+            {
+                "key": "MartialProficiency",
+                "label": "Gunblade Legend",
+                "slug": "gnb-legend",
+                "definition": [
+                    "item:group:sword"
+                ],
+                "value": 4
+            }
+        ]
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

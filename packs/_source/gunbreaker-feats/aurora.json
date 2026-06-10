@@ -1,0 +1,48 @@
+{
+    "_id": "8edcc57f3326f12a",
+    "name": "Aurora",
+    "type": "feat",
+    "img": "icons/magic/life/cross-area-circle-green-white.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Frequency</strong> twice per minute.</p><p>Grant yourself or an ally within 30 feet fast healing equal to half your level for 3 rounds (regen).</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 4
+        },
+        "traits": {
+            "value": [
+                "healing",
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [],
+        "frequency": {
+            "max": 2,
+            "per": "PT1M"
+        }
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

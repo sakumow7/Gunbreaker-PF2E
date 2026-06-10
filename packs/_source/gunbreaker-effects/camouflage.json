@@ -1,0 +1,63 @@
+{
+    "_id": "47ab3c3e65986371",
+    "name": "Camouflage",
+    "type": "effect",
+    "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+    "system": {
+        "description": {
+            "value": "<p>+2 circumstance AC vs melee; physical resistance equal to half your level.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 1
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "start": {
+            "value": 0,
+            "initiative": null
+        },
+        "duration": {
+            "value": 2,
+            "unit": "rounds",
+            "sustained": false,
+            "expiry": "turn-start"
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [
+            {
+                "key": "FlatModifier",
+                "selector": "ac",
+                "type": "circumstance",
+                "value": 2,
+                "predicate": [
+                    "melee"
+                ]
+            },
+            {
+                "key": "Resistance",
+                "type": "physical",
+                "value": "floor(@actor.level/2)"
+            }
+        ]
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

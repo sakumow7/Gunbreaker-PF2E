@@ -1,0 +1,47 @@
+{
+    "_id": "86023718d8bb7327",
+    "name": "Powder Discipline",
+    "type": "feat",
+    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Frequency</strong> once per encounter.</p><p>Your trigger control wastes nothing. When you score a critical hit with a gunblade Strike while you have fewer than your maximum cartridges, load 1 cartridge into your @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.fe03ab566ecd7e59]{Powder Gauge}. A disciplined Gunbreaker turns a clean hit into fresh ammunition.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 2
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [],
+        "frequency": {
+            "max": 1,
+            "per": "PT1M"
+        }
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

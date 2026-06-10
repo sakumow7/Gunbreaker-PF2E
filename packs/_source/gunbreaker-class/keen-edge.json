@@ -1,0 +1,48 @@
+{
+    "_id": "0f2a8e0288fb91c8",
+    "name": "Keen Edge",
+    "type": "feat",
+    "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Requirements</strong> Wielding a gunblade.</p><p>Make a melee Strike with your gunblade. On a hit you gain the <em>Keen Edge</em> combo effect, enabling @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.78f54cb87f5eafaa]{Brutal Shell} on your next action.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 1
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.331249351add9e72"
+            }
+        ]
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

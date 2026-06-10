@@ -1,0 +1,43 @@
+{
+    "_id": "a61994a226d98bcc",
+    "name": "Steady Aim",
+    "type": "feat",
+    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p>Your gunblade reports find their mark. When you make a ranged gunblade Strike (such as @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.47bc76d1092a9061]{Lightning Shot}) you ignore the first range increment's penalty, and your critical specialization with gunblades comes online once you have the requisite proficiency.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 3
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": []
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}
