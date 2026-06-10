@@ -43,7 +43,8 @@
                 "domain": "all",
                 "option": "gunbreaker:combo:gnashing-fang"
             }
-        ]
+        ],
+        "slug": "combo-gnashing-fang-ready"
     },
     "folder": null,
     "sort": 0,

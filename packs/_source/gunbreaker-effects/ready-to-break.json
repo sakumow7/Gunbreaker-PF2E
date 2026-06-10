@@ -37,7 +37,14 @@
         },
         "badge": null,
         "context": null,
-        "rules": []
+        "rules": [
+            {
+                "key": "RollOption",
+                "domain": "all",
+                "option": "gunbreaker:ready:break"
+            }
+        ],
+        "slug": "ready-to-break"
     },
     "folder": null,
     "sort": 0,

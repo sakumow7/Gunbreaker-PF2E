@@ -32,16 +32,7 @@
             "remaster": true,
             "title": "FFXIV Gunbreaker (homebrew)"
         },
-        "rules": [
-            {
-                "key": "GrantItem",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.698e269ba38bcb47"
-            },
-            {
-                "key": "GrantItem",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.de55178b35fdfb4c"
-            }
-        ],
+        "rules": [],
         "frequency": {
             "max": 1,
             "per": "PT1M"
@@ -52,5 +43,12 @@
     "ownership": {
         "default": 0
     },
-    "flags": {}
+    "flags": {
+        "gunbreaker-pf2e": {
+            "applyEffects": [
+                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.698e269ba38bcb47",
+                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.de55178b35fdfb4c"
+            ]
+        }
+    }
 }

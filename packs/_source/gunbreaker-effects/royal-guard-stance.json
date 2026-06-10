@@ -49,7 +49,8 @@
                 "domain": "all",
                 "option": "royal-guard"
             }
-        ]
+        ],
+        "slug": "royal-guard-stance"
     },
     "folder": null,
     "sort": 0,

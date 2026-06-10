@@ -43,7 +43,8 @@
                 "domain": "all",
                 "option": "gunbreaker:cont:ready-to-raze"
             }
-        ]
+        ],
+        "slug": "ready-to-raze"
     },
     "folder": null,
     "sort": 0,

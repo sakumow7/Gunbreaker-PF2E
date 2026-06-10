@@ -39,5 +39,11 @@
     "ownership": {
         "default": 0
     },
-    "flags": {}
+    "flags": {
+        "gunbreaker-pf2e": {
+            "removeEffects": [
+                "ready-to-tear"
+            ]
+        }
+    }
 }

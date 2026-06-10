@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
 """Generate all PF2e _source JSON for the Gunbreaker class module.
 
+DEPRECATED as the build entry point as of v1.2.2: this script reproduces the
+v1.2.1 baseline and does NOT include the v1.2.2 bug fixes (SpecialResource
+gauge, reevaluateOnUpdate unlocks, on-use effect flags, inline-roll fixes —
+see apply_fixes.py for the full list). packs/_source/*.json is now the
+canonical source; edit those files directly and repack with pack_leveldb.mjs.
+Re-running this script will overwrite the fixes.
+
 Architecture mirrors a real PF2e martial class (Fighter as reference):
 
   * AUTO-GRANTED CLASS FEATURES (category "classfeature") at fixed levels,

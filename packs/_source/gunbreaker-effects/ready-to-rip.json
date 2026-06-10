@@ -43,7 +43,8 @@
                 "domain": "all",
                 "option": "gunbreaker:cont:ready-to-rip"
             }
-        ]
+        ],
+        "slug": "ready-to-rip"
     },
     "folder": null,
     "sort": 0,

@@ -35,9 +35,9 @@
         "rules": [
             {
                 "key": "ActiveEffectLike",
-                "mode": "upgrade",
+                "mode": "add",
                 "path": "system.resources.cartridges.max",
-                "value": 5
+                "value": 1
             }
         ]
     },

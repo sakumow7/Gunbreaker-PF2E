@@ -1,15 +1,15 @@
 {
-    "_id": "4791a8210f7e88da",
-    "name": "Ready to Gouge",
+    "_id": "e8d2c7a4b9f01356",
+    "name": "Ready to Reign",
     "type": "effect",
-    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "img": "icons/creatures/abilities/lion-roar-yellow.webp",
     "system": {
         "description": {
-            "value": "<p>Continuation: you may use @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.46135863d5cb73ef]{Eye Gouge}.</p>",
+            "value": "<p>Enables @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.d2baacee6625134d]{Reign of Beasts}.</p>",
             "gm": ""
         },
         "level": {
-            "value": 1
+            "value": 10
         },
         "traits": {
             "value": [
@@ -28,9 +28,9 @@
         },
         "duration": {
             "value": 1,
-            "unit": "rounds",
+            "unit": "minutes",
             "sustained": false,
-            "expiry": "turn-end"
+            "expiry": null
         },
         "tokenIcon": {
             "show": true
@@ -41,10 +41,10 @@
             {
                 "key": "RollOption",
                 "domain": "all",
-                "option": "gunbreaker:cont:ready-to-gouge"
+                "option": "gunbreaker:ready:reign"
             }
         ],
-        "slug": "ready-to-gouge"
+        "slug": "ready-to-reign"
     },
     "folder": null,
     "sort": 0,

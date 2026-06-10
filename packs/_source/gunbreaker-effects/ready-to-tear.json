@@ -43,7 +43,8 @@
                 "domain": "all",
                 "option": "gunbreaker:cont:ready-to-tear"
             }
-        ]
+        ],
+        "slug": "ready-to-tear"
     },
     "folder": null,
     "sort": 0,

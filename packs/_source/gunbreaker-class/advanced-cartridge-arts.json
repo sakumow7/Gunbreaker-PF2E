@@ -67,7 +67,9 @@
                             12
                         ]
                     }
-                ]
+                ],
+                "reevaluateOnUpdate": true,
+                "allowDuplicate": false
             },
             {
                 "key": "GrantItem",
@@ -79,7 +81,9 @@
                             12
                         ]
                     }
-                ]
+                ],
+                "reevaluateOnUpdate": true,
+                "allowDuplicate": false
             },
             {
                 "key": "GrantItem",
@@ -91,7 +95,9 @@
                             14
                         ]
                     }
-                ]
+                ],
+                "reevaluateOnUpdate": true,
+                "allowDuplicate": false
             }
         ]
     },

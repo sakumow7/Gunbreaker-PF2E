@@ -74,7 +74,7 @@
             "simple": 1,
             "unarmed": 1,
             "other": {
-                "name": "Gunblades",
+                "name": "gunblade",
                 "rank": 1
             }
         },
@@ -221,17 +221,7 @@
             "value": [],
             "rarity": "common"
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "override",
-                "path": "system.resources.cartridges",
-                "value": {
-                    "value": 0,
-                    "max": 3
-                }
-            }
-        ]
+        "rules": []
     },
     "folder": null,
     "sort": 0,

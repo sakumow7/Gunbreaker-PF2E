@@ -32,14 +32,7 @@
             "remaster": true,
             "title": "FFXIV Gunbreaker (homebrew)"
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "override",
-                "path": "system.resources.cartridges.max",
-                "value": 6
-            }
-        ],
+        "rules": [],
         "frequency": {
             "max": 1,
             "per": "PT1M"
@@ -52,7 +45,11 @@
     },
     "flags": {
         "gunbreaker-pf2e": {
-            "cartridge": 3
+            "cartridge": 3,
+            "applyEffects": [
+                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.c4a9b1d0fe5e6f72",
+                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.e8d2c7a4b9f01356"
+            ]
         }
     }
 }

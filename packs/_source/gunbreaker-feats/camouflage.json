@@ -43,5 +43,11 @@
     "ownership": {
         "default": 0
     },
-    "flags": {}
+    "flags": {
+        "gunbreaker-pf2e": {
+            "applyEffects": [
+                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.47ab3c3e65986371"
+            ]
+        }
+    }
 }

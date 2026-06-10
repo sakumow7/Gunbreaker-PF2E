@@ -43,7 +43,8 @@
                 "domain": "all",
                 "option": "gunbreaker:cont:ready-to-blast"
             }
-        ]
+        ],
+        "slug": "ready-to-blast"
     },
     "folder": null,
     "sort": 0,

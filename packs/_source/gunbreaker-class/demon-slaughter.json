@@ -5,7 +5,7 @@
     "img": "icons/magic/fire/projectile-fireball-smoke-strong-orange.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Requirements</strong> You have the <em>Demon Slice</em> combo effect.</p><p>Sweep again in a 5-foot emanation, each enemy taking a gunblade Strike's damage plus bonus damage (<strong>1d8, +1d8 at 10th and 16th levels</strong>). <strong>Combo bonus: load 1 cartridge</strong>.</p><p><strong>Damage:</strong> @Damage[(1+floor((@actor.level-2)/8))d8[slashing]]</p><p><strong>Cartridges:</strong> Build 1 (adjusted automatically when this is used).</p>",
+            "value": "<p><strong>Requirements</strong> You have the <em>Demon Slice</em> combo effect.</p><p>Sweep again in a 5-foot emanation, each enemy taking a gunblade Strike's damage plus bonus damage (<strong>1d8, +1d8 at 10th and 18th levels</strong>). <strong>Combo bonus: load 1 cartridge</strong>.</p><p><strong>Damage:</strong> @Damage[(1+floor((@actor.level-2)/8))d8[slashing]]</p><p><strong>Cartridges:</strong> Build 1 (adjusted automatically when this is used).</p>",
             "gm": ""
         },
         "level": {
@@ -41,7 +41,10 @@
     },
     "flags": {
         "gunbreaker-pf2e": {
-            "cartridge": 1
+            "cartridge": 1,
+            "removeEffects": [
+                "combo-demon-slice-ready"
+            ]
         }
     }
 }

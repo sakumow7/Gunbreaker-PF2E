@@ -43,7 +43,8 @@
                 "domain": "all",
                 "option": "gunbreaker:combo:demon-slice"
             }
-        ]
+        ],
+        "slug": "combo-demon-slice-ready"
     },
     "folder": null,
     "sort": 0,

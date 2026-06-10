@@ -40,13 +40,11 @@
         "rules": [
             {
                 "key": "Resistance",
-                "type": "all",
-                "value": "@actor.level",
-                "definition": [
-                    "damage"
-                ]
+                "type": "all-damage",
+                "value": "@actor.level"
             }
-        ]
+        ],
+        "slug": "nebula"
     },
     "folder": null,
     "sort": 0,

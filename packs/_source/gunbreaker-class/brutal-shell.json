@@ -5,7 +5,7 @@
     "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Requirements</strong> You have the <em>Keen Edge</em> combo effect.</p><p>Make a gunblade Strike. <strong>Combo bonus:</strong> on a hit deal bonus damage of the weapon's type (<strong>1d8, +1d8 at 8th and 14th levels</strong>), restore HP equal to half your level, and gain that much temporary HP until the end of your next turn. You gain the <em>Brutal Shell</em> effect, enabling @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.b886b4f9b5e0ef3a]{Solid Barrel}.</p><p><strong>Damage:</strong> @Damage[(1+floor((@actor.level-2)/6))d8[slashing]]</p>",
+            "value": "<p><strong>Requirements</strong> You have the <em>Keen Edge</em> combo effect.</p><p>Make a gunblade Strike. <strong>Combo bonus:</strong> on a hit deal bonus damage of the weapon's type (<strong>1d8, +1d8 at 8th, 14th, and 20th levels</strong>), restore HP equal to half your level, and gain that much temporary HP until the end of your next turn. You gain the <em>Brutal Shell</em> effect, enabling @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.b886b4f9b5e0ef3a]{Solid Barrel}.</p><p><strong>Damage:</strong> @Damage[(1+floor((@actor.level-2)/6))d8[slashing]]</p>",
             "gm": ""
         },
         "level": {
@@ -32,17 +32,21 @@
             "remaster": true,
             "title": "FFXIV Gunbreaker (homebrew)"
         },
-        "rules": [
-            {
-                "key": "GrantItem",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.7ac01ee061a8f728"
-            }
-        ]
+        "rules": []
     },
     "folder": null,
     "sort": 0,
     "ownership": {
         "default": 0
     },
-    "flags": {}
+    "flags": {
+        "gunbreaker-pf2e": {
+            "applyEffects": [
+                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.7ac01ee061a8f728"
+            ],
+            "removeEffects": [
+                "combo-keen-edge-ready"
+            ]
+        }
+    }
 }

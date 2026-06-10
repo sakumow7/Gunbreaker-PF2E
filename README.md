@@ -4,8 +4,8 @@ A maximally faithful adaptation of the **Final Fantasy XIV Gunbreaker** job as a
 full **Pathfinder 2e** class for Foundry VTT. Built to be installed once and
 reused across every PF2e campaign you run.
 
-> **System:** Pathfinder Second Edition (`pf2e`). **Foundry:** v11–v13
-> (LevelDB packs; verified against v12). This module does **not** work in the
+> **System:** Pathfinder Second Edition (`pf2e`, 5.13.0 or later). **Foundry:**
+> v11–v13 (LevelDB packs; verified against v12). This module does **not** work in the
 > Starfinder 2e (`sf2e`) system — that would require a separately authored set
 > of `sf2e` items.
 
@@ -102,16 +102,18 @@ contains clickable buttons and the module reacts automatically:
   Danger Zone / Blasting Zone / Fated Circle scale with you automatically.
 - **Saves** — AoE actions embed a basic `@Check` against your class DC. Click it
   to post a save button players/targets can roll.
-- **Effects** — Royal Guard, No Mercy, Camouflage, and Nebula include an
-  **Apply Effect** link in their description. Click it to apply the matching
-  effect (with its AC/damage/resistance rules) to yourself. Royal Guard's effect
-  persists until you remove it (use Release Royal Guard, or delete the effect).
+- **Effects** — posting an action applies its effects to you **automatically**:
+  combo steps grant their "ready" window (Keen Edge → *Combo: Keen Edge Ready*,
+  etc.) and consume the window they used up; No Mercy, Camouflage, Nebula, and
+  Bloodfest apply their buffs; Royal Guard enters the stance and Release Royal
+  Guard removes it. Re-using an action refreshes its effect instead of stacking
+  a duplicate copy.
 - **Cartridges** — actions that build or spend cartridges (Solid Barrel +1,
   Demon Slaughter +1, Bloodfest +3, Burst Strike −1, Gnashing Fang −1, Fated
   Circle −1, Double Down −2) adjust the Powder Gauge **automatically** when
-  posted to chat, and whisper the new total to the GM. If you don't have enough
-  cartridges for a spender, you'll get a warning but the action still resolves
-  (GM can override).
+  posted to chat and report the new total. If you don't have enough cartridges
+  for a spender, you'll get a warning but the action still resolves (GM can
+  override).
 
 **What is *not* automated** (PF2e limitation, not a bug):
 
@@ -124,13 +126,16 @@ contains clickable buttons and the module reacts automatically:
 
 ## Rebuilding the packs (for editing)
 
-Source JSON lives in `packs/_source/`. After editing:
+Source JSON lives in `packs/_source/` and is the canonical source — edit those
+files directly, then repack:
 
 ```bash
-python3 build_sources.py     # regenerate _source from the generator (optional)
 npm install classic-level
 node pack_leveldb.mjs         # repack LevelDB folders
 ```
+
+> `build_sources.py` reproduces the v1.2.1 baseline and predates the v1.2.2
+> fixes; re-running it will overwrite them. Kept for reference only.
 
 ## Notes & balance
 

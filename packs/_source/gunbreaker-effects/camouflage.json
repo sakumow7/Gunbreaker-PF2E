@@ -44,7 +44,7 @@
                 "type": "circumstance",
                 "value": 2,
                 "predicate": [
-                    "melee"
+                    "item:melee"
                 ]
             },
             {
@@ -52,7 +52,8 @@
                 "type": "physical",
                 "value": "floor(@actor.level/2)"
             }
-        ]
+        ],
+        "slug": "camouflage"
     },
     "folder": null,
     "sort": 0,

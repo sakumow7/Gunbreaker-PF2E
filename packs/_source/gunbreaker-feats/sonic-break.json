@@ -5,7 +5,7 @@
     "img": "icons/magic/fire/flame-burning-creature-skeleton.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Requirements</strong> You have <em>Ready to Break</em> (from @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.4b87be96d6c648d2]{No Mercy}).</p><p>Make a gunblade Strike with a +2d8 bonus, and inflict persistent fire damage equal to 1d6 per 4 levels for 3 rounds.</p><p><strong>Damage:</strong> @Damage[2d8[fire]]</p><p><strong>Persistent:</strong> @Damage[((ceil(@actor.level/4))d6[persistent,fire])]</p>",
+            "value": "<p><strong>Requirements</strong> You have <em>Ready to Break</em> (from @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.4b87be96d6c648d2]{No Mercy}).</p><p>Make a gunblade Strike with a +2d8 bonus, and inflict persistent fire damage equal to 1d6 per 4 levels for 3 rounds.</p><p><strong>Damage:</strong> @Damage[2d8[fire]]</p><p><strong>Persistent:</strong> @Damage[(ceil(@actor.level/4))d6[persistent,fire]]</p>",
             "gm": ""
         },
         "level": {
@@ -41,5 +41,11 @@
     "ownership": {
         "default": 0
     },
-    "flags": {}
+    "flags": {
+        "gunbreaker-pf2e": {
+            "removeEffects": [
+                "ready-to-break"
+            ]
+        }
+    }
 }

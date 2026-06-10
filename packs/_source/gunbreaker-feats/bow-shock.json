@@ -5,7 +5,7 @@
     "img": "icons/magic/fire/flame-burning-creature-skeleton.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Frequency</strong> once per minute.</p><p>5-foot emanation dealing 2d6 fire damage (basic Reflex save against your class DC) plus persistent fire damage to all hit (1d4, 3 rounds).</p><p><strong>Damage:</strong> @Damage[2d6[fire]] &mdash; @Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|basic:true]</p><p><strong>Persistent:</strong> @Damage[(1d4[persistent,fire])]</p>",
+            "value": "<p><strong>Frequency</strong> once per minute.</p><p>5-foot emanation dealing 2d6 fire damage (basic Reflex save against your class DC) plus persistent fire damage to all hit (1d4, 3 rounds).</p><p><strong>Damage:</strong> @Damage[2d6[fire]] &mdash; @Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|basic:true]</p><p><strong>Persistent:</strong> @Damage[1d4[persistent,fire]]</p>",
             "gm": ""
         },
         "level": {

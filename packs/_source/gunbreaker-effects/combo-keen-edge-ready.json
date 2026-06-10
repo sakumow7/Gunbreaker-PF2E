@@ -43,7 +43,8 @@
                 "domain": "all",
                 "option": "gunbreaker:combo:keen-edge"
             }
-        ]
+        ],
+        "slug": "combo-keen-edge-ready"
     },
     "folder": null,
     "sort": 0,

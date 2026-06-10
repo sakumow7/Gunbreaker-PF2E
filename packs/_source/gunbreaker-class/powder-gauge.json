@@ -34,10 +34,10 @@
         },
         "rules": [
             {
-                "key": "ActiveEffectLike",
-                "mode": "override",
-                "path": "system.resources.cartridges.max",
-                "value": 3
+                "key": "SpecialResource",
+                "slug": "cartridges",
+                "label": "Powder Gauge",
+                "max": 3
             }
         ]
     },

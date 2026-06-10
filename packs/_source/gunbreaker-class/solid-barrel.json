@@ -41,7 +41,10 @@
     },
     "flags": {
         "gunbreaker-pf2e": {
-            "cartridge": 1
+            "cartridge": 1,
+            "removeEffects": [
+                "combo-brutal-shell-ready"
+            ]
         }
     }
 }

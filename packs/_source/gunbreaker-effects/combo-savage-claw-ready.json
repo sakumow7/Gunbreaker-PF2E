@@ -43,7 +43,8 @@
                 "domain": "all",
                 "option": "gunbreaker:combo:savage-claw"
             }
-        ]
+        ],
+        "slug": "combo-savage-claw-ready"
     },
     "folder": null,
     "sort": 0,

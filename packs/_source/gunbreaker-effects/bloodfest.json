@@ -1,15 +1,15 @@
 {
-    "_id": "4791a8210f7e88da",
-    "name": "Ready to Gouge",
+    "_id": "c4a9b1d0fe5e6f72",
+    "name": "Bloodfest",
     "type": "effect",
-    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "img": "icons/magic/unholy/strike-hand-glow-pink.webp",
     "system": {
         "description": {
-            "value": "<p>Continuation: you may use @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.46135863d5cb73ef]{Eye Gouge}.</p>",
+            "value": "<p>Aether floods your chamber: your maximum Powder Gauge is increased by 3 (typically to 6) for 1 minute.</p>",
             "gm": ""
         },
         "level": {
-            "value": 1
+            "value": 10
         },
         "traits": {
             "value": [
@@ -28,9 +28,9 @@
         },
         "duration": {
             "value": 1,
-            "unit": "rounds",
+            "unit": "minutes",
             "sustained": false,
-            "expiry": "turn-end"
+            "expiry": null
         },
         "tokenIcon": {
             "show": true
@@ -39,12 +39,13 @@
         "context": null,
         "rules": [
             {
-                "key": "RollOption",
-                "domain": "all",
-                "option": "gunbreaker:cont:ready-to-gouge"
+                "key": "ActiveEffectLike",
+                "mode": "add",
+                "path": "system.resources.cartridges.max",
+                "value": 3
             }
         ],
-        "slug": "ready-to-gouge"
+        "slug": "bloodfest"
     },
     "folder": null,
     "sort": 0,
