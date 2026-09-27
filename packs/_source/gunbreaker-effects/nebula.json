@@ -1,0 +1,55 @@
+{
+    "_id": "bbf2b441d6c80fae",
+    "name": "Nebula",
+    "type": "effect",
+    "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+    "system": {
+        "description": {
+            "value": "<p>Reduce all damage taken by your level (1 round).</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 1
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "start": {
+            "value": 0,
+            "initiative": null
+        },
+        "duration": {
+            "value": 1,
+            "unit": "rounds",
+            "sustained": false,
+            "expiry": "turn-start"
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [
+            {
+                "key": "Resistance",
+                "type": "all-damage",
+                "value": "@actor.level"
+            }
+        ],
+        "slug": "nebula"
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

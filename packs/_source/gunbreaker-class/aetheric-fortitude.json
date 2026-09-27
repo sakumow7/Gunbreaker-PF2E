@@ -1,0 +1,57 @@
+{
+    "_id": "ad484df0b1baae4e",
+    "name": "Aetheric Fortitude",
+    "type": "feat",
+    "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+    "system": {
+        "description": {
+            "value": "<p>Cartridge aether hardens you against punishment. Your proficiency in Fortitude increases to <strong>expert</strong>. When you roll a success on a Fortitude save, you get a critical success instead.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 9
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [
+            {
+                "key": "ActiveEffectLike",
+                "mode": "upgrade",
+                "path": "system.saves.fortitude.rank",
+                "value": 2
+            },
+            {
+                "key": "AdjustDegreeOfSuccess",
+                "selector": "fortitude",
+                "adjustment": {
+                    "success": "one-degree-better"
+                }
+            }
+        ]
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

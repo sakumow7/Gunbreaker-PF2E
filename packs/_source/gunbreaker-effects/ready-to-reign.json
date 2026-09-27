@@ -1,0 +1,55 @@
+{
+    "_id": "e8d2c7a4b9f01356",
+    "name": "Ready to Reign",
+    "type": "effect",
+    "img": "icons/creatures/abilities/lion-roar-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p>Enables @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.d2baacee6625134d]{Reign of Beasts}.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 10
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "start": {
+            "value": 0,
+            "initiative": null
+        },
+        "duration": {
+            "value": 1,
+            "unit": "minutes",
+            "sustained": false,
+            "expiry": null
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [
+            {
+                "key": "RollOption",
+                "domain": "all",
+                "option": "gunbreaker:ready:reign"
+            }
+        ],
+        "slug": "ready-to-reign"
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

@@ -1,0 +1,43 @@
+{
+    "_id": "0814b62891d4161f",
+    "name": "Relentless Combo",
+    "type": "feat",
+    "img": "icons/skills/movement/figure-running-gray.webp",
+    "system": {
+        "description": {
+            "value": "<p>Your sequences carry you forward. Immediately after you land @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.b886b4f9b5e0ef3a]{Solid Barrel} or @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.de5ec634e0595e50]{Demon Slaughter}, you may Step as a free action. This keeps you locked onto a target or repositioned to guard an ally.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 2
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": []
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

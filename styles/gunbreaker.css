@@ -1,0 +1,10 @@
+/* Gunbreaker (PF2e) — light cosmetic touches for compendium entries. */
+.gunbreaker-pf2e .cartridge-pip {
+  display: inline-block;
+  width: 0.8em; height: 0.8em;
+  margin: 0 1px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffcf6b, #b8860b);
+  border: 1px solid #6b4f00;
+}
+.gunbreaker-pf2e h2 { border-bottom: 1px solid #b8860b; }

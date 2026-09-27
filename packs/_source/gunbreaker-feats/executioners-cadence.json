@@ -1,0 +1,47 @@
+{
+    "_id": "29de0db157247ab8",
+    "name": "Executioner's Cadence",
+    "type": "feat",
+    "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Frequency</strong> once per round.</p><p>The killing rhythm feeds your gauge. When you score a critical hit with @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.901295e96cdc5cc2]{Wicked Talon} or @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.9165ace5282778b5]{Double Down}, load 1 cartridge into your @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.fe03ab566ecd7e59]{Powder Gauge}.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 8
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [],
+        "frequency": {
+            "max": 1,
+            "per": "round"
+        }
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

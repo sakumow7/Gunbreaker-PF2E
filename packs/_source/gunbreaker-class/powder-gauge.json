@@ -1,0 +1,50 @@
+{
+    "_id": "fe03ab566ecd7e59",
+    "name": "Powder Gauge",
+    "type": "feat",
+    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p>Your gunblade chambers aetheric <strong>cartridges</strong>, tracked by the <strong>Powder Gauge</strong>. You begin each encounter with 0 cartridges, to a maximum of <strong>3</strong> (raised to 6 by @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.39542260a7548fc5]{Bloodfest}).</p><p><strong>Building:</strong> the combo finishers @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.b886b4f9b5e0ef3a]{Solid Barrel} and @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.de5ec634e0595e50]{Demon Slaughter} each load 1 cartridge.</p><p><strong>Spending:</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.148481d3f7d0f02b]{Burst Strike}, @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.bf44b0d50715c762]{Gnashing Fang}, @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.2d1c8118880acda4]{Fated Circle}, and @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.9165ace5282778b5]{Double Down} consume cartridges as noted.</p><p>A cartridge resource is added to your sheet automatically (Attributes tab).</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 1
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [
+            {
+                "key": "SpecialResource",
+                "slug": "cartridges",
+                "label": "Powder Gauge",
+                "max": 3
+            }
+        ]
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

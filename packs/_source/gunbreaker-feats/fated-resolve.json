@@ -1,0 +1,43 @@
+{
+    "_id": "2bfa1496cb9fdf2b",
+    "name": "Fated Resolve",
+    "type": "feat",
+    "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+    "system": {
+        "description": {
+            "value": "<p>Your area spenders steel you as they fire. Whenever you use @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.2d1c8118880acda4]{Fated Circle} or @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.9165ace5282778b5]{Double Down}, you gain temporary Hit Points equal to your level until the start of your next turn &mdash; the recoil of power becomes a ward.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 14
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": []
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

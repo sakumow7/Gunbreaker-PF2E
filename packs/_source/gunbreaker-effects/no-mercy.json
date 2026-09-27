@@ -1,0 +1,56 @@
+{
+    "_id": "698e269ba38bcb47",
+    "name": "No Mercy",
+    "type": "effect",
+    "img": "icons/magic/control/buff-flight-wings-runes-purple.webp",
+    "system": {
+        "description": {
+            "value": "<p>+2 status bonus to weapon damage.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 1
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "start": {
+            "value": 0,
+            "initiative": null
+        },
+        "duration": {
+            "value": 2,
+            "unit": "rounds",
+            "sustained": false,
+            "expiry": "turn-start"
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [
+            {
+                "key": "FlatModifier",
+                "selector": "strike-damage",
+                "type": "status",
+                "value": 2
+            }
+        ],
+        "slug": "no-mercy"
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

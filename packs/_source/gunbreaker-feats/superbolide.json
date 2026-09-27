@@ -1,0 +1,47 @@
+{
+    "_id": "92a076708eb700d2",
+    "name": "Superbolide",
+    "type": "feat",
+    "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Frequency</strong> once per 10 minutes.</p><p>The ultimate guard. Reduce your current HP to 1, then become immune to damage and most harmful effects until the start of your next turn.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 10
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [],
+        "frequency": {
+            "max": 1,
+            "per": "PT10M"
+        }
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

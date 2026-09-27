@@ -1,0 +1,43 @@
+{
+    "_id": "1698d186eff6f736",
+    "name": "Overpowered Round",
+    "type": "feat",
+    "img": "icons/magic/fire/explosion-fireball-large-orange.webp",
+    "system": {
+        "description": {
+            "value": "<p>You pack your point-blank rounds with extra charge. When you use @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.148481d3f7d0f02b]{Burst Strike}, it gains the splash trait, dealing splash fire damage equal to your level to each creature adjacent to your target. Your single-target spender becomes a threat to a whole cluster.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 6
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": []
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

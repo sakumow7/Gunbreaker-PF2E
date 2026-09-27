@@ -1,0 +1,62 @@
+{
+    "_id": "70faa71375db332e",
+    "name": "Armor Mastery",
+    "type": "feat",
+    "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+    "system": {
+        "description": {
+            "value": "<p>Your armor wards off even the most powerful blows. Your proficiency in light and medium armor and in unarmored defense increases to <strong>master</strong>.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 15
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [
+            {
+                "key": "ActiveEffectLike",
+                "mode": "upgrade",
+                "path": "system.martial.unarmored.rank",
+                "value": 3
+            },
+            {
+                "key": "ActiveEffectLike",
+                "mode": "upgrade",
+                "path": "system.martial.light.rank",
+                "value": 3
+            },
+            {
+                "key": "ActiveEffectLike",
+                "mode": "upgrade",
+                "path": "system.martial.medium.rank",
+                "value": 3
+            }
+        ]
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

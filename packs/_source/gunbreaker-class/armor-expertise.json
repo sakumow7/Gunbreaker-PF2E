@@ -1,0 +1,62 @@
+{
+    "_id": "0e4bd01ae207e03c",
+    "name": "Armor Expertise",
+    "type": "feat",
+    "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+    "system": {
+        "description": {
+            "value": "<p>You have spent so long fighting on the front line that armor becomes a second skin. Your proficiency in light and medium armor and in unarmored defense increases to <strong>expert</strong>. You gain the specialization effects of medium armor.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 11
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [
+            {
+                "key": "ActiveEffectLike",
+                "mode": "upgrade",
+                "path": "system.martial.unarmored.rank",
+                "value": 2
+            },
+            {
+                "key": "ActiveEffectLike",
+                "mode": "upgrade",
+                "path": "system.martial.light.rank",
+                "value": 2
+            },
+            {
+                "key": "ActiveEffectLike",
+                "mode": "upgrade",
+                "path": "system.martial.medium.rank",
+                "value": 2
+            }
+        ]
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

@@ -1,0 +1,56 @@
+{
+    "_id": "c4a9b1d0fe5e6f72",
+    "name": "Bloodfest",
+    "type": "effect",
+    "img": "icons/magic/unholy/strike-hand-glow-pink.webp",
+    "system": {
+        "description": {
+            "value": "<p>Aether floods your chamber: your maximum Powder Gauge is increased by 3 (typically to 6) for 1 minute.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 10
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "start": {
+            "value": 0,
+            "initiative": null
+        },
+        "duration": {
+            "value": 1,
+            "unit": "minutes",
+            "sustained": false,
+            "expiry": null
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [
+            {
+                "key": "ActiveEffectLike",
+                "mode": "add",
+                "path": "system.resources.cartridges.max",
+                "value": 3
+            }
+        ],
+        "slug": "bloodfest"
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

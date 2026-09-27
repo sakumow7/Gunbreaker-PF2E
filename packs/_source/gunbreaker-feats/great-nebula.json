@@ -1,0 +1,49 @@
+{
+    "_id": "6e8aab4b359497e2",
+    "name": "Great Nebula",
+    "type": "feat",
+    "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Frequency</strong> once per 10 minutes.</p><p>As @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.cc8dfc414f174066]{Nebula} but reduce damage by 1.5× your level for 2 rounds, and gain temporary HP equal to 20% of your maximum HP.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 16
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": [
+                "@UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.cc8dfc414f174066]{Nebula}"
+            ]
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [],
+        "frequency": {
+            "max": 1,
+            "per": "PT10M"
+        }
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

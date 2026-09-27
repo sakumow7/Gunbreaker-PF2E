@@ -1,0 +1,49 @@
+{
+    "_id": "1f7a9715421e92da",
+    "name": "Royal Guard",
+    "type": "feat",
+    "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Stance.</strong> You adopt a taunting defensive posture. While in Royal Guard you gain a +1 circumstance bonus to AC, and an enemy that begins its turn adjacent to you and then targets an ally is flat-footed against your next attack this round (representing enmity). Your combo bonus damage is halved while this stance is active. Entering or leaving the stance is a single action (@UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.ca203eb3b1f22fda]{Release Royal Guard}).</p><p><strong>Apply:</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.a74a5130c0f43674]{Enter Royal Guard}</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 1
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": []
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {
+        "gunbreaker-pf2e": {
+            "applyEffects": [
+                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.a74a5130c0f43674"
+            ]
+        }
+    }
+}

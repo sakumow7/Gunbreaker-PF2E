@@ -1,0 +1,53 @@
+{
+    "_id": "cc8dfc414f174066",
+    "name": "Nebula",
+    "type": "feat",
+    "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Frequency</strong> once per 10 minutes.</p><p>For 1 round, reduce all damage you take by an amount equal to your level. Upgrades to @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.6e8aab4b359497e2]{Great Nebula} at 16th level.</p><p><strong>Apply:</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.bbf2b441d6c80fae]{Nebula}</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 4
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [],
+        "frequency": {
+            "max": 1,
+            "per": "PT10M"
+        }
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {
+        "gunbreaker-pf2e": {
+            "applyEffects": [
+                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.bbf2b441d6c80fae"
+            ]
+        }
+    }
+}

@@ -1,0 +1,49 @@
+{
+    "_id": "11009f00b5d265be",
+    "name": "Fated Brand",
+    "type": "feat",
+    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Requirements</strong> The Ready to Raze effect (from @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.141e49ccd412a33a]{Continuation}); the effect then ends.</p><p>Fire a follow-up round dealing <strong>2d6 fire damage</strong>. Affects all enemies in a 5-foot emanation (basic Reflex save vs. your class DC).</p><p><strong>Damage:</strong> @Damage[2d6[fire]] &mdash; @Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|basic:true]</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 12
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": []
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {
+        "gunbreaker-pf2e": {
+            "removeEffects": [
+                "ready-to-raze"
+            ]
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "_id": "4c778ba7ff5d693e",
+    "name": "Heart of Corundum",
+    "type": "feat",
+    "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Frequency</strong> once per minute.</p><p>Target yourself or an ally within 30 feet. The target reduces damage taken by half your level for 2 rounds, and the next time it drops to or below half HP it regains HP equal to your level ×2 (Catharsis).</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 8
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [],
+        "frequency": {
+            "max": 1,
+            "per": "PT1M"
+        }
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

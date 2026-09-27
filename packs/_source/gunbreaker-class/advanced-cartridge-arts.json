@@ -1,0 +1,110 @@
+{
+    "_id": "8167449ad5822303",
+    "name": "Advanced Cartridge Arts",
+    "type": "feat",
+    "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
+    "system": {
+        "description": {
+            "value": "<p>As your mastery deepens, the Traveler's more demanding techniques open to you. You automatically gain these combo actions at the listed levels &mdash; no feats required:</p><ul><li><strong>6th</strong> The Gnashing combo: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.bf44b0d50715c762]{Gnashing Fang} → @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.c92a9a4f65aed576]{Savage Claw} → @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.901295e96cdc5cc2]{Wicked Talon}, plus their @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.141e49ccd412a33a]{Continuation} follow-ups (@UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.84d4d65427e30457]{Jugular Rip}, @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.d2e7e82195b0d940]{Abdomen Tear}, @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.46135863d5cb73ef]{Eye Gouge}).</li><li><strong>12th</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.2d1c8118880acda4]{Fated Circle} and its follow-up @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.11009f00b5d265be]{Fated Brand}.</li><li><strong>14th</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.9165ace5282778b5]{Double Down}, your two-cartridge ultimate.</li></ul><p>(The follow-ups become usable once you also have Continuation, gained at 7th level.)</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 6
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.bf44b0d50715c762"
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.c92a9a4f65aed576"
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.901295e96cdc5cc2"
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.84d4d65427e30457"
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.d2e7e82195b0d940"
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.46135863d5cb73ef"
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.2d1c8118880acda4",
+                "predicate": [
+                    {
+                        "gte": [
+                            "self:level",
+                            12
+                        ]
+                    }
+                ],
+                "reevaluateOnUpdate": true,
+                "allowDuplicate": false
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.11009f00b5d265be",
+                "predicate": [
+                    {
+                        "gte": [
+                            "self:level",
+                            12
+                        ]
+                    }
+                ],
+                "reevaluateOnUpdate": true,
+                "allowDuplicate": false
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.9165ace5282778b5",
+                "predicate": [
+                    {
+                        "gte": [
+                            "self:level",
+                            14
+                        ]
+                    }
+                ],
+                "reevaluateOnUpdate": true,
+                "allowDuplicate": false
+            }
+        ]
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

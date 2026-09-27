@@ -1,0 +1,55 @@
+{
+    "_id": "b79130079a98d5e0",
+    "name": "Combo: Savage Claw Ready",
+    "type": "effect",
+    "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
+    "system": {
+        "description": {
+            "value": "<p>Enables @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.901295e96cdc5cc2]{Wicked Talon}.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 1
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "start": {
+            "value": 0,
+            "initiative": null
+        },
+        "duration": {
+            "value": 1,
+            "unit": "rounds",
+            "sustained": false,
+            "expiry": "turn-end"
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [
+            {
+                "key": "RollOption",
+                "domain": "all",
+                "option": "gunbreaker:combo:savage-claw"
+            }
+        ],
+        "slug": "combo-savage-claw-ready"
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

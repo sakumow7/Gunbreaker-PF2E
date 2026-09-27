@@ -1,0 +1,47 @@
+{
+    "_id": "e0f1268439d77a85",
+    "name": "Perfect Chamber",
+    "type": "feat",
+    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p>Your gauge is bottomless in the moment of need. Once per day, your cartridge spenders cost no cartridges for 1 minute, and your combo finishers build double cartridges during that time.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 20
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [],
+        "frequency": {
+            "max": 1,
+            "per": "day"
+        }
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

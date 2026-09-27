@@ -1,0 +1,52 @@
+{
+    "_id": "901295e96cdc5cc2",
+    "name": "Wicked Talon",
+    "type": "feat",
+    "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Requirements</strong> <em>Savage Claw</em> combo effect.</p><p>Make a gunblade Strike with a +4d8 bonus. You gain <em>Ready to Gouge</em> (@UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.46135863d5cb73ef]{Eye Gouge}).</p><p><strong>Damage:</strong> @Damage[4d8[slashing]]</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 6
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": []
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {
+        "gunbreaker-pf2e": {
+            "applyEffects": [
+                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.4791a8210f7e88da"
+            ],
+            "removeEffects": [
+                "combo-savage-claw-ready"
+            ]
+        }
+    }
+}

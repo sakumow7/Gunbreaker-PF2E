@@ -1,0 +1,48 @@
+{
+    "_id": "141e49ccd412a33a",
+    "name": "Continuation",
+    "type": "feat",
+    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p>Certain weaponskills open a follow-up gunshot. After using a qualifying action you may spend 1 action to fire the linked follow-up before your turn ends:</p><ul><li>@UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.bf44b0d50715c762]{Gnashing Fang} → @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.84d4d65427e30457]{Jugular Rip}</li><li>@UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.c92a9a4f65aed576]{Savage Claw} → @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.d2e7e82195b0d940]{Abdomen Tear}</li><li>@UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.901295e96cdc5cc2]{Wicked Talon} → @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.46135863d5cb73ef]{Eye Gouge}</li><li>@UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.148481d3f7d0f02b]{Burst Strike} → @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.291e00009610fbc7]{Hypervelocity}</li><li>@UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.2d1c8118880acda4]{Fated Circle} → @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.11009f00b5d265be]{Fated Brand}</li></ul><p>You gain the relevant follow-up actions automatically as you unlock their parent actions through @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.8167449ad5822303]{Advanced Cartridge Arts}.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 7
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.291e00009610fbc7"
+            }
+        ]
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

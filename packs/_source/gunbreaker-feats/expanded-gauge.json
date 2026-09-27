@@ -1,0 +1,50 @@
+{
+    "_id": "2a461f10c3b7e0f4",
+    "name": "Expanded Gauge",
+    "type": "feat",
+    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p>Your maximum Powder Gauge increases by 1 (to 4, or 7 while @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.39542260a7548fc5]{Bloodfest} is active), letting you bank an extra cartridge for your spenders.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 12
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [
+            {
+                "key": "ActiveEffectLike",
+                "mode": "add",
+                "path": "system.resources.cartridges.max",
+                "value": 1
+            }
+        ]
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

@@ -1,0 +1,50 @@
+{
+    "_id": "148481d3f7d0f02b",
+    "name": "Burst Strike",
+    "type": "feat",
+    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Cost</strong> 1 cartridge.</p><p>Fire a point-blank round: make a gunblade Strike dealing bonus fire damage (<strong>2d8, +1d8 at 8th, 14th, and 20th levels</strong>). You gain <em>Ready to Blast</em>, enabling @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.291e00009610fbc7]{Hypervelocity} via @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.141e49ccd412a33a]{Continuation}.</p><p><strong>Damage:</strong> @Damage[(2+floor((@actor.level-2)/6))d8[fire]]</p><p><strong>Cartridges:</strong> Spend 1 (adjusted automatically when this is used).</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 2
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": []
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {
+        "gunbreaker-pf2e": {
+            "cartridge": -1,
+            "applyEffects": [
+                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.d85fd2974ad8971c"
+            ]
+        }
+    }
+}

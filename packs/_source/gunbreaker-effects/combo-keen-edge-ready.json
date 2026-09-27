@@ -1,0 +1,55 @@
+{
+    "_id": "331249351add9e72",
+    "name": "Combo: Keen Edge Ready",
+    "type": "effect",
+    "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
+    "system": {
+        "description": {
+            "value": "<p>Enables @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.78f54cb87f5eafaa]{Brutal Shell}.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 1
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "start": {
+            "value": 0,
+            "initiative": null
+        },
+        "duration": {
+            "value": 1,
+            "unit": "rounds",
+            "sustained": false,
+            "expiry": "turn-end"
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [
+            {
+                "key": "RollOption",
+                "domain": "all",
+                "option": "gunbreaker:combo:keen-edge"
+            }
+        ],
+        "slug": "combo-keen-edge-ready"
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

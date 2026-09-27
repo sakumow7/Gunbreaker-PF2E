@@ -1,0 +1,49 @@
+{
+    "_id": "be479ddf19c2509a",
+    "name": "Demon Slice",
+    "type": "feat",
+    "img": "icons/magic/fire/projectile-fireball-smoke-strong-orange.webp",
+    "system": {
+        "description": {
+            "value": "<p>Sweep your gunblade in a 5-foot emanation. Each enemy in the area takes one gunblade Strike's worth of damage (roll once, apply to each), gaining increased enmity. You gain the <em>Demon Slice</em> combo effect, enabling @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.de5ec634e0595e50]{Demon Slaughter}.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 1
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": []
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {
+        "gunbreaker-pf2e": {
+            "applyEffects": [
+                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.c37990e182342366"
+            ]
+        }
+    }
+}

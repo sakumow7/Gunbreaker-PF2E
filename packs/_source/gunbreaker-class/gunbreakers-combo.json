@@ -1,0 +1,108 @@
+{
+    "_id": "04cbd7c7e3159f9e",
+    "name": "Gunbreaker's Combo",
+    "type": "feat",
+    "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p>You are trained in the gunblade's flowing strike sequences, the heart of the Traveler's art. You learn these combo actions as you grow in skill, and gain still more through @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.8167449ad5822303]{Advanced Cartridge Arts}:</p><p><strong>Single-target route:</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0f2a8e0288fb91c8]{Keen Edge} (1st) → @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.78f54cb87f5eafaa]{Brutal Shell} (2nd) → @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.b886b4f9b5e0ef3a]{Solid Barrel} (4th; the finisher loads a cartridge).</p><p><strong>Area route:</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.be479ddf19c2509a]{Demon Slice} (1st) → @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.de5ec634e0595e50]{Demon Slaughter} (2nd; the finisher loads a cartridge).</p><p><strong>Spender:</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.148481d3f7d0f02b]{Burst Strike} (2nd), which spends a cartridge for a powerful point-blank round.</p><p>Each combo step grants a brief effect enabling the next, and the bonus damage of your combo actions increases as you gain levels. These actions are added to your character automatically at the levels shown.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 1
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0f2a8e0288fb91c8"
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.78f54cb87f5eafaa",
+                "predicate": [
+                    {
+                        "gte": [
+                            "self:level",
+                            2
+                        ]
+                    }
+                ],
+                "reevaluateOnUpdate": true,
+                "allowDuplicate": false
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.b886b4f9b5e0ef3a",
+                "predicate": [
+                    {
+                        "gte": [
+                            "self:level",
+                            4
+                        ]
+                    }
+                ],
+                "reevaluateOnUpdate": true,
+                "allowDuplicate": false
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.be479ddf19c2509a"
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.de5ec634e0595e50",
+                "predicate": [
+                    {
+                        "gte": [
+                            "self:level",
+                            2
+                        ]
+                    }
+                ],
+                "reevaluateOnUpdate": true,
+                "allowDuplicate": false
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.148481d3f7d0f02b",
+                "predicate": [
+                    {
+                        "gte": [
+                            "self:level",
+                            2
+                        ]
+                    }
+                ],
+                "reevaluateOnUpdate": true,
+                "allowDuplicate": false
+            }
+        ]
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

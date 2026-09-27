@@ -1,0 +1,47 @@
+{
+    "_id": "073a72a5ae307d5f",
+    "name": "Danger Zone",
+    "type": "feat",
+    "img": "icons/magic/fire/explosion-fireball-large-orange.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Frequency</strong> once per minute.</p><p>A focused blast at one target within 15 feet, dealing 1d6 fire damage per 2 levels (basic Reflex save against your class DC). Upgrades to @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.fd5d34cfa27b9f42]{Blasting Zone} at 14th level.</p><p><strong>Damage:</strong> @Damage[(ceil(@actor.level/2))d6[fire]] &mdash; @Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|basic:true]</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 6
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": [],
+        "frequency": {
+            "max": 1,
+            "per": "PT1M"
+        }
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

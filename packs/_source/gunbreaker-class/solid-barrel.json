@@ -1,0 +1,50 @@
+{
+    "_id": "b886b4f9b5e0ef3a",
+    "name": "Solid Barrel",
+    "type": "feat",
+    "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Requirements</strong> You have the <em>Brutal Shell</em> combo effect.</p><p>Make a gunblade Strike. <strong>Combo bonus:</strong> on a hit deal bonus damage of the weapon's type (<strong>2d8, +1d8 at 9th, 14th, and 19th levels</strong>) and <strong>load 1 cartridge</strong> into your @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.fe03ab566ecd7e59]{Powder Gauge}.</p><p><strong>Damage:</strong> @Damage[(2+floor((@actor.level-4)/5))d8[slashing]]</p><p><strong>Cartridges:</strong> Build 1 (adjusted automatically when this is used).</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 4
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "FFXIV Gunbreaker (homebrew)"
+        },
+        "rules": []
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {
+        "gunbreaker-pf2e": {
+            "cartridge": 1,
+            "removeEffects": [
+                "combo-brutal-shell-ready"
+            ]
+        }
+    }
+}
