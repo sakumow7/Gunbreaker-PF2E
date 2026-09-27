@@ -5,7 +5,7 @@
     "img": "icons/magic/fire/explosion-fireball-large-orange.webp",
     "system": {
         "description": {
-            "value": "<p>You pack your point-blank rounds with extra charge. When you use @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.148481d3f7d0f02b]{Burst Strike}, it gains the splash trait, dealing splash fire damage equal to your level to each creature adjacent to your target. Your single-target spender becomes a threat to a whole cluster.</p>",
+            "value": "<p>When Burst Strike hits, you can deal splash fire damage equal to the number of weapon damage dice to other creatures within 5 feet of the target, including allies and yourself if in the area. This damage is not dealt to the primary target, does not double on a critical hit, and is not dealt on a miss. This is an explicit secondary damage effect, not the splash weapon trait.</p>",
             "gm": ""
         },
         "level": {
@@ -15,7 +15,7 @@
             "value": [
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "class",
         "actionType": {
@@ -28,11 +28,11 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
-        "rules": []
+        "rules": [],
+        "slug": "overpowered-round"
     },
     "folder": null,
     "sort": 0,

@@ -5,7 +5,7 @@
     "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Requirements</strong> <em>Gnashing Fang</em> combo effect.</p><p>Make a gunblade Strike with a +3d8 bonus. You gain <em>Ready to Tear</em> (@UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.d2e7e82195b0d940]{Abdomen Tear}) and the <em>Savage Claw</em> effect, enabling @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.901295e96cdc5cc2]{Wicked Talon}.</p><p><strong>Damage:</strong> @Damage[3d8[slashing]]</p>",
+            "value": "<p><strong>Requirements</strong> Your Gnashing Fang combo opening.</p><p>Make a melee gunblade Strike with 1d6 additional slashing damage, increasing by 1d6 at 11th and 17th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, consume the opening and enable Wicked Talon until the end of your next turn. A hit enables Abdomen Tear if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(1+floor((@actor.level-5)/6))d6[slashing]]</p>",
             "gm": ""
         },
         "level": {
@@ -13,9 +13,10 @@
         },
         "traits": {
             "value": [
-                "gunbreaker"
+                "gunbreaker",
+                "magical"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "classfeature",
         "actionType": {
@@ -28,26 +29,16 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
-        "rules": []
+        "rules": [],
+        "slug": "savage-claw"
     },
     "folder": null,
     "sort": 0,
     "ownership": {
         "default": 0
     },
-    "flags": {
-        "gunbreaker-pf2e": {
-            "applyEffects": [
-                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.14d57475c050642d",
-                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.b79130079a98d5e0"
-            ],
-            "removeEffects": [
-                "combo-gnashing-fang-ready"
-            ]
-        }
-    }
+    "flags": {}
 }

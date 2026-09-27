@@ -5,7 +5,7 @@
     "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Frequency</strong> once per minute.</p><p>For 2 rounds you gain a +2 circumstance bonus to AC against melee attacks and resistance to physical damage equal to half your level.</p><p><strong>Apply:</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.47ab3c3e65986371]{Camouflage}</p>",
+            "value": "<p><strong>Frequency</strong> once per 10 minutes. <strong>Requirements</strong> You wield a gunblade.</p><p>Until the start of your next turn, gain a +2 circumstance bonus to AC against melee attacks and resistance to physical damage equal to half your level (minimum 1). Apply the Camouflage effect. Its AC bonus does not stack with Royal Guard.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.47ab3c3e65986371]{Camouflage}. Apply manually after recording the action.</p>",
             "gm": ""
         },
         "level": {
@@ -13,9 +13,10 @@
         },
         "traits": {
             "value": [
-                "gunbreaker"
+                "gunbreaker",
+                "magical"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "class",
         "actionType": {
@@ -28,14 +29,14 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "rules": [],
+        "slug": "camouflage",
         "frequency": {
             "max": 1,
-            "per": "PT1M"
+            "per": "PT10M"
         }
     },
     "folder": null,
@@ -43,11 +44,5 @@
     "ownership": {
         "default": 0
     },
-    "flags": {
-        "gunbreaker-pf2e": {
-            "applyEffects": [
-                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.47ab3c3e65986371"
-            ]
-        }
-    }
+    "flags": {}
 }

@@ -5,7 +5,7 @@
     "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Frequency</strong> once per 10 minutes.</p><p>As @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.cc8dfc414f174066]{Nebula} but reduce damage by 1.5× your level for 2 rounds, and gain temporary HP equal to 20% of your maximum HP.</p>",
+            "value": "<p>Nebula instead grants resistance to all damage equal to your level until the start of your second subsequent turn. When you use it, also gain temporary Hit Points equal to your level for that duration. This replaces Nebula's resistance, shares its frequency, and does not grant a separate use. Apply Great Nebula instead of Nebula.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.2bf2c8bbde2e358d]{Great Nebula}.</p>",
             "gm": ""
         },
         "level": {
@@ -15,30 +15,28 @@
             "value": [
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "class",
         "actionType": {
-            "value": "action"
+            "value": "passive"
         },
         "actions": {
-            "value": 1
+            "value": null
         },
         "prerequisites": {
             "value": [
-                "@UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.cc8dfc414f174066]{Nebula}"
+                {
+                    "value": "Nebula"
+                }
             ]
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "rules": [],
-        "frequency": {
-            "max": 1,
-            "per": "PT10M"
-        }
+        "slug": "great-nebula"
     },
     "folder": null,
     "sort": 0,

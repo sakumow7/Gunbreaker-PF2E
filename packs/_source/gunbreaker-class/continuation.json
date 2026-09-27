@@ -5,7 +5,7 @@
     "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
     "system": {
         "description": {
-            "value": "<p>Certain weaponskills open a follow-up gunshot. After using a qualifying action you may spend 1 action to fire the linked follow-up before your turn ends:</p><ul><li>@UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.bf44b0d50715c762]{Gnashing Fang} → @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.84d4d65427e30457]{Jugular Rip}</li><li>@UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.c92a9a4f65aed576]{Savage Claw} → @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.d2e7e82195b0d940]{Abdomen Tear}</li><li>@UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.901295e96cdc5cc2]{Wicked Talon} → @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.46135863d5cb73ef]{Eye Gouge}</li><li>@UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.148481d3f7d0f02b]{Burst Strike} → @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.291e00009610fbc7]{Hypervelocity}</li><li>@UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.2d1c8118880acda4]{Fated Circle} → @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.11009f00b5d265be]{Fated Brand}</li></ul><p>You gain the relevant follow-up actions automatically as you unlock their parent actions through @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.8167449ad5822303]{Advanced Cartridge Arts}.</p>",
+            "value": "<p>You learn Hypervelocity, Jugular Rip, Abdomen Tear, and Eye Gouge. After a successful qualifying melee Strike, you may use its follow-up as your next action on the same turn: Burst Strike → Hypervelocity; Gnashing Fang → Jugular Rip; Savage Claw → Abdomen Tear; Wicked Talon → Eye Gouge. A miss grants no follow-up. Any intervening action or the end of your turn closes the opening.</p><p>You may use only one Continuation follow-up per round, including Fated Brand. It targets the same creature, which must remain within your gunblade's melee reach. The follow-up requires no additional attack roll, does not affect multiple attack penalty, and is a separate damage instance for resistance and weakness. It never doubles because the opening Strike critically hit. These limits also apply to follow-ups granted before this feature.</p>",
             "gm": ""
         },
         "level": {
@@ -15,7 +15,7 @@
             "value": [
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "classfeature",
         "actionType": {
@@ -28,16 +28,32 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "rules": [
             {
                 "key": "GrantItem",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.291e00009610fbc7"
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.291e00009610fbc7",
+                "allowDuplicate": false
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.84d4d65427e30457",
+                "allowDuplicate": false
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.d2e7e82195b0d940",
+                "allowDuplicate": false
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.46135863d5cb73ef",
+                "allowDuplicate": false
             }
-        ]
+        ],
+        "slug": "continuation"
     },
     "folder": null,
     "sort": 0,

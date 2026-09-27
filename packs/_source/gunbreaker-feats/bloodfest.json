@@ -5,7 +5,7 @@
     "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Frequency</strong> once per minute.</p><p>Draw aetheric energy from a target within 25 feet: immediately fill your @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.fe03ab566ecd7e59]{Powder Gauge} by 3 cartridges and raise your maximum to <strong>6</strong> until the end of the encounter. You also gain <em>Ready to Reign</em>, enabling @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.d2baacee6625134d]{Reign of Beasts} at higher levels.</p><p><strong>Cartridges:</strong> Build 3 (adjusted automatically when this is used).</p>",
+            "value": "<p><strong>Frequency</strong> once per 10 minutes. <strong>Requirements</strong> A genuine enemy is within 30 feet and you wield a gunblade. Draw aether from the foe. Increase your maximum cartridges by 3 (normally to 6) for 1 minute or until the encounter ends, whichever comes first, then load 3 cartridges. When this ends, discard cartridges above your normal maximum. You gain Ready to Reign for the same duration; it allows one Reign of Beasts sequence if you have that feat.</p>",
             "gm": ""
         },
         "level": {
@@ -13,9 +13,10 @@
         },
         "traits": {
             "value": [
-                "gunbreaker"
+                "gunbreaker",
+                "magical"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "class",
         "actionType": {
@@ -28,14 +29,14 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "rules": [],
+        "slug": "bloodfest",
         "frequency": {
             "max": 1,
-            "per": "PT1M"
+            "per": "PT10M"
         }
     },
     "folder": null,
@@ -43,13 +44,5 @@
     "ownership": {
         "default": 0
     },
-    "flags": {
-        "gunbreaker-pf2e": {
-            "cartridge": 3,
-            "applyEffects": [
-                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.c4a9b1d0fe5e6f72",
-                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.e8d2c7a4b9f01356"
-            ]
-        }
-    }
+    "flags": {}
 }

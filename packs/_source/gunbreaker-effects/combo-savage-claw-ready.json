@@ -5,7 +5,7 @@
     "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
     "system": {
         "description": {
-            "value": "<p>Enables @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.901295e96cdc5cc2]{Wicked Talon}.</p>",
+            "value": "<p>Legacy combo reminder. The tracker is authoritative: this opening lasts until the end of your next turn and is consumed by its next step. Delete obsolete reminders when migrating.</p>",
             "gm": ""
         },
         "level": {
@@ -18,9 +18,8 @@
             "rarity": "common"
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "start": {
             "value": 0,
@@ -29,7 +28,6 @@
         "duration": {
             "value": 1,
             "unit": "rounds",
-            "sustained": false,
             "expiry": "turn-end"
         },
         "tokenIcon": {
@@ -37,13 +35,7 @@
         },
         "badge": null,
         "context": null,
-        "rules": [
-            {
-                "key": "RollOption",
-                "domain": "all",
-                "option": "gunbreaker:combo:savage-claw"
-            }
-        ],
+        "rules": [],
         "slug": "combo-savage-claw-ready"
     },
     "folder": null,

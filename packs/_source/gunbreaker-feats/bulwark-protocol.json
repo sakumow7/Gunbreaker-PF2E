@@ -5,7 +5,7 @@
     "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Trigger</strong> An ally within 15 feet would be hit by an attack.</p><p><strong>Frequency</strong> once per round. You throw yourself into the line of fire. You become the target of the triggering attack instead; if it would have hit the ally, it hits you, but you reduce its damage by an amount equal to your level. The Traveler's first lesson: the guardian's body is the wall.</p>",
+            "value": "<p>When using Heart of Stone, you may Step before applying its protection, provided you finish closer to the protected ally. Check the reaction's range and other requirements before this Step. Resolve the triggering Strike against its original target; you do not become its target. The Step is part of the reaction.</p>",
             "gm": ""
         },
         "level": {
@@ -15,11 +15,11 @@
             "value": [
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "class",
         "actionType": {
-            "value": "reaction"
+            "value": "passive"
         },
         "actions": {
             "value": null
@@ -28,15 +28,11 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "rules": [],
-        "frequency": {
-            "max": 1,
-            "per": "round"
-        }
+        "slug": "bulwark-protocol"
     },
     "folder": null,
     "sort": 0,

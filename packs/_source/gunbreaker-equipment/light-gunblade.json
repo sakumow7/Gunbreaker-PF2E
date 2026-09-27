@@ -1,0 +1,84 @@
+{
+    "_id": "b17d1aac074341e7",
+    "name": "Light Gunblade",
+    "type": "weapon",
+    "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
+    "system": {
+        "description": {
+            "value": "<p>A one-handed martial sword with a lighter aetheric chamber: 1d6 slashing, finesse, sword group, Bulk 1, price 10 gp. It qualifies as a gunblade for all class abilities. It has no two-hand trait. Use Dexterity for melee attack rolls if desired; Strength still modifies melee damage normally. Its cartridges function identically to those of a standard gunblade.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 0
+        },
+        "traits": {
+            "value": [
+                "finesse",
+                "gunbreaker"
+            ],
+            "rarity": "uncommon"
+        },
+        "publication": {
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
+        },
+        "baseItem": "gunblade",
+        "category": "martial",
+        "group": "sword",
+        "damage": {
+            "damageType": "slashing",
+            "dice": 1,
+            "die": "d6"
+        },
+        "bonus": {
+            "value": 0
+        },
+        "bonusDamage": {
+            "value": 0
+        },
+        "splashDamage": {
+            "value": 0
+        },
+        "range": null,
+        "reload": {
+            "value": ""
+        },
+        "usage": {
+            "canBeAmmo": false,
+            "value": "held-in-one-hand"
+        },
+        "bulk": {
+            "value": 1
+        },
+        "price": {
+            "value": {
+                "gp": 10
+            }
+        },
+        "quantity": 1,
+        "hp": {
+            "value": 0,
+            "max": 0
+        },
+        "hardness": 0,
+        "size": "med",
+        "material": {
+            "type": null,
+            "grade": null
+        },
+        "runes": {
+            "potency": 0,
+            "striking": 0,
+            "property": []
+        },
+        "containerId": null,
+        "rules": [],
+        "slug": "light-gunblade"
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

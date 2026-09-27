@@ -5,7 +5,7 @@
     "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Frequency</strong> once per 10 minutes.</p><p>For 1 round, reduce all damage you take by an amount equal to your level. Upgrades to @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.6e8aab4b359497e2]{Great Nebula} at 16th level.</p><p><strong>Apply:</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.bbf2b441d6c80fae]{Nebula}</p>",
+            "value": "<p><strong>Frequency</strong> once per 10 minutes. Gain resistance to all damage equal to half your level (minimum 1) until the start of your second subsequent turn. Apply Nebula. Overlapping resistances do not add together.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.bbf2b441d6c80fae]{Nebula}. Apply manually after recording the action.</p>",
             "gm": ""
         },
         "level": {
@@ -13,9 +13,10 @@
         },
         "traits": {
             "value": [
-                "gunbreaker"
+                "gunbreaker",
+                "magical"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "class",
         "actionType": {
@@ -28,11 +29,11 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "rules": [],
+        "slug": "nebula",
         "frequency": {
             "max": 1,
             "per": "PT10M"
@@ -43,11 +44,5 @@
     "ownership": {
         "default": 0
     },
-    "flags": {
-        "gunbreaker-pf2e": {
-            "applyEffects": [
-                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.bbf2b441d6c80fae"
-            ]
-        }
-    }
+    "flags": {}
 }

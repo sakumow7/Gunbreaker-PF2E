@@ -5,7 +5,7 @@
     "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Requirements</strong> The Ready to Raze effect (from @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.141e49ccd412a33a]{Continuation}); the effect then ends.</p><p>Fire a follow-up round dealing <strong>2d6 fire damage</strong>. Affects all enemies in a 5-foot emanation (basic Reflex save vs. your class DC).</p><p><strong>Damage:</strong> @Damage[2d6[fire]] &mdash; @Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|basic:true]</p>",
+            "value": "<p><strong>Requirements</strong> Continuation; your immediately preceding action this turn was Fated Circle and at least one enemy failed its save. <strong>Frequency</strong> once per round, shared with all Continuation follow-ups.</p><p>Each enemy that failed or critically failed that Fated Circle save and remains within a 5-foot emanation takes 2d6 fire damage with a new basic Reflex save against your class DC. Damage increases to 3d6 at 17th level. Consume the opening. This does not use or increase multiple attack penalty.</p><p>@Damage[(2+floor((@actor.level-11)/6))d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
             "gm": ""
         },
         "level": {
@@ -13,9 +13,10 @@
         },
         "traits": {
             "value": [
-                "gunbreaker"
+                "gunbreaker",
+                "magical"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "classfeature",
         "actionType": {
@@ -28,22 +29,20 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
-        "rules": []
+        "rules": [],
+        "slug": "fated-brand",
+        "frequency": {
+            "max": 1,
+            "per": "round"
+        }
     },
     "folder": null,
     "sort": 0,
     "ownership": {
         "default": 0
     },
-    "flags": {
-        "gunbreaker-pf2e": {
-            "removeEffects": [
-                "ready-to-raze"
-            ]
-        }
-    }
+    "flags": {}
 }

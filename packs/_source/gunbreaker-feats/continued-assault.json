@@ -5,7 +5,7 @@
     "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Frequency</strong> once per round.</p><p>Your follow-through is ceaseless. The first time each round you would end a @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.141e49ccd412a33a]{Continuation} follow-up, you may immediately make a single gunblade Strike against the same target as a free action. The Traveler's forms never truly stop.</p>",
+            "value": "<p><strong>Frequency</strong> once per round. After you resolve a Continuation follow-up, you may Step as a free action. Alternatively, if you are in Royal Guard, grant one adjacent ally temporary Hit Points equal to half your level until the start of your next turn. This does not grant another Strike or follow-up.</p>",
             "gm": ""
         },
         "level": {
@@ -15,7 +15,7 @@
             "value": [
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "class",
         "actionType": {
@@ -28,15 +28,11 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "rules": [],
-        "frequency": {
-            "max": 1,
-            "per": "round"
-        }
+        "slug": "continued-assault"
     },
     "folder": null,
     "sort": 0,

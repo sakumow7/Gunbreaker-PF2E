@@ -5,17 +5,17 @@
     "img": "icons/magic/light/explosion-star-glow-yellow.webp",
     "system": {
         "description": {
-            "value": "<p>Your command of the gunblade arts deepens. Your proficiency in your Gunbreaker class DC increases to <strong>expert</strong>.</p>",
+            "value": "<p>Your Gunbreaker class DC proficiency increases to expert.</p>",
             "gm": ""
         },
         "level": {
-            "value": 11
+            "value": 9
         },
         "traits": {
             "value": [
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "classfeature",
         "actionType": {
@@ -28,18 +28,18 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.attributes.classDC.rank",
-                "value": 2
+        "rules": [],
+        "slug": "gunbreaker-expertise",
+        "subfeatures": {
+            "proficiencies": {
+                "gunbreaker": {
+                    "rank": 2
+                }
             }
-        ]
+        }
     },
     "folder": null,
     "sort": 0,

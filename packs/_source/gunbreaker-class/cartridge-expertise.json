@@ -5,7 +5,7 @@
     "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
     "system": {
         "description": {
-            "value": "<p>Your gauge runs hot. Once per encounter, when a combo finisher would build a cartridge, you build 2 instead.</p>",
+            "value": "<p>Once per encounter, when Solid Barrel or Demon Slaughter would load 1 cartridge, you may load 2 instead. This cannot combine with Twin Cartridge; a single finisher can load no more than 2 cartridges.</p>",
             "gm": ""
         },
         "level": {
@@ -15,7 +15,7 @@
             "value": [
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "classfeature",
         "actionType": {
@@ -28,11 +28,11 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
-        "rules": []
+        "rules": [],
+        "slug": "cartridge-expertise"
     },
     "folder": null,
     "sort": 0,

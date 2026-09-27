@@ -5,7 +5,7 @@
     "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
     "system": {
         "description": {
-            "value": "<p>Your gunblade reports find their mark. When you make a ranged gunblade Strike (such as @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.47bc76d1092a9061]{Lightning Shot}) you ignore the first range increment's penalty, and your critical specialization with gunblades comes online once you have the requisite proficiency.</p>",
+            "value": "<p>Your proficiency in Perception and Will saves increases to expert. When you use Lightning Shot, ignore the circumstance bonus to AC from lesser cover; cover and greater cover still apply.</p>",
             "gm": ""
         },
         "level": {
@@ -15,7 +15,7 @@
             "value": [
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "classfeature",
         "actionType": {
@@ -28,11 +28,21 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
-        "rules": []
+        "rules": [],
+        "slug": "steady-aim",
+        "subfeatures": {
+            "proficiencies": {
+                "perception": {
+                    "rank": 2
+                },
+                "will": {
+                    "rank": 2
+                }
+            }
+        }
     },
     "folder": null,
     "sort": 0,

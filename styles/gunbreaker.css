@@ -8,3 +8,8 @@
   border: 1px solid #6b4f00;
 }
 .gunbreaker-pf2e h2 { border-bottom: 1px solid #b8860b; }
+.gunbreaker-tracker label { display: flex; align-items: center; gap: .6rem; margin: .5rem 0; }
+.gunbreaker-tracker select { flex: 1; min-width: 0; }
+.gunbreaker-tracker .note { font-size: .85em; line-height: 1.4; }
+.gunbreaker-dialog .form-footer { flex-wrap: wrap; }
+.gunbreaker-dialog .form-footer button { flex: 1 1 160px; }

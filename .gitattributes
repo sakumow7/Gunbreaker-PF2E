@@ -1,0 +1,3 @@
+* text=auto eol=lf
+packs/gunbreaker-*/** -text
+*.zip -text

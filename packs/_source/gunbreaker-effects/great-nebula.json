@@ -1,0 +1,58 @@
+{
+    "_id": "2bf2c8bbde2e358d",
+    "name": "Great Nebula",
+    "type": "effect",
+    "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+    "system": {
+        "description": {
+            "value": "<p>Resistance to all damage equal to your level and temporary HP equal to your level, until the start of your second subsequent turn.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 1
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "publication": {
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
+        },
+        "start": {
+            "value": 0,
+            "initiative": null
+        },
+        "duration": {
+            "sustained": false,
+            "value": 2,
+            "unit": "rounds",
+            "expiry": "turn-start"
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [
+            {
+                "key": "Resistance",
+                "type": "all-damage",
+                "value": "@actor.level"
+            },
+            {
+                "key": "TempHP",
+                "value": "@actor.level"
+            }
+        ],
+        "slug": "great-nebula"
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

@@ -5,7 +5,7 @@
     "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Cost</strong> 1 cartridge.</p><p>Opener of the Gnashing combo. Make a gunblade Strike with a +2d8 bonus. You gain <em>Ready to Rip</em> (@UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.84d4d65427e30457]{Jugular Rip}) and the <em>Gnashing Fang</em> combo effect, enabling @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.c92a9a4f65aed576]{Savage Claw}.</p><p><strong>Damage:</strong> @Damage[2d8[slashing]]</p><p><strong>Cartridges:</strong> Spend 1 (adjusted automatically when this is used).</p>",
+            "value": "<p><strong>Cost</strong> 1 cartridge. <strong>Frequency</strong> once per minute.</p><p>Make a melee gunblade Strike with 1d6 additional slashing damage, increasing by 1d6 at 11th and 17th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, begin this sequence and enable Savage Claw until the end of your next turn. A hit enables Jugular Rip if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(1+floor((@actor.level-5)/6))d6[slashing]]</p>",
             "gm": ""
         },
         "level": {
@@ -13,9 +13,10 @@
         },
         "traits": {
             "value": [
-                "gunbreaker"
+                "gunbreaker",
+                "magical"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "classfeature",
         "actionType": {
@@ -28,24 +29,20 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
-        "rules": []
+        "rules": [],
+        "slug": "gnashing-fang",
+        "frequency": {
+            "max": 1,
+            "per": "PT1M"
+        }
     },
     "folder": null,
     "sort": 0,
     "ownership": {
         "default": 0
     },
-    "flags": {
-        "gunbreaker-pf2e": {
-            "cartridge": -1,
-            "applyEffects": [
-                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.f94b9d922ff30784",
-                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.16f79119478d9aa4"
-            ]
-        }
-    }
+    "flags": {}
 }

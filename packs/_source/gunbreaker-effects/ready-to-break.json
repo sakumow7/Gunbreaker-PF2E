@@ -5,7 +5,7 @@
     "img": "icons/magic/fire/flame-burning-creature-skeleton.webp",
     "system": {
         "description": {
-            "value": "<p>Enables @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.fd0cd59b38944c65]{Sonic Break}.</p>",
+            "value": "<p>Legacy readiness reminder. Use the tracker and the linked action's requirements; the reminder alone does not authorize an action. Continuation requires a successful preceding Strike and the same target, and is limited to once per round.</p>",
             "gm": ""
         },
         "level": {
@@ -18,9 +18,8 @@
             "rarity": "common"
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "start": {
             "value": 0,
@@ -37,13 +36,7 @@
         },
         "badge": null,
         "context": null,
-        "rules": [
-            {
-                "key": "RollOption",
-                "domain": "all",
-                "option": "gunbreaker:ready:break"
-            }
-        ],
+        "rules": [],
         "slug": "ready-to-break"
     },
     "folder": null,

@@ -5,7 +5,7 @@
     "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Frequency</strong> once per minute.</p><p>Target yourself or an ally within 30 feet. The target reduces damage taken by half your level for 2 rounds, and the next time it drops to or below half HP it regains HP equal to your level ×2 (Catharsis).</p>",
+            "value": "<p><strong>Frequency</strong> once per 10 minutes. <strong>Requirements</strong> You wield a gunblade. Choose yourself or an ally within 30 feet. Until the start of your second subsequent turn, the target gains resistance to all damage equal to half your level (minimum 1). After an instance of damage leaves it at or below half its maximum HP during this duration, it regains 2d8 + your level HP, then the healing portion ends. This healing triggers at most once, even if the target was already below half HP when you used the action. It cannot heal a dead creature. Untriggered healing expires with the resistance. Apply manually using the originating Gunbreaker's level and turn.</p>",
             "gm": ""
         },
         "level": {
@@ -13,9 +13,11 @@
         },
         "traits": {
             "value": [
-                "gunbreaker"
+                "gunbreaker",
+                "healing",
+                "magical"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "class",
         "actionType": {
@@ -28,14 +30,14 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "rules": [],
+        "slug": "heart-of-corundum",
         "frequency": {
             "max": 1,
-            "per": "PT1M"
+            "per": "PT10M"
         }
     },
     "folder": null,

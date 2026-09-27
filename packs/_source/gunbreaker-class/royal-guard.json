@@ -5,7 +5,7 @@
     "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Stance.</strong> You adopt a taunting defensive posture. While in Royal Guard you gain a +1 circumstance bonus to AC, and an enemy that begins its turn adjacent to you and then targets an ally is flat-footed against your next attack this round (representing enmity). Your combo bonus damage is halved while this stance is active. Entering or leaving the stance is a single action (@UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.ca203eb3b1f22fda]{Release Royal Guard}).</p><p><strong>Apply:</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.a74a5130c0f43674]{Enter Royal Guard}</p>",
+            "value": "<p><strong>Requirements</strong> You wield a gunblade.</p><p>You adopt the protective posture of Gunnhildr's guard. Gain a +1 circumstance bonus to AC while in this stance. Your damage is unchanged. The stance ends if you cease wielding a gunblade, become unconscious, or combat ends. Your Heart of Stone reaction works with or without the stance. This stance does not force enemies to attack you.</p><p>Apply the linked Royal Guard effect when you enter, and remove it when you leave.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.a74a5130c0f43674]{Royal Guard (Stance)}. Apply manually after recording the action.</p>",
             "gm": ""
         },
         "level": {
@@ -13,9 +13,10 @@
         },
         "traits": {
             "value": [
-                "gunbreaker"
+                "gunbreaker",
+                "stance"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "classfeature",
         "actionType": {
@@ -28,22 +29,22 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
-        "rules": []
+        "rules": [
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.ca203eb3b1f22fda",
+                "allowDuplicate": false
+            }
+        ],
+        "slug": "royal-guard"
     },
     "folder": null,
     "sort": 0,
     "ownership": {
         "default": 0
     },
-    "flags": {
-        "gunbreaker-pf2e": {
-            "applyEffects": [
-                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.a74a5130c0f43674"
-            ]
-        }
-    }
+    "flags": {}
 }

@@ -5,7 +5,7 @@
     "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
     "system": {
         "description": {
-            "value": "<p>A masterwork gunblade etched with light-aspected aether (+1 striking).</p>",
+            "value": "<p>A one-handed martial sword with an aetheric firing chamber: 1d8 slashing, two-hand d12, sword group, Bulk 1. Gunbreaker actions discharge its cartridges; it is not a firearm or combination weapon and has no separate ammunition, reload, or ranged Strike without a class ability. Fire damage comes from abilities or runes, not a versatile trait.</p><p>+1 striking gunblade.</p>",
             "gm": ""
         },
         "level": {
@@ -13,17 +13,14 @@
         },
         "traits": {
             "value": [
-                "versatile-fire",
                 "two-hand-d12",
-                "magical",
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "baseItem": "gunblade",
         "category": "martial",
@@ -75,7 +72,8 @@
             "property": []
         },
         "containerId": null,
-        "rules": []
+        "rules": [],
+        "slug": "shadowbane-gunblade-plus1-striking"
     },
     "folder": null,
     "sort": 0,

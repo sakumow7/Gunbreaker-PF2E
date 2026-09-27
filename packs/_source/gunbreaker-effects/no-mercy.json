@@ -5,7 +5,7 @@
     "img": "icons/magic/control/buff-flight-wings-runes-purple.webp",
     "system": {
         "description": {
-            "value": "<p>+2 status bonus to weapon damage.</p>",
+            "value": "<p>Status bonus to gunblade Strike damage: +2, +3 at 11, +4 at 17. Lasts until the start of your third subsequent turn. Record the cartridge and Ready to Break in the tracker.</p>",
             "gm": ""
         },
         "level": {
@@ -18,18 +18,17 @@
             "rarity": "common"
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "start": {
             "value": 0,
             "initiative": null
         },
         "duration": {
-            "value": 2,
-            "unit": "rounds",
             "sustained": false,
+            "value": 3,
+            "unit": "rounds",
             "expiry": "turn-start"
         },
         "tokenIcon": {
@@ -42,7 +41,10 @@
                 "key": "FlatModifier",
                 "selector": "strike-damage",
                 "type": "status",
-                "value": 2
+                "value": "2+max(0,floor((@actor.level-5)/6))",
+                "predicate": [
+                    "item:trait:gunbreaker"
+                ]
             }
         ],
         "slug": "no-mercy"

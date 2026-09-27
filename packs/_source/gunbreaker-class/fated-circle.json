@@ -5,7 +5,7 @@
     "img": "icons/magic/fire/projectile-fireball-smoke-strong-orange.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Cost</strong> 1 cartridge.</p><p>Sweep a chambered round across a 5-foot emanation, dealing 1d8 fire damage per 2 levels to all enemies in it (basic Reflex save vs. your class DC). You gain <em>Ready to Raze</em>, enabling @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.11009f00b5d265be]{Fated Brand}.</p><p><strong>Damage:</strong> @Damage[(ceil(@actor.level/2))d8[fire]] &mdash; @Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|basic:true]</p><p><strong>Cartridges:</strong> Spend 1 (adjusted automatically when this is used).</p>",
+            "value": "<p><strong>Cost</strong> 1 cartridge. <strong>Requirements</strong> You wield a gunblade.</p><p>Release aether in a 5-foot emanation. Each enemy attempts a basic Reflex save against your class DC against 1d6 fire damage per 2 levels, rounded up. This is not a Strike and does not use or increase multiple attack penalty. If at least one enemy fails or critically fails, you may use Fated Brand as your next action this turn.</p><p>@Damage[(ceil(@actor.level/2))d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
             "gm": ""
         },
         "level": {
@@ -13,38 +13,32 @@
         },
         "traits": {
             "value": [
-                "gunbreaker"
+                "gunbreaker",
+                "magical"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "classfeature",
         "actionType": {
             "value": "action"
         },
         "actions": {
-            "value": 1
+            "value": 2
         },
         "prerequisites": {
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
-        "rules": []
+        "rules": [],
+        "slug": "fated-circle"
     },
     "folder": null,
     "sort": 0,
     "ownership": {
         "default": 0
     },
-    "flags": {
-        "gunbreaker-pf2e": {
-            "cartridge": -1,
-            "applyEffects": [
-                "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.5f11dd5176112b3c"
-            ]
-        }
-    }
+    "flags": {}
 }

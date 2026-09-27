@@ -5,7 +5,7 @@
     "img": "icons/magic/fire/projectile-fireball-smoke-strong-orange.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Cost</strong> 1 cartridge. <strong>Frequency</strong> once per minute.</p><p>You rake an entire line with chambered rounds. Deal 1d6 fire damage per 2 levels to each creature in a 30-foot line (basic Reflex save vs. your class DC). A wider, longer-reaching alternative to your emanation spenders.</p><p><strong>Damage:</strong> @Damage[(ceil(@actor.level/2))d6[fire]] &mdash; @Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|basic:true]</p><p><strong>Cartridges:</strong> Spend 1 (adjusted automatically when this is used).</p>",
+            "value": "<p><strong>Cost</strong> 1 cartridge. <strong>Requirements</strong> You wield a gunblade. Creatures in a 30-foot line attempt a basic Reflex save against your class DC against 1d6 fire damage per 2 levels, rounded up. This includes allies, does not open Fated Brand, and does not affect multiple attack penalty.</p><p>@Damage[(ceil(@actor.level/2))d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
             "gm": ""
         },
         "level": {
@@ -13,39 +13,32 @@
         },
         "traits": {
             "value": [
-                "gunbreaker"
+                "gunbreaker",
+                "magical"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "class",
         "actionType": {
             "value": "action"
         },
         "actions": {
-            "value": 1
+            "value": 2
         },
         "prerequisites": {
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "rules": [],
-        "frequency": {
-            "max": 1,
-            "per": "PT1M"
-        }
+        "slug": "saturation-fire"
     },
     "folder": null,
     "sort": 0,
     "ownership": {
         "default": 0
     },
-    "flags": {
-        "gunbreaker-pf2e": {
-            "cartridge": -1
-        }
-    }
+    "flags": {}
 }

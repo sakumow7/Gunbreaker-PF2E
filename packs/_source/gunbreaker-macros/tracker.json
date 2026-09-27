@@ -1,0 +1,11 @@
+{
+    "_id": "GnbTracker130001",
+    "name": "Gunbreaker Tracker",
+    "type": "script",
+    "scope": "global",
+    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "command": "const api = game.modules.get('gunbreaker-pf2e')?.api;\nif (!api) ui.notifications.warn('Enable Gunbreaker first.');\nelse await api.tracker();",
+    "ownership": {
+        "default": 2
+    }
+}

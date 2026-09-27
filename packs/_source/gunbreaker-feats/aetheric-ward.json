@@ -5,7 +5,7 @@
     "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Trigger</strong> You take damage. <strong>Cost</strong> 1 cartridge.</p><p><strong>Frequency</strong> once per round. You vent a cartridge into a sudden aetheric barrier, reducing the triggering damage by an amount equal to twice your level. A defensive use of the same volatile rounds you would otherwise spend on offense.</p><p><strong>Cartridges:</strong> Spend 1 (adjusted automatically when this is used).</p>",
+            "value": "<p>You can use Heart of Stone when you would take damage from an enemy's Strike, targeting yourself. You must spend a cartridge when using it this way. It uses the same reaction as Heart of Stone and provides its cartridge-enhanced resistance.</p>",
             "gm": ""
         },
         "level": {
@@ -15,11 +15,11 @@
             "value": [
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "class",
         "actionType": {
-            "value": "reaction"
+            "value": "passive"
         },
         "actions": {
             "value": null
@@ -28,24 +28,16 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "rules": [],
-        "frequency": {
-            "max": 1,
-            "per": "round"
-        }
+        "slug": "aetheric-ward"
     },
     "folder": null,
     "sort": 0,
     "ownership": {
         "default": 0
     },
-    "flags": {
-        "gunbreaker-pf2e": {
-            "cartridge": -1
-        }
-    }
+    "flags": {}
 }

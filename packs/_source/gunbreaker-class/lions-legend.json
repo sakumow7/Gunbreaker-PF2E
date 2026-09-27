@@ -5,7 +5,7 @@
     "img": "icons/magic/light/explosion-star-glow-yellow.webp",
     "system": {
         "description": {
-            "value": "<p>You stand among the greatest gunblade wielders to ever live. Your proficiency with simple weapons, martial weapons, and gunblades increases to <strong>legendary</strong>, and you gain access to the capstone combo @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.d2baacee6625134d]{Reign of Beasts} if you do not already have it. Once per day you may treat your Powder Gauge as full (3 cartridges, or 6 if @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.39542260a7548fc5]{Bloodfest} is active) at the start of an encounter.</p>",
+            "value": "<p>At the start of each combat encounter you begin with 2 cartridges instead of 1. When you spend a cartridge on Heart of Stone, its resistance increases to 4 + your level. Your weapon proficiency remains master. Reign of Beasts remains an optional feat and is not granted a second time.</p>",
             "gm": ""
         },
         "level": {
@@ -15,7 +15,7 @@
             "value": [
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "classfeature",
         "actionType": {
@@ -28,32 +28,11 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
-        "rules": [
-            {
-                "key": "MartialProficiency",
-                "label": "Lion's Legend (Simple/Martial)",
-                "slug": "gnb-lions-legend-sm",
-                "definition": [
-                    "item:category:simple",
-                    "or",
-                    "item:category:martial"
-                ],
-                "value": 5
-            },
-            {
-                "key": "MartialProficiency",
-                "label": "Lion's Legend",
-                "slug": "gnb-lions-legend",
-                "definition": [
-                    "item:group:sword"
-                ],
-                "value": 5
-            }
-        ]
+        "rules": [],
+        "slug": "lions-legend"
     },
     "folder": null,
     "sort": 0,

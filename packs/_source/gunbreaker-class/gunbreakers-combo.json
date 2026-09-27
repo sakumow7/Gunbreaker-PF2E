@@ -5,7 +5,7 @@
     "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
     "system": {
         "description": {
-            "value": "<p>You are trained in the gunblade's flowing strike sequences, the heart of the Traveler's art. You learn these combo actions as you grow in skill, and gain still more through @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.8167449ad5822303]{Advanced Cartridge Arts}:</p><p><strong>Single-target route:</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0f2a8e0288fb91c8]{Keen Edge} (1st) → @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.78f54cb87f5eafaa]{Brutal Shell} (2nd) → @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.b886b4f9b5e0ef3a]{Solid Barrel} (4th; the finisher loads a cartridge).</p><p><strong>Area route:</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.be479ddf19c2509a]{Demon Slice} (1st) → @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.de5ec634e0595e50]{Demon Slaughter} (2nd; the finisher loads a cartridge).</p><p><strong>Spender:</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.148481d3f7d0f02b]{Burst Strike} (2nd), which spends a cartridge for a powerful point-blank round.</p><p>Each combo step grants a brief effect enabling the next, and the bonus damage of your combo actions increases as you gain levels. These actions are added to your character automatically at the levels shown.</p>",
+            "value": "<p>You learn Keen Edge, Brutal Shell, Solid Barrel, Burst Strike, Demon Slice, and Demon Slaughter at 1st level. All these actions require you to wield a gunblade. Combo actions can be used only in a combat encounter with a genuine threat.</p><p>You can maintain one combo sequence at a time. Keen Edge opens Brutal Shell, which opens Solid Barrel. Demon Slice opens Demon Slaughter. Each step consumes the previous opening and enables the next until the end of your next turn. Advance the sequence after resolving the action, even on a miss. Starting another sequence replaces the old one. Other actions, including movement, defense, normal Strikes, and cartridge spenders that do not start a sequence, do not interrupt it.</p><p>All Strikes use and increase multiple attack penalty normally. Bonus damage belongs to the Strike and doubles on a critical hit unless specified otherwise. Count only the base weapon damage die and fundamental striking rune dice when a feature refers to weapon damage dice; extra dice from abilities or property runes do not count. No Mercy modifies gunblade Strike damage, not separate save-based blasts or Continuation damage.</p>",
             "gm": ""
         },
         "level": {
@@ -15,7 +15,7 @@
             "value": [
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "classfeature",
         "actionType": {
@@ -28,76 +28,42 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "rules": [
             {
                 "key": "GrantItem",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0f2a8e0288fb91c8"
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0f2a8e0288fb91c8",
+                "allowDuplicate": false
             },
             {
                 "key": "GrantItem",
                 "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.78f54cb87f5eafaa",
-                "predicate": [
-                    {
-                        "gte": [
-                            "self:level",
-                            2
-                        ]
-                    }
-                ],
-                "reevaluateOnUpdate": true,
                 "allowDuplicate": false
             },
             {
                 "key": "GrantItem",
                 "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.b886b4f9b5e0ef3a",
-                "predicate": [
-                    {
-                        "gte": [
-                            "self:level",
-                            4
-                        ]
-                    }
-                ],
-                "reevaluateOnUpdate": true,
-                "allowDuplicate": false
-            },
-            {
-                "key": "GrantItem",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.be479ddf19c2509a"
-            },
-            {
-                "key": "GrantItem",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.de5ec634e0595e50",
-                "predicate": [
-                    {
-                        "gte": [
-                            "self:level",
-                            2
-                        ]
-                    }
-                ],
-                "reevaluateOnUpdate": true,
                 "allowDuplicate": false
             },
             {
                 "key": "GrantItem",
                 "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.148481d3f7d0f02b",
-                "predicate": [
-                    {
-                        "gte": [
-                            "self:level",
-                            2
-                        ]
-                    }
-                ],
-                "reevaluateOnUpdate": true,
+                "allowDuplicate": false
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.be479ddf19c2509a",
+                "allowDuplicate": false
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.de5ec634e0595e50",
                 "allowDuplicate": false
             }
-        ]
+        ],
+        "slug": "gunbreakers-combo"
     },
     "folder": null,
     "sort": 0,

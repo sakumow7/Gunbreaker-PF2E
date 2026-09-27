@@ -1,5 +1,7 @@
 {
-  "GUNBREAKER.Cartridges": "Cartridges",
-  "GUNBREAKER.PowderGauge": "Powder Gauge",
-  "GUNBREAKER.TraitGunbreaker": "Gunbreaker"
+  "GUNBREAKER": {
+    "PowderGauge": "Powder Gauge",
+    "TraitGunbreaker": "Gunbreaker",
+    "Cartridges": "Cartridges"
+  }
 }
