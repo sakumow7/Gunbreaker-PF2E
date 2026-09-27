@@ -5,7 +5,7 @@
     "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Requirements</strong> You have <em>Ready to Reign</em> (from @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.39542260a7548fc5]{Bloodfest}).</p><p>Capstone combo. Make a gunblade Strike against a target and all enemies adjacent to it with a <strong>+4d10</strong> bonus (secondary targets take half the bonus). On your next two turns this becomes Noble Blood (+5d10) and then Lion Heart (+6d10), escalating the chain.</p>",
+            "value": "<p><strong>Requirements</strong> Ready to Reign from Bloodfest; you wield a gunblade. Consume Ready to Reign and begin the Reign sequence. Make a melee gunblade Strike with 2d6 additional slashing damage. On a hit, deal 2d6 fire damage to up to two other enemies that are both within your melee reach and adjacent to the primary target; each attempts a basic Reflex save against your class DC. The secondary damage does not depend on the primary Strike's critical result.</p><p>After resolving the Strike, enable Noble Blood until the end of your next turn. You may use only one Reign sequence action per turn. Strikes use and increase multiple attack penalty normally. The sequence does not grant Continuation.</p><p>Additional Strike damage @Damage[2d6[slashing]]; secondary @Damage[2d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
             "gm": ""
         },
         "level": {
@@ -13,9 +13,10 @@
         },
         "traits": {
             "value": [
-                "gunbreaker"
+                "gunbreaker",
+                "magical"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "class",
         "actionType": {
@@ -26,27 +27,33 @@
         },
         "prerequisites": {
             "value": [
-                "@UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.39542260a7548fc5]{Bloodfest}",
-                "Ready to Reign"
+                {
+                    "value": "Bloodfest"
+                }
             ]
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
-        "rules": []
+        "rules": [
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.11e1ba1ee195f05c",
+                "allowDuplicate": false
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.36bba5488759245c",
+                "allowDuplicate": false
+            }
+        ],
+        "slug": "reign-of-beasts"
     },
     "folder": null,
     "sort": 0,
     "ownership": {
         "default": 0
     },
-    "flags": {
-        "gunbreaker-pf2e": {
-            "removeEffects": [
-                "ready-to-reign"
-            ]
-        }
-    }
+    "flags": {}
 }

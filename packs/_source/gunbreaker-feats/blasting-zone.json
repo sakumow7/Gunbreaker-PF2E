@@ -5,7 +5,7 @@
     "img": "icons/magic/fire/explosion-fireball-large-orange.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Frequency</strong> once per minute.</p><p>An empowered @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.073a72a5ae307d5f]{Danger Zone}: one target within 15 feet takes 1d8 fire damage per 2 levels (basic Reflex save vs. your class DC).</p><p><strong>Damage:</strong> @Damage[(ceil(@actor.level/2))d8[fire]] &mdash; @Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|basic:true]</p>",
+            "value": "<p>Danger Zone deals d8s instead of d6s and has a range of 30 feet. It retains the same action cost and shares Danger Zone's once-per-10-minutes frequency; this is an upgrade, not a second blast.</p><p>@Damage[(ceil(@actor.level/2))d8[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
             "gm": ""
         },
         "level": {
@@ -15,30 +15,28 @@
             "value": [
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "class",
         "actionType": {
-            "value": "action"
+            "value": "passive"
         },
         "actions": {
-            "value": 1
+            "value": null
         },
         "prerequisites": {
             "value": [
-                "@UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.073a72a5ae307d5f]{Danger Zone}"
+                {
+                    "value": "Danger Zone"
+                }
             ]
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "rules": [],
-        "frequency": {
-            "max": 1,
-            "per": "PT1M"
-        }
+        "slug": "blasting-zone"
     },
     "folder": null,
     "sort": 0,

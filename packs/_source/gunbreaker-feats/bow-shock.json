@@ -5,7 +5,7 @@
     "img": "icons/magic/fire/flame-burning-creature-skeleton.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Frequency</strong> once per minute.</p><p>5-foot emanation dealing 2d6 fire damage (basic Reflex save against your class DC) plus persistent fire damage to all hit (1d4, 3 rounds).</p><p><strong>Damage:</strong> @Damage[2d6[fire]] &mdash; @Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|basic:true]</p><p><strong>Persistent:</strong> @Damage[1d4[persistent,fire]]</p>",
+            "value": "<p><strong>Frequency</strong> once per 10 minutes. Enemies in a 5-foot emanation attempt a basic Reflex save against your class DC against 1d4 fire damage per 2 levels, rounded up. On a failure or critical failure, they also take 1d4 persistent fire damage, increasing to 2d4 at 12th level. Persistent damage is not doubled on a critical failure and ends normally using recovery checks; it has no fixed three-round duration.</p><p>@Damage[(ceil(@actor.level/2))d4[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]; persistent @Damage[(1+floor(@actor.level/12))d4[persistent,fire]]</p>",
             "gm": ""
         },
         "level": {
@@ -13,29 +13,30 @@
         },
         "traits": {
             "value": [
-                "gunbreaker"
+                "gunbreaker",
+                "magical"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "class",
         "actionType": {
             "value": "action"
         },
         "actions": {
-            "value": 1
+            "value": 2
         },
         "prerequisites": {
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "rules": [],
+        "slug": "bow-shock",
         "frequency": {
             "max": 1,
-            "per": "PT1M"
+            "per": "PT10M"
         }
     },
     "folder": null,

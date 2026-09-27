@@ -5,7 +5,7 @@
     "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
     "system": {
         "description": {
-            "value": "<p>End your @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1f7a9715421e92da]{Royal Guard} stance, dropping the taunt and its AC bonus but restoring full combo bonus damage.</p>",
+            "value": "<p>End your Royal Guard stance. This is a granted action, not a selectable class feat.</p>",
             "gm": ""
         },
         "level": {
@@ -15,9 +15,9 @@
             "value": [
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
-        "category": "class",
+        "category": "classfeature",
         "actionType": {
             "value": "action"
         },
@@ -28,22 +28,16 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
-        "rules": []
+        "rules": [],
+        "slug": "release-royal-guard"
     },
     "folder": null,
     "sort": 0,
     "ownership": {
         "default": 0
     },
-    "flags": {
-        "gunbreaker-pf2e": {
-            "removeEffects": [
-                "royal-guard-stance"
-            ]
-        }
-    }
+    "flags": {}
 }

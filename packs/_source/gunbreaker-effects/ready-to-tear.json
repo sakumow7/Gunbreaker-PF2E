@@ -5,7 +5,7 @@
     "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
     "system": {
         "description": {
-            "value": "<p>Continuation: you may use @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.d2e7e82195b0d940]{Abdomen Tear}.</p>",
+            "value": "<p>Legacy readiness reminder. Use the tracker and the linked action's requirements; the reminder alone does not authorize an action. Continuation requires a successful preceding Strike and the same target, and is limited to once per round.</p>",
             "gm": ""
         },
         "level": {
@@ -18,9 +18,8 @@
             "rarity": "common"
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "start": {
             "value": 0,
@@ -37,13 +36,7 @@
         },
         "badge": null,
         "context": null,
-        "rules": [
-            {
-                "key": "RollOption",
-                "domain": "all",
-                "option": "gunbreaker:cont:ready-to-tear"
-            }
-        ],
+        "rules": [],
         "slug": "ready-to-tear"
     },
     "folder": null,

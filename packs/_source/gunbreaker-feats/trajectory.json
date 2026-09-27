@@ -5,18 +5,19 @@
     "img": "icons/skills/movement/figure-running-gray.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Frequency</strong> twice per minute.</p><p>Stride up to your Speed toward a targeted enemy within 60 feet, ending adjacent if possible and generating enmity.</p>",
+            "value": "<p><strong>Frequency</strong> once per round. <strong>Requirements</strong> You wield a gunblade and can see an enemy or ally within twice your Speed.</p><p>Stride up to twice your Speed, ignoring difficult terrain but not greater difficult terrain. You must finish adjacent to the chosen creature and be able to reach a legal space; otherwise you cannot use this action. You cannot move through creatures or obstacles, and this movement triggers reactions normally. It does not include a Strike or interrupt your combo.</p>",
             "gm": ""
         },
         "level": {
-            "value": 10
+            "value": 2
         },
         "traits": {
             "value": [
+                "gunbreaker",
                 "move",
-                "gunbreaker"
+                "flourish"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "class",
         "actionType": {
@@ -29,14 +30,14 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "rules": [],
+        "slug": "trajectory",
         "frequency": {
-            "max": 2,
-            "per": "PT1M"
+            "max": 1,
+            "per": "round"
         }
     },
     "folder": null,

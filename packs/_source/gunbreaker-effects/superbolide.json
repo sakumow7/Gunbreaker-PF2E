@@ -1,0 +1,54 @@
+{
+    "_id": "d00ba9863847115e",
+    "name": "Superbolide",
+    "type": "effect",
+    "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+    "system": {
+        "description": {
+            "value": "<p>After manually reducing your current HP to 1, apply resistance to all damage equal to twice your level until the start of your next turn. No condition immunity.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 1
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "publication": {
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
+        },
+        "start": {
+            "value": 0,
+            "initiative": null
+        },
+        "duration": {
+            "sustained": false,
+            "value": 1,
+            "unit": "rounds",
+            "expiry": "turn-start"
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [
+            {
+                "key": "Resistance",
+                "type": "all-damage",
+                "value": "2*@actor.level"
+            }
+        ],
+        "slug": "superbolide"
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

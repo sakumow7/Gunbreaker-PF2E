@@ -5,7 +5,7 @@
     "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Frequency</strong> once per day.</p><p>The Gunbreaker's ultimate expression of protection. You and all allies within 60 feet reduce all damage taken by half (to a minimum of 1 per instance) until the start of your next turn. This can be used even while otherwise unable to act.</p>",
+            "value": "<p><strong>Frequency</strong> once per day. <strong>Requirements</strong> You can act and wield a gunblade. You and allies currently within 30 feet gain resistance to all damage equal to your level until the start of your next turn. Recipients retain the benefit if they leave the area. This does not stack with other resistance to the same damage. You cannot activate it while unconscious or otherwise unable to take its two actions.</p>",
             "gm": ""
         },
         "level": {
@@ -13,9 +13,10 @@
         },
         "traits": {
             "value": [
-                "gunbreaker"
+                "gunbreaker",
+                "magical"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "class",
         "actionType": {
@@ -28,11 +29,11 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "rules": [],
+        "slug": "gunmetal-soul",
         "frequency": {
             "max": 1,
             "per": "day"

@@ -1,0 +1,44 @@
+{
+    "_id": "36bba5488759245c",
+    "name": "Lion Heart",
+    "type": "feat",
+    "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Requirements</strong> Your Noble Blood combo opening and Reign of Beasts. Make a melee gunblade Strike with 4d6 additional slashing damage. On a hit, up to two other enemies both within your reach and adjacent to the target each take 4d6 fire damage with a basic Reflex save against your class DC. Secondary damage is not doubled by a critical hit on the primary Strike.</p><p>You may use only one Reign sequence action per turn. End the sequence. This does not grant Continuation.</p><p>Additional Strike damage @Damage[4d6[slashing]]; secondary @Damage[4d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 18
+        },
+        "traits": {
+            "value": [
+                "gunbreaker",
+                "magical"
+            ],
+            "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
+        },
+        "rules": [],
+        "slug": "lion-heart"
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

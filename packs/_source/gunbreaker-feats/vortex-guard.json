@@ -5,7 +5,7 @@
     "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
     "system": {
         "description": {
-            "value": "<p>Your protective shell extends to those beside you. When you gain the temporary Hit Points from @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.78f54cb87f5eafaa]{Brutal Shell}, one ally adjacent to you also gains temporary Hit Points equal to half the amount you received. This embodies the guardian's instinct the Traveler instilled.</p>",
+            "value": "<p>When Brutal Shell grants you temporary Hit Points, you may grant one adjacent ally the same number of temporary Hit Points until the end of your next turn. Temporary Hit Points do not stack. This can occur only once per round.</p>",
             "gm": ""
         },
         "level": {
@@ -15,7 +15,7 @@
             "value": [
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "class",
         "actionType": {
@@ -28,11 +28,11 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
-        "rules": []
+        "rules": [],
+        "slug": "vortex-guard"
     },
     "folder": null,
     "sort": 0,

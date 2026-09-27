@@ -5,7 +5,7 @@
     "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
     "system": {
         "description": {
-            "value": "<p>+1 circumstance AC; enmity taunt active. Combo bonus damage halved.</p>",
+            "value": "<p>+1 circumstance AC while conscious, wielding a gunblade, and in combat. Remove when any requirement ends. Damage is unchanged.</p>",
             "gm": ""
         },
         "level": {
@@ -18,18 +18,17 @@
             "rarity": "common"
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "start": {
             "value": 0,
             "initiative": null
         },
         "duration": {
+            "sustained": false,
             "value": -1,
             "unit": "unlimited",
-            "sustained": false,
             "expiry": null
         },
         "tokenIcon": {

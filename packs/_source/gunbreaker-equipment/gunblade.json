@@ -5,24 +5,22 @@
     "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
     "system": {
         "description": {
-            "value": "<p>A heavy sword housing a powered chamber; a martial sword that can be fired for the Gunbreaker's combo actions. <strong>Versatile fire</strong>; <strong>two-hand d12</strong>. The signature Gunbreaker weapon.</p>",
+            "value": "<p>A one-handed martial sword with an aetheric firing chamber: 1d8 slashing, two-hand d12, sword group, Bulk 1. Gunbreaker actions discharge its cartridges; it is not a firearm or combination weapon and has no separate ammunition, reload, or ranged Strike without a class ability. Fire damage comes from abilities or runes, not a versatile trait.</p>",
             "gm": ""
         },
         "level": {
-            "value": 1
+            "value": 0
         },
         "traits": {
             "value": [
-                "versatile-fire",
                 "two-hand-d12",
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "baseItem": "gunblade",
         "category": "martial",
@@ -74,7 +72,8 @@
             "property": []
         },
         "containerId": null,
-        "rules": []
+        "rules": [],
+        "slug": "gunblade"
     },
     "folder": null,
     "sort": 0,

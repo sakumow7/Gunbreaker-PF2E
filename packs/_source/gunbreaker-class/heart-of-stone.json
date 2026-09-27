@@ -1,0 +1,44 @@
+{
+    "_id": "1aab8f02f7a76d31",
+    "name": "Heart Of Stone",
+    "type": "feat",
+    "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Trigger</strong> An ally other than you within 15 feet would take damage from an enemy's Strike. <strong>Requirements</strong> You wield a gunblade and can see the ally and attacker.</p><p>You project a protective ward. The ally gains resistance to all damage from the triggering Strike equal to 2 + half your level (rounded down). Before applying the resistance, you can spend 1 cartridge to increase it to 2 + your level. This is resistance, not additional damage reduction; overlapping resistances use the highest applicable value. This does not move either creature or change the target of the attack.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 1
+        },
+        "traits": {
+            "value": [
+                "gunbreaker",
+                "magical"
+            ],
+            "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+            "value": "reaction"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
+        },
+        "rules": [],
+        "slug": "heart-of-stone"
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

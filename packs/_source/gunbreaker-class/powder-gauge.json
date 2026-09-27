@@ -5,7 +5,7 @@
     "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
     "system": {
         "description": {
-            "value": "<p>Your gunblade chambers aetheric <strong>cartridges</strong>, tracked by the <strong>Powder Gauge</strong>. You begin each encounter with 0 cartridges, to a maximum of <strong>3</strong> (raised to 6 by @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.39542260a7548fc5]{Bloodfest}).</p><p><strong>Building:</strong> the combo finishers @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.b886b4f9b5e0ef3a]{Solid Barrel} and @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.de5ec634e0595e50]{Demon Slaughter} each load 1 cartridge.</p><p><strong>Spending:</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.148481d3f7d0f02b]{Burst Strike}, @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.bf44b0d50715c762]{Gnashing Fang}, @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.2d1c8118880acda4]{Fated Circle}, and @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.9165ace5282778b5]{Double Down} consume cartridges as noted.</p><p>A cartridge resource is added to your sheet automatically (Attributes tab).</p>",
+            "value": "<p>Your gunblade stores aether in a Powder Gauge with a maximum of 3 cartridges. At the start of a combat encounter, begin with 1 cartridge; unspent cartridges dissipate at its end. You cannot build cartridges outside a combat encounter with a genuine threat, as determined by the GM. A training target or cooperative creature is not a threat.</p><p>Completing Solid Barrel or Demon Slaughter loads 1 cartridge, even if the Strike misses or every target succeeds at its save. Each activity loads only once, regardless of targets. You cannot exceed your maximum. Costs are paid before resolving an action and are not refunded on a miss. Cartridges are class resources, not ammunition or trade goods. Round fractional values down, to a minimum of 1 only where stated.</p><p>Use the Gunbreaker Tracker macro to record cartridges, combos, and cooldowns. Posting an item to chat never spends or grants resources. Effects, attacks, saves, damage, healing, and reactions are resolved on the sheet with your GM.</p><p>Unless a feature says otherwise, you must wield a gunblade to use Gunbreaker actions and reactions. Passive features do not require this. Aurora and defensive abilities without an encounter requirement may be used during exploration; their cooldowns still apply.</p>",
             "gm": ""
         },
         "level": {
@@ -15,7 +15,7 @@
             "value": [
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "classfeature",
         "actionType": {
@@ -28,18 +28,11 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
-        "rules": [
-            {
-                "key": "SpecialResource",
-                "slug": "cartridges",
-                "label": "Powder Gauge",
-                "max": 3
-            }
-        ]
+        "rules": [],
+        "slug": "powder-gauge"
     },
     "folder": null,
     "sort": 0,

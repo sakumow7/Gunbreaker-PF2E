@@ -5,7 +5,7 @@
     "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
     "system": {
         "description": {
-            "value": "<p>Your chamber is reinforced to hold even more volatile aether. Your maximum Powder Gauge increases by 1 (stacking with @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.2a461f10c3b7e0f4]{Expanded Gauge}). You bank deeper reserves for back-to-back spenders.</p>",
+            "value": "<p>Your maximum cartridges increases by another 1, to 5 normally or 8 during Bloodfest. This stacks with Expanded Gauge and does not increase encounter starting cartridges.</p>",
             "gm": ""
         },
         "level": {
@@ -15,7 +15,7 @@
             "value": [
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "class",
         "actionType": {
@@ -25,21 +25,18 @@
             "value": null
         },
         "prerequisites": {
-            "value": []
+            "value": [
+                {
+                    "value": "Expanded Gauge"
+                }
+            ]
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "add",
-                "path": "system.resources.cartridges.max",
-                "value": 1
-            }
-        ]
+        "rules": [],
+        "slug": "overcharged-gauge"
     },
     "folder": null,
     "sort": 0,

@@ -5,17 +5,17 @@
     "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
     "system": {
         "description": {
-            "value": "<p>You have spent so long fighting on the front line that armor becomes a second skin. Your proficiency in light and medium armor and in unarmored defense increases to <strong>expert</strong>. You gain the specialization effects of medium armor.</p>",
+            "value": "<p>Your proficiency in light and medium armor and unarmored defense increases to expert. Your aetheric guards reinforce practiced footwork.</p>",
             "gm": ""
         },
         "level": {
-            "value": 11
+            "value": 7
         },
         "traits": {
             "value": [
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "classfeature",
         "actionType": {
@@ -28,30 +28,24 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.unarmored.rank",
-                "value": 2
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.light.rank",
-                "value": 2
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.medium.rank",
-                "value": 2
+        "rules": [],
+        "slug": "armor-expertise",
+        "subfeatures": {
+            "proficiencies": {
+                "light": {
+                    "rank": 2
+                },
+                "medium": {
+                    "rank": 2
+                },
+                "unarmored": {
+                    "rank": 2
+                }
             }
-        ]
+        }
     },
     "folder": null,
     "sort": 0,

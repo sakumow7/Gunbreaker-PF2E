@@ -5,7 +5,7 @@
     "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
     "system": {
         "description": {
-            "value": "<p><em>An aether-forged gunblade discipline that channels combustion through steel. Gunbreakers hold the front line and answer blows with chambered fury.</em></p><h2>Key Ability</h2><p>STR or DEX.</p><h2>Hit Points</h2><p>10 + your Constitution modifier per level.</p><h2>Class Features</h2><p>You gain class features at the levels shown below; they are added to your sheet automatically when you take this class.</p><ul><li><strong>1st</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.fe03ab566ecd7e59]{Powder Gauge}, @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.04cbd7c7e3159f9e]{Gunbreaker's Combo}, @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1f7a9715421e92da]{Royal Guard}, Gunbreaker feat</li><li><strong>2nd</strong> Gunbreaker feat, skill feat</li><li><strong>3rd</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a61994a226d98bcc]{Steady Aim}, general feat, skill increase</li><li><strong>4th</strong> Gunbreaker feat, skill feat</li><li><strong>5th</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.7ea8bba45957ea76]{Gunblade Weapon Mastery}, ancestry feat, skill increase</li><li><strong>6th</strong> Gunbreaker feat, skill feat</li><li><strong>7th</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.141e49ccd412a33a]{Continuation}, @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a40dd44fb62beb04]{Weapon Specialization}, general feat, skill increase</li><li><strong>8th</strong> Gunbreaker feat, skill feat</li><li><strong>9th</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.ad484df0b1baae4e]{Aetheric Fortitude}, @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0034c6c64e887ff7]{Cartridge Expertise}, ancestry feat, skill increase</li><li><strong>10th</strong> Gunbreaker feat, skill feat</li><li><strong>11th</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0a3b3f4bfc68b3d1]{Gunbreaker Expertise}, @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0e4bd01ae207e03c]{Armor Expertise}, general feat, skill increase</li><li><strong>12th</strong> Gunbreaker feat, skill feat</li><li><strong>13th</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a5ca84e5a87ea0ea]{Gunblade Legend}, @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.571c5710dc92e12d]{Battle-Tested}, ancestry feat, skill increase</li><li><strong>14th</strong> Gunbreaker feat, skill feat</li><li><strong>15th</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.5ee5fcd559eedf13]{Greater Weapon Specialization}, @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.70faa71375db332e]{Armor Mastery}, general feat, skill increase</li><li><strong>16th</strong> Gunbreaker feat, skill feat</li><li><strong>17th</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.81fc94e9fc8dcc22]{Gunbreaker Mastery}, ancestry feat, skill increase</li><li><strong>18th</strong> Gunbreaker feat, skill feat</li><li><strong>19th</strong> @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a7bcbcad2fd2a303]{Lion's Legend}, general feat, skill increase</li><li><strong>20th</strong> Gunbreaker feat, skill feat</li></ul><h2>Proficiencies (1st level)</h2><p>Perception trained; Fortitude expert; Reflex & Will trained; gunblades/simple/martial trained; light & medium armor trained; class DC trained (STR or DEX); 3 + Int skills.</p>",
+            "value": "<p><em>Gunnhildr's blades protect their companions with aetheric wards, then unleash explosive sword combinations. This PF2e Remaster playtest adapts the FFXIV job's identity to three-action turns.</em></p><h2>Initial Proficiencies</h2><p>Key attribute Strength or Dexterity; 10 + Constitution modifier HP per level. Trained Perception, expert Fortitude, trained Reflex and Will. Trained simple weapons, martial weapons, unarmed attacks, light and medium armor, unarmored defense, and Gunbreaker class DC. Trained Athletics plus 3 + Intelligence modifier additional skills. Use the d6 finesse Light Gunblade for a Dexterity build, or the d8/two-hand d12 Gunblade for Strength.</p><p>You gain standard attribute boosts at levels 1, 5, 10, 15, and 20, ancestry feats at 1/5/9/13/17, class feats at 1 and every even level, skill feats at every even level, general feats at 3/7/11/15/19, and skill increases at every odd level starting at 3. Skill proficiency is capped at expert before level 7 and master before level 15.</p><h2>Class Features</h2><ul><li>Level 1: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.fe03ab566ecd7e59]{Powder Gauge}</li><li>Level 1: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.04cbd7c7e3159f9e]{Gunbreaker's Combo}</li><li>Level 1: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1f7a9715421e92da]{Royal Guard}</li><li>Level 1: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1aab8f02f7a76d31]{Heart Of Stone}</li><li>Level 3: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a61994a226d98bcc]{Steady Aim}</li><li>Level 5: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.7ea8bba45957ea76]{Gunblade Weapon Mastery}</li><li>Level 6: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.8167449ad5822303]{Advanced Cartridge Arts}</li><li>Level 7: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.141e49ccd412a33a]{Continuation}</li><li>Level 7: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a40dd44fb62beb04]{Weapon Specialization}</li><li>Level 7: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0e4bd01ae207e03c]{Armor Expertise}</li><li>Level 9: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.ad484df0b1baae4e]{Aetheric Fortitude}</li><li>Level 9: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0034c6c64e887ff7]{Cartridge Expertise}</li><li>Level 9: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0a3b3f4bfc68b3d1]{Gunbreaker Expertise}</li><li>Level 11: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.571c5710dc92e12d]{Battle-Tested}</li><li>Level 13: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a5ca84e5a87ea0ea]{Gunblade Legend}</li><li>Level 15: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.70faa71375db332e]{Armor Mastery}</li><li>Level 15: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.5ee5fcd559eedf13]{Greater Weapon Specialization}</li><li>Level 17: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.81fc94e9fc8dcc22]{Gunbreaker Mastery}</li><li>Level 19: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a7bcbcad2fd2a303]{Lion's Legend}</li></ul><p>During exploration, your alertness and Athletics help you escort companions and clear dangerous routes. Outside battle, you may be a bodyguard, weaponsmith, or keeper of Gunnhildr's traditions. There are no mandatory religious edicts.</p><h2>Playtest and Tracker</h2><p>Read RULES.html for the complete class and PLAYTEST.md for balance assumptions. Use the Gunbreaker Tracker macro; recording an action is separate from posting its rules to chat. Roll and apply attacks, saves, and damage normally. Old world copies must be replaced using MIGRATION.md.</p>",
             "gm": ""
         },
         "ancestryFeatLevels": {
@@ -69,13 +69,13 @@
             ]
         },
         "attacks": {
-            "advanced": 0,
-            "martial": 1,
             "simple": 1,
+            "martial": 1,
             "unarmed": 1,
+            "advanced": 0,
             "other": {
-                "name": "gunblade",
-                "rank": 1
+                "name": "",
+                "rank": 0
             }
         },
         "defenses": {
@@ -90,8 +90,10 @@
             "will": 1
         },
         "trainedSkills": {
-            "additional": 3,
-            "value": []
+            "value": [
+                "athletics"
+            ],
+            "additional": 3
         },
         "keyAbility": {
             "value": [
@@ -103,125 +105,131 @@
         "perception": 1,
         "spellcasting": 0,
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "items": {
-            "fe03a": {
-                "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
-                "level": 1,
+            "fe03ab566ecd7e59": {
                 "name": "Powder Gauge",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.fe03ab566ecd7e59"
-            },
-            "04cbd": {
-                "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
                 "level": 1,
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.fe03ab566ecd7e59",
+                "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp"
+            },
+            "04cbd7c7e3159f9e": {
                 "name": "Gunbreaker's Combo",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.04cbd7c7e3159f9e"
-            },
-            "1f7a9": {
-                "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
                 "level": 1,
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.04cbd7c7e3159f9e",
+                "img": "icons/skills/melee/strike-sword-steel-yellow.webp"
+            },
+            "1f7a9715421e92da": {
                 "name": "Royal Guard",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1f7a9715421e92da"
+                "level": 1,
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1f7a9715421e92da",
+                "img": "icons/equipment/shield/heater-steel-worn-grey.webp"
             },
-            "a6199": {
-                "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
-                "level": 3,
+            "1aab8f02f7a76d31": {
+                "name": "Heart Of Stone",
+                "level": 1,
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1aab8f02f7a76d31",
+                "img": "icons/skills/melee/strike-sword-steel-yellow.webp"
+            },
+            "a61994a226d98bcc": {
                 "name": "Steady Aim",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a61994a226d98bcc"
+                "level": 3,
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a61994a226d98bcc",
+                "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp"
             },
-            "7ea8b": {
-                "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
-                "level": 5,
+            "7ea8bba45957ea76": {
                 "name": "Gunblade Weapon Mastery",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.7ea8bba45957ea76"
+                "level": 5,
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.7ea8bba45957ea76",
+                "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp"
             },
-            "141e4": {
-                "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
-                "level": 7,
-                "name": "Continuation",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.141e49ccd412a33a"
-            },
-            "81674": {
-                "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
-                "level": 6,
+            "8167449ad5822303": {
                 "name": "Advanced Cartridge Arts",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.8167449ad5822303"
+                "level": 6,
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.8167449ad5822303",
+                "img": "icons/skills/melee/strike-blade-knife-white-red.webp"
             },
-            "a40dd": {
-                "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
+            "141e49ccd412a33a": {
+                "name": "Continuation",
                 "level": 7,
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.141e49ccd412a33a",
+                "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp"
+            },
+            "a40dd44fb62beb04": {
                 "name": "Weapon Specialization",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a40dd44fb62beb04"
+                "level": 7,
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a40dd44fb62beb04",
+                "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp"
             },
-            "ad484": {
-                "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
-                "level": 9,
-                "name": "Aetheric Fortitude",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.ad484df0b1baae4e"
-            },
-            "0034c": {
-                "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
-                "level": 9,
-                "name": "Cartridge Expertise",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0034c6c64e887ff7"
-            },
-            "0a3b3": {
-                "img": "icons/magic/light/explosion-star-glow-yellow.webp",
-                "level": 11,
-                "name": "Gunbreaker Expertise",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0a3b3f4bfc68b3d1"
-            },
-            "0e4bd": {
-                "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
-                "level": 11,
+            "0e4bd01ae207e03c": {
                 "name": "Armor Expertise",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0e4bd01ae207e03c"
+                "level": 7,
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0e4bd01ae207e03c",
+                "img": "icons/equipment/shield/heater-steel-worn-grey.webp"
             },
-            "a5ca8": {
-                "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
-                "level": 13,
-                "name": "Gunblade Legend",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a5ca84e5a87ea0ea"
+            "ad484df0b1baae4e": {
+                "name": "Aetheric Fortitude",
+                "level": 9,
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.ad484df0b1baae4e",
+                "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp"
             },
-            "571c5": {
-                "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
-                "level": 13,
+            "0034c6c64e887ff7": {
+                "name": "Cartridge Expertise",
+                "level": 9,
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0034c6c64e887ff7",
+                "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp"
+            },
+            "0a3b3f4bfc68b3d1": {
+                "name": "Gunbreaker Expertise",
+                "level": 9,
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0a3b3f4bfc68b3d1",
+                "img": "icons/magic/light/explosion-star-glow-yellow.webp"
+            },
+            "571c5710dc92e12d": {
                 "name": "Battle-Tested",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.571c5710dc92e12d"
+                "level": 11,
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.571c5710dc92e12d",
+                "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp"
             },
-            "5ee5f": {
-                "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
-                "level": 15,
-                "name": "Greater Weapon Specialization",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.5ee5fcd559eedf13"
+            "a5ca84e5a87ea0ea": {
+                "name": "Gunblade Legend",
+                "level": 13,
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a5ca84e5a87ea0ea",
+                "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp"
             },
-            "70faa": {
-                "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
-                "level": 15,
+            "70faa71375db332e": {
                 "name": "Armor Mastery",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.70faa71375db332e"
+                "level": 15,
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.70faa71375db332e",
+                "img": "icons/equipment/shield/heater-steel-worn-grey.webp"
             },
-            "81fc9": {
-                "img": "icons/magic/light/explosion-star-glow-yellow.webp",
-                "level": 17,
+            "5ee5fcd559eedf13": {
+                "name": "Greater Weapon Specialization",
+                "level": 15,
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.5ee5fcd559eedf13",
+                "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp"
+            },
+            "81fc94e9fc8dcc22": {
                 "name": "Gunbreaker Mastery",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.81fc94e9fc8dcc22"
+                "level": 17,
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.81fc94e9fc8dcc22",
+                "img": "icons/magic/light/explosion-star-glow-yellow.webp"
             },
-            "a7bcb": {
-                "img": "icons/magic/light/explosion-star-glow-yellow.webp",
-                "level": 19,
+            "a7bcbcad2fd2a303": {
                 "name": "Lion's Legend",
-                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a7bcbcad2fd2a303"
+                "level": 19,
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a7bcbcad2fd2a303",
+                "img": "icons/magic/light/explosion-star-glow-yellow.webp"
             }
         },
         "traits": {
             "value": [],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
-        "rules": []
+        "rules": [],
+        "slug": "gunbreaker"
     },
     "folder": null,
     "sort": 0,

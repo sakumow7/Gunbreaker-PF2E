@@ -5,7 +5,7 @@
     "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Trigger</strong> An ally within 30 feet would take damage.</p><p><strong>Frequency</strong> once per round. You interpose covering fire, granting the ally resistance to that damage equal to half your level. </p>",
+            "value": "<p>Heart of Stone's range increases to 30 feet. At the start of each of your turns, gain one additional reaction that can be used only for Heart of Stone to protect an ally other than yourself. It expires at the start of your next turn. You cannot use more than one reaction on the same triggering Strike. Aetheric Ward cannot use this extra reaction.</p>",
             "gm": ""
         },
         "level": {
@@ -15,11 +15,11 @@
             "value": [
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "class",
         "actionType": {
-            "value": "reaction"
+            "value": "passive"
         },
         "actions": {
             "value": null
@@ -28,15 +28,11 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
         "rules": [],
-        "frequency": {
-            "max": 1,
-            "per": "round"
-        }
+        "slug": "guardians-instinct"
     },
     "folder": null,
     "sort": 0,

@@ -1,0 +1,47 @@
+{
+    "_id": "5332df7babf82362",
+    "name": "Auroral Mastery",
+    "type": "feat",
+    "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p>Aurora gains a second use per 10 minutes. Each target is still immune to your Aurora for 10 minutes after receiving it; spend the second use on a different target. Its healing does not otherwise increase.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 10
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": [
+                {
+                    "value": "Aurora"
+                }
+            ]
+        },
+        "publication": {
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
+        },
+        "rules": [],
+        "slug": "auroral-mastery"
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

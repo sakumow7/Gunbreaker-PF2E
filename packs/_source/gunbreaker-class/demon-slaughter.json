@@ -5,46 +5,39 @@
     "img": "icons/magic/fire/projectile-fireball-smoke-strong-orange.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Requirements</strong> You have the <em>Demon Slice</em> combo effect.</p><p>Sweep again in a 5-foot emanation, each enemy taking a gunblade Strike's damage plus bonus damage (<strong>1d8, +1d8 at 10th and 18th levels</strong>). <strong>Combo bonus: load 1 cartridge</strong>.</p><p><strong>Damage:</strong> @Damage[(1+floor((@actor.level-2)/8))d8[slashing]]</p><p><strong>Cartridges:</strong> Build 1 (adjusted automatically when this is used).</p>",
+            "value": "<p><strong>Requirements</strong> Your Demon Slice combo opening. Sweep your gunblade through a 5-foot emanation. Each enemy in the area attempts a basic Reflex save against your Gunbreaker class DC. Roll the damage once: 1d4 slashing damage per 2 levels, rounded up. This is not a Strike; do not add weapon damage, runes, Strength, or specialization. This activity does not use or increase multiple attack penalty.</p><p>After resolving the saves, end the combo and load 1 cartridge, even if all targets succeed. At least one enemy must be in the area.</p><p>@Damage[(ceil(@actor.level/2))d4[slashing]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
             "gm": ""
         },
         "level": {
-            "value": 2
+            "value": 1
         },
         "traits": {
             "value": [
                 "gunbreaker"
             ],
-            "rarity": "common"
+            "rarity": "uncommon"
         },
         "category": "classfeature",
         "actionType": {
             "value": "action"
         },
         "actions": {
-            "value": 1
+            "value": 2
         },
         "prerequisites": {
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": true,
-            "title": "FFXIV Gunbreaker (homebrew)"
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "remaster": true
         },
-        "rules": []
+        "rules": [],
+        "slug": "demon-slaughter"
     },
     "folder": null,
     "sort": 0,
     "ownership": {
         "default": 0
     },
-    "flags": {
-        "gunbreaker-pf2e": {
-            "cartridge": 1,
-            "removeEffects": [
-                "combo-demon-slice-ready"
-            ]
-        }
-    }
+    "flags": {}
 }
