@@ -1,0 +1,44 @@
+{
+    "_id": "677832a37dd0865c",
+    "name": "Guarded Advance",
+    "type": "feat",
+    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p>Requirements: You wield a gunblade and can enter or are already in Royal Guard. Stride up to your Speed. You may then enter Royal Guard without spending another action, ending an incompatible stance normally. Finally, use Keen Edge against an enemy within your melee reach. If no enemy is in reach, you do not make the Strike or gain a combo opening; the movement and stance still occur. The subordinate Strike uses and increases MAP normally. This activity does not increase your Speed or bypass difficult terrain or reactions.</p><p>It counts as one flourish. It cannot be combined with Trajectory on the same turn. When already in Royal Guard, it still allows Stride and Keen Edge but grants no extra benefit. Its subordinate movement and Strike do not each consume another action.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 4
+        },
+        "traits": {
+            "value": [
+                "gunbreaker",
+                "flourish"
+            ],
+            "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "action"
+        },
+        "actions": {
+            "value": 2
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+            "remaster": true
+        },
+        "rules": [],
+        "slug": "guarded-advance"
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

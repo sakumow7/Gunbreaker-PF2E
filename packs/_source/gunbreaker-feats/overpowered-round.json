@@ -5,7 +5,7 @@
     "img": "icons/magic/fire/explosion-fireball-large-orange.webp",
     "system": {
         "description": {
-            "value": "<p>When Burst Strike hits, you can deal splash fire damage equal to the number of weapon damage dice to other creatures within 5 feet of the target, including allies and yourself if in the area. This damage is not dealt to the primary target, does not double on a critical hit, and is not dealt on a miss. This is an explicit secondary damage effect, not the splash weapon trait.</p>",
+            "value": "<p>When Burst Strike hits, you may deal fire damage equal to the number of weapon damage dice to each other enemy within 5 feet of the primary target. This is separate secondary damage, not the splash weapon trait. It does not damage the primary target, you, or your allies; it does not double on a critical hit and does not occur on a miss. Aetheric Calibration may change this fire damage.</p>",
             "gm": ""
         },
         "level": {
@@ -28,7 +28,7 @@
             "value": []
         },
         "publication": {
-            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
             "remaster": true
         },
         "rules": [],

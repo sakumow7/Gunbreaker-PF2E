@@ -1,0 +1,44 @@
+{
+    "_id": "35a9caf57d156ced",
+    "name": "Aetheric Calibration",
+    "type": "feat",
+    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p>During daily preparations, choose fire, cold, or electricity; fire is the default. Until your next daily preparations, replace the fire damage of Burst Strike, Hypervelocity, Jugular Rip, Abdomen Tear, Eye Gouge, Fated Circle, Fated Brand, Double Down, Saturation Fire, and Overpowered Round with the chosen type. This changes only those listed damage components. It does not change physical weapon damage, persistent bleed, property runes, Lightning Shot, Danger Zone, Bow Shock, Reign secondary damage, or Relentless Rush. Replace any corresponding fire trait on a modified effect with the chosen damage trait. Other traits and all costs are unchanged.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 4
+        },
+        "traits": {
+            "value": [
+                "gunbreaker",
+                "magical"
+            ],
+            "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+            "remaster": true
+        },
+        "rules": [],
+        "slug": "aetheric-calibration"
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

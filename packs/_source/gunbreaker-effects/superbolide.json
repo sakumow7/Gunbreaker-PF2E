@@ -5,7 +5,7 @@
     "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
     "system": {
         "description": {
-            "value": "<p>After manually reducing your current HP to 1, apply resistance to all damage equal to twice your level until the start of your next turn. No condition immunity.</p>",
+            "value": "<p>After paying HP equal to your level, to a minimum of 1 HP (not damage), gain resistance to all damage equal to twice your level until the start of your next turn. No condition immunity.</p>",
             "gm": ""
         },
         "level": {
@@ -18,7 +18,7 @@
             "rarity": "common"
         },
         "publication": {
-            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
             "remaster": true
         },
         "start": {

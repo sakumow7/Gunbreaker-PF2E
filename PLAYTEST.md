@@ -4,7 +4,7 @@
 
 A mobile martial defender who alternates sword combos, cartridge bursts, and party protection. Weapon accuracy follows a normal martial rather than Fighter. Medium armor reaches expert at 7 and master at 15; Royal Guard adds +1 circumstance AC while wielding a gunblade. It does not stack with a shield's circumstance AC bonus. Damage bonuses are smaller than 1.2 because defensive tools now function reliably.
 
-FFXIV identity retained: Keen Edge → Brutal Shell → Solid Barrel; Demon Slice → Demon Slaughter; cartridge spenders; Gnashing Fang → Savage Claw → Wicked Talon; hit-confirmed Continuation; No Mercy/Sonic Break; Bloodfest/Reign of Beasts → Noble Blood → Lion Heart; Aurora, Camouflage, Nebula, Heart of Stone/Corundum/Light, Superbolide, and Gunmetal Soul. This is an adaptation, not a numerical translation of potency or recast times. Current FFXIV and older iterations differ; reducing HP to 1 for Superbolide intentionally retains the earlier iconic version while replacing immunity with resistance.
+FFXIV identity retained: Keen Edge → Brutal Shell → Solid Barrel; Demon Slice → Demon Slaughter; cartridge spenders; Gnashing Fang → Savage Claw → Wicked Talon; hit-confirmed Continuation; No Mercy/Sonic Break; Bloodfest/Reign of Beasts → Noble Blood → Lion Heart; Aurora, Camouflage, Nebula, Heart of Stone/Corundum/Light, Superbolide, and Gunmetal Soul. This is an adaptation, not a numerical translation of potency or recast times. Current FFXIV and older iterations differ; v1.4 Superbolide costs level HP (minimum remaining HP 1) and retains twice-level resistance. The proposed revision is pinned in docs/DESIGN-v1.4.md.
 
 References consulted:
 

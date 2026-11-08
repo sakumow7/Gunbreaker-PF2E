@@ -19,7 +19,7 @@
             "rarity": "uncommon"
         },
         "publication": {
-            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
             "remaster": true
         },
         "baseItem": "gunblade",
@@ -72,7 +72,22 @@
             "property": []
         },
         "containerId": null,
-        "rules": [],
+        "rules": [
+            {
+                "key": "RollOption",
+                "domain": "all",
+                "option": "gunbreaker:wielding",
+                "predicate": [
+                    "parent:equipped",
+                    {
+                        "or": [
+                            "parent:hands-held:1",
+                            "parent:hands-held:2"
+                        ]
+                    }
+                ]
+            }
+        ],
         "slug": "shadowbane-gunblade-plus1-striking"
     },
     "folder": null,

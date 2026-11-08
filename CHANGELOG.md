@@ -1,3 +1,12 @@
+# 1.4.0-beta.1 — design implementation and native core prototype
+
+- Implement the approved rules revisions and three new selectable options plus Reserved Cartridge replacement.
+- Retire Twin Cartridge and Overcharged Gauge with explicit migration choices; preserve compatible source IDs and custom actor data in a read-only migration plan.
+- Update the resource engine for reaction-preserving Continuation, captured weapon dice, scaled capacity, Reserved Cartridge, daily preparation gates, numbered rounds and duplicate event IDs.
+- Add native action-predicated damage rules and a GM-only core-action execution prototype with persistent failure recovery.
+- Add mechanics, execution, migration and regression tests. Rebuild authored data, catalogue, rule reference and packs together.
+- Full player automation and live Forge acceptance remain pending. No release or live actor migration is performed by this branch.
+
 # Changelog
 
 ## 1.3.0 — Gunbreaker balance playtest
