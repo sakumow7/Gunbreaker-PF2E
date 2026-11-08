@@ -60,7 +60,7 @@ for(const pack of manifest.packs){
 }
 const zip=unzipSync(await readFile(path.join(root,`dist/gunbreaker-pf2e-${manifest.version}.zip`)));
 assert.equal(JSON.parse(strFromU8(zip['module.json'])).version,manifest.version);
-for(const file of ['scripts/gunbreaker.js','scripts/state.mjs','scripts/catalogue.mjs','scripts/execution.mjs','scripts/queue.mjs','scripts/requests.mjs','scripts/transport.mjs','scripts/stone.mjs','scripts/stone-native.mjs','scripts/area.mjs','scripts/area-native.mjs','scripts/native-damage.mjs','docs/AREA-COMBOS.md','docs/HEART-OF-STONE.md','scripts/native.mjs','scripts/mechanics.mjs','scripts/migration.mjs','migrations/baseline-v1.3.json','migrations/current-source.json','docs/AUTOMATION.md','RULES.html','MIGRATION.md'])assert(zip[file],`ZIP missing ${file}`);
+for(const file of ['scripts/gunbreaker.js','scripts/state.mjs','scripts/catalogue.mjs','scripts/execution.mjs','scripts/queue.mjs','scripts/requests.mjs','scripts/transport.mjs','scripts/stone.mjs','scripts/stone-native.mjs','scripts/area.mjs','scripts/area-native.mjs','scripts/line-native.mjs','scripts/native-damage.mjs','docs/AREA-COMBOS.md','docs/HEART-OF-STONE.md','scripts/native.mjs','scripts/mechanics.mjs','scripts/migration.mjs','migrations/baseline-v1.3.json','migrations/current-source.json','docs/AUTOMATION.md','RULES.html','MIGRATION.md'])assert(zip[file],`ZIP missing ${file}`);
 for(const pack of manifest.packs)assert(zip[`${pack.path}/CURRENT`],`ZIP missing ${pack.path}`);
 assert.deepEqual(JSON.parse(strFromU8(zip['migrations/current-source.json'])),entries.map(({uuid,doc})=>({uuid,doc})),'Migration snapshot is stale');
 const html=await readFile(path.join(root,'RULES.html'),'utf8');

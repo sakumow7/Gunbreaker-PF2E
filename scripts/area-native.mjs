@@ -2,14 +2,15 @@ import {AreaRunner,areaFormula,areaProfile,areaPersistentFormula,basicMultiplier
 import {normalizeState,transition} from './state.mjs';
 import {catalogue} from './catalogue.mjs';
 import {assertFreshIntent} from './requests.mjs';
+import {LineRegionService} from './line-native.mjs';
 import {nativeDamageContext} from './native-damage.mjs';
 const MOD='gunbreaker-pf2e';
 const esc=s=>foundry.utils.escapeHTML(String(s));
 const degreeNames=['criticalFailure','failure','success','criticalSuccess'];
-const position=t=>({uuid:t.document.uuid,x:t.document.x,y:t.document.y,elevation:t.document.elevation,width:t.document.width,height:t.document.height});
+const position=t=>({uuid:t.document.uuid,x:t.document.x,y:t.document.y,elevation:t.document.elevation,width:t.document.width,height:t.document.height,level:t.document.level,depth:t.document.depth,shape:t.document.shape});
 const samePosition=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const itemFor=(actor,slug)=>actor.items.find(i=>(i.slug??i.system?.slug)===slug&&i.system.publication?.title?.includes('1.4.0'));
-const saveOptions=profile=>['damaging-effect',...(profile.shape==='emanation'?['area-damage']:[])];
+const saveOptions=profile=>['damaging-effect',...(profile.shape!=='target'?['area-damage']:[])];
 const damageClass=()=>{const cls=CONFIG.Dice.rolls.find(r=>r.name==='DamageRoll');if(!cls)throw Error('Native PF2e damage rolls are unavailable.');return cls;};
 export function areaSaveEvidence(message,actorUuid){
   const roll=message?.rolls?.[0];
@@ -35,7 +36,7 @@ export function combinedSaveDamage(DamageRoll,data,multiplier,persistentData=nul
   return roll;
 }
 export function createAreaRunner({authority,contextFor,actorToken,weaponFor},queue){
-  const privateJournals=new Set();
+  const privateJournals=new Set(),lines=new LineRegionService();
   const check=(actor,request)=>{
     authority(actor,request);
     if(game.users.filter(u=>u.active&&u.isGM).length!==1)throw Error('Area automation requires exactly one active GM.');
@@ -55,9 +56,14 @@ export function createAreaRunner({authority,contextFor,actorToken,weaponFor},que
   const verifyTargets=async(actor,prepared,completed=[])=>{
     const self=actorToken(actor);
     if(!samePosition(position(self),prepared.origin))throw Error('The origin moved after area confirmation.');
+    const region=prepared.line?await lines.read(prepared.line):null;
+    if(region){
+      const eligible=canvas.tokens.placeables.filter(t=>t.actor&&t.actor.uuid!==actor.uuid&&actor.isEnemyOf(t.actor)&&(!t.actor.isDead||completed.includes(t.document.uuid))&&lines.contains(region,t,prepared.line)).map(t=>t.document.uuid).sort();
+      if(JSON.stringify(eligible)!==JSON.stringify(prepared.lineCandidates))throw Error('The enemies within the confirmed line changed.');
+    }
     for(const t of prepared.targets){
       const doc=await fromUuid(t.uuid),token=doc?.object;
-      if(!token?.actor||token.actor.uuid!==t.actorUuid||token.document.hidden||!samePosition(position(token),t.position)||!actor.isEnemyOf(token.actor)||(token.actor.isDead&&!completed.includes(t.uuid))||self.distanceTo(token)>prepared.profile.range)throw Error('An affected target moved, changed visibility or allegiance, died, or left range. Reconcile before continuing.');
+      if(!token?.actor||token.actor.uuid!==t.actorUuid||token.document.hidden||!samePosition(position(token),t.position)||!actor.isEnemyOf(token.actor)||(token.actor.isDead&&!completed.includes(t.uuid))||(region?!lines.contains(region,token,prepared.line):self.distanceTo(token)>prepared.profile.range))throw Error('An affected target moved, changed visibility or allegiance, died, or left range. Reconcile before continuing.');
     }
   };
   const verifySaves=progress=>{
@@ -87,6 +93,11 @@ export function createAreaRunner({authority,contextFor,actorToken,weaponFor},que
       }
       await a.setFlag(MOD,'execution',{id:j.id,slug:j.slug,status:j.status,journalId:log.id,revision:j.revision??null});
     },
+    cleanup:async(actor,request,prepared)=>{
+      const marker=actor.getFlag(MOD,'execution');
+      if(marker?.id===request.id&&['reserved','committed','recovery'].includes(marker.status))return;
+      await lines.cleanup(prepared.line);
+    },
     read:a=>a.getFlag(MOD,'tracker'),write:(a,s)=>{authority(a);return a.setFlag(MOD,'tracker',s);},
     prepare:async(actor,request)=>{
       const {self,dc}=inspect(actor,request),c=contextFor(actor),raw=actor.getFlag(MOD,'tracker');
@@ -99,23 +110,33 @@ export function createAreaRunner({authority,contextFor,actorToken,weaponFor},que
       if(request.slug==='fated-brand'&&!original?.length)throw Error('Fated Brand has no eligible original targets.');
       const selectedIds=request.targetIds??c.targetIds;
       if(profile.shape==='target'&&selectedIds?.length!==1)throw Error('Select exactly one enemy for Danger Zone.');
-      const tokens=canvas.tokens.placeables.filter(t=>t.actor&&t.actor.uuid!==actor.uuid&&actor.isEnemyOf(t.actor)&&!t.actor.isDead&&self.distanceTo(t)<=profile.range&&(!original||original.includes(t.document.uuid))&&(profile.shape!=='target'||selectedIds.includes(t.document.uuid)));
-      // Do not put hidden target identities into an owner-readable Continuation state.
-      if(tokens.some(t=>t.document.hidden))throw Error('This area requires GM adjudication outside the automated target workflow.');
-      if(!tokens.length)throw Error(`No eligible enemy remains within ${profile.range} feet.`);
-      if(tokens.length>50)throw Error('This prototype supports at most 50 targets; adjudicate this area manually.');
-      if(new Set(tokens.map(t=>t.actor.uuid)).size!==tokens.length)throw Error('Multiple target tokens share a creature; adjudicate this area manually.');
-      const candidates=tokens.map(t=>({uuid:t.document.uuid,actorUuid:t.actor.uuid,name:t.name,hidden:!!t.document.hidden,position:position(t)}));
-      c.targetIds=candidates.map(t=>t.uuid);
-      if(state.encounter!==c.encounterId)state=transition(state,{type:'start'},c,catalogue);
-      transition(state,{type:'use',slug:request.slug,outcome:request.slug==='fated-circle'?'none':undefined},c,catalogue);
-      const origin=position(self);
-      const selected=await foundry.applications.api.DialogV2.wait({window:{title:`${profile.name} — Confirm area`},rejectClose:false,
-        content:`<p>${profile.shape==='target'?`One enemy within ${profile.range} feet`:`${profile.range}-foot emanation`} · Gunbreaker DC ${dc}. Check every affected enemy. Exclude only creatures blocked by geometry or another rule.</p>${candidates.map(t=>`<label><input type="checkbox" name="target" value="${esc(t.uuid)}" checked> ${esc(t.name)}</label>`).join('')}<label><input type="checkbox" name="verified"> I verified the area, line of effect, and genuine enemy targets.</label><p>Confirming begins the activity and spends its frequency. Canceling a later save requires recovery and cannot refund the activity.</p>`,
-        buttons:[{action:'confirm',label:'Begin activity',callback:(_e,b)=>b.form.elements.verified.checked?[...b.form.querySelectorAll('input[name="target"]:checked')].map(e=>e.value):null}]});
-      if(!selected)return null;
-      if(!selected.length)throw Error('At least one affected enemy is required.');
-      return {origin,expected,dc,profile,weaponId:request.weaponId,targets:candidates.filter(t=>selected.includes(t.uuid)),privateResults:!!self.document.hidden||candidates.some(t=>t.hidden)};
+      // Validate resources and learned prerequisites before asking the GM to place a region.
+      if(profile.shape==='line'){
+        if(state.encounter!==c.encounterId)state=transition(state,{type:'start'},c,catalogue);
+        transition(state,{type:'use',slug:request.slug},{...c,targetIds:['preview']},catalogue);
+      }
+      const origin=position(self);let line=null;
+      try{
+        if(profile.shape==='line'){line=await lines.place(actor,self,request);if(!line)return null;}
+        if(!samePosition(position(self),origin))throw Error('The acting token moved during line placement.');
+        const region=line?await lines.read(line):null;
+        const tokens=canvas.tokens.placeables.filter(t=>t.actor&&t.actor.uuid!==actor.uuid&&actor.isEnemyOf(t.actor)&&!t.actor.isDead&&(region?lines.contains(region,t,line):self.distanceTo(t)<=profile.range)&&(!original||original.includes(t.document.uuid))&&(profile.shape!=='target'||selectedIds.includes(t.document.uuid)));
+        // Do not put hidden target identities into an owner-readable Continuation state.
+        if(tokens.some(t=>t.document.hidden))throw Error('This area requires GM adjudication outside the automated target workflow.');
+        if(!tokens.length)throw Error(`No eligible enemy remains within ${profile.range} feet.`);
+        if(tokens.length>50)throw Error('This prototype supports at most 50 targets; adjudicate this area manually.');
+        if(new Set(tokens.map(t=>t.actor.uuid)).size!==tokens.length)throw Error('Multiple target tokens share a creature; adjudicate this area manually.');
+        const candidates=tokens.map(t=>({uuid:t.document.uuid,actorUuid:t.actor.uuid,name:t.name,hidden:!!t.document.hidden,position:position(t)}));
+        c.targetIds=candidates.map(t=>t.uuid);
+        if(state.encounter!==c.encounterId)state=transition(state,{type:'start'},c,catalogue);
+        transition(state,{type:'use',slug:request.slug,outcome:request.slug==='fated-circle'?'none':undefined},c,catalogue);
+        const selected=await foundry.applications.api.DialogV2.wait({window:{title:`${profile.name} — Confirm area`},rejectClose:false,
+          content:`<p>${profile.shape==='target'?`One enemy within ${profile.range} feet`:profile.shape==='line'?`${profile.range}-foot line; native covered spaces`:`${profile.range}-foot emanation`} · Gunbreaker DC ${dc}. Check every affected enemy. Exclude only creatures blocked by geometry or another rule.</p>${candidates.map(t=>`<label><input type="checkbox" name="target" value="${esc(t.uuid)}" checked> ${esc(t.name)}</label>`).join('')}<label><input type="checkbox" name="verified"> I verified the area, line of effect, and genuine enemy targets.</label><p>Confirming begins the activity and spends its frequency. Canceling a later save requires recovery and cannot refund the activity.</p>`,
+          buttons:[{action:'confirm',label:'Begin activity',callback:(_e,b)=>b.form.elements.verified.checked?[...b.form.querySelectorAll('input[name="target"]:checked')].map(e=>e.value):null}]});
+        if(!selected){await lines.cleanup(line);return null;}
+        if(!selected.length)throw Error('At least one affected enemy is required.');
+        return {origin,expected,dc,profile,line,lineCandidates:line?candidates.map(t=>t.uuid).sort():null,weaponId:request.weaponId,targets:candidates.filter(t=>selected.includes(t.uuid)),privateResults:!!self.document.hidden||candidates.some(t=>t.hidden)};
+      }catch(error){await lines.cleanup(line);throw error;}
     },
     validate:async(actor,request,prepared)=>{
       const {dc}=inspect(actor,request),c=contextFor(actor);

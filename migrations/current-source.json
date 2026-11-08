@@ -5443,7 +5443,7 @@
       "img": "icons/magic/fire/projectile-fireball-smoke-strong-orange.webp",
       "system": {
         "description": {
-          "value": "<p>Requirements: You wield a gunblade. Enemies in a 30-foot line attempt a basic Reflex save against your Gunbreaker class DC against 1d6 fire damage per 2 levels, rounded up. Allies are unaffected. This is not a Strike, does not use or increase MAP, and does not open Fated Brand. Aetheric Calibration may change its fire damage.</p>",
+          "value": "<p><strong>Cost</strong> 1 cartridge. Requirements: You wield a gunblade. Enemies in a 30-foot line attempt a basic Reflex save against your Gunbreaker class DC against 1d6 fire damage per 2 levels, rounded up. Allies are unaffected. This is not a Strike, does not use or increase MAP, and does not open Fated Brand. Aetheric Calibration may change its fire damage.</p>",
           "gm": ""
         },
         "level": {
