@@ -1,7 +1,7 @@
 import {normalizeState,transition,COSTS} from './state.mjs';
 import {catalogue} from './catalogue.mjs';
 import {ActorQueue} from './queue.mjs';
-export const SAVE_ACTIONS=new Set(['demon-slice','demon-slaughter','fated-circle','fated-brand','double-down','danger-zone','bow-shock','saturation-fire']);
+export const SAVE_ACTIONS=new Set(['demon-slice','demon-slaughter','fated-circle','fated-brand','double-down','danger-zone','bow-shock','saturation-fire','relentless-rush']);
 export const TARGETED_SAVES=new Set(['danger-zone']);
 const assert=(ok,message)=>{if(!ok)throw Error(message);};
 export function areaProfile(slug,level,learned=[]){
@@ -16,6 +16,7 @@ export function areaPersistentFormula(slug,level){
 }
 export function areaFormula(slug,level,calibration='fire',learned=[]){
   assert(SAVE_ACTIONS.has(slug)&&Number.isInteger(level)&&level>=1&&level<=20,'Invalid area ability or level.');
+  if(slug==='relentless-rush')return '8d6[fire]';
   if(slug.startsWith('demon-'))return `${Math.ceil(level/2)}d4[slashing]`;
   if(slug==='bow-shock')return `${Math.ceil(level/2)}d4[fire]`;
   if(slug==='danger-zone')return `${Math.ceil(level/2)}d${areaProfile(slug,level,learned).upgraded?8:6}[fire]`;
@@ -60,7 +61,7 @@ export class AreaRunner{
     const prepared=await p.prepare(actor,request);
     if(!prepared)return {id:request.id,status:'canceled'};
     try{
-      assert(prepared.targets.length>0&&prepared.targets.length<=50,'The area needs 1–50 valid targets.');
+      assert((prepared.targets.length>0||p.allowEmpty)&&prepared.targets.length<=50,'The area needs 1–50 valid targets.');
       assert(new Set(prepared.targets.map(t=>t.uuid)).size===prepared.targets.length&&new Set(prepared.targets.map(t=>t.actorUuid)).size===prepared.targets.length,'Multiple target tokens share a creature; adjudicate the area manually.');
       return await this.queue.runMany([actor,...prepared.targets.map(t=>({uuid:t.actorUuid}))],()=>this.#execute(actor,request,prepared));
     }finally{await p.cleanup?.(actor,request,prepared);}
@@ -74,14 +75,14 @@ export class AreaRunner{
     let before=normalizeState(await p.read(actor),c);
     if(before.events.includes(request.id))return {id:request.id,status:'complete',duplicate:true};
     if(before.encounter!==c.encounterId)before=transition(before,{type:'start'},c,catalogue);
-    const committed=areaCommit(before,request.slug,c,request.id);
+    const committed=p.commit?await p.commit(actor,request,before,c):areaCommit(before,request.slug,c,request.id);
     let progress={id:request.id,slug:request.slug,status:'reserved',before,context:c,prepared,saves:[],applications:[]};
     await p.saveJournal(actor,progress);
     try{
       await p.authorize(actor,request);
       // Committing the activity precedes native saves. Later cancellation cannot refund a begun activity.
       progress={...progress,status:'committed'};await p.saveJournal(actor,progress);await p.write(actor,committed);
-      progress.damage=await p.damage(actor,request,c,prepared,committed);await p.saveJournal(actor,progress);
+      progress.damage=prepared.targets.length?await p.damage(actor,request,c,prepared,committed):null;await p.saveJournal(actor,progress);
       for(const target of prepared.targets){
         await p.authorize(actor,request);
         const result=await p.save(actor,request,c,target);
@@ -89,9 +90,9 @@ export class AreaRunner{
         basicMultiplier(result?.degree);
       }
       // These rewards follow resolution of all saves, even if later HP application is interrupted.
-      const after=areaFinish(before,committed,request.slug,c,request.id,progress.saves);
+      const after=p.finish?await p.finish(actor,request,before,committed,c):areaFinish(before,committed,request.slug,c,request.id,progress.saves);
       await p.write(actor,after);
-      const review=await p.review(actor,request,c,prepared,progress);
+      const review=prepared.targets.length?await p.review(actor,request,c,prepared,progress):[];
       assert(review&&review.length===progress.saves.length,'Area resolution needs GM recovery; no damage was applied by this workflow.');
       assert(review.every((r,i)=>r.target===progress.saves[i].target&&[0,0.5,1,2].includes(r.multiplier)
         &&(r.persistent===undefined||typeof r.persistent==='boolean')
@@ -103,6 +104,7 @@ export class AreaRunner{
         if(row.multiplier>0||row.persistent)await p.apply(actor,request,c,prepared,progress,row);
         progress.applications.at(-1).status=row.multiplier>0||row.persistent?'complete':'no-damage';await p.saveJournal(actor,progress);
       }
+      await p.finalize?.(actor,request,c,prepared,progress);
       progress={...progress,status:'complete',revision:after.revision};await p.saveJournal(actor,progress);
       await p.summary?.(actor,request,progress);return progress;
     }catch(error){

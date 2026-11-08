@@ -3,6 +3,7 @@ import {damageType,followupFormula,superbolideHP,nativeWeaponDice} from './mecha
 import {sourceIds,catalogue} from './catalogue.mjs';
 import {assertFreshIntent} from './requests.mjs';
 import {createAreaRunner} from './area-native.mjs';
+import {createRushRunner} from './rush-native.mjs';
 import {createReignRunner} from './reign-native.mjs';
 import {REIGN_STEPS} from './reign.mjs';
 import {SAVE_ACTIONS} from './area.mjs';
@@ -133,7 +134,8 @@ export function createNativeRunner(contextFor,queue){
   },queue);
   const area=createAreaRunner({authority,contextFor,actorToken,weaponFor},queue);
   const reign=createReignRunner({authority,contextFor,actorToken,weaponFor,strikeFor},queue);
-  return {execute:(actor,request)=>REIGN_STEPS.has(request.slug)?reign.execute(actor,request):SAVE_ACTIONS.has(request.slug)?area.execute(actor,request):single.execute(actor,request)};
+  const rush=createRushRunner({authority,contextFor,actorToken,weaponFor},queue);
+  return {advanceRush:rush.advance,reconcileRush:rush.reconcile,execute:(actor,request)=>request.slug==='relentless-rush'?rush.execute(actor,request):REIGN_STEPS.has(request.slug)?reign.execute(actor,request):SAVE_ACTIONS.has(request.slug)?area.execute(actor,request):single.execute(actor,request)};
 }
 export async function nativePanel(actor,runner,contextFor){
   if(!actor?.isOwner||actor.type!=='character')throw Error('Select an owned character.');
@@ -142,7 +144,7 @@ export async function nativePanel(actor,runner,contextFor){
   const expected={revision:state?.revision??0,encounterId:c.encounterId,round:c.round,turn:c.turn};
   const choices=[...SUPPORTED].filter(s=>c.learned.includes(s)&&catalogue[s].level<=c.level);
   const weapons=actor.itemTypes.weapon.filter(isHeld);
-  const content=`<p>Native execution beta · Cartridges ${state?.cartridges??0}. Costs and combo outcomes update automatically. Native damage controls remain available.</p><label>Ability<select name="ability">${choices.map(s=>`<option value="${s}">${esc(catalogue[s].name)}</option>`).join('')}</select></label><label>Gunblade<select name="weapon">${weapons.map(w=>`<option value="${w.id}">${esc(w.name)}</option>`).join('')}</select></label><label>Attack stage (Strikes only)<select name="map"><option value="0">First attack</option><option value="1">Second attack</option><option value="2">Third or later attack</option></select></label><p>Player requests go to the GM coordinator. Check action availability and terrain. Save abilities use GM target confirmation and damage review. Danger Zone uses your selected enemy; Blasting Zone upgrades it automatically. Saturation Fire asks the GM to place and aim its line. Reign steps use one primary target and up to two secondary enemies chosen after a hit. Other areas, movement and complete party protection remain pending.</p>`;
+  const content=`<p>Native execution beta · Cartridges ${state?.cartridges??0}. Costs and combo outcomes update automatically. Native damage controls remain available.</p><label>Ability<select name="ability">${choices.map(s=>`<option value="${s}">${esc(catalogue[s].name)}</option>`).join('')}</select></label><label>Gunblade<select name="weapon">${weapons.map(w=>`<option value="${w.id}">${esc(w.name)}</option>`).join('')}</select></label><label>Attack stage (Strikes only)<select name="map"><option value="0">First attack</option><option value="1">Second attack</option><option value="2">Third or later attack</option></select></label><p>Player requests go to the GM coordinator. Check action availability and terrain. Save abilities use GM target confirmation and damage review. Danger Zone uses your selected enemy; Blasting Zone upgrades it automatically. Saturation Fire asks the GM to place and aim its line. Reign steps use one primary target and up to two secondary enemies chosen after a hit. Relentless Rush triggers its second blast on your next turn; the GM confirms the current area. Movement and complete party protection remain pending.</p>`;
   const req=await foundry.applications.api.DialogV2.wait({window:{title:'Gunbreaker — Native Actions Beta'},content,rejectClose:false,buttons:[{action:'execute',label:'Use ability',callback:(_event,b)=>({id:foundry.utils.randomID(),slug:b.form.elements.ability.value,weaponId:b.form.elements.weapon.value,map:Number(b.form.elements.map.value)})}]});
   if(!req||typeof req!=='object')return;
   // Snapshot when the panel opens: a stale selection must not spend changed resources.

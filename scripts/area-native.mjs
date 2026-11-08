@@ -36,7 +36,7 @@ export function combinedSaveDamage(DamageRoll,data,multiplier,persistentData=nul
   roll.options.degreeOfSuccess=null;
   return roll;
 }
-export function createSavePorts({authority,contextFor,actorToken,weaponFor}){
+export function createSavePorts({authority,contextFor,actorToken,weaponFor},{automatic=false,allowEmpty=false,formulaFor=null}={}){
   const privateJournals=new Set(),lines=new LineRegionService();
   const check=(actor,request)=>{
     authority(actor,request);
@@ -44,7 +44,7 @@ export function createSavePorts({authority,contextFor,actorToken,weaponFor}){
   };
   const inspect=(actor,request)=>{
     check(actor,request);
-    if(['unconscious','paralyzed','stunned'].some(c=>actor.hasCondition(c)))throw Error('This character cannot act.');
+    if((automatic?['unconscious']:['unconscious','paralyzed','stunned']).some(c=>actor.hasCondition(c)))throw Error('This character cannot act.');
     if((game.combat?.turns.filter(t=>t.actor?.uuid===actor.uuid).length??0)!==1)throw Error('Area automation requires exactly one combatant for the actor.');
     const item=itemFor(actor,request.slug);if(!item)throw Error('Update this ability from the v1.4 compendium first.');
     const weapon=weaponFor(actor,request.weaponId),self=actorToken(actor);
@@ -124,18 +124,18 @@ export function createSavePorts({authority,contextFor,actorToken,weaponFor}){
         const tokens=canvas.tokens.placeables.filter(t=>t.actor&&t.actor.uuid!==actor.uuid&&actor.isEnemyOf(t.actor)&&!t.actor.isDead&&(region?lines.contains(region,t,line):self.distanceTo(t)<=profile.range)&&(!original||original.includes(t.document.uuid))&&(profile.shape!=='target'||selectedIds.includes(t.document.uuid)));
         // Do not put hidden target identities into an owner-readable Continuation state.
         if(tokens.some(t=>t.document.hidden))throw Error('This area requires GM adjudication outside the automated target workflow.');
-        if(!tokens.length)throw Error(`No eligible enemy remains within ${profile.range} feet.`);
+        if(!tokens.length&&!allowEmpty)throw Error(`No eligible enemy remains within ${profile.range} feet.`);
         if(tokens.length>50)throw Error('This prototype supports at most 50 targets; adjudicate this area manually.');
         if(new Set(tokens.map(t=>t.actor.uuid)).size!==tokens.length)throw Error('Multiple target tokens share a creature; adjudicate this area manually.');
         const candidates=tokens.map(t=>({uuid:t.document.uuid,actorUuid:t.actor.uuid,name:t.name,hidden:!!t.document.hidden,position:nativePosition(t)}));
         c.targetIds=candidates.map(t=>t.uuid);
         if(state.encounter!==c.encounterId)state=transition(state,{type:'start'},c,catalogue);
-        transition(state,{type:'use',slug:request.slug,outcome:request.slug==='fated-circle'?'none':undefined},c,catalogue);
-        const selected=await foundry.applications.api.DialogV2.wait({window:{title:`${profile.name} — Confirm area`},rejectClose:false,
-          content:`<p>${profile.shape==='target'?`One enemy within ${profile.range} feet`:profile.shape==='line'?`${profile.range}-foot line; native covered spaces`:`${profile.range}-foot emanation`} · Gunbreaker DC ${dc}. Check every affected enemy. Exclude only creatures blocked by geometry or another rule.</p>${candidates.map(t=>`<label><input type="checkbox" name="target" value="${esc(t.uuid)}" checked> ${esc(t.name)}</label>`).join('')}<label><input type="checkbox" name="verified"> I verified the area, line of effect, and genuine enemy targets.</label><p>Confirming begins the activity and spends its frequency. Canceling a later save requires recovery and cannot refund the activity.</p>`,
+        if(!automatic)transition(state,{type:'use',slug:request.slug,outcome:request.slug==='fated-circle'?'none':undefined},c,catalogue);
+        const selected=automatic&&!candidates.length?[]:await foundry.applications.api.DialogV2.wait({window:{title:`${profile.name} — Confirm area`},rejectClose:false,
+          content:`<p>${profile.shape==='target'?`One enemy within ${profile.range} feet`:profile.shape==='line'?`${profile.range}-foot line; native covered spaces`:`${profile.range}-foot emanation`} · Gunbreaker DC ${dc}. Check every affected enemy. Exclude only creatures blocked by geometry or another rule.</p>${candidates.map(t=>`<label><input type="checkbox" name="target" value="${esc(t.uuid)}" checked> ${esc(t.name)}</label>`).join('')}<label><input type="checkbox" name="verified"> I verified the area, line of effect, and genuine enemy targets.</label><p>${automatic?'Resolve the already-triggered blast; this spends no action or frequency.':'Confirming begins the activity and spends its frequency.'} Canceling a later save requires recovery and cannot refund the activity.</p>`,
           buttons:[{action:'confirm',label:'Begin activity',callback:(_e,b)=>b.form.elements.verified.checked?[...b.form.querySelectorAll('input[name="target"]:checked')].map(e=>e.value):null}]});
         if(!selected){await lines.cleanup(line);return null;}
-        if(!selected.length)throw Error('At least one affected enemy is required.');
+        if(!selected.length&&!allowEmpty)throw Error('At least one affected enemy is required.');
         return {origin,expected,dc,profile,line,lineCandidates:line?candidates.map(t=>t.uuid).sort():null,weaponId:request.weaponId,targets:candidates.filter(t=>selected.includes(t.uuid)),privateResults:!!self.document.hidden||candidates.some(t=>t.hidden)};
       }catch(error){await lines.cleanup(line);throw error;}
     },
@@ -149,7 +149,7 @@ export function createSavePorts({authority,contextFor,actorToken,weaponFor}){
       return {...c,targetIds:prepared.targets.map(t=>t.uuid),dc,origin:prepared.origin,prepared,weaponId:prepared.weaponId};
     },
     damage:async(actor,request,c,prepared,state)=>{
-      const formula=REIGN_STEPS.has(request.slug)?reignFormula(request.slug):areaFormula(request.slug,c.level,state.calibration,c.learned),DamageRoll=damageClass();
+      const formula=formulaFor?formulaFor(request,c,state):REIGN_STEPS.has(request.slug)?reignFormula(request.slug):areaFormula(request.slug,c.level,state.calibration,c.learned),DamageRoll=damageClass();
       const roll=await new DamageRoll(formula).evaluate();
       const item=itemFor(actor,request.slug);
       const options=[...actor.getSelfRollOptions('self'),...item.getRollOptions('item'),...saveOptions(prepared.profile),...item.system.traits.value.map(t=>`origin:action:trait:${t}`),`origin:action:slug:${request.slug}`];
@@ -200,7 +200,7 @@ export function createSavePorts({authority,contextFor,actorToken,weaponFor}){
       await clone.applyDamage({damage:roll,token,item,rollOptions,skipIWR:false,shieldBlockRequest:false,outcome:degreeNames[saved.degree]});
     },
     summary:async(actor,request,progress)=>{
-      const content=`<p><strong>${esc(progress.prepared.profile.name)}</strong> resolved. ${progress.saves.length} native saves; one initial damage roll; costs, frequency and combo updated.</p><ul>${progress.prepared.targets.map(t=>{const save=progress.saves.find(s=>s.target===t.uuid),row=progress.review.find(r=>r.target===t.uuid);return `<li>${esc(t.name)}: ${degreeNames[save.degree]}, ${row.multiplier}× initial damage${row.persistent?`; persistent ${esc(progress.damage.persistent.formula)}`:''}.</li>`;}).join('')}</ul>`;
+      const content=`<p><strong>${esc(progress.prepared.profile.name)}</strong> resolved. ${progress.saves.length} native saves; ${progress.damage?'one shared damage roll':'no affected enemies'}. ${automatic?'Triggered blast; no action, frequency or combo spent.':'Costs, frequency and combo updated.'}</p><ul>${progress.prepared.targets.map(t=>{const save=progress.saves.find(s=>s.target===t.uuid),row=progress.review.find(r=>r.target===t.uuid);return `<li>${esc(t.name)}: ${degreeNames[save.degree]}, ${row.multiplier}× initial damage${row.persistent?`; persistent ${esc(progress.damage.persistent.formula)}`:''}.</li>`;}).join('')}</ul>`;
       const whisper=progress.prepared.privateResults?game.users.filter(u=>u.isGM).map(u=>u.id):[];
       await ChatMessage.create({speaker:ChatMessage.getSpeaker({actor}),content,whisper,flags:{[MOD]:{execution:request.id}}});
     }

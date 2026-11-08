@@ -1,6 +1,7 @@
 import {createNativeRunner,nativePanel,authority} from './native.mjs';
 import {ActorQueue} from './queue.mjs';
 import {installRequests} from './transport.mjs';
+import {installRushHooks} from './rush-native.mjs';
 import {installStone} from './stone-native.mjs';
 import {initialState,normalizeState,capacity,transition} from './state.mjs';
 import {catalogue,sourceIds} from './catalogue.mjs';
@@ -99,6 +100,7 @@ Hooks.once('ready',()=>{
   if(game.system.id!=='pf2e')return;
   nativeRunner=createNativeRunner(contextFor,actorQueue);
   requestActions=installRequests(nativeRunner,contextFor);
+  installRushHooks(nativeRunner);
   const heartOfStone=installStone(contextFor,actorQueue);
   game.modules.get(MOD).api={tracker,record,heartOfStone,execute:(actor,request)=>requestActions.execute(actor,request),nativeActions:actor=>nativePanel(actor,requestActions,contextFor),adjustCartridges:(actor,delta)=>record(actor,{type:'adjust',delta}),getState:actor=>normalizeState(actor.getFlag(MOD,'tracker'),contextFor(actor))};
 });
