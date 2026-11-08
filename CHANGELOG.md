@@ -1,3 +1,11 @@
+# Unreleased — Bloodfest and Reign sequence
+
+- Add native Bloodfest target validation, frequency, cartridge capacity/load and readiness reminders.
+- Add Reign of Beasts, Noble Blood and Lion Heart with native Strike/MAP/damage rolls, existing action-predicated bonus dice, hit-or-miss combo progression and the shared one-step-per-turn limit. Require the parent Reign feat for follow-on steps.
+- On a hit, choose up to two other enemies within reach and adjacent to the primary target. Resolve fresh native saves and one shared fire roll; do not inherit the primary critical multiplier or Calibration.
+- Keep primary HP application on normal card controls after the workflow completes; apply reviewed secondary damage through the shared native IWR ports. Record both phases in one private journal and block uncertain repeats/rerolls.
+- Add 16 tests for 146 passing local tests. Live Forge acceptance, Relentless Rush and the broader remaining scope are still pending; no release or live update is included.
+
 # Unreleased — Saturation Fire line workflow
 
 - Add Saturation Fire to native GM/player execution: one cartridge, calibrated damage, native basic Reflex saves, no MAP or Fated Brand opening. Make its existing cartridge cost explicit in the compendium rules text.

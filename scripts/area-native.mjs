@@ -2,12 +2,13 @@ import {AreaRunner,areaFormula,areaProfile,areaPersistentFormula,basicMultiplier
 import {normalizeState,transition} from './state.mjs';
 import {catalogue} from './catalogue.mjs';
 import {assertFreshIntent} from './requests.mjs';
+import {REIGN_STEPS,reignFormula} from './reign.mjs';
 import {LineRegionService} from './line-native.mjs';
 import {nativeDamageContext} from './native-damage.mjs';
 const MOD='gunbreaker-pf2e';
 const esc=s=>foundry.utils.escapeHTML(String(s));
 const degreeNames=['criticalFailure','failure','success','criticalSuccess'];
-const position=t=>({uuid:t.document.uuid,x:t.document.x,y:t.document.y,elevation:t.document.elevation,width:t.document.width,height:t.document.height,level:t.document.level,depth:t.document.depth,shape:t.document.shape});
+export const nativePosition=t=>({uuid:t.document.uuid,x:t.document.x,y:t.document.y,elevation:t.document.elevation,width:t.document.width,height:t.document.height,level:t.document.level,depth:t.document.depth,shape:t.document.shape});
 const samePosition=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const itemFor=(actor,slug)=>actor.items.find(i=>(i.slug??i.system?.slug)===slug&&i.system.publication?.title?.includes('1.4.0'));
 const saveOptions=profile=>['damaging-effect',...(profile.shape!=='target'?['area-damage']:[])];
@@ -35,7 +36,7 @@ export function combinedSaveDamage(DamageRoll,data,multiplier,persistentData=nul
   roll.options.degreeOfSuccess=null;
   return roll;
 }
-export function createAreaRunner({authority,contextFor,actorToken,weaponFor},queue){
+export function createSavePorts({authority,contextFor,actorToken,weaponFor}){
   const privateJournals=new Set(),lines=new LineRegionService();
   const check=(actor,request)=>{
     authority(actor,request);
@@ -55,7 +56,7 @@ export function createAreaRunner({authority,contextFor,actorToken,weaponFor},que
   };
   const verifyTargets=async(actor,prepared,completed=[])=>{
     const self=actorToken(actor);
-    if(!samePosition(position(self),prepared.origin))throw Error('The origin moved after area confirmation.');
+    if(!samePosition(nativePosition(self),prepared.origin))throw Error('The origin moved after area confirmation.');
     const region=prepared.line?await lines.read(prepared.line):null;
     if(region){
       const eligible=canvas.tokens.placeables.filter(t=>t.actor&&t.actor.uuid!==actor.uuid&&actor.isEnemyOf(t.actor)&&(!t.actor.isDead||completed.includes(t.document.uuid))&&lines.contains(region,t,prepared.line)).map(t=>t.document.uuid).sort();
@@ -63,7 +64,7 @@ export function createAreaRunner({authority,contextFor,actorToken,weaponFor},que
     }
     for(const t of prepared.targets){
       const doc=await fromUuid(t.uuid),token=doc?.object;
-      if(!token?.actor||token.actor.uuid!==t.actorUuid||token.document.hidden||!samePosition(position(token),t.position)||!actor.isEnemyOf(token.actor)||(token.actor.isDead&&!completed.includes(t.uuid))||(region?!lines.contains(region,token,prepared.line):self.distanceTo(token)>prepared.profile.range))throw Error('An affected target moved, changed visibility or allegiance, died, or left range. Reconcile before continuing.');
+      if(!token?.actor||token.actor.uuid!==t.actorUuid||token.document.hidden||!samePosition(nativePosition(token),t.position)||!actor.isEnemyOf(token.actor)||(token.actor.isDead&&!completed.includes(t.uuid))||(region?!lines.contains(region,token,prepared.line):self.distanceTo(token)>prepared.profile.range))throw Error('An affected target moved, changed visibility or allegiance, died, or left range. Reconcile before continuing.');
     }
   };
   const verifySaves=progress=>{
@@ -71,7 +72,7 @@ export function createAreaRunner({authority,contextFor,actorToken,weaponFor},que
       if(areaSaveEvidence(game.messages.get(saved.messageId)).fingerprint!==saved.fingerprint)throw Error('A saved result changed; automatic damage is stopped for GM reconciliation.');
     }
   };
-  return new AreaRunner({
+  return {
     authorize:check,
     journal:a=>{
       const marker=a.getFlag(MOD,'execution');
@@ -88,7 +89,7 @@ export function createAreaRunner({authority,contextFor,actorToken,weaponFor},que
         await log.setFlag(MOD,'areaJournal',j);
       }else{
         log=await ChatMessage.create({author:game.user.id,whisper:game.users.filter(u=>u.isGM).map(u=>u.id),
-          content:`<p>Gunbreaker area journal: ${esc(j.slug)}. Keep this record for interruption recovery.</p>`,flags:{[MOD]:{areaJournal:j}}});
+          content:`<p>Gunbreaker action journal: ${esc(j.slug)}. Keep this record for interruption recovery.</p>`,flags:{[MOD]:{areaJournal:j}}});
         if(!log?.id)throw Error('The private area journal could not be created.');privateJournals.add(log.id);
       }
       await a.setFlag(MOD,'execution',{id:j.id,slug:j.slug,status:j.status,journalId:log.id,revision:j.revision??null});
@@ -115,10 +116,10 @@ export function createAreaRunner({authority,contextFor,actorToken,weaponFor},que
         if(state.encounter!==c.encounterId)state=transition(state,{type:'start'},c,catalogue);
         transition(state,{type:'use',slug:request.slug},{...c,targetIds:['preview']},catalogue);
       }
-      const origin=position(self);let line=null;
+      const origin=nativePosition(self);let line=null;
       try{
         if(profile.shape==='line'){line=await lines.place(actor,self,request);if(!line)return null;}
-        if(!samePosition(position(self),origin))throw Error('The acting token moved during line placement.');
+        if(!samePosition(nativePosition(self),origin))throw Error('The acting token moved during line placement.');
         const region=line?await lines.read(line):null;
         const tokens=canvas.tokens.placeables.filter(t=>t.actor&&t.actor.uuid!==actor.uuid&&actor.isEnemyOf(t.actor)&&!t.actor.isDead&&(region?lines.contains(region,t,line):self.distanceTo(t)<=profile.range)&&(!original||original.includes(t.document.uuid))&&(profile.shape!=='target'||selectedIds.includes(t.document.uuid)));
         // Do not put hidden target identities into an owner-readable Continuation state.
@@ -126,7 +127,7 @@ export function createAreaRunner({authority,contextFor,actorToken,weaponFor},que
         if(!tokens.length)throw Error(`No eligible enemy remains within ${profile.range} feet.`);
         if(tokens.length>50)throw Error('This prototype supports at most 50 targets; adjudicate this area manually.');
         if(new Set(tokens.map(t=>t.actor.uuid)).size!==tokens.length)throw Error('Multiple target tokens share a creature; adjudicate this area manually.');
-        const candidates=tokens.map(t=>({uuid:t.document.uuid,actorUuid:t.actor.uuid,name:t.name,hidden:!!t.document.hidden,position:position(t)}));
+        const candidates=tokens.map(t=>({uuid:t.document.uuid,actorUuid:t.actor.uuid,name:t.name,hidden:!!t.document.hidden,position:nativePosition(t)}));
         c.targetIds=candidates.map(t=>t.uuid);
         if(state.encounter!==c.encounterId)state=transition(state,{type:'start'},c,catalogue);
         transition(state,{type:'use',slug:request.slug,outcome:request.slug==='fated-circle'?'none':undefined},c,catalogue);
@@ -148,7 +149,7 @@ export function createAreaRunner({authority,contextFor,actorToken,weaponFor},que
       return {...c,targetIds:prepared.targets.map(t=>t.uuid),dc,origin:prepared.origin,prepared,weaponId:prepared.weaponId};
     },
     damage:async(actor,request,c,prepared,state)=>{
-      const formula=areaFormula(request.slug,c.level,state.calibration,c.learned),DamageRoll=damageClass();
+      const formula=REIGN_STEPS.has(request.slug)?reignFormula(request.slug):areaFormula(request.slug,c.level,state.calibration,c.learned),DamageRoll=damageClass();
       const roll=await new DamageRoll(formula).evaluate();
       const item=itemFor(actor,request.slug);
       const options=[...actor.getSelfRollOptions('self'),...item.getRollOptions('item'),...saveOptions(prepared.profile),...item.system.traits.value.map(t=>`origin:action:trait:${t}`),`origin:action:slug:${request.slug}`];
@@ -176,7 +177,7 @@ export function createAreaRunner({authority,contextFor,actorToken,weaponFor},que
       verifySaves(progress);
       const rows=progress.saves.map((s,i)=>({...s,name:prepared.targets[i].name,multiplier:basicMultiplier(s.degree),persistent:request.slug==='bow-shock'&&s.degree<=1}));
       const selected=await foundry.applications.api.DialogV2.wait({window:{title:'Review area damage'},rejectClose:false,
-        content:`<p>One initial damage roll: ${esc(progress.damage.formula)}. Native save outcomes are recorded below. Adjust damage only for a rule such as Improved Evasion; this does not change who failed the save.${progress.damage.persistent?` Failed saves also receive ${esc(progress.damage.persistent.formula)} as a native condition, without doubling or an immediate tick. Uncheck only if a rule prevents it.`:''}</p>${rows.map((r,i)=>`<label>${esc(r.name)} · ${degreeNames[r.degree]} <select name="scale${i}">${[0,0.5,1,2].map(n=>`<option value="${n}" ${n===r.multiplier?'selected':''}>${n}× initial damage</option>`).join('')}</select></label>${r.persistent?`<label><input type="checkbox" name="persistent${i}" checked> Apply persistent damage</label>`:''}`).join('')}<label><input type="checkbox" name="verified"> These results are ready. No other control or module has applied this damage; no unresolved reaction, reroll or damage redirection remains.</label>`,
+        content:`<p>One initial damage roll: ${esc(progress.damage.formula)}. Native save outcomes are recorded below. Adjust damage only for a rule such as Improved Evasion; this does not change who failed the save.${progress.damage.persistent?` Failed saves also receive ${esc(progress.damage.persistent.formula)} as a native condition, without doubling or an immediate tick. Uncheck only if a rule prevents it.`:''}</p>${rows.map((r,i)=>`<label>${esc(r.name)} · ${degreeNames[r.degree]} <select name="scale${i}">${[0,0.5,1,2].map(n=>`<option value="${n}" ${n===r.multiplier?'selected':''}>${n}× initial damage</option>`).join('')}</select></label>${r.persistent?`<label><input type="checkbox" name="persistent${i}" checked> Apply persistent damage</label>`:''}`).join('')}<label><input type="checkbox" name="verified"> These results are ready. No other control or module has applied this damage; no unresolved reaction, reroll or damage redirection for these save results remains.</label>`,
         buttons:[{action:'apply',label:'Apply reviewed damage once',callback:(_e,b)=>b.form.elements.verified.checked?rows.map((r,i)=>({target:r.target,multiplier:Number(b.form.elements[`scale${i}`].value),persistent:!!r.persistent&&!!b.form.elements[`persistent${i}`]?.checked})):null}]});
       if(!selected)return null;
       inspect(actor,request);await verifyTargets(actor,prepared);verifySaves(progress);
@@ -203,5 +204,6 @@ export function createAreaRunner({authority,contextFor,actorToken,weaponFor},que
       const whisper=progress.prepared.privateResults?game.users.filter(u=>u.isGM).map(u=>u.id):[];
       await ChatMessage.create({speaker:ChatMessage.getSpeaker({actor}),content,whisper,flags:{[MOD]:{execution:request.id}}});
     }
-  },queue);
+  };
 }
+export function createAreaRunner(args,queue){return new AreaRunner(createSavePorts(args),queue);}

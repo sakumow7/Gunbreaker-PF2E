@@ -3,6 +3,8 @@ import {damageType,followupFormula,superbolideHP,nativeWeaponDice} from './mecha
 import {sourceIds,catalogue} from './catalogue.mjs';
 import {assertFreshIntent} from './requests.mjs';
 import {createAreaRunner} from './area-native.mjs';
+import {createReignRunner} from './reign-native.mjs';
+import {REIGN_STEPS} from './reign.mjs';
 import {SAVE_ACTIONS} from './area.mjs';
 const MOD='gunbreaker-pf2e';
 const slug=i=>i.slug??i.system?.slug;
@@ -67,6 +69,11 @@ export function createNativeRunner(contextFor,queue){
       const item=actor.items.find(i=>slug(i)===req.slug);
       if(!item?.system.publication?.title?.includes('1.4.0'))throw Error('Update this action from the v1.4 compendium before native execution.');
       if(req.slug==='superbolide')superbolideHP(actor.system.attributes.hp.value,actor.level);
+      if(req.slug==='bloodfest'){
+        if(c.targetIds.length!==1)throw Error('Select one genuine enemy for Bloodfest.');
+        const enemy=await target(c),self=actorToken(actor);
+        if(enemy.document.parent.id!==self.document.parent.id||!actor.isEnemyOf(enemy.actor)||enemy.actor.isDead||enemy.document.hidden||enemy.isVisible===false||self.distanceTo(enemy)>30)throw Error('Bloodfest needs a visible genuine enemy within 30 feet.');
+      }
       if(req.slug==='royal-guard'&&actor.itemTypes.effect.some(i=>slug(i)==='royal-guard-stance'))throw Error('Royal Guard is already active.');
       if(CORE_STRIKES.has(req.slug)||CORE_FOLLOWUPS.has(req.slug)){
         if(c.targetIds.length!==1)throw Error('Select one enemy target.');
@@ -103,6 +110,8 @@ export function createNativeRunner(contextFor,queue){
           await actor.applyDamage({damage:-value,token:actorToken(actor).document});
           await actor.createEmbeddedDocuments('Item',[{name:'Brutal Shell Barrier',type:'effect',img:'icons/magic/defensive/shield-barrier-glowing-blue.webp',system:{slug:'gunbreaker-brutal-shell-barrier',level:{value:actor.level},duration:{value:1,unit:'rounds',expiry:'turn-end',sustained:false},start:{value:game.time.worldTime,initiative:actor.combatant?.initiative??null},rules:[{key:'TempHP',value}]},flags:{[MOD]:{execution:req.id}}}]);
         }
+      }else if(req.slug==='bloodfest'){
+        await applyEffect(actor,'bloodfest',req.id);await applyEffect(actor,'ready-to-reign',req.id);
       }else if(CORE_FOLLOWUPS.has(req.slug)){
         const DamageRoll=CONFIG.Dice.rolls.find(r=>r.name==='DamageRoll');
         if(!DamageRoll)throw Error('PF2e DamageRoll is unavailable.');
@@ -123,7 +132,8 @@ export function createNativeRunner(contextFor,queue){
     }
   },queue);
   const area=createAreaRunner({authority,contextFor,actorToken,weaponFor},queue);
-  return {execute:(actor,request)=>SAVE_ACTIONS.has(request.slug)?area.execute(actor,request):single.execute(actor,request)};
+  const reign=createReignRunner({authority,contextFor,actorToken,weaponFor,strikeFor},queue);
+  return {execute:(actor,request)=>REIGN_STEPS.has(request.slug)?reign.execute(actor,request):SAVE_ACTIONS.has(request.slug)?area.execute(actor,request):single.execute(actor,request)};
 }
 export async function nativePanel(actor,runner,contextFor){
   if(!actor?.isOwner||actor.type!=='character')throw Error('Select an owned character.');
@@ -132,7 +142,7 @@ export async function nativePanel(actor,runner,contextFor){
   const expected={revision:state?.revision??0,encounterId:c.encounterId,round:c.round,turn:c.turn};
   const choices=[...SUPPORTED].filter(s=>c.learned.includes(s)&&catalogue[s].level<=c.level);
   const weapons=actor.itemTypes.weapon.filter(isHeld);
-  const content=`<p>Native execution beta · Cartridges ${state?.cartridges??0}. Costs and combo outcomes update automatically. Native damage controls remain available.</p><label>Ability<select name="ability">${choices.map(s=>`<option value="${s}">${esc(catalogue[s].name)}</option>`).join('')}</select></label><label>Gunblade<select name="weapon">${weapons.map(w=>`<option value="${w.id}">${esc(w.name)}</option>`).join('')}</select></label><label>Attack stage (Strikes only)<select name="map"><option value="0">First attack</option><option value="1">Second attack</option><option value="2">Third or later attack</option></select></label><p>Player requests go to the GM coordinator. Check action availability and terrain. Save abilities use GM target confirmation and damage review. Danger Zone uses your selected enemy; Blasting Zone upgrades it automatically. Saturation Fire asks the GM to place and aim its line. Other areas, movement and complete party protection remain pending.</p>`;
+  const content=`<p>Native execution beta · Cartridges ${state?.cartridges??0}. Costs and combo outcomes update automatically. Native damage controls remain available.</p><label>Ability<select name="ability">${choices.map(s=>`<option value="${s}">${esc(catalogue[s].name)}</option>`).join('')}</select></label><label>Gunblade<select name="weapon">${weapons.map(w=>`<option value="${w.id}">${esc(w.name)}</option>`).join('')}</select></label><label>Attack stage (Strikes only)<select name="map"><option value="0">First attack</option><option value="1">Second attack</option><option value="2">Third or later attack</option></select></label><p>Player requests go to the GM coordinator. Check action availability and terrain. Save abilities use GM target confirmation and damage review. Danger Zone uses your selected enemy; Blasting Zone upgrades it automatically. Saturation Fire asks the GM to place and aim its line. Reign steps use one primary target and up to two secondary enemies chosen after a hit. Other areas, movement and complete party protection remain pending.</p>`;
   const req=await foundry.applications.api.DialogV2.wait({window:{title:'Gunbreaker — Native Actions Beta'},content,rejectClose:false,buttons:[{action:'execute',label:'Use ability',callback:(_event,b)=>({id:foundry.utils.randomID(),slug:b.form.elements.ability.value,weaponId:b.form.elements.weapon.value,map:Number(b.form.elements.map.value)})}]});
   if(!req||typeof req!=='object')return;
   // Snapshot when the panel opens: a stale selection must not spend changed resources.

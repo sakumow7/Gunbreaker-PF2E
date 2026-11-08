@@ -116,7 +116,7 @@ export function transition(raw,op,context,catalogue={}) {
   const chain=CHAINS[slug];
   if(chain?.requires)assert(s.combo?.next===chain.requires,'The required combo opening is missing or expired.');
   if(chain?.family==='gnashing')assert(s.lastGnashingTurn!==context.turn,'Only one Gnashing sequence step per turn.');
-  if(chain?.family==='reign')assert(s.lastReignTurn!==context.turn,'Only one Reign sequence step per turn.');
+  if(chain?.family==='reign'){requireFeature('reign-of-beasts');assert(s.lastReignTurn!==context.turn,'Only one Reign sequence step per turn.');}
   if(FOLLOWUP_SET.has(slug)) {
     requireFeature('continuation');
     assert(s.continuation?.slug===slug,'No valid hit-confirmed Continuation opening.');
