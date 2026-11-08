@@ -1,14 +1,14 @@
 import {normalizeState,transition,COSTS} from './state.mjs';
 import {catalogue} from './catalogue.mjs';
 import {ActorQueue} from './queue.mjs';
-export const SAVE_ACTIONS=new Set(['demon-slice','demon-slaughter','fated-circle','fated-brand','double-down','danger-zone','bow-shock']);
+export const SAVE_ACTIONS=new Set(['demon-slice','demon-slaughter','fated-circle','fated-brand','double-down','danger-zone','bow-shock','saturation-fire']);
 export const TARGETED_SAVES=new Set(['danger-zone']);
 const assert=(ok,message)=>{if(!ok)throw Error(message);};
 export function areaProfile(slug,level,learned=[]){
   assert(SAVE_ACTIONS.has(slug),'Unsupported save ability.');
   const upgraded=slug==='danger-zone'&&learned.includes('blasting-zone');
   assert(!upgraded||level>=14,'Blasting Zone requires level 14.');
-  return {shape:TARGETED_SAVES.has(slug)?'target':'emanation',range:slug==='double-down'?10:slug==='danger-zone'?(upgraded?30:15):5,
+  return {shape:slug==='saturation-fire'?'line':TARGETED_SAVES.has(slug)?'target':'emanation',range:slug==='saturation-fire'?30:slug==='double-down'?10:slug==='danger-zone'?(upgraded?30:15):5,
     name:upgraded?'Blasting Zone':catalogue[slug].name,upgraded};
 }
 export function areaPersistentFormula(slug,level){
@@ -59,9 +59,11 @@ export class AreaRunner{
     assert(!['reserved','committed','recovery'].includes(prior?.status),'Resolve the pending action before starting another.');
     const prepared=await p.prepare(actor,request);
     if(!prepared)return {id:request.id,status:'canceled'};
-    assert(prepared.targets.length>0&&prepared.targets.length<=50,'The area needs 1–50 valid targets.');
-    assert(new Set(prepared.targets.map(t=>t.uuid)).size===prepared.targets.length&&new Set(prepared.targets.map(t=>t.actorUuid)).size===prepared.targets.length,'Multiple target tokens share a creature; adjudicate the area manually.');
-    return this.queue.runMany([actor,...prepared.targets.map(t=>({uuid:t.actorUuid}))],()=>this.#execute(actor,request,prepared));
+    try{
+      assert(prepared.targets.length>0&&prepared.targets.length<=50,'The area needs 1–50 valid targets.');
+      assert(new Set(prepared.targets.map(t=>t.uuid)).size===prepared.targets.length&&new Set(prepared.targets.map(t=>t.actorUuid)).size===prepared.targets.length,'Multiple target tokens share a creature; adjudicate the area manually.');
+      return await this.queue.runMany([actor,...prepared.targets.map(t=>({uuid:t.actorUuid}))],()=>this.#execute(actor,request,prepared));
+    }finally{await p.cleanup?.(actor,request,prepared);}
   }
   async #execute(actor,request,prepared){
     const p=this.p;await p.authorize(actor,request);

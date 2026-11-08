@@ -23,5 +23,5 @@ test('targeted save intents preserve one selected enemy and reject standalone up
  const raw={version:1,id:'click',actorUuid:'Actor.hero',sceneId:'scene',gmId:'gm',slug:'danger-zone',weaponId:'blade',map:0,targetIds:['Scene.scene.Token.enemy'],revision:0,encounterId:'combat',round:1,turn:1};
  assert.deepEqual(validateIntent(raw).targetIds,raw.targetIds);
  assert.throws(()=>validateIntent({...raw,targetIds:[]}));assert.throws(()=>validateIntent({...raw,map:1}));assert.throws(()=>validateIntent({...raw,slug:'blasting-zone'}));
- for(const slug of ['double-down','bow-shock']){assert.throws(()=>validateIntent({...raw,slug}));assert.equal(validateIntent({...raw,slug,targetIds:[]}).slug,slug);}
+ for(const slug of ['double-down','bow-shock','saturation-fire']){assert.throws(()=>validateIntent({...raw,slug}));assert.equal(validateIntent({...raw,slug,targetIds:[]}).slug,slug);}
 });

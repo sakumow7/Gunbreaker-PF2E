@@ -7,14 +7,14 @@ import {catalogue} from '../scripts/catalogue.mjs';
 const MOD='gunbreaker-pf2e';
 function setup({slug='fated-circle',level=12,degrees=[1,0],distances=[],learned=[],calibration='fire',killOnApply=true}={}){
  const messages=new Map(),flags={},documents=new Map(),applied=[],saveArgs=[],rolls=[],dialogs=[];let seq=0;
- const users=[{id:'gm',isGM:true,active:true}],user=users[0];
+ const users=[{id:'gm',isGM:true,active:true,color:'#ff9900'}],user=users[0];
  const c={time:1000,level,learned:[slug,'continuation',...learned],encounterId:'combat',round:1,turn:1,inTurn:true,wielding:true,targetIds:[]};
  const itemFor=slug=>({slug,type:'feat',system:{publication:{title:'Gunbreaker 1.4.0'},traits:{value:['gunbreaker','magical']}},getRollOptions:()=>['item:type:feat']});
  const actor={uuid:'Actor.hero',items:[itemFor(slug),...learned.map(itemFor)],hasCondition:()=>false,isEnemyOf:a=>a.uuid.startsWith('Actor.enemy'),alliance:'party',synthetics:{},
   getStatistic:slug=>{assert.equal(slug,'gunbreaker');return {dc:{value:22}};},getSelfRollOptions:()=>['self:trait:human'],getRollOptions:()=>[],
   getFlag:(_m,k)=>flags[k],setFlag:async(_m,k,v)=>{flags[k]=structuredClone(v);}};
  flags.tracker={...transition(initialState(),{type:'start'},c,catalogue),cartridges:3,calibration};
- function token(id,a,distance=5){const d={uuid:`Scene.scene.Token.${id}`,x:0,y:0,elevation:0,width:1,height:1,parent:{id:'scene'},actor:a};const t={document:d,actor:a,name:id,distance,distanceTo:other=>other.distance};d.object=t;documents.set(d.uuid,d);return t;}
+ function token(id,a,distance=5){const d={uuid:`Scene.scene.Token.${id}`,x:0,y:0,elevation:0,width:1,height:1,parent:{id:'scene'},actor:a};const t={document:d,actor:a,name:id,distance,distanceTo:other=>other.distance,mechanicalBounds:{x:0,y:0,width:100,height:100}};d.testInsideRegion=()=>t.inLine!==false;d.object=t;documents.set(d.uuid,d);return t;}
  const self=token('self',actor),targets=degrees.map((degree,i)=>{
   const enemy={uuid:`Actor.enemy${i}`,alliance:'opposition',isDead:false,getSelfRollOptions:p=>[`${p??'self'}:trait:humanoid`]};
   const t=token(`enemy${i}`,enemy,distances[i]??5);
@@ -30,7 +30,14 @@ function setup({slug='fated-circle',level=12,degrees=[1,0],distances=[],learned=
   return t;
  });
  globalThis.game={user,users,combat:{turns:[{actor}]},pf2e:{settings:{iwr:true}},messages,settings:{get:()=> 'public'}};
- globalThis.canvas={scene:{id:'scene'},tokens:{placeables:[self,...targets]}};
+ globalThis.canvas={ready:true,scene:{id:'scene'},level:null,grid:{isSquare:true,size:100},dimensions:{size:100,distance:5},tokens:{placeables:[self,...targets]},regions:{placeRegion:async data=>{
+  h.placements++;if(h.placementWait)await h.placementWait;if(h.cancelPlacement)return null;
+  const region={uuid:'Scene.scene.Region.line',parent:{id:'scene'},...structuredClone(data),elevation:{bottom:null,top:null},
+    getCoverage:()=>({covered:h.covered,blocked:[]}),clearCoverage:()=>{},delete:async()=>{h.deleted++;documents.delete(region.uuid);}};
+  h.region=region;documents.set(region.uuid,region);h.onPlace?.(region);return region;
+ }}};
+ globalThis.CONST={DOCUMENT_OWNERSHIP_LEVELS:{OWNER:3},REGION_VISIBILITY:{ALWAYS:2}};
+ globalThis.ui={notifications:{info:()=>{},warn:()=>{}}};
  globalThis.fromUuid=async uuid=>documents.get(uuid);
  globalThis.ChatMessage={getSpeaker:()=>({actor:'hero'}),create:async data=>{
   const m={id:`message${++seq}`,author:user,...data,getFlag(_m,k){return this.flags?.[_m]?.[k];},async setFlag(_m,k,v){this.flags??={};this.flags[_m]??={};this.flags[_m][k]=structuredClone(v);}};
@@ -51,6 +58,7 @@ function setup({slug='fated-circle',level=12,degrees=[1,0],distances=[],learned=
  globalThis.foundry={utils:{escapeHTML:s=>s,deepClone:structuredClone},applications:{api:{DialogV2:{wait:async options=>{
   dialogs.push(options);
   if(options.window.title.includes('Confirm area')){
+   if(h.cancelConfirm)return null;h.onConfirm?.();
    const values=[...options.content.matchAll(/name="target" value="([^"]+)"/g)].map(m=>({value:m[1]}));
    return options.buttons[0].callback(null,{form:{elements:{verified:{checked:true}},querySelectorAll:()=>values}});
   }
@@ -63,7 +71,7 @@ function setup({slug='fated-circle',level=12,degrees=[1,0],distances=[],learned=
   return options.buttons[0].callback(null,{form:{elements}});
  }}}}};
  const runner=createAreaRunner({authority:()=>{},contextFor:()=>structuredClone(c),actorToken:()=>self,weaponFor:()=>({})},new ActorQueue());
- const h={actor,flags,c,targets,messages,applied,saveArgs,rolls,dialogs,DamageRoll,runner,req:{id:'request',slug,weaponId:'blade'}};
+ const h={actor,self,flags,c,targets,messages,applied,saveArgs,rolls,dialogs,DamageRoll,runner,placements:0,deleted:0,covered:[{i:0,j:1}],req:{id:'request',slug,weaponId:'blade'}};
  return h;
 }
 test('native area adapter preserves class DC, private evidence and one application per enemy even when the first dies',async()=>{
@@ -125,4 +133,69 @@ test('combat advancing between native applications leaves the remaining target p
 test('a target becoming hidden after its save stops area damage for GM adjudication',async()=>{
  const h=setup({slug:'bow-shock',level:12,degrees:[1]});h.onSave=()=>{h.targets[0].document.hidden=true;};
  await assert.rejects(()=>h.runner.execute(h.actor,h.req),/visibility/);assert.equal(h.applied.length,0);assert.equal(h.flags.execution.status,'recovery');
+});
+
+test('Saturation Fire uses native line containment, excludes allies, rolls calibrated damage once and cleans its region',async()=>{
+ const h=setup({slug:'saturation-fire',level:12,degrees:[0,1,1,1],distances:[5,40,10,10],calibration:'electricity'});
+ h.targets[2].inLine=false;h.targets[3].actor.uuid='Actor.ally';
+ h.onSave=()=>assert.equal(h.flags.tracker.cartridges,2);
+ await h.runner.execute(h.actor,h.req);
+ assert.equal(h.placements,1);assert.equal(h.deleted,1);assert.equal(h.region.shapes[0].type,'line');assert.equal(h.region.shapes[0].length,600);assert.equal(h.region.shapes[0].width,100);
+ assert.equal(h.saveArgs.length,2);assert(h.saveArgs.every(a=>a.extraRollOptions.includes('area-damage')));
+ assert.deepEqual(h.rolls,['6d6[electricity]']);assert.deepEqual(h.applied.map(a=>a.total),[42,21]);assert.equal(h.flags.tracker.continuation,null);
+ const journal=h.messages.get(h.flags.execution.journalId).getFlag(MOD,'areaJournal');assert.equal(journal.prepared.line.uuid,h.region.uuid);
+});
+test('canceling line placement or target confirmation spends nothing and removes only a created preview',async()=>{
+ for(const stage of ['placement','confirmation']){
+  const h=setup({slug:'saturation-fire',level:12}),before=structuredClone(h.flags.tracker);
+  h.cancelPlacement=stage==='placement';h.cancelConfirm=stage==='confirmation';
+  assert.equal((await h.runner.execute(h.actor,h.req)).status,'canceled');
+  assert.deepEqual(h.flags.tracker,before);assert.equal(h.flags.execution,undefined);assert.equal(h.deleted,stage==='placement'?0:1);assert.equal(h.rolls.length,0);
+ }
+});
+test('line preflight rejects missing cartridges before asking the GM to place anything',async()=>{
+ const h=setup({slug:'saturation-fire',level:12});h.flags.tracker.cartridges=0;
+ await assert.rejects(()=>h.runner.execute(h.actor,h.req),/Not enough cartridges/);assert.equal(h.placements,0);assert.equal(h.flags.execution,undefined);
+});
+test('a line shape or wall change after saves preserves the cartridge spend and keeps evidence for recovery',async()=>{
+ for(const change of ['shape','wall']){
+  const h=setup({slug:'saturation-fire',level:12,degrees:[1]});h.onSave=()=>{if(change==='shape')h.region.shapes[0].rotation=90;else h.covered=[{i:0,j:2}];};
+  await assert.rejects(()=>h.runner.execute(h.actor,h.req),/line shape changed|blocking walls changed/);
+  assert.equal(h.flags.tracker.cartridges,2);assert.equal(h.flags.execution.status,'recovery');assert.equal(h.applied.length,0);assert.equal(h.deleted,0);
+  await assert.rejects(()=>h.runner.execute(h.actor,{...h.req,id:'again'}),/pending/);assert.equal(h.placements,1);
+ }
+});
+test('new enemies entering the confirmed line before commit reject without spending or leaving a preview',async()=>{
+ const h=setup({slug:'saturation-fire',level:12,degrees:[1,1]});h.targets[1].inLine=false;
+ h.onConfirm=()=>{h.targets[1].inLine=true;};
+ await assert.rejects(()=>h.runner.execute(h.actor,h.req),/enemies.*changed/);assert.equal(h.flags.execution,undefined);assert.equal(h.flags.tracker.cartridges,3);assert.equal(h.deleted,1);
+});
+test('line origin, elevation and scene changes reject before committing',async()=>{
+ for(const change of ['origin','elevation','scene','movement']){
+  const h=setup({slug:'saturation-fire',level:12,degrees:[1]});
+  h.onPlace=r=>{if(change==='origin')r.shapes[0].x=500;else if(change==='elevation')h.targets[0].document.elevation=10;else if(change==='scene')canvas.scene.id='other';else h.self.document.x=100;};
+  await assert.rejects(()=>h.runner.execute(h.actor,h.req));assert.equal(h.deleted,1);assert.equal(h.flags.execution,undefined);assert.equal(h.flags.tracker.cartridges,3);
+ }
+});
+
+test('unsupported line grids and hidden origins stop before placement or state writes',async()=>{
+ for(const change of ['gridless','scale','hidden']){
+  const h=setup({slug:'saturation-fire',level:12});
+  if(change==='gridless')canvas.grid.isSquare=false;else if(change==='scale')canvas.dimensions.distance=10;else h.self.document.hidden=true;
+  await assert.rejects(()=>h.runner.execute(h.actor,h.req));assert.equal(h.placements,0);assert.equal(h.flags.execution,undefined);
+ }
+});
+test('a line with no eligible enemy cleans its preview without spending',async()=>{
+ const h=setup({slug:'saturation-fire',level:12});h.targets.forEach(t=>t.inLine=false);
+ await assert.rejects(()=>h.runner.execute(h.actor,h.req),/No eligible/);assert.equal(h.deleted,1);assert.equal(h.flags.tracker.cartridges,3);assert.equal(h.flags.execution,undefined);
+});
+test('native line placement does not accept a second simultaneous aiming session',async()=>{
+ const h=setup({slug:'saturation-fire',level:12});let release;h.placementWait=new Promise(r=>release=r);h.cancelConfirm=true;
+ const first=h.runner.execute(h.actor,h.req);await new Promise(r=>setImmediate(r));
+ await assert.rejects(()=>h.runner.execute(h.actor,{...h.req,id:'second'}),/Another line/);assert.equal(h.placements,1);
+ release();assert.equal((await first).status,'canceled');assert.equal(h.deleted,1);assert.equal(h.flags.tracker.cartridges,3);
+});
+test('cleanup never deletes a region whose action ownership marker was replaced',async()=>{
+ const h=setup({slug:'saturation-fire',level:12});h.onConfirm=()=>{h.region.flags[MOD].line.id='different-action';};
+ await assert.rejects(()=>h.runner.execute(h.actor,h.req),/removed or replaced/);assert.equal(h.deleted,0);assert.equal(h.flags.execution,undefined);assert.equal(h.flags.tracker.cartridges,3);
 });

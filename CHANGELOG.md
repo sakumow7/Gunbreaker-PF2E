@@ -1,3 +1,11 @@
+# Unreleased — Saturation Fire line workflow
+
+- Add Saturation Fire to native GM/player execution: one cartridge, calibrated damage, native basic Reflex saves, no MAP or Fated Brand opening. Make its existing cartridge cost explicit in the compendium rules text.
+- Use Foundry v14/PF2e native region placement and covered-space token containment for the 30-foot line. The GM places its origin along the acting token's edge, aims, and confirms eligible enemies. Allies are excluded.
+- Revalidate line shape, wall coverage, grid/level, token positions and enemy membership. Canceling before commitment spends nothing; post-commit changes preserve evidence and block replay.
+- Remove owned preview regions after completion or cancellation; retain them for uncertain recovery. Reject simultaneous aiming and unsupported grids/elevations instead of guessing geometry.
+- Add 11 tests for 130 passing local tests. Native region behavior and real GM/player acceptance still require live Forge verification. No release or live actor update is included.
+
 # Unreleased — save powers and persistent damage
 
 - Add Double Down (10-foot emanation), Danger Zone (one selected enemy), its automatic Blasting Zone upgrade, and Bow Shock to the native GM/player workflow.

@@ -21,7 +21,7 @@ function setup({degrees=[0,1,2,3],slug='fated-circle'}={}){
 test('area formulas use level, calibration and fixed Brand dice without weapon or No Mercy bonuses',()=>{
  assert.equal(areaFormula('demon-slice',1),'1d4[slashing]');assert.equal(areaFormula('demon-slaughter',20),'10d4[slashing]');
  assert.equal(areaFormula('fated-circle',13,'cold'),'7d6[cold]');assert.equal(areaFormula('fated-brand',16,'electricity'),'2d6[electricity]');assert.equal(areaFormula('fated-brand',17),'3d6[fire]');
- assert.throws(()=>areaFormula('fated-circle',12,'force'));assert.throws(()=>areaFormula('saturation-fire',14));
+ assert.throws(()=>areaFormula('fated-circle',12,'force'));assert.throws(()=>areaFormula('relentless-rush',18));
  assert.deepEqual([0,1,2,3].map(basicMultiplier),[2,1,.5,0]);assert.throws(()=>basicMultiplier(null));
 });
 test('Circle spends before any save, rolls damage once, applies native degrees and stores only original failures',async()=>{
@@ -135,4 +135,12 @@ test('persistent application is independent of initial damage and cannot be adde
  await h.runner.execute(h.actor,h.req);assert.equal(h.applications.length,1);assert.equal(h.journal.applications[0].persistent,true);assert.equal(h.journal.applications[0].status,'complete');
  const invalid=setup({slug:'bow-shock',degrees:[2]});invalid.c.learned.push('bow-shock');invalid.p.review=()=>[{target:invalid.c.targetIds[0],multiplier:1,persistent:true}];
  await assert.rejects(()=>invalid.runner.execute(invalid.actor,invalid.req),/Invalid damage review/);assert.equal(invalid.applications.length,0);
+});
+
+test('Saturation Fire uses a calibrated line, spends one cartridge and cannot open Fated Brand',async()=>{
+ assert.deepEqual([areaProfile('saturation-fire',12).shape,areaProfile('saturation-fire',12).range],['line',30]);
+ assert.equal(areaFormula('saturation-fire',13,'cold'),'7d6[cold]');
+ const h=setup({slug:'saturation-fire',degrees:[0,1,2,3]});h.c.learned.push('saturation-fire');
+ h.state={...h.state,continuation:{slug:'fated-brand',turn:1,targets:h.c.targetIds}};
+ await h.runner.execute(h.actor,h.req);assert.equal(h.state.cartridges,0);assert.equal(h.state.continuation,null);assert.equal(h.state.cooldowns['saturation-fire'],undefined);
 });
