@@ -1,6 +1,6 @@
-# v1.4 native candidate smoke test — pending live execution
+# v1.4 native candidate smoke test — full encounter execution pending
 
-Observed environment: Foundry 14 build 369, PF2e 8.7.0, Gunbreaker 1.3.0. The candidate has not been installed. Local tests and source inspection do not substitute for these checks.
+Observed environment: Foundry 14 build 369, PF2e 8.7.0, Gunbreaker 1.3.0. The candidate has not been installed. Limited detached-model tests passed (docs/LIVE-QA-2026-11-08.md). They do not substitute for these full encounter checks.
 
 ## Rules and import
 
@@ -15,7 +15,7 @@ Observed environment: Foundry 14 build 369, PF2e 8.7.0, Gunbreaker 1.3.0. The ca
 - Cancel an attack dialog: no costs or combo changes. Cancel a damage dialog after a hit: costs remain spent. Verify damage is not applied twice by Workbench or another automation module.
 - Burst Strike has its extra damage only on the named activity. Verify critical doubling and property runes with PF2e native damage. An ordinary Strike must not acquire Burst or Gnashing dice.
 - At 7/11/17, verify each Continuation's dice plus captured weapon-dice count. No critical doubling, No Mercy, property damage or new attack roll. Reach and original-target checks must block invalid use without an uncommitted spend.
-- Brutal Shell restores actual missing HP, grants nonstacking temporary HP once per round, and expires at the end of the next turn. Record Vortex Guard manually until integrated.
+- Brutal Shell restores actual missing HP, grants nonstacking temporary HP once per round, and expires at the end of the next turn. Test Vortex Guard on an adjacent ally, decline it, and verify no offer when a stronger existing barrier prevents an actual TempHP grant.
 - Apply self-effects using native execution. Check Camouflage/Royal Guard/shield circumstance stacking, Nebula/Great Nebula, No Mercy expiry, Superbolide at 2 HP and high HP. Its HP cost must not trigger Corundum or other damage-based abilities.
 - Double-click and reopen: one native roll and one spend. Simulate a post-roll write failure: a recovery journal must block a new action. Reconnect and verify it remains blocked.
 
@@ -116,3 +116,13 @@ Use disposable characters and exactly one GM. Disable automatic damage applicati
 - Reconnect before the due round preserves a future trigger; reconnect during/after the due turn requires reconciliation, with no retroactive blast. End/delete combat before resolution and check managed protection cleanup without frequency reset.
 - Change initiative order, source token, scene, or combat while a dialog is open; verify recovery rather than damage on stale targets. Test one active GM, two GM clients, and a player without HP ownership.
 - Check PF2e Toolbelt, Workbench, HUD and reaction automation on disposable actors; verify no duplicate damage, unexpected expiry or unresolved reaction conflict.
+
+## New support and maintenance acceptance checks
+
+- Aurora: three recipient turns, source-specific immunity, highest overlapping Aurora, normal combat-to-exploration conversion, missed six-second interval/reconnect recovery, dead and undead recipients, and conflicting fast healing.
+- Corundum: actual native damage at/under half HP, temporary HP damage, damage undo, non-damage HP cost, duplicate receipts, recipient death, expiration, and overlapping effects. Confirm only one real healing application.
+- Heart of Light/Gunmetal Soul: source-level values, source-turn expiry, unchanged benefit outside the initial radius, non-stacking Resistance, spell/impulse distinction and non-magical damage.
+- Resource riders: zero-cartridge Perfect Chamber, actual critical outcomes, canceled rolls, once-per-round/encounter gates and delayed request rejection.
+- Overpowered Round/Fated Resolve/Vortex Guard: native IWR/TempHP, exact targets, primary damage-card automation, per-target failures and no replays.
+- Encounter/stance lifecycle: initiative start/end, weapon unequip, unconsciousness, same-actor tokens, off-scene actors, pending executions, reload and two active GMs.
+- Maintenance on copies: migration preview/conflicts, explicit retired-feat choice, complete actor backup, rollback retaining unrelated HP/custom edits, partial-write recovery, Escort duplicates and same-checkpoint repeated clicks.

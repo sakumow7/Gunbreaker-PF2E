@@ -3,6 +3,10 @@ import {damageType,followupFormula,superbolideHP,nativeWeaponDice} from './mecha
 import {sourceIds,catalogue} from './catalogue.mjs';
 import {assertFreshIntent} from './requests.mjs';
 import {createAreaRunner} from './area-native.mjs';
+import {vortexGuard,overpoweredRound} from './riders.mjs';
+import {lightningStrike,lightningWeapon} from './lightning.mjs';
+import {createSupportRunner} from './support-native.mjs';
+import {SUPPORT_ACTIONS} from './support.mjs';
 import {createRushRunner} from './rush-native.mjs';
 import {createReignRunner} from './reign-native.mjs';
 import {REIGN_STEPS} from './reign.mjs';
@@ -16,7 +20,7 @@ export function activeGM(){return game.users.filter(u=>u.active&&u.isGM).sort((a
 export function authority(actor,req){
   if(!game.user.isGM || activeGM()?.id!==game.user.id)throw Error('Native execution requires the active GM coordinator.');
   if(actor.type!=='character'||!actor.isOwner)throw Error('Select an owned character.');
-  if((game.settings.get(MOD,'playerRequests')||game.settings.get(MOD,'stoneReactions'))&&game.users.filter(u=>u.active&&u.isGM).length!==1)throw Error('Experimental automation requires exactly one active GM.');
+  if(game.users.filter(u=>u.active&&u.isGM).length!==1)throw Error('Experimental automation requires exactly one active GM.');
   if(req?.requesterId){
     const user=game.users.get(req.requesterId);
     if(!game.settings.get(MOD,'playerRequests')||req.intent.gmId!==game.user.id||!user?.active||!actor.testUserPermission(user,'OWNER'))throw Error('Player action permission changed; submit a new request.');
@@ -37,7 +41,8 @@ function weaponFor(actor,id){
   const weapon=id?weapons.find(w=>w.id===id):weapons.length===1?weapons[0]:null;
   if(!weapon)throw Error('Choose exactly one held gunblade.');return weapon;
 }
-function strikeFor(actor,weaponId){
+function strikeFor(actor,weaponId,action){
+  if(action==='lightning-shot')return lightningStrike(actor,weaponId);
   const strike=actor.system.actions.find(s=>s.item.id===weaponId);
   if(!strike)throw Error('PF2e has no native Strike for this weapon.');return strike;
 }
@@ -52,6 +57,7 @@ async function applyEffect(actor,name,requestId){
 export function createNativeRunner(contextFor,queue){
   const single=new ActionRunner({
     authorize:async(actor,req)=>authority(actor,req),
+    lockActors:async(actor,req)=>{authority(actor,req);const all=[actor,...canvas.tokens.placeables.map(t=>t.actor).filter(Boolean)];req.lockedActors=all.map(a=>a.uuid);return all;},
     preflight:async(actor,req,c,state)=>{if(req.intent||req.expected)assertFreshIntent(req.intent??req.expected,c,state);},
     context:async(actor,req)=>{
       const c=contextFor(actor),w=weaponFor(actor,req.weaponId);
@@ -81,14 +87,16 @@ export function createNativeRunner(contextFor,queue){
         const t=await target(c),self=actorToken(actor),w=weaponFor(actor,c.weaponId);
         if(t.document.parent?.id!==self.document.parent?.id)throw Error('The target must be on the character’s scene.');
         if(!actor.isEnemyOf(t.actor))throw Error('Select a genuine enemy; the GM must adjudicate unusual allegiances.');
-        if(self.distanceTo(t)>actor.getReach({action:'attack',weapon:w}))throw Error('Target is outside melee reach.');
+        if(req.slug==='lightning-shot'){
+          if(self.distanceTo(t)>120)throw Error('Lightning Shot has a maximum range of 120 feet.');lightningWeapon(w.toObject());
+        }else if(self.distanceTo(t)>actor.getReach({action:'attack',weapon:w}))throw Error('Target is outside melee reach.');
         if(!t.isVisible||(req.requesterId&&!game.users.get(req.requesterId)?.isGM&&t.document.hidden))throw Error('Target visibility requires GM adjudication.');
         if(CORE_FOLLOWUPS.has(req.slug)&&state.continuation?.weaponId!==w.id)throw Error('Use the opening gunblade for this follow-up.');
       }
     },
     attack:async(actor,req,c)=>{
       if(req.intent||req.expected)assertFreshIntent(req.intent??req.expected,contextFor(actor),actor.getFlag(MOD,'tracker'));
-      const w=weaponFor(actor,c.weaponId),strike=strikeFor(actor,w.id),t=await target(c);
+      const w=weaponFor(actor,c.weaponId),strike=strikeFor(actor,w.id,req.slug),t=await target(c);
       const calibration=actor.getFlag(MOD,'tracker')?.calibration??'fire';
       let messageId=null;
       const roll=await strike.variants[c.map].roll({target:t,options:[`gunbreaker:action:${req.slug}`,`gunbreaker:calibration:${calibration}`],callback:(_roll,_outcome,message)=>{messageId=message?.id??null;}});
@@ -100,17 +108,20 @@ export function createNativeRunner(contextFor,queue){
       if(CORE_STRIKES.has(req.slug)){
         if(result.degree<2)return;
         // Native damage includes critical doubling, property runes and action-predicated DamageDice.
-        const strike=strikeFor(actor,c.weaponId),t=await target(c);
+        const strike=strikeFor(actor,c.weaponId,req.slug),t=await target(c);
+        if(req.slug==='lightning-shot'&&actorToken(actor).distanceTo(t)>120)throw Error('Lightning Shot target moved beyond 120 feet; reconcile the resolved attack.');
         const message=game.messages.get(result.messageId);
         await strike[result.degree===3?'critical':'damage']({target:t,mapIncreases:c.map,checkContext:message?.flags?.pf2e?.context,
           options:new Set([`gunbreaker:action:${req.slug}`,`gunbreaker:calibration:${after.calibration}`])});
         if(req.slug==='brutal-shell' && before.once.brutalRound!==c.round){
           // Store the rider gate before HP/effect writes; a recovery must never re-award it.
           after.once.brutalRound=c.round;await actor.setFlag(MOD,'tracker',after);
-          const value=Math.max(1,Math.floor(actor.level/2));
+          const value=Math.max(1,Math.floor(actor.level/2)),priorTemp=actor.system.attributes.hp.temp??0;
           await actor.applyDamage({damage:-value,token:actorToken(actor).document});
           await actor.createEmbeddedDocuments('Item',[{name:'Brutal Shell Barrier',type:'effect',img:'icons/magic/defensive/shield-barrier-glowing-blue.webp',system:{slug:'gunbreaker-brutal-shell-barrier',level:{value:actor.level},duration:{value:1,unit:'rounds',expiry:'turn-end',sustained:false},start:{value:game.time.worldTime,initiative:actor.combatant?.initiative??null},rules:[{key:'TempHP',value}]},flags:{[MOD]:{execution:req.id}}}]);
+          if(value>priorTemp)await vortexGuard(actor,req,c,after,actorToken(actor));
         }
+        if(req.slug==='burst-strike')await overpoweredRound(actor,req,c,after,t,weaponFor(actor,c.weaponId));
       }else if(req.slug==='bloodfest'){
         await applyEffect(actor,'bloodfest',req.id);await applyEffect(actor,'ready-to-reign',req.id);
       }else if(CORE_FOLLOWUPS.has(req.slug)){
@@ -135,7 +146,8 @@ export function createNativeRunner(contextFor,queue){
   const area=createAreaRunner({authority,contextFor,actorToken,weaponFor},queue);
   const reign=createReignRunner({authority,contextFor,actorToken,weaponFor,strikeFor},queue);
   const rush=createRushRunner({authority,contextFor,actorToken,weaponFor},queue);
-  return {advanceRush:rush.advance,reconcileRush:rush.reconcile,execute:(actor,request)=>request.slug==='relentless-rush'?rush.execute(actor,request):REIGN_STEPS.has(request.slug)?reign.execute(actor,request):SAVE_ACTIONS.has(request.slug)?area.execute(actor,request):single.execute(actor,request)};
+  const support=createSupportRunner({authority,contextFor,actorToken,weaponFor},queue);
+  return {advanceRush:rush.advance,reconcileRush:rush.reconcile,execute:(actor,request)=>SUPPORT_ACTIONS.has(request.slug)?support.execute(actor,request):request.slug==='relentless-rush'?rush.execute(actor,request):REIGN_STEPS.has(request.slug)?reign.execute(actor,request):SAVE_ACTIONS.has(request.slug)?area.execute(actor,request):single.execute(actor,request)};
 }
 export async function nativePanel(actor,runner,contextFor){
   if(!actor?.isOwner||actor.type!=='character')throw Error('Select an owned character.');
@@ -144,9 +156,11 @@ export async function nativePanel(actor,runner,contextFor){
   const expected={revision:state?.revision??0,encounterId:c.encounterId,round:c.round,turn:c.turn};
   const choices=[...SUPPORTED].filter(s=>c.learned.includes(s)&&catalogue[s].level<=c.level);
   const weapons=actor.itemTypes.weapon.filter(isHeld);
-  const content=`<p>Native execution beta · Cartridges ${state?.cartridges??0}. Costs and combo outcomes update automatically. Native damage controls remain available.</p><label>Ability<select name="ability">${choices.map(s=>`<option value="${s}">${esc(catalogue[s].name)}</option>`).join('')}</select></label><label>Gunblade<select name="weapon">${weapons.map(w=>`<option value="${w.id}">${esc(w.name)}</option>`).join('')}</select></label><label>Attack stage (Strikes only)<select name="map"><option value="0">First attack</option><option value="1">Second attack</option><option value="2">Third or later attack</option></select></label><p>Player requests go to the GM coordinator. Check action availability and terrain. Save abilities use GM target confirmation and damage review. Danger Zone uses your selected enemy; Blasting Zone upgrades it automatically. Saturation Fire asks the GM to place and aim its line. Reign steps use one primary target and up to two secondary enemies chosen after a hit. Relentless Rush triggers its second blast on your next turn; the GM confirms the current area. Movement and complete party protection remain pending.</p>`;
-  const req=await foundry.applications.api.DialogV2.wait({window:{title:'Gunbreaker — Native Actions Beta'},content,rejectClose:false,buttons:[{action:'execute',label:'Use ability',callback:(_event,b)=>({id:foundry.utils.randomID(),slug:b.form.elements.ability.value,weaponId:b.form.elements.weapon.value,map:Number(b.form.elements.map.value)})}]});
+  const resources=[['expertise','cartridge-expertise','Cartridge Expertise (finisher)'],['perfect','perfect-chamber','Perfect Chamber discount'],['discipline','powder-discipline','Powder Discipline (critical hit)'],['cadence','executioners-cadence','Executioner’s Cadence (qualifying critical result)']].filter(([,feat])=>c.learned.includes(feat));
+  const content=`<p>Native execution beta · Cartridges ${state?.cartridges??0}. Costs and combo outcomes update automatically. Native damage controls remain available.</p><label>Ability<select name="ability">${choices.map(s=>`<option value="${s}">${esc(catalogue[s].name)}</option>`).join('')}</select></label><label>Gunblade<select name="weapon">${weapons.map(w=>`<option value="${w.id}">${esc(w.name)}</option>`).join('')}</select></label>${resources.length?`<details><summary>Optional resources</summary>${resources.map(([key,_feat,label])=>`<label><input type="checkbox" name="${key}"> ${esc(label)}</label>`).join('')}</details>`:''}<label>Attack stage (Strikes only)<select name="map"><option value="0">First attack</option><option value="1">Second attack</option><option value="2">Third or later attack</option></select></label><p>Player requests go to the GM coordinator. Check action availability and terrain. Save abilities use GM target confirmation and damage review. Danger Zone uses your selected enemy; Blasting Zone upgrades it automatically. Saturation Fire asks the GM to place and aim its line. Reign steps use one primary target and up to two secondary enemies chosen after a hit. Relentless Rush triggers its second blast on your next turn; the GM confirms the current area. Support abilities confirm recipients once; Aurora and Corundum use native healing automatically. Movement and automatic reaction interception remain pending.</p>`;
+  const req=await foundry.applications.api.DialogV2.wait({window:{title:'Gunbreaker — Native Actions Beta'},content,rejectClose:false,buttons:[...(game.user.isGM?[{action:'recover',label:'Recovery',callback:()=>({maintenance:'recover'})},{action:'migrate',label:'Migration',callback:()=>({maintenance:'migrate'})},{action:'rollback',label:'Rollback migration',callback:()=>({maintenance:'rollback'})},{action:'escort',label:'Escort setup',callback:()=>({maintenance:'escort'})}]:[]),{action:'execute',label:'Use ability',callback:(_event,b)=>({id:foundry.utils.randomID(),slug:b.form.elements.ability.value,weaponId:b.form.elements.weapon.value,map:Number(b.form.elements.map.value),options:Object.fromEntries(['expertise','perfect','discipline','cadence'].filter(k=>b.form.elements[k]?.checked).map(k=>[k,true]))})}]});
   if(!req||typeof req!=='object')return;
+  if(req.maintenance)return game.modules.get(MOD).api.maintenance[req.maintenance](actor);
   // Snapshot when the panel opens: a stale selection must not spend changed resources.
   req.targetIds=[...c.targetIds];
   req.expected=expected;

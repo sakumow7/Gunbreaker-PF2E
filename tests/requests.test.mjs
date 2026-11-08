@@ -12,7 +12,8 @@ function harness(){
 test('request identity comes from creation event, while outcomes and costs cannot be supplied',async()=>{
  const h=harness();await h.router.receive(intent(),'player');
  assert.equal(h.calls[0][1].requesterId,'player');assert.equal(h.calls[0][1].id,'player:click');
- for(const field of ['requesterId','outcome','cartridges','options','context'])assert.throws(()=>validateIntent({...intent(),[field]:'forged'}),/Unexpected/);
+ assert.throws(()=>validateIntent({...intent(),options:'forged'}),/Invalid resource/);
+ for(const field of ['requesterId','outcome','cartridges','context'])assert.throws(()=>validateIntent({...intent(),[field]:'forged'}),/Unexpected/);
 });
 test('intent validation rejects malformed, oversized, unsupported and cross-scene requests',()=>{
  for(const patch of [{version:2},{id:'x'.repeat(65)},{actorUuid:'Item.blade'},{slug:'fated-circle'},{map:3},{map:NaN},{revision:-1},{revision:2.5},{targetIds:['Scene.other.Token.enemy']},{targetIds:['Scene.scene.Token.one','Scene.scene.Token.two']},{round:-1},{encounterId:{}},{weaponId:'../data'}])assert.throws(()=>validateIntent({...intent(),...patch}));

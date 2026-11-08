@@ -1,3 +1,4 @@
+import {resourceOptions} from './options.mjs';
 import {REIGN_STEPS} from './reign.mjs';
 import {SUPPORTED} from './execution.mjs';
 import {SAVE_ACTIONS,TARGETED_SAVES} from './area.mjs';
@@ -8,7 +9,7 @@ const token=v=>typeof v==='string'&&/^Scene\.[a-zA-Z0-9_-]+\.Token\.[a-zA-Z0-9_-
 /** Copy only the bounded intent schema. Never accept costs, outcomes or user IDs. */
 export function validateIntent(raw){
   assert(plain(raw),'Invalid action request.');
-  const keys=['version','id','actorUuid','sceneId','gmId','slug','weaponId','map','targetIds','revision','encounterId','round','turn'];
+  const keys=['version','id','actorUuid','sceneId','gmId','slug','weaponId','map','targetIds','revision','encounterId','round','turn','options'];
   assert(Object.keys(raw).every(k=>keys.includes(k)),'Unexpected action request fields.');
   assert(raw.version===1&&id(raw.id)&&id(raw.gmId)&&id(raw.sceneId)&&id(raw.weaponId),'Invalid request identifiers.');
   assert(typeof raw.actorUuid==='string'&&/^(Actor\.[a-zA-Z0-9_-]+|Scene\.[a-zA-Z0-9_-]+\.Token\.[a-zA-Z0-9_-]+\.Actor\.[a-zA-Z0-9_-]+)$/.test(raw.actorUuid),'Invalid character reference.');
@@ -20,6 +21,7 @@ export function validateIntent(raw){
   assert(Number.isSafeInteger(raw.revision)&&raw.revision>=0,'Invalid tracker revision.');
   assert(raw.encounterId===null||id(raw.encounterId),'Invalid encounter.');
   assert(Number.isSafeInteger(raw.round)&&raw.round>=0&&Number.isSafeInteger(raw.turn)&&raw.turn>=0,'Invalid turn.');
+  if(raw.options!==undefined)resourceOptions(raw.options);
   return structuredClone(raw);
 }
 export function assertFreshIntent(intent,context,state){
@@ -38,6 +40,6 @@ export class RequestRouter {
     assert(actor?.type==='character'&&p.owns(actor,user),'You must own the requested character.');
     // execute rechecks ownership, authority and freshness after acquiring the shared queue.
     return p.execute(actor,{id:`${creatorId}:${intent.id}`,slug:intent.slug,weaponId:intent.weaponId,map:intent.map,
-      targetIds:intent.targetIds,requesterId:creatorId,intent});
+      targetIds:intent.targetIds,options:intent.options,requesterId:creatorId,intent});
   }
 }

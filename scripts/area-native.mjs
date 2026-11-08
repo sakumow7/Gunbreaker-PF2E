@@ -1,3 +1,5 @@
+import {tempHPEffect} from './riders.mjs';
+import {resolvedOptions} from './options.mjs';
 import {AreaRunner,areaFormula,areaProfile,areaPersistentFormula,basicMultiplier} from './area.mjs';
 import {normalizeState,transition} from './state.mjs';
 import {catalogue} from './catalogue.mjs';
@@ -114,7 +116,7 @@ export function createSavePorts({authority,contextFor,actorToken,weaponFor},{aut
       // Validate resources and learned prerequisites before asking the GM to place a region.
       if(profile.shape==='line'){
         if(state.encounter!==c.encounterId)state=transition(state,{type:'start'},c,catalogue);
-        transition(state,{type:'use',slug:request.slug},{...c,targetIds:['preview']},catalogue);
+        transition(state,{type:'use',slug:request.slug,...resolvedOptions(request.options,request.slug,null)},{...c,targetIds:['preview']},catalogue);
       }
       const origin=nativePosition(self);let line=null;
       try{
@@ -130,7 +132,7 @@ export function createSavePorts({authority,contextFor,actorToken,weaponFor},{aut
         const candidates=tokens.map(t=>({uuid:t.document.uuid,actorUuid:t.actor.uuid,name:t.name,hidden:!!t.document.hidden,position:nativePosition(t)}));
         c.targetIds=candidates.map(t=>t.uuid);
         if(state.encounter!==c.encounterId)state=transition(state,{type:'start'},c,catalogue);
-        if(!automatic)transition(state,{type:'use',slug:request.slug,outcome:request.slug==='fated-circle'?'none':undefined},c,catalogue);
+        if(!automatic)transition(state,{type:'use',slug:request.slug,...resolvedOptions(request.options,request.slug,null),outcome:request.slug==='fated-circle'?'none':undefined},c,catalogue);
         const selected=automatic&&!candidates.length?[]:await foundry.applications.api.DialogV2.wait({window:{title:`${profile.name} — Confirm area`},rejectClose:false,
           content:`<p>${profile.shape==='target'?`One enemy within ${profile.range} feet`:profile.shape==='line'?`${profile.range}-foot line; native covered spaces`:`${profile.range}-foot emanation`} · Gunbreaker DC ${dc}. Check every affected enemy. Exclude only creatures blocked by geometry or another rule.</p>${candidates.map(t=>`<label><input type="checkbox" name="target" value="${esc(t.uuid)}" checked> ${esc(t.name)}</label>`).join('')}<label><input type="checkbox" name="verified"> I verified the area, line of effect, and genuine enemy targets.</label><p>${automatic?'Resolve the already-triggered blast; this spends no action or frequency.':'Confirming begins the activity and spends its frequency.'} Canceling a later save requires recovery and cannot refund the activity.</p>`,
           buttons:[{action:'confirm',label:'Begin activity',callback:(_e,b)=>b.form.elements.verified.checked?[...b.form.querySelectorAll('input[name="target"]:checked')].map(e=>e.value):null}]});
@@ -147,6 +149,9 @@ export function createSavePorts({authority,contextFor,actorToken,weaponFor},{aut
       await verifyTargets(actor,prepared);
       for(const t of prepared.targets){const doc=await fromUuid(t.uuid);if(!doc.actor.saves?.reflex?.check)throw Error('A target has no native Reflex save.');}
       return {...c,targetIds:prepared.targets.map(t=>t.uuid),dc,origin:prepared.origin,prepared,weaponId:prepared.weaponId};
+    },
+    onCommitted:async(actor,request,c,before)=>{
+      if(['fated-circle','double-down'].includes(request.slug)&&c.learned.includes('fated-resolve')&&before.once.fatedRound!==c.round)await actor.createEmbeddedDocuments('Item',[tempHPEffect('Fated Resolve',actor,c,Math.floor(c.level/2),request.id)]);
     },
     damage:async(actor,request,c,prepared,state)=>{
       const formula=formulaFor?formulaFor(request,c,state):REIGN_STEPS.has(request.slug)?reignFormula(request.slug):areaFormula(request.slug,c.level,state.calibration,c.learned),DamageRoll=damageClass();

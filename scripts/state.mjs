@@ -188,6 +188,7 @@ export function transition(raw,op,context,catalogue={}) {
   if(slug==='sonic-break'){n.breakUntil=0;n.breakTurn=null;}
   if(slug==='bloodfest'){n.bloodfestUntil=context.time+60;n.cartridges+=3;n.reignUntil=context.time+60;}
   if(slug==='reign-of-beasts')n.reignUntil=0;
+  if(['fated-circle','double-down'].includes(slug)&&learned.has('fated-resolve'))n.once.fatedRound=context.round;
   if(slug==='perfect-chamber')n.perfectUntil=context.time+60;
   if(slug==='guarded-advance' && op.struck){assert(['miss','hit','critical'].includes(op.outcome),'Guarded Advance needs its Strike outcome.');n.combo={next:'brutal-shell',untilTurn:context.turn+1};}
   n.cartridges=Math.min(capacity(n,context),n.cartridges);

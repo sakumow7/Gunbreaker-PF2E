@@ -1,5 +1,12 @@
 # Unreleased — Relentless Rush
 
+## Unreleased automation expansion
+
+- Add native Lightning Shot, support powers, optional resource choices and Vortex Guard/Fated Resolve/Overpowered Round riders.
+- Add encounter/stance lifecycle, GM recovery, migration application/field rollback and once-only Escort training.
+- Expand no-replay, timing, stale-state and backup tests; record detached native checks in Forge 14.369 / PF2e 8.7.0.
+- Keep release gates explicit: movement, external-action observation, complete reaction interception and full GM/player encounter testing are still pending.
+
 - Add the initial 8d6 fire emanation, ten-minute frequency and native all-damage Resistance effect until the next turn. Empty emanations are legal.
 - Schedule one 4d6 fire blast at the next own turn with fresh current targets/saves, conditional on consciousness and a held gunblade. No additional action, MAP, frequency or Continuation consumption.
 - Persist trigger identity and recovery state; reject duplicate, missed, stale and uncertain executions. Reconnect never retroactively fires an already-due blast.
