@@ -1,3 +1,11 @@
+# Unreleased — save powers and persistent damage
+
+- Add Double Down (10-foot emanation), Danger Zone (one selected enemy), its automatic Blasting Zone upgrade, and Bow Shock to the native GM/player workflow.
+- Commit cartridge costs and once-per-minute/ten-minute frequencies before saves. Blasting Zone uses Danger Zone's existing cooldown; it is not a separate selectable activation.
+- Apply Bow Shock's initial damage and native persistent fire in one target application. Only failed saves receive persistent damage; critical failure does not double it. Native condition controls handle later ticks and recovery.
+- Restrict Aetheric Calibration to listed components: Double Down changes type, while Danger/Blasting Zone and Bow Shock remain fire. Exclude the area-damage predicate from single-target Danger Zone and retain magical action traits in damage context.
+- Recheck combat before each damage application and stop when target visibility changes. Add 14 regression tests, for 119 passing local tests; live Forge and GM/player acceptance remain pending.
+
 # Unreleased — core area combos
 
 - Add native Demon Slice, Demon Slaughter, Fated Circle and Fated Brand to the existing GM/player action path. Confirm enemy geometry, use the Gunbreaker class DC, and roll each activity's damage once.

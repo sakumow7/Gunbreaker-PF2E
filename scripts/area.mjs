@@ -1,12 +1,26 @@
 import {normalizeState,transition,COSTS} from './state.mjs';
 import {catalogue} from './catalogue.mjs';
 import {ActorQueue} from './queue.mjs';
-export const CORE_AREAS=new Set(['demon-slice','demon-slaughter','fated-circle','fated-brand']);
+export const SAVE_ACTIONS=new Set(['demon-slice','demon-slaughter','fated-circle','fated-brand','double-down','danger-zone','bow-shock']);
+export const TARGETED_SAVES=new Set(['danger-zone']);
 const assert=(ok,message)=>{if(!ok)throw Error(message);};
-export function areaFormula(slug,level,calibration='fire'){
-  assert(CORE_AREAS.has(slug)&&Number.isInteger(level)&&level>=1&&level<=20,'Invalid area ability or level.');
+export function areaProfile(slug,level,learned=[]){
+  assert(SAVE_ACTIONS.has(slug),'Unsupported save ability.');
+  const upgraded=slug==='danger-zone'&&learned.includes('blasting-zone');
+  assert(!upgraded||level>=14,'Blasting Zone requires level 14.');
+  return {shape:TARGETED_SAVES.has(slug)?'target':'emanation',range:slug==='double-down'?10:slug==='danger-zone'?(upgraded?30:15):5,
+    name:upgraded?'Blasting Zone':catalogue[slug].name,upgraded};
+}
+export function areaPersistentFormula(slug,level){
+  return slug==='bow-shock'?`${level>=12?2:1}d4[persistent,fire]`:null;
+}
+export function areaFormula(slug,level,calibration='fire',learned=[]){
+  assert(SAVE_ACTIONS.has(slug)&&Number.isInteger(level)&&level>=1&&level<=20,'Invalid area ability or level.');
   if(slug.startsWith('demon-'))return `${Math.ceil(level/2)}d4[slashing]`;
+  if(slug==='bow-shock')return `${Math.ceil(level/2)}d4[fire]`;
+  if(slug==='danger-zone')return `${Math.ceil(level/2)}d${areaProfile(slug,level,learned).upgraded?8:6}[fire]`;
   assert(['fire','cold','electricity'].includes(calibration),'Invalid calibration.');
+  if(slug==='double-down')return `${level>=18?12:10}d6[${calibration}]`;
   return `${slug==='fated-brand'?(level>=17?3:2):Math.ceil(level/2)}d6[${calibration}]`;
 }
 export function basicMultiplier(degree){
@@ -17,7 +31,8 @@ export function areaCommit(before,slug,context,id){
   // Validate the complete activity before separating its start costs from completion rewards.
   const preview=transition(before,{type:'use',slug,id,outcome:slug==='fated-circle'?'none':undefined},context,catalogue);
   return {...structuredClone(before),revision:preview.revision,events:preview.events,
-    cartridges:before.cartridges-(COSTS[slug]??0),continuation:null,lastFollowRound:preview.lastFollowRound};
+    cartridges:before.cartridges-(COSTS[slug]??0),cooldowns:preview.cooldowns,dailyUses:preview.dailyUses,
+    continuation:null,lastFollowRound:preview.lastFollowRound};
 }
 export function areaFinish(before,committed,slug,context,id,saves){
   assert(saves.length===context.targetIds.length&&new Set(saves.map(s=>s.target)).size===saves.length&&saves.every(s=>context.targetIds.includes(s.target)),'Save results must cover each affected target exactly once.');
@@ -37,7 +52,7 @@ export class AreaRunner{
   }
   async #prepare(actor,request){
     const p=this.p;await p.authorize(actor,request);
-    assert(typeof request.id==='string'&&request.id.length>0&&request.id.length<=100&&CORE_AREAS.has(request.slug),'Invalid area request.');
+    assert(typeof request.id==='string'&&request.id.length>0&&request.id.length<=100&&SAVE_ACTIONS.has(request.slug),'Invalid area request.');
     assert(!request.options||!Object.keys(request.options).length,'Optional area riders are not yet supported.');
     const prior=await p.journal(actor);
     if(prior?.id===request.id&&['complete','canceled'].includes(prior.status))return prior;
@@ -76,13 +91,15 @@ export class AreaRunner{
       await p.write(actor,after);
       const review=await p.review(actor,request,c,prepared,progress);
       assert(review&&review.length===progress.saves.length,'Area resolution needs GM recovery; no damage was applied by this workflow.');
-      assert(review.every((r,i)=>r.target===progress.saves[i].target&&[0,0.5,1,2].includes(r.multiplier)),'Invalid damage review.');
+      assert(review.every((r,i)=>r.target===progress.saves[i].target&&[0,0.5,1,2].includes(r.multiplier)
+        &&(r.persistent===undefined||typeof r.persistent==='boolean')
+        &&(!r.persistent||(request.slug==='bow-shock'&&progress.saves[i].degree<=1))),'Invalid damage review.');
       progress.review=review;await p.saveJournal(actor,progress);
       for(const row of review){
         await p.authorize(actor,request);
-        progress.applications.push({target:row.target,status:'applying',multiplier:row.multiplier});await p.saveJournal(actor,progress);
-        if(row.multiplier>0)await p.apply(actor,request,c,prepared,progress,row);
-        progress.applications.at(-1).status=row.multiplier>0?'complete':'no-damage';await p.saveJournal(actor,progress);
+        progress.applications.push({target:row.target,status:'applying',multiplier:row.multiplier,persistent:!!row.persistent});await p.saveJournal(actor,progress);
+        if(row.multiplier>0||row.persistent)await p.apply(actor,request,c,prepared,progress,row);
+        progress.applications.at(-1).status=row.multiplier>0||row.persistent?'complete':'no-damage';await p.saveJournal(actor,progress);
       }
       progress={...progress,status:'complete',revision:after.revision};await p.saveJournal(actor,progress);
       await p.summary?.(actor,request,progress);return progress;
