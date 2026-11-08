@@ -104,3 +104,15 @@ Use disposable characters and exactly one GM. Disable automatic damage applicati
 - Finish the secondary workflow, then apply the primary damage once through its native card and resolve its appropriate reactions. Verify third-party modules do not auto-apply primary damage out of order or duplicate secondary damage. Managed secondary damage does not intercept ordinary primary damage buttons.
 - Reroll/delete the attack, cancel primary damage, close secondary selection, move a target or advance combat during resolution. The journal must preserve actual evidence and block a new action without refunding a resolved Strike. Choosing zero secondaries explicitly is a valid completion; closing the prompt is not.
 - Interrupt after one secondary HP application, reconnect, then retry: no replay, duplicated damage or additional readiness use. Inspect completed versus uncertain entries and reconcile manually. Confirm only module-managed Ready to Reign reminders are removed when starting the sequence.
+
+## Relentless Rush acceptance (pending live execution)
+
+- At level 18, confirm a 5-foot enemy emanation: one 8d6 fire pool, native basic Reflex saves, reviewed IWR, ten-minute frequency and resistance 9. At level 19 resistance remains 9. Calibration does not change either blast.
+- Confirm an empty initial area: frequency is spent, resistance/trigger are created, no damage is rolled. Close the initial prompt instead: spend nothing.
+- Move before the next turn and change nearby enemies. On both GM-advanced and player-advanced turns, verify exactly one GM workflow, resistance expiry before the blast, and fresh current targets with one 4d6 fire pool/new saves.
+- Verify no second action, cartridge, MAP, frequency or next-action opening is spent. Repeated turn hooks and backward/forward navigation must not repeat damage.
+- Become unconscious, die or stop holding a gunblade before the trigger: no blast and protection ends. Stunned/paralyzed alone allows the automatic blast; changing to another held gunblade also allows it.
+- Empty delayed area completes without damage. Closing the triggered area confirmation, canceling a save or interrupting HP application leaves recovery and cannot repeat prior writes.
+- Reconnect before the due round preserves a future trigger; reconnect during/after the due turn requires reconciliation, with no retroactive blast. End/delete combat before resolution and check managed protection cleanup without frequency reset.
+- Change initiative order, source token, scene, or combat while a dialog is open; verify recovery rather than damage on stale targets. Test one active GM, two GM clients, and a player without HP ownership.
+- Check PF2e Toolbelt, Workbench, HUD and reaction automation on disposable actors; verify no duplicate damage, unexpected expiry or unresolved reaction conflict.

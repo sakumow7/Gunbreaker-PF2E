@@ -25,7 +25,7 @@ This prototype requires exactly one active token and combatant for the actor. It
 
 The server-delivered creation-event user ID identifies the requester. The coordinator rechecks ownership, resource revision and combat turn, and shares one actor queue with manual tracker writes. Manual tracker writes from players are blocked while routing is enabled; the GM records uncovered actions. Ordinary rules cards and edited request cards never execute. Timed-out or uncertain submissions stay locally blocked until a GM acknowledgement arrives; they are not automatically retried or replayed on reconnect. See [request transport and recovery limits](docs/PLAYER-REQUESTS.md).
 
-**Automatic damage interception, complete party reaction coverage, remaining area abilities, movement, external-action observation, and complete feat-rider coverage remain pending.** No distributed-lock, seamless GM failover, multi-client runtime safety, or live compatibility claim is made.
+**Automatic damage interception, complete party reaction coverage, live area validation, movement, external-action observation, and complete feat-rider coverage remain pending.** No distributed-lock, seamless GM failover, multi-client runtime safety, or live compatibility claim is made.
 
 ## Save-action prototype
 
@@ -33,13 +33,17 @@ Demon Slice, Demon Slaughter, Fated Circle, Fated Brand, Double Down, Danger Zon
 
 Saturation Fire adds native placement for a 30-foot line. The GM places the origin on a grid corner along the acting token’s edge, aims it, then confirms enemies found through PF2e’s covered-space checks. It spends one cartridge and uses calibrated damage. This prototype requires a flat scene with 5-foot square spaces; unsupported elevations/grids need manual adjudication. Preview lines clear after completion/cancellation and stay for interrupted-action recovery.
 
-Emanations and Saturation Fire need no player target selection; Danger Zone preserves the player's one selected target. These save abilities do not use MAP. Geometry, exceptional save-damage rules and outstanding reactions remain GM decisions. Hidden enemies require manual adjudication. Bow Shock includes native persistent fire on failed saves, without doubling it or applying an immediate tick. Its later ticks and recovery use PF2e's normal persistent-damage controls. Cartridge costs and frequencies commit before saves; interruption records a private GM journal and blocks replay. Optional feat riders and the remaining area abilities are pending. See [area coverage and recovery](docs/AREA-COMBOS.md).
+Emanations and Saturation Fire need no player target selection; Danger Zone preserves the player's one selected target. These save abilities do not use MAP. Geometry, exceptional save-damage rules and outstanding reactions remain GM decisions. Hidden enemies require manual adjudication. Bow Shock includes native persistent fire on failed saves, without doubling it or applying an immediate tick. Its later ticks and recovery use PF2e's normal persistent-damage controls. Cartridge costs and frequencies commit before saves; interruption records a private GM journal and blocks replay. Optional feat riders and live area validation are pending. See [area coverage and recovery](docs/AREA-COMBOS.md).
 
 ## Reign sequence prototype
 
 Bloodfest now validates one selected enemy within 30 feet, commits its frequency and cartridge expansion, and grants Ready to Reign. Reign of Beasts, Noble Blood and Lion Heart use native melee Strikes with the existing bonus-dice rules, preserve normal MAP, and enforce their openings and one-step-per-turn limit. Misses advance the sequence.
 
 On a hit, the GM chooses up to two other eligible enemies for native Reflex saves and reviewed secondary fire damage. Primary critical hits do not double secondary damage, and Calibration does not change it. Primary HP application remains on the normal damage-card controls after this workflow completes. Exact attack/damage evidence and a private journal block uncertain repeats. See [Reign coverage and recovery](docs/REIGN.md); live testing remains pending.
+
+## Relentless Rush prototype
+
+Relentless Rush now resolves its initial 8d6 fire emanation and grants native all-damage resistance until the next turn. At that turn start, the GM coordinator checks consciousness and a held gunblade, discovers current enemies, and resolves a fresh 4d6 fire emanation without another action or frequency. Empty areas are legal; interrupted or already-due triggers never replay automatically. The GM still confirms areas and reviews damage. See [Rush timing and recovery](docs/RELENTLESS-RUSH.md); real-client acceptance remains pending.
 
 ## Heart of Stone prototype
 

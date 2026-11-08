@@ -1,3 +1,10 @@
+# Unreleased — Relentless Rush
+
+- Add the initial 8d6 fire emanation, ten-minute frequency and native all-damage Resistance effect until the next turn. Empty emanations are legal.
+- Schedule one 4d6 fire blast at the next own turn with fresh current targets/saves, conditional on consciousness and a held gunblade. No additional action, MAP, frequency or Continuation consumption.
+- Persist trigger identity and recovery state; reject duplicate, missed, stale and uncertain executions. Reconnect never retroactively fires an already-due blast.
+- Add 18 tests for 164 passing local tests. Live Forge hook/expiry and GM/player acceptance remain pending; no release or live update.
+
 # Unreleased — Bloodfest and Reign sequence
 
 - Add native Bloodfest target validation, frequency, cartridge capacity/load and readiness reminders.

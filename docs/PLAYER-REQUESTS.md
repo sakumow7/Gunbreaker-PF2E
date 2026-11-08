@@ -39,3 +39,5 @@ The module's GM manual writes and native executor share one per-actor queue. Whi
 ## Evidence and acceptance
 
 Local tests cover schema rejection, identity, ownership, coordinator selection, intent copies, stale state/turns, queue serialization, permission loss, ordinary/edited cards, acknowledgement identity, uncertain submission and timeout handling. Those tests use mocked Foundry events. The real transport, roll dialogs, server creator IDs and module interactions require the two-client tests in SMOKE-TEST.md before this setting is used in the campaign.
+
+Relentless Rush requests the initial action with MAP zero and no selected targets. Its second blast is triggered internally by the GM turn hook; players do not submit a second action or a phase field. The GM confirms the current area and reviews fresh saves. See RELENTLESS-RUSH.md.
