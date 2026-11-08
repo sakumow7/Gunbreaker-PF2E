@@ -42,3 +42,18 @@ Use one GM and one real player session on disposable actors. Keep the setting of
 - Try to supply a forged requester ID, hit result, or cost in a request. Reject it. Verify the server-reported create/update event user IDs with a second real client, not only a local hook call.
 - Timeout an outstanding request, deliver its acknowledgement late, then disconnect/reconnect clients. No automatic request replay or retry; reconcile the actual native roll and actor journal first.
 - Stop or replace the GM during a pending write. Treat this as an unresolved recovery case, not proof of failover safety. Keep routing disabled for regular play until the observed behavior and recovery procedure are accepted.
+
+## Heart of Stone — assisted workflow gate
+
+Use disposable characters and exactly one GM. Disable automatic damage application while testing; ordinary damage buttons bypass the reaction workflow.
+
+- Enable Experimental Heart of Stone reactions. A successful enemy Strike should offer eligible owners one prompt; a miss, saving throw, nondamaging attack or persistent tick must not. Test a normal spell attack as well.
+- Confirm base/enhanced scaling at 1, 7 and 19. Reserved Cartridge works at zero once on another ally and uses the regular reaction. Guardian’s Instinct has 30-foot range and grants no extra reaction before the first own turn.
+- Test Aetheric Ward against self-targeted Strikes; reject spell attacks, reserves, free Perfect Chamber discounts and the extra reaction. Verify Continuation survives the reaction.
+- Decline or close without spending. Leave a prompt open past the reminder: damage remains unresolved within this workflow. Only explicit GM continuation permits unprotected managed application.
+- Pair the exact native damage card. Reject wrong attacker, item, target or degree. Test successful spell damage and document any critical spell representation the adapter rejects.
+- With native physical/fire resistance already present, apply a mixed physical/fire attack. Inspect PF2e's native breakdown: resistance must stack according to native rules, with no additional subtraction. Check critical immunity and weaknesses. Confirm temporary protection never appears as a live actor effect.
+- Apply an attack containing persistent bleed. Initial native application should create the condition; its later tick receives no Heart of Stone protection. A separate later attack also receives none.
+- Double-click responses/application; try simultaneous protectors and concurrent tracker corrections. At most one managed acceptance/application occurs. Confirm manual player writes are blocked while the setting is enabled.
+- Reroll/delete the attack, change ownership, advance combat before acceptance, or simulate a failed HP write. No silent refund, replay or guessed result. On GM reload, old windows require manual reconciliation.
+- Test Bulwark movement, Shield Block, split packets and third-party auto-apply as explicitly unsupported paths. Do not declare full reaction automation until they have implemented integrations and passing tests.

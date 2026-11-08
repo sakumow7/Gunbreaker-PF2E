@@ -25,7 +25,15 @@ This prototype requires exactly one active token and combatant for the actor. It
 
 The server-delivered creation-event user ID identifies the requester. The coordinator rechecks ownership, resource revision and combat turn, and shares one actor queue with manual tracker writes. Manual tracker writes from players are blocked while routing is enabled; the GM records uncovered actions. Ordinary rules cards and edited request cards never execute. Timed-out or uncertain submissions stay locally blocked until a GM acknowledgement arrives; they are not automatically retried or replayed on reconnect. See [request transport and recovery limits](docs/PLAYER-REQUESTS.md).
 
-**Triggered party reactions, area saves, movement, external-action observation, and complete feat-rider coverage remain pending.** No distributed-lock, seamless GM failover, multi-client runtime safety, or live compatibility claim is made.
+**Automatic damage interception, complete party reaction coverage, area saves, movement, external-action observation, and complete feat-rider coverage remain pending.** No distributed-lock, seamless GM failover, multi-client runtime safety, or live compatibility claim is made.
+
+## Heart of Stone prototype
+
+A separate, disabled-by-default **Experimental Heart of Stone reactions** setting detects successful native damaging Strikes and spell attacks. Eligible owners receive a consolidated protection prompt; the GM handles unassigned characters. It validates base/enhanced protection, Reserved Cartridge, the regular/Guardian’s Instinct reaction pools, Aetheric Ward restrictions and Lion’s Legend scaling. Declining spends nothing. An unresolved prompt requires an explicit GM continue decision.
+
+The GM must pair the exact native damage card and apply it through the reaction card. The adapter supplies a temporary Resistance rule to a contextual target clone for one native damage application. It leaves no general resistance effect on the ally and does not subtract protection after PF2e IWR.
+
+**This is an assisted reaction workflow, not automatic interception of every damage application.** Ordinary damage buttons and other modules bypass it. Bulwark movement, Shield Block combinations, split damage packets, some critical spell damage representations, automatic visibility adjudication and recovery UI remain manual. Exactly one GM is required, and old windows after a GM reload cannot resume without manual reconciliation. See [full coverage and test boundaries](docs/HEART-OF-STONE.md). No live GM/player test has been completed.
 
 ## Build and review
 

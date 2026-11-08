@@ -11,7 +11,7 @@ export function activeGM(){return game.users.filter(u=>u.active&&u.isGM).sort((a
 export function authority(actor,req){
   if(!game.user.isGM || activeGM()?.id!==game.user.id)throw Error('Native execution requires the active GM coordinator.');
   if(actor.type!=='character'||!actor.isOwner)throw Error('Select an owned character.');
-  if(game.settings.get(MOD,'playerRequests')&&game.users.filter(u=>u.active&&u.isGM).length!==1)throw Error('Experimental player routing requires exactly one active GM.');
+  if((game.settings.get(MOD,'playerRequests')||game.settings.get(MOD,'stoneReactions'))&&game.users.filter(u=>u.active&&u.isGM).length!==1)throw Error('Experimental automation requires exactly one active GM.');
   if(req?.requesterId){
     const user=game.users.get(req.requesterId);
     if(!game.settings.get(MOD,'playerRequests')||req.intent.gmId!==game.user.id||!user?.active||!actor.testUserPermission(user,'OWNER'))throw Error('Player action permission changed; submit a new request.');

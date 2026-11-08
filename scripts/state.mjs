@@ -135,16 +135,17 @@ export function transition(raw,op,context,catalogue={}) {
   if(slug==='heart-of-stone') {
     assert(context.targetIds?.length===1,'Select one protected creature.');
     if(context.selfTargetIds?.includes(context.targetIds[0]))assert(op.self,'Select the Aetheric Ward self-protection option.');
-    if(op.self) {requireFeature('aetheric-ward');assert(op.enhance,'Aetheric Ward requires the cartridge enhancement.');}
+    if(op.self) {requireFeature('aetheric-ward');assert(op.enhance && !op.perfect,'Aetheric Ward requires spending a cartridge.');}
     cost=op.enhance?1:0;
     if(op.reserve){
       requireFeature('reserved-cartridge');
       assert(op.enhance && !op.self && !context.selfTargetIds?.includes(context.targetIds[0]),'Reserved Cartridge protects another ally only.');
       assert(!s.once.reserve,'Reserved Cartridge has already been used this encounter.');
       assert(!op.perfect,'Reserved Cartridge cannot combine with Perfect Chamber.');
+      assert(!op.instinct,'Reserved Cartridge uses the regular reaction.');
       cost=0;n.once.reserve=true;
     }
-    if(op.instinct){requireFeature('guardians-instinct');assert(!op.self && !context.selfTargetIds?.includes(context.targetIds[0]),'The extra reaction protects another ally only.');assert(s.lastInstinctTurn!==context.turn,'Extra reaction already spent.');n.lastInstinctTurn=context.turn;}
+    if(op.instinct){requireFeature('guardians-instinct');assert(context.turn>0,'The extra reaction begins at the start of your first turn.');assert(!op.self && !context.selfTargetIds?.includes(context.targetIds[0]),'The extra reaction protects another ally only.');assert(s.lastInstinctTurn!==context.turn,'Extra reaction already spent.');n.lastInstinctTurn=context.turn;}
     else {assert(s.lastReactionTurn!==context.turn,'Reaction already spent.');n.lastReactionTurn=context.turn;}
   }
   if(op.reserve)assert(slug==='heart-of-stone','Reserved Cartridge only enhances Heart of Stone.');

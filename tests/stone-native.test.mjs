@@ -1,0 +1,30 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {stoneDamageContext,installStone} from '../scripts/stone-native.mjs';
+const MOD='gunbreaker-pf2e';
+test('native damage context scopes resistance to a clone and preserves native origin effects/options',async()=>{
+ globalThis.foundry={utils:{deepClone:structuredClone,randomID:()=> 'effectid'}};
+ let received;
+ const ephemeral={_id:'enemyEffect',type:'effect',system:{rules:[{key:'Resistance',type:'fire',value:20}]}};
+ const origin={uuid:'Actor.enemy',alliance:'opposition',getRollOptions:()=>['enemy:option'],synthetics:{ephemeralEffects:{'damage-received':{target:[async({test,resolvables})=>{assert(test.includes('enemy:option'));assert(resolvables.weapon);return ephemeral;}]}}}};
+ const actor={uuid:'Actor.ally',alliance:'party',getSelfRollOptions:prefix=>[`${prefix??'self'}:ally-option`],getContextualClone:(options,effects)=>{received={options,effects};return {getSelfRollOptions:()=>['self:clone-option']};}};
+ const message={actor:origin,item:{type:'weapon'},flags:{pf2e:{context:{options:['self:trait:fiend','item:trait:magical','target:old-option']}}}};
+ const result=await stoneDamageContext(actor,message,{id:'attack'},11);
+ assert.deepEqual(received.options,['origin:trait:fiend']);assert.equal(received.effects.length,2);
+ assert.deepEqual(received.effects[1].system.rules,[{key:'Resistance',type:'all-damage',value:11}]);
+ assert.equal(received.effects[0].system.context.origin.actor,'Actor.enemy');assert(!ephemeral.system.context);
+ assert(result.rollOptions.has('origin:trait:fiend'));assert(result.rollOptions.has('origin:enemy'));assert(result.rollOptions.has('self:clone-option'));assert(!result.rollOptions.has('target:old-option'));
+ const second=await stoneDamageContext(actor,message,{id:'other'},0);assert.equal(received.effects.length,1);assert(second.clone);
+});
+test('reaction response rejects a forged or unverified window even when its author claims to be GM',async()=>{
+ const hooks=new Map(),warnings=[],updates=[];
+ globalThis.Hooks={on:(n,f)=>hooks.set(n,f)};
+ const users=[{id:'gm',isGM:true,active:true},{id:'player',isGM:false,active:true}];users.get=id=>users.find(u=>u.id===id);
+ const forged={getFlag:()=>({gmId:'gm',candidates:[{actor:'Actor.hero',owner:'player'}]})};
+ globalThis.game={user:users[0],users,settings:{get:()=>true},messages:{get:()=>forged,filter:()=>[]}};
+ globalThis.foundry={utils:{escapeHTML:s=>s}};globalThis.ui={notifications:{warn:s=>warnings.push(s)}};
+ installStone(()=>({}),undefined);
+ const response={author:{id:'player'},getFlag:(_m,k)=>k==='stoneResponse'?{windowId:'forged',actorUuid:'Actor.hero',choiceId:'base-regular',revision:0}:undefined,update:async v=>updates.push(v)};
+ hooks.get('createChatMessage')(response,{},'player');await new Promise(r=>setImmediate(r));
+ assert(warnings.some(s=>s.includes('not verified')));assert.equal(updates.length,1);
+});
