@@ -2,6 +2,8 @@ import {ActionRunner,CORE_STRIKES,CORE_FOLLOWUPS,SUPPORTED} from './execution.mj
 import {damageType,followupFormula,superbolideHP,nativeWeaponDice} from './mechanics.mjs';
 import {sourceIds,catalogue} from './catalogue.mjs';
 import {assertFreshIntent} from './requests.mjs';
+import {createAreaRunner} from './area-native.mjs';
+import {CORE_AREAS} from './area.mjs';
 const MOD='gunbreaker-pf2e';
 const slug=i=>i.slug??i.system?.slug;
 const effectUuid=name=>Object.entries(sourceIds).find(([id,s])=>s===name&&id.includes('gunbreaker-effects'))?.[0];
@@ -45,7 +47,7 @@ async function applyEffect(actor,name,requestId){
   await actor.createEmbeddedDocuments('Item',[data]);
 }
 export function createNativeRunner(contextFor,queue){
-  return new ActionRunner({
+  const single=new ActionRunner({
     authorize:async(actor,req)=>authority(actor,req),
     preflight:async(actor,req,c,state)=>{if(req.intent||req.expected)assertFreshIntent(req.intent??req.expected,c,state);},
     context:async(actor,req)=>{
@@ -120,6 +122,8 @@ export function createNativeRunner(contextFor,queue){
       }
     }
   },queue);
+  const area=createAreaRunner({authority,contextFor,actorToken,weaponFor},queue);
+  return {execute:(actor,request)=>CORE_AREAS.has(request.slug)?area.execute(actor,request):single.execute(actor,request)};
 }
 export async function nativePanel(actor,runner,contextFor){
   if(!actor?.isOwner||actor.type!=='character')throw Error('Select an owned character.');
@@ -128,7 +132,7 @@ export async function nativePanel(actor,runner,contextFor){
   const expected={revision:state?.revision??0,encounterId:c.encounterId,round:c.round,turn:c.turn};
   const choices=[...SUPPORTED].filter(s=>c.learned.includes(s)&&catalogue[s].level<=c.level);
   const weapons=actor.itemTypes.weapon.filter(isHeld);
-  const content=`<p>Native execution beta · Cartridges ${state?.cartridges??0}. Costs and combo outcomes update automatically. Native damage controls remain available.</p><label>Ability<select name="ability">${choices.map(s=>`<option value="${s}">${esc(catalogue[s].name)}</option>`).join('')}</select></label><label>Gunblade<select name="weapon">${weapons.map(w=>`<option value="${w.id}">${esc(w.name)}</option>`).join('')}</select></label><label>Attack stage<select name="map"><option value="0">First attack</option><option value="1">Second attack</option><option value="2">Third or later attack</option></select></label><p>Player requests go to the GM coordinator. Check action availability and terrain. Party protection, area saves and movement are still pending.</p>`;
+  const content=`<p>Native execution beta · Cartridges ${state?.cartridges??0}. Costs and combo outcomes update automatically. Native damage controls remain available.</p><label>Ability<select name="ability">${choices.map(s=>`<option value="${s}">${esc(catalogue[s].name)}</option>`).join('')}</select></label><label>Gunblade<select name="weapon">${weapons.map(w=>`<option value="${w.id}">${esc(w.name)}</option>`).join('')}</select></label><label>Attack stage (Strikes only)<select name="map"><option value="0">First attack</option><option value="1">Second attack</option><option value="2">Third or later attack</option></select></label><p>Player requests go to the GM coordinator. Check action availability and terrain. Four area combo abilities use a GM area confirmation and damage review. Other areas, movement and complete party protection remain pending.</p>`;
   const req=await foundry.applications.api.DialogV2.wait({window:{title:'Gunbreaker — Native Actions Beta'},content,rejectClose:false,buttons:[{action:'execute',label:'Use ability',callback:(_event,b)=>({id:foundry.utils.randomID(),slug:b.form.elements.ability.value,weaponId:b.form.elements.weapon.value,map:Number(b.form.elements.map.value)})}]});
   if(!req||typeof req!=='object')return;
   // Snapshot when the panel opens: a stale selection must not spend changed resources.

@@ -1,3 +1,4 @@
+import {nativeDamageContext} from './native-damage.mjs';
 import {StoneRunner,stoneAttack,stoneDamage,stoneOptions,stoneEffect} from './stone.mjs';
 import {activeGM} from './native.mjs';
 const MOD='gunbreaker-pf2e';
@@ -22,27 +23,9 @@ async function factsFor(actor,w){
     seesBoth:!actor.hasCondition('blinded')&&!!target.object?.isVisible&&!!origin.object?.isVisible,
     distance:self.distanceTo(target.object),attackKind:w.attack.kind};
 }
-/** Build the same target context used by PF2e's native damage-card helper. */
-export async function stoneDamageContext(actor,message,attack,resistance){
-  const options=[...(message.flags.pf2e.context.options??[])],origin=message.actor,item=message.item;
-  if(actor.alliance&&origin)options.push(`origin:${actor.alliance===origin.alliance?'ally':'enemy'}`);
-  if(!options.some(o=>o.startsWith('target:')))options.push(...actor.getSelfRollOptions('target'));
-  const originOptions=options.filter(o=>o.startsWith('self:')).map(o=>o.replace(/^self:/,'origin:'));
-  const deferred=origin?.synthetics?.ephemeralEffects?.['damage-received']?.target??[];
-  const resolvables=item?{[item.type==='spell'?'spell':'weapon']:item}:{};
-  const test=[...options,...(origin?.getRollOptions(['damage-received'])??[]),...actor.getSelfRollOptions('target')];
-  const effects=(await Promise.all(deferred.map(fn=>fn({test,resolvables})))).filter(Boolean).map(source=>{
-    const effect=foundry.utils.deepClone(source);
-    if(effect.type==='effect'){
-      effect.system.context={origin:{actor:origin.uuid,token:null,item:null,spellcasting:null,rollOptions:[]},target:{actor:actor.uuid,token:null},roll:null};
-      effect.system.duration={value:-1,unit:'unlimited',expiry:null,sustained:false};
-    }
-    return effect;
-  });
-  if(resistance)effects.push({...stoneEffect(resistance,attack.id),_id:foundry.utils.randomID()});
-  const clone=actor.getContextualClone(originOptions,effects);
-  const itemOptions=['affliction','condition','effect'].includes(item?.type)?item.getRollOptions('item'):[];
-  return {clone,rollOptions:new Set([...options.filter(o=>!/^(self|target)(:|$)/.test(o)),...itemOptions,...originOptions,...clone.getSelfRollOptions()])};
+export function stoneDamageContext(actor,message,attack,resistance){
+  const effects=resistance?[{...stoneEffect(resistance,attack.id),_id:foundry.utils.randomID()}]:[];
+  return nativeDamageContext(actor,message,effects);
 }
 export function installStone(contextFor,actorQueue){
   // Only server-delivered GM creation events establish trusted windows in this session.
