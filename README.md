@@ -19,13 +19,19 @@ Unlisted class progression and abilities retain the 1.3 baseline. Ordinary Stren
 
 The tracker has a **Native action beta** button for the active GM coordinator. A disabled-by-default **Experimental player action requests** world setting enables the player entry path for disposable-character tests; the existing tracker macro then opens the native panel directly for players. It can execute the basic melee combo, Burst Strike, Gnashing sequence, Sonic Break, four single-target Continuations, Royal Guard, Camouflage, Nebula/Great Nebula, No Mercy, Superbolide, and Perfect Chamber. Select the ability, held gunblade, and native MAP stage. It reads native attack outcomes, records costs/openings, rolls native damage, and applies the listed self-effects. A canceled pre-roll selection spends nothing; a miss or canceled damage dialog does not refund the attack. Failed post-roll work blocks further native execution for GM recovery.
 
-This prototype requires exactly one active token and combatant for the actor. It checks melee reach and target allegiance; the GM still checks terrain, visibility edge cases, action availability, and genuine threats. Native damage controls still apply damage. Optional feat riders are not all integrated. The manual tracker remains for uncovered actions; do not record a natively executed action again.
+This prototype requires exactly one active token and combatant for the actor. It checks melee reach and target allegiance; the GM still checks terrain, visibility edge cases, action availability, and genuine threats. For Strikes and single-target follow-ups, native damage controls still apply damage. Optional feat riders are not all integrated. The manual tracker remains for uncovered actions; do not record a natively executed action again.
 
 **Player routing is implemented as an experimental transport; live two-client verification remains pending.** It requires exactly one active GM on the same scene. The player selects an ability, held gunblade, attack stage, and target. A private request card carries that intent to the GM, who runs the normal PF2e roll/damage dialogs. This still requires GM participation; it is not the final minimal-interface experience.
 
 The server-delivered creation-event user ID identifies the requester. The coordinator rechecks ownership, resource revision and combat turn, and shares one actor queue with manual tracker writes. Manual tracker writes from players are blocked while routing is enabled; the GM records uncovered actions. Ordinary rules cards and edited request cards never execute. Timed-out or uncertain submissions stay locally blocked until a GM acknowledgement arrives; they are not automatically retried or replayed on reconnect. See [request transport and recovery limits](docs/PLAYER-REQUESTS.md).
 
-**Automatic damage interception, complete party reaction coverage, area saves, movement, external-action observation, and complete feat-rider coverage remain pending.** No distributed-lock, seamless GM failover, multi-client runtime safety, or live compatibility claim is made.
+**Automatic damage interception, complete party reaction coverage, remaining area abilities, movement, external-action observation, and complete feat-rider coverage remain pending.** No distributed-lock, seamless GM failover, multi-client runtime safety, or live compatibility claim is made.
+
+## Core area prototype
+
+Demon Slice, Demon Slaughter, Fated Circle and Fated Brand now run from the same native panel. The GM confirms eligible enemies in the 5-foot emanation, resolves native Reflex saves against the Gunbreaker DC, and reviews damage before one native application per target. Each activity rolls damage once. Demon Slaughter loads its cartridge after every save resolves, including when all enemies succeed; Fated Brand makes fresh saves against original failed-save targets still in range.
+
+The player does not select targets or MAP for these four areas. Geometry, exceptional save-damage rules and outstanding reactions remain GM decisions. Hidden enemies require manual adjudication. Costs commit before saves; interruption records a private GM journal and blocks replay. Optional feat riders and the remaining area abilities are pending. See [area coverage and recovery](docs/AREA-COMBOS.md).
 
 ## Heart of Stone prototype
 

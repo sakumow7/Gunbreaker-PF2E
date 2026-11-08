@@ -1,3 +1,11 @@
+# Unreleased — core area combos
+
+- Add native Demon Slice, Demon Slaughter, Fated Circle and Fated Brand to the existing GM/player action path. Confirm enemy geometry, use the Gunbreaker class DC, and roll each activity's damage once.
+- Resolve native Reflex outcomes and apply reviewed basic-save damage through contextual native IWR. Critical failure doubles save damage without treating it as a critical attack.
+- Load Demon Slaughter's cartridge after all saves; retain only failed Circle targets for fresh Brand saves, with original-target/range and shared Continuation checks.
+- Reserve source and affected actors together in the local GM queue. Persist per-save/per-application evidence in a GM-private journal, retaining a compact actor recovery marker; block uncertain or reconnected work rather than replaying it.
+- Add 19 local regression tests, including a mocked native pipeline. Hidden enemies, exceptional save rules, optional riders and remaining area abilities require manual handling. Live Forge verification remains pending; no release published.
+
 # Unreleased — Heart of Stone assisted reaction workflow
 
 - Detect successful native damaging attacks, identify eligible protectors, and offer owner reaction choices with GM fallback.

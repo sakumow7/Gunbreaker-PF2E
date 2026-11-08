@@ -6,6 +6,8 @@ Status: implemented for testing, disabled by default. No live two-client result 
 
 Enable **Experimental player action requests** in the module's world settings only in the disposable test setup. Exactly one GM must be connected and viewing the player's scene. The existing tracker macro opens the native panel for a player: ability, held gunblade and attack stage, using the selected enemy. A private request/result card is visible to the requester and the nominated GM. The GM still handles PF2e's native attack and damage dialogs; damage application uses the normal controls. Player-side modifiers, sheet buttons and action-budget tracking are not implemented.
 
+For Demon Slice/Slaughter and Fated Circle/Brand, the intent contains no targets and uses MAP zero. The GM discovers and confirms the area, resolves native saves, then reviews and applies area damage through the workflow. No player-selected targets or damage values are trusted. Detailed area recovery evidence stays in a GM-private chat journal; the actor execution flag contains its reference and status only. See AREA-COMBOS.md.
+
 Only abilities already covered by the native core executor can be requested. Optional feat riders are rejected on the player request path until their choices are integrated. Follow-ups use the stored original target, not a newly selected target. Owned action data must be updated to the v1.4 compendium.
 
 ## Request contract
