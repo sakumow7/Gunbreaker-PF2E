@@ -1,6 +1,7 @@
 import {createNativeRunner,nativePanel,authority} from './native.mjs';
 import {ActorQueue} from './queue.mjs';
 import {installRequests} from './transport.mjs';
+import {installStone} from './stone-native.mjs';
 import {initialState,normalizeState,capacity,transition} from './state.mjs';
 import {catalogue,sourceIds} from './catalogue.mjs';
 const MOD='gunbreaker-pf2e',openActors=new Set(),actorQueue=new ActorQueue();
@@ -15,6 +16,7 @@ function registerTraits(){
 Hooks.once('init',()=>{
   registerTraits();
   game.settings.register(MOD,'playerRequests',{name:'Experimental player action requests',hint:'Route supported native actions through the active GM. Requires the GM on the same scene. Keep disabled until disposable-character two-client testing is complete.',scope:'world',config:true,type:Boolean,default:false});
+  game.settings.register(MOD,'stoneReactions',{name:'Experimental Heart of Stone reactions',hint:'Offer reaction choices on eligible attacks. The GM must pair and apply damage through the reaction card. Ordinary damage buttons and automatic damage modules bypass this workflow. Test on disposable actors first.',scope:'world',config:true,type:Boolean,default:false});
 });Hooks.once('setup',registerTraits);
 export function contextFor(actor){
   const combat=game.combat?.started?game.combat:null;
@@ -36,7 +38,7 @@ function permitted(actor){
 export async function record(actor,op,expected){
   permitted(actor);
   return actorQueue.run(actor,async()=>{
-    if(game.settings?.get(MOD,'playerRequests'))authority(actor);
+    if(game.settings?.get(MOD,'playerRequests')||game.settings?.get(MOD,'stoneReactions'))authority(actor);
     permitted(actor);
     const raw=actor.getFlag(MOD,'tracker')??initialState();
     if(['reserved','committed','recovery'].includes(actor.getFlag(MOD,'execution')?.status))throw Error('Reconcile the pending native execution before changing the tracker.');
@@ -97,6 +99,7 @@ Hooks.once('ready',()=>{
   if(game.system.id!=='pf2e')return;
   nativeRunner=createNativeRunner(contextFor,actorQueue);
   requestActions=installRequests(nativeRunner,contextFor);
-  game.modules.get(MOD).api={tracker,record,execute:(actor,request)=>requestActions.execute(actor,request),nativeActions:actor=>nativePanel(actor,requestActions,contextFor),adjustCartridges:(actor,delta)=>record(actor,{type:'adjust',delta}),getState:actor=>normalizeState(actor.getFlag(MOD,'tracker'),contextFor(actor))};
+  const heartOfStone=installStone(contextFor,actorQueue);
+  game.modules.get(MOD).api={tracker,record,heartOfStone,execute:(actor,request)=>requestActions.execute(actor,request),nativeActions:actor=>nativePanel(actor,requestActions,contextFor),adjustCartridges:(actor,delta)=>record(actor,{type:'adjust',delta}),getState:actor=>normalizeState(actor.getFlag(MOD,'tracker'),contextFor(actor))};
 });
 // Ordinary rules cards never execute transitions; only bounded explicit request envelopes do.

@@ -1,3 +1,11 @@
+# Unreleased — Heart of Stone assisted reaction workflow
+
+- Detect successful native damaging attacks, identify eligible protectors, and offer owner reaction choices with GM fallback.
+- Bind each managed window to exact attack evidence; require explicit GM damage-card pairing. Apply one native Resistance rule in a contextual clone, preserving native IWR and origin effects without leaving resistance on the live actor.
+- Serialize reaction costs with other module actor writes, persist uncertain application states, reject duplicate/late/rerolled responses, and require explicit continuation for unresolved prompts.
+- Enforce Reserved Cartridge's regular reaction, Guardian’s Instinct starting on the first own turn, and Aetheric Ward's actual cartridge spend. These enforce the retained/proposed rules text rather than adding free uses.
+- Keep the setting off by default. Ordinary damage buttons and other modules bypass this workflow; Bulwark movement, Shield Block combinations, split packets, unsupported critical spell rolls, and live GM/player tests remain pending.
+
 # Unreleased — experimental player requests
 
 - Route explicit player intents through Foundry ChatMessage creation events, using the workflow creator ID for permission checks. Default off; requires one active GM on the same scene.
