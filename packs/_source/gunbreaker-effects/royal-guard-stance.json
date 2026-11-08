@@ -18,7 +18,7 @@
             "rarity": "common"
         },
         "publication": {
-            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
             "remaster": true
         },
         "start": {
@@ -41,12 +41,26 @@
                 "key": "FlatModifier",
                 "selector": "ac",
                 "type": "circumstance",
-                "value": 1
+                "value": 1,
+                "predicate": [
+                    "encounter",
+                    {
+                        "not": "self:condition:unconscious"
+                    },
+                    "gunbreaker:wielding"
+                ]
             },
             {
                 "key": "RollOption",
                 "domain": "all",
-                "option": "royal-guard"
+                "option": "royal-guard",
+                "predicate": [
+                    "encounter",
+                    {
+                        "not": "self:condition:unconscious"
+                    },
+                    "gunbreaker:wielding"
+                ]
             }
         ],
         "slug": "royal-guard-stance"

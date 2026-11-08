@@ -1,20 +1,31 @@
-# Live Foundry smoke test (pending)
+# v1.4 native candidate smoke test — pending live execution
 
-Automated validation covers source data, grant graphs, tracker transitions, package contents, and compiled pack parity. It does not run a licensed Foundry server. Complete this checklist on the actual Foundry/PF2e versions used by the campaign before marking compatibility verified.
+Observed environment: Foundry 14 build 369, PF2e 8.7.0, Gunbreaker 1.3.0. The candidate has not been installed. Local tests and source inspection do not substitute for these checks.
 
-- Import the local ZIP with module.json at its root. Enable the module, reload, and open all five compendia. Confirm the Gunbreaker trait and gunblade label resolve.
-- Add the class to a fresh character at level 1: Keen Edge, Brutal Shell, Solid Barrel, Burst Strike, Demon Slice, Demon Slaughter, Heart of Stone, Royal Guard, and Release Royal Guard must appear.
-- Raise levels through 3, 5, 6, 7, 9, 11, 12, 13, 14, 15, 17, and 19. Check exact proficiency ranks, action grants, and specialization against RULES.html. Confirm no duplicate actions and no advanced weapon mastery.
-- Test Strength with a standard gunblade and Dexterity with a Light Gunblade. Confirm the latter has finesse, not two-hand d12. Check one-/two-handed damage and rune scaling.
-- Start combat, select the Gunbreaker, and initialize the tracker once. A second initialization must fail. Post Keen Edge and Burst Strike to chat: neither should mutate anything.
-- Select a real enemy, roll Keen Edge, and record a miss. Brutal Shell should become available. Record a move using Other Action: the combo survives. Complete the sequence on the following turn; Solid Barrel loads a cartridge even on a miss.
-- Try Solid Barrel without its opening, an unlearned spender, and a spender with zero cartridges. Each must leave the whole state unchanged.
-- At level 7, record a missed Burst Strike: no Hypervelocity. Record a hit: Hypervelocity opens only for that target. An intervening action closes it. A second Continuation in the same round must fail.
-- Confirm Gnashing Fang, Savage Claw, and Wicked Talon cannot be recorded on the same turn. Check delayed combo expiry after the end of the next Gunbreaker turn, including when another combatant is acting.
-- Resolve Fated Circle with mixed saves; mark only failed/critically failed enemies. Fated Brand must reject another target and requires new saves for damage.
-- Test Heart of Stone with and without a cartridge; self-protection requires Aetheric Ward and the enhancement. Apply resistance manually. Guardians' Instinct grants only one extra ally-protection reaction, not an unrestricted reaction.
-- Apply Royal Guard, Camouflage, Nebula, Great Nebula, No Mercy, and Superbolide effects manually. Check duration, AC stacking, damage selector, and resistance. Check native inline damage and class-DC save links in chat.
-- Bloodfest increases capacity before loading; after 60 world-time seconds, refresh the tracker and confirm it clamps excess cartridges. End combat and initialize another: cooldowns must persist, and capacity returns to normal.
-- Test two tracker windows and rapid clicks: stale revisions must reject duplicate commits on the same client. Designate one operator per actor; cross-client writes are not a distributed transaction.
-- End combat, clear the tracker, and perform actual daily preparations before confirming that button. Reopening, moving to another encounter, or reposting a card must not refresh daily uses.
-- Confirm targets, sheet actions/reactions, HP prerequisites, range/reach, temporary HP, healing, persistent damage, durations on allied targets, and genuine-threat restrictions with the GM. These are intentionally manual.
+## Rules and import
+
+- Import the candidate into an isolated test setup; open all five compendia and inspect rule validation warnings.
+- Advance a fresh character through levels 1–20; verify class grants and proficiency progression, without duplicate actions.
+- Confirm the four new feat entries and retired Twin Cartridge/Overcharged Gauge handling. Verify exact text against docs/DESIGN-v1.4.md.
+- Test normal/Light Gunblade with one/two hands, striking runes and ABP; verify weapon-dice counts and Royal Guard eligibility.
+
+## Native core prototype
+
+- Use one GM coordinator and one active token/combatant per character. Select a real enemy, choose MAP, and execute Keen Edge. A miss still enables Brutal Shell. Complete Solid Barrel on a miss and check that one cartridge loads.
+- Cancel an attack dialog: no costs or combo changes. Cancel a damage dialog after a hit: costs remain spent. Verify damage is not applied twice by Workbench or another automation module.
+- Burst Strike has its extra damage only on the named activity. Verify critical doubling and property runes with PF2e native damage. An ordinary Strike must not acquire Burst or Gnashing dice.
+- At 7/11/17, verify each Continuation's dice plus captured weapon-dice count. No critical doubling, No Mercy, property damage or new attack roll. Reach and original-target checks must block invalid use without an uncommitted spend.
+- Brutal Shell restores actual missing HP, grants nonstacking temporary HP once per round, and expires at the end of the next turn. Record Vortex Guard manually until integrated.
+- Apply self-effects using native execution. Check Camouflage/Royal Guard/shield circumstance stacking, Nebula/Great Nebula, No Mercy expiry, Superbolide at 2 HP and high HP. Its HP cost must not trigger Corundum or other damage-based abilities.
+- Double-click and reopen: one native roll and one spend. Simulate a post-roll write failure: a recovery journal must block a new action. Reconnect and verify it remains blocked.
+
+## State and migration
+
+- Reserved Cartridge at zero works once for another ally; rejects self, duplicate use and Perfect Chamber stacking. Regular and restricted reaction uses remain separate.
+- Expanded Gauge gives 4 at 12–17 and 5 at 18–20; Bloodfest adds 3 and expiry clamps it. Combat restart does not reset timed/daily cooldowns.
+- Advance world time beyond 24 hours: a daily power stays spent until daily preparations. Same-day preparations cannot refresh it. Confirm the campaign's day-boundary convention before using the beta ledger.
+- Preview a character with both retired feats and custom rules. No actor mutation occurs. Keep all player choices unresolved until chosen; retain backup and rollback.
+
+## Full automation release gate
+
+Every remaining item in docs/AUTOMATION.md must have both implementation evidence and a GM/player live test, including party reactions, external actions, areas, movement, allied expiry, all riders and migrations. Test with relevant campaign modules enabled and disabled. Do not mark compatibility verified or describe the class as fully automated before that gate passes.

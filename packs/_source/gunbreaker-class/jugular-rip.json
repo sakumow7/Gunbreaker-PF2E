@@ -5,7 +5,7 @@
     "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Requirements</strong> Continuation; your immediately preceding action this turn was a successful Gnashing Fang Strike against an enemy still in your melee reach. <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Trigger a close-range aetheric discharge against that enemy: deal 2d6 fire damage, increasing to 3d6 at 11th level and 4d6 at 17th. No attack roll or save is required because the preceding Strike established the hit. This is separate damage and never doubles on a critical hit. Consume the opening.</p><p>@Damage[(2+floor((@actor.level-5)/6))d6[fire]]</p>",
+            "value": "<p><strong>Requirements</strong> Continuation; your next action after a successful Gnashing Fang Strike this turn, against the same enemy still within your melee reach. Intervening reactions do not close this opening; other actions, including free actions, do. <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 2d6 fire damage plus the number of weapon damage dice of the opening gunblade (base die plus fundamental striking rune dice only). Increase the d6s to 3d6 at level 11 and 4d6 at level 17. Snapshot the weapon dice when the opening Strike resolves. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
             "gm": ""
         },
         "level": {
@@ -29,7 +29,7 @@
             "value": []
         },
         "publication": {
-            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
             "remaster": true
         },
         "rules": [],

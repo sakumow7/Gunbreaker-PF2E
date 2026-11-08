@@ -1,16 +1,15 @@
-# Migrating from 1.2.x
+# Migrating to the v1.4 development candidate
 
-The module ID and every existing item ID/pack location are preserved. Compendium links remain stable. Updating the package does not rewrite copies already imported onto actors or into world directories.
+Do not migrate campaign actors until the native candidate passes disposable-character tests. Updating the package alone never rewrites owned items.
 
-1. Back up the world and duplicate each affected character. Finish the current encounter before migrating.
-2. Install 1.3.0 and reload. This revision targets Foundry 13+ and PF2e 7+; the older Foundry 11/12 compatibility claim is retired. No live version is marked verified by this revision.
-3. On the duplicate, note existing class feats, runes, current HP, skill choices, and other customizations. Remove the old Gunbreaker class and its granted class features/actions, plus old Gunbreaker effects. Be careful not to remove ancestry/background/archetype items.
-4. Add the new Gunbreaker class at the character's existing level. Check the automatic grants against the class progression in RULES.html. Replace old Gunbreaker feat copies with the matching updated compendium entries; retain the same choices where still legal. If a prerequisite or level changed, choose a legal replacement with the GM.
-5. Update gunblades using the new equipment definitions while preserving purchased runes and material upgrades. Strength builds use the standard gunblade; Dexterity builds can choose the d6 finesse Light Gunblade. Remove the obsolete versatile-fire trait.
-6. Remove any remaining old Powder Gauge SpecialResource rule and legacy combo/readiness effects. The new tracker uses `flags.gunbreaker-pf2e.tracker`; the obsolete Attributes-tab cartridge resource is no longer authoritative. Nothing silently resets or rewrites the old actor.
-7. Import **Gunbreaker Tracker** from **Gunbreaker — Tracker** into the hotbar. At the next real combat, initialize the encounter once. Start with one cartridge, or two with Lion's Legend. Do not carry ammunition totals across encounters.
-8. Test on the duplicate using SMOKE-TEST.md. Keep the original until the replacement's proficiency, grants, and equipment match.
+1. Export affected actors and back up the world. Finish current combat. Keep an untouched character copy and the prior installed package.
+2. Preview changes using `node tools/plan-migration.mjs actor-export.json migration-plan.json`. The output includes a detached backup, compatible updates, custom-field conflicts, and retired-feat decisions. It never writes to Foundry and refuses to overwrite an existing output file.
+3. Twin Cartridge owners choose Reserved Cartridge or a free retrain. Reserved Cartridge has a new source ID; do not relabel an owned Twin Cartridge automatically. Overcharged Gauge owners choose a legal replacement for the original slot. Both retired entries are removed from selectable compendium feats; their baseline definitions remain in migrations/.
+4. Update compatible class/features/actions and equipment on a duplicate. Preserve item location, selections, links, runes, materials, custom rules, and unrelated items. The preview only matches known compendium source IDs; it will not guess from an item's display name. Resolve every conflict before applying updates.
+5. Update the gunblade's RollOption rule as well as action data. Native action DamageDice predicates require v1.4 action copies. Do not add the bonus dice manually when using native execution.
+6. State v1 upgrades to v2 in memory and on the next successful write. Legacy daily timestamps stay spent until eligible daily preparations. Minute cooldowns survive encounter changes. Retired feat slugs block v1.4 action use until retraining is resolved.
+7. Complete SMOKE-TEST.md on the duplicate. Keep campaign actors unchanged until the new grants, proficiency, equipment, resource ledger and effects are confirmed.
 
-Notable retraining cases: Trajectory moves to level 2; Aetheric Ward, Blasting Zone, and Great Nebula become passive upgrades; Heart of Stone is granted; Reign of Beasts requires Bloodfest and is no longer automatically granted by Lion's Legend. Follow-ups require level-7 Continuation even though their parent Gnashing actions arrive at level 6.
+For an interrupted native action, export `flags.gunbreaker-pf2e.execution` and inspect its before-state, request and committed result. Determine whether the attack, damage, HP and effects actually occurred. Reconcile those documents with the GM before clearing the journal; never blindly replay the action or refund a rolled attack. A graphical recovery workflow is pending.
 
-The legacy `api.adjustCartridges(actor, delta)` remains available, but writes the tracker and returns its new state. It is a manual correction, not an attack or combo resolver. Native action-frequency displays and tracker cooldowns are separate; the tracker is authoritative for the actions it records.
+Rollback: restore the untouched actor export and prior module package together. Do not load state v2 in v1.3; the old engine correctly rejects an unknown schema. Retain backups until the campaign has completed its acceptance encounter.

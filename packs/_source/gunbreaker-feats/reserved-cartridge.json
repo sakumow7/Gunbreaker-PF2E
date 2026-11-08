@@ -1,0 +1,43 @@
+{
+    "_id": "dd803762c60bc33a",
+    "name": "Reserved Cartridge",
+    "type": "feat",
+    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "system": {
+        "description": {
+            "value": "<p><strong>Frequency</strong> once per encounter.</p><p>When you use Heart of Stone to protect an ally other than yourself, you may apply its cartridge enhancement without spending a cartridge. You can do this with no cartridges remaining. It uses your normal available reaction, does not load a cartridge, and cannot enhance Aetheric Ward. Declare the use before resolving the protection. You cannot also apply Perfect Chamber’s discount to the same enhancement.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 8
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+            "remaster": true
+        },
+        "rules": [],
+        "slug": "reserved-cartridge"
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

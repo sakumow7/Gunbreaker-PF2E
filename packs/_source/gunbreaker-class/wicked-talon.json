@@ -29,10 +29,25 @@
             "value": []
         },
         "publication": {
-            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
             "remaster": true
         },
-        "rules": [],
+        "rules": [
+            {
+                "key": "DamageDice",
+                "selector": "strike-damage",
+                "slug": "gunbreaker-wicked-talon",
+                "diceNumber": "2+floor((@actor.level-5)/6)",
+                "dieSize": "d6",
+                "damageType": "slashing",
+                "predicate": [
+                    "item:trait:gunbreaker",
+                    "item:melee",
+                    "gunbreaker:action:wicked-talon"
+                ],
+                "hideIfDisabled": true
+            }
+        ],
         "slug": "wicked-talon"
     },
     "folder": null,

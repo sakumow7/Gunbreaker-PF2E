@@ -1,0 +1,5433 @@
+[
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.d2e7e82195b0d940",
+    "doc": {
+      "_id": "d2e7e82195b0d940",
+      "name": "Abdomen Tear",
+      "type": "feat",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Requirements</strong> Continuation; your immediately preceding action this turn was a successful Savage Claw Strike against an enemy still in your melee reach. <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Trigger a close-range aetheric discharge against that enemy: deal 2d6 fire damage, increasing to 3d6 at 11th level and 4d6 at 17th. No attack roll or save is required because the preceding Strike established the hit. This is separate damage and never doubles on a critical hit. Consume the opening.</p><p>@Damage[(2+floor((@actor.level-5)/6))d6[fire]]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 7
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "abdomen-tear",
+        "frequency": {
+          "max": 1,
+          "per": "round"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.8167449ad5822303",
+    "doc": {
+      "_id": "8167449ad5822303",
+      "name": "Advanced Cartridge Arts",
+      "type": "feat",
+      "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
+      "system": {
+        "description": {
+          "value": "<p>At 6th level you learn Gnashing Fang, Savage Claw, and Wicked Talon. At 12th level you learn Fated Circle and Fated Brand. At 14th level you learn Double Down. These are automatic class actions; they do not use class feat slots. Follow-ups require Continuation.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 6
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [
+          {
+            "key": "GrantItem",
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.bf44b0d50715c762",
+            "allowDuplicate": false
+          },
+          {
+            "key": "GrantItem",
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.c92a9a4f65aed576",
+            "allowDuplicate": false
+          },
+          {
+            "key": "GrantItem",
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.901295e96cdc5cc2",
+            "allowDuplicate": false
+          },
+          {
+            "key": "GrantItem",
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.2d1c8118880acda4",
+            "predicate": [
+              {
+                "gte": [
+                  "self:level",
+                  12
+                ]
+              }
+            ],
+            "reevaluateOnUpdate": true,
+            "allowDuplicate": false
+          },
+          {
+            "key": "GrantItem",
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.11009f00b5d265be",
+            "predicate": [
+              {
+                "gte": [
+                  "self:level",
+                  12
+                ]
+              }
+            ],
+            "reevaluateOnUpdate": true,
+            "allowDuplicate": false
+          },
+          {
+            "key": "GrantItem",
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.9165ace5282778b5",
+            "predicate": [
+              {
+                "gte": [
+                  "self:level",
+                  14
+                ]
+              }
+            ],
+            "reevaluateOnUpdate": true,
+            "allowDuplicate": false
+          }
+        ],
+        "slug": "advanced-cartridge-arts"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.ad484df0b1baae4e",
+    "doc": {
+      "_id": "ad484df0b1baae4e",
+      "name": "Aetheric Fortitude",
+      "type": "feat",
+      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your Fortitude proficiency increases to master. When you roll a success on a Fortitude save, improve it to a critical success.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 9
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [
+          {
+            "key": "AdjustDegreeOfSuccess",
+            "selector": "fortitude",
+            "adjustment": {
+              "success": "one-degree-better"
+            }
+          }
+        ],
+        "slug": "aetheric-fortitude",
+        "subfeatures": {
+          "proficiencies": {
+            "fortitude": {
+              "rank": 3
+            }
+          }
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0e4bd01ae207e03c",
+    "doc": {
+      "_id": "0e4bd01ae207e03c",
+      "name": "Armor Expertise",
+      "type": "feat",
+      "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your proficiency in light and medium armor and unarmored defense increases to expert. Your aetheric guards reinforce practiced footwork.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 7
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "armor-expertise",
+        "subfeatures": {
+          "proficiencies": {
+            "light": {
+              "rank": 2
+            },
+            "medium": {
+              "rank": 2
+            },
+            "unarmored": {
+              "rank": 2
+            }
+          }
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.70faa71375db332e",
+    "doc": {
+      "_id": "70faa71375db332e",
+      "name": "Armor Mastery",
+      "type": "feat",
+      "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your proficiency in light and medium armor and unarmored defense increases to master.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 15
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "armor-mastery",
+        "subfeatures": {
+          "proficiencies": {
+            "light": {
+              "rank": 3
+            },
+            "medium": {
+              "rank": 3
+            },
+            "unarmored": {
+              "rank": 3
+            }
+          }
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.571c5710dc92e12d",
+    "doc": {
+      "_id": "571c5710dc92e12d",
+      "name": "Battle-Tested",
+      "type": "feat",
+      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your proficiency in Reflex saves and Perception increases to expert and master, respectively.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 11
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "battle-tested",
+        "subfeatures": {
+          "proficiencies": {
+            "reflex": {
+              "rank": 2
+            },
+            "perception": {
+              "rank": 3
+            }
+          }
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.78f54cb87f5eafaa",
+    "doc": {
+      "_id": "78f54cb87f5eafaa",
+      "name": "Brutal Shell",
+      "type": "feat",
+      "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Requirements</strong> Your Keen Edge combo opening.</p><p>Make a melee gunblade Strike. On a hit, regain Hit Points equal to half your level (minimum 1), and gain that many temporary Hit Points until the end of your next turn. This healing and barrier can occur only once per round. After resolving the Strike, consume the opening and enable Solid Barrel until the end of your next turn.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "brutal-shell"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.148481d3f7d0f02b",
+    "doc": {
+      "_id": "148481d3f7d0f02b",
+      "name": "Burst Strike",
+      "type": "feat",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Cost</strong> 1 cartridge.</p><p>Make a melee gunblade Strike. On a hit, deal additional fire damage: 1d6 at 1st level, 2d6 at 5th, 3d6 at 11th, and 4d6 at 17th. If you have Continuation, a hit enables Hypervelocity as your next action this turn against the same target.</p><p><strong>Additional Strike damage:</strong> @Damage[(1+floor((@actor.level+1)/6))d6[fire]]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "burst-strike"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0034c6c64e887ff7",
+    "doc": {
+      "_id": "0034c6c64e887ff7",
+      "name": "Cartridge Expertise",
+      "type": "feat",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Once per encounter, when Solid Barrel or Demon Slaughter would load 1 cartridge, you may load 2 instead. This cannot combine with Twin Cartridge; a single finisher can load no more than 2 cartridges.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 9
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "cartridge-expertise"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.141e49ccd412a33a",
+    "doc": {
+      "_id": "141e49ccd412a33a",
+      "name": "Continuation",
+      "type": "feat",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>You learn Hypervelocity, Jugular Rip, Abdomen Tear, and Eye Gouge. After a successful qualifying melee Strike, you may use its follow-up as your next action on the same turn: Burst Strike → Hypervelocity; Gnashing Fang → Jugular Rip; Savage Claw → Abdomen Tear; Wicked Talon → Eye Gouge. A miss grants no follow-up. Any intervening action or the end of your turn closes the opening.</p><p>You may use only one Continuation follow-up per round, including Fated Brand. It targets the same creature, which must remain within your gunblade's melee reach. The follow-up requires no additional attack roll, does not affect multiple attack penalty, and is a separate damage instance for resistance and weakness. It never doubles because the opening Strike critically hit. These limits also apply to follow-ups granted before this feature.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 7
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [
+          {
+            "key": "GrantItem",
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.291e00009610fbc7",
+            "allowDuplicate": false
+          },
+          {
+            "key": "GrantItem",
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.84d4d65427e30457",
+            "allowDuplicate": false
+          },
+          {
+            "key": "GrantItem",
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.d2e7e82195b0d940",
+            "allowDuplicate": false
+          },
+          {
+            "key": "GrantItem",
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.46135863d5cb73ef",
+            "allowDuplicate": false
+          }
+        ],
+        "slug": "continuation"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.de5ec634e0595e50",
+    "doc": {
+      "_id": "de5ec634e0595e50",
+      "name": "Demon Slaughter",
+      "type": "feat",
+      "img": "icons/magic/fire/projectile-fireball-smoke-strong-orange.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Requirements</strong> Your Demon Slice combo opening. Sweep your gunblade through a 5-foot emanation. Each enemy in the area attempts a basic Reflex save against your Gunbreaker class DC. Roll the damage once: 1d4 slashing damage per 2 levels, rounded up. This is not a Strike; do not add weapon damage, runes, Strength, or specialization. This activity does not use or increase multiple attack penalty.</p><p>After resolving the saves, end the combo and load 1 cartridge, even if all targets succeed. At least one enemy must be in the area.</p><p>@Damage[(ceil(@actor.level/2))d4[slashing]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 2
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "demon-slaughter"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.be479ddf19c2509a",
+    "doc": {
+      "_id": "be479ddf19c2509a",
+      "name": "Demon Slice",
+      "type": "feat",
+      "img": "icons/magic/fire/projectile-fireball-smoke-strong-orange.webp",
+      "system": {
+        "description": {
+          "value": "<p>Sweep your gunblade through a 5-foot emanation. Each enemy in the area attempts a basic Reflex save against your Gunbreaker class DC. Roll the damage once: 1d4 slashing damage per 2 levels, rounded up. This is not a Strike; do not add weapon damage, runes, Strength, or specialization. This activity does not use or increase multiple attack penalty.</p><p>After resolving the saves, begin the area combo, enabling Demon Slaughter until the end of your next turn. At least one enemy must be in the area.</p><p>@Damage[(ceil(@actor.level/2))d4[slashing]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 2
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "demon-slice"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.9165ace5282778b5",
+    "doc": {
+      "_id": "9165ace5282778b5",
+      "name": "Double Down",
+      "type": "feat",
+      "img": "icons/magic/fire/explosion-fireball-large-orange.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Cost</strong> 2 cartridges. <strong>Frequency</strong> once per minute. <strong>Requirements</strong> You wield a gunblade.</p><p>Unleash two explosive cuts in a 10-foot emanation. Enemies attempt a basic Reflex save against your class DC against 10d6 fire damage, increasing to 12d6 at 18th level. Roll damage once. This is not a Strike, cannot critically hit, and does not affect multiple attack penalty.</p><p>@Damage[(10+2*floor((@actor.level-14)/4))d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 14
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 2
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "double-down",
+        "frequency": {
+          "max": 1,
+          "per": "PT1M"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.46135863d5cb73ef",
+    "doc": {
+      "_id": "46135863d5cb73ef",
+      "name": "Eye Gouge",
+      "type": "feat",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Requirements</strong> Continuation; your immediately preceding action this turn was a successful Wicked Talon Strike against an enemy still in your melee reach. <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Trigger a close-range aetheric discharge against that enemy: deal 2d6 fire damage, increasing to 3d6 at 11th level and 4d6 at 17th. No attack roll or save is required because the preceding Strike established the hit. This is separate damage and never doubles on a critical hit. Consume the opening.</p><p>@Damage[(2+floor((@actor.level-5)/6))d6[fire]]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 7
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "eye-gouge",
+        "frequency": {
+          "max": 1,
+          "per": "round"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.11009f00b5d265be",
+    "doc": {
+      "_id": "11009f00b5d265be",
+      "name": "Fated Brand",
+      "type": "feat",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Requirements</strong> Continuation; your immediately preceding action this turn was Fated Circle and at least one enemy failed its save. <strong>Frequency</strong> once per round, shared with all Continuation follow-ups.</p><p>Each enemy that failed or critically failed that Fated Circle save and remains within a 5-foot emanation takes 2d6 fire damage with a new basic Reflex save against your class DC. Damage increases to 3d6 at 17th level. Consume the opening. This does not use or increase multiple attack penalty.</p><p>@Damage[(2+floor((@actor.level-11)/6))d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 12
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "fated-brand",
+        "frequency": {
+          "max": 1,
+          "per": "round"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.2d1c8118880acda4",
+    "doc": {
+      "_id": "2d1c8118880acda4",
+      "name": "Fated Circle",
+      "type": "feat",
+      "img": "icons/magic/fire/projectile-fireball-smoke-strong-orange.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Cost</strong> 1 cartridge. <strong>Requirements</strong> You wield a gunblade.</p><p>Release aether in a 5-foot emanation. Each enemy attempts a basic Reflex save against your class DC against 1d6 fire damage per 2 levels, rounded up. This is not a Strike and does not use or increase multiple attack penalty. If at least one enemy fails or critically fails, you may use Fated Brand as your next action this turn.</p><p>@Damage[(ceil(@actor.level/2))d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 12
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 2
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "fated-circle"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.bf44b0d50715c762",
+    "doc": {
+      "_id": "bf44b0d50715c762",
+      "name": "Gnashing Fang",
+      "type": "feat",
+      "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Cost</strong> 1 cartridge. <strong>Frequency</strong> once per minute.</p><p>Make a melee gunblade Strike with 1d6 additional slashing damage, increasing by 1d6 at 11th and 17th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, begin this sequence and enable Savage Claw until the end of your next turn. A hit enables Jugular Rip if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(1+floor((@actor.level-5)/6))d6[slashing]]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 6
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "gnashing-fang",
+        "frequency": {
+          "max": 1,
+          "per": "PT1M"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.5ee5fcd559eedf13",
+    "doc": {
+      "_id": "5ee5fcd559eedf13",
+      "name": "Greater Weapon Specialization",
+      "type": "feat",
+      "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your specialization damage becomes 4 with expert weapons and unarmed attacks, 6 with master, and 8 with legendary.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 15
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [
+          {
+            "key": "AdjustModifier",
+            "selector": "strike-damage",
+            "slug": "weapon-specialization",
+            "mode": "multiply",
+            "value": 2
+          }
+        ],
+        "slug": "greater-weapon-specialization"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a5ca84e5a87ea0ea",
+    "doc": {
+      "_id": "a5ca84e5a87ea0ea",
+      "name": "Gunblade Legend",
+      "type": "feat",
+      "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your proficiency in simple weapons, martial weapons, and unarmed attacks increases to master. Your proficiency in advanced weapons is unchanged.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 13
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "gunblade-legend",
+        "subfeatures": {
+          "proficiencies": {
+            "simple": {
+              "rank": 3
+            },
+            "martial": {
+              "rank": 3
+            },
+            "unarmed": {
+              "rank": 3
+            }
+          }
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.7ea8bba45957ea76",
+    "doc": {
+      "_id": "7ea8bba45957ea76",
+      "name": "Gunblade Weapon Mastery",
+      "type": "feat",
+      "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your proficiency in simple weapons, martial weapons, and unarmed attacks increases to expert. You gain critical specialization effects with gunblades.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 5
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [
+          {
+            "key": "CriticalSpecialization",
+            "predicate": [
+              "item:trait:gunbreaker"
+            ]
+          }
+        ],
+        "slug": "gunblade-weapon-mastery",
+        "subfeatures": {
+          "proficiencies": {
+            "simple": {
+              "rank": 2
+            },
+            "martial": {
+              "rank": 2
+            },
+            "unarmed": {
+              "rank": 2
+            }
+          }
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0a3b3f4bfc68b3d1",
+    "doc": {
+      "_id": "0a3b3f4bfc68b3d1",
+      "name": "Gunbreaker Expertise",
+      "type": "feat",
+      "img": "icons/magic/light/explosion-star-glow-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your Gunbreaker class DC proficiency increases to expert.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 9
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "gunbreaker-expertise",
+        "subfeatures": {
+          "proficiencies": {
+            "gunbreaker": {
+              "rank": 2
+            }
+          }
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.81fc94e9fc8dcc22",
+    "doc": {
+      "_id": "81fc94e9fc8dcc22",
+      "name": "Gunbreaker Mastery",
+      "type": "feat",
+      "img": "icons/magic/light/explosion-star-glow-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your Gunbreaker class DC and Will save proficiencies increase to master. When you roll a success on a Will save, improve it to a critical success.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 17
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [
+          {
+            "key": "AdjustDegreeOfSuccess",
+            "selector": "will",
+            "adjustment": {
+              "success": "one-degree-better"
+            }
+          }
+        ],
+        "slug": "gunbreaker-mastery",
+        "subfeatures": {
+          "proficiencies": {
+            "gunbreaker": {
+              "rank": 3
+            },
+            "will": {
+              "rank": 3
+            }
+          }
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.d5d26315a5c8cd5e",
+    "doc": {
+      "_id": "d5d26315a5c8cd5e",
+      "name": "Gunbreaker",
+      "type": "class",
+      "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
+      "system": {
+        "description": {
+          "value": "<p><em>Gunnhildr's blades protect their companions with aetheric wards, then unleash explosive sword combinations. This PF2e Remaster playtest adapts the FFXIV job's identity to three-action turns.</em></p><h2>Initial Proficiencies</h2><p>Key attribute Strength or Dexterity; 10 + Constitution modifier HP per level. Trained Perception, expert Fortitude, trained Reflex and Will. Trained simple weapons, martial weapons, unarmed attacks, light and medium armor, unarmored defense, and Gunbreaker class DC. Trained Athletics plus 3 + Intelligence modifier additional skills. Use the d6 finesse Light Gunblade for a Dexterity build, or the d8/two-hand d12 Gunblade for Strength.</p><p>You gain standard attribute boosts at levels 1, 5, 10, 15, and 20, ancestry feats at 1/5/9/13/17, class feats at 1 and every even level, skill feats at every even level, general feats at 3/7/11/15/19, and skill increases at every odd level starting at 3. Skill proficiency is capped at expert before level 7 and master before level 15.</p><h2>Class Features</h2><ul><li>Level 1: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.fe03ab566ecd7e59]{Powder Gauge}</li><li>Level 1: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.04cbd7c7e3159f9e]{Gunbreaker's Combo}</li><li>Level 1: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1f7a9715421e92da]{Royal Guard}</li><li>Level 1: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1aab8f02f7a76d31]{Heart Of Stone}</li><li>Level 3: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a61994a226d98bcc]{Steady Aim}</li><li>Level 5: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.7ea8bba45957ea76]{Gunblade Weapon Mastery}</li><li>Level 6: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.8167449ad5822303]{Advanced Cartridge Arts}</li><li>Level 7: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.141e49ccd412a33a]{Continuation}</li><li>Level 7: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a40dd44fb62beb04]{Weapon Specialization}</li><li>Level 7: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0e4bd01ae207e03c]{Armor Expertise}</li><li>Level 9: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.ad484df0b1baae4e]{Aetheric Fortitude}</li><li>Level 9: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0034c6c64e887ff7]{Cartridge Expertise}</li><li>Level 9: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0a3b3f4bfc68b3d1]{Gunbreaker Expertise}</li><li>Level 11: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.571c5710dc92e12d]{Battle-Tested}</li><li>Level 13: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a5ca84e5a87ea0ea]{Gunblade Legend}</li><li>Level 15: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.70faa71375db332e]{Armor Mastery}</li><li>Level 15: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.5ee5fcd559eedf13]{Greater Weapon Specialization}</li><li>Level 17: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.81fc94e9fc8dcc22]{Gunbreaker Mastery}</li><li>Level 19: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a7bcbcad2fd2a303]{Lion's Legend}</li></ul><p>During exploration, your alertness and Athletics help you escort companions and clear dangerous routes. Outside battle, you may be a bodyguard, weaponsmith, or keeper of Gunnhildr's traditions. There are no mandatory religious edicts.</p><h2>Playtest and Tracker</h2><p>Read RULES.html for the complete class and PLAYTEST.md for balance assumptions. Use the Gunbreaker Tracker macro; recording an action is separate from posting its rules to chat. Roll and apply attacks, saves, and damage normally. Old world copies must be replaced using MIGRATION.md.</p>",
+          "gm": ""
+        },
+        "ancestryFeatLevels": {
+          "value": [
+            1,
+            5,
+            9,
+            13,
+            17
+          ]
+        },
+        "classFeatLevels": {
+          "value": [
+            1,
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18,
+            20
+          ]
+        },
+        "skillFeatLevels": {
+          "value": [
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            16,
+            18,
+            20
+          ]
+        },
+        "generalFeatLevels": {
+          "value": [
+            3,
+            7,
+            11,
+            15,
+            19
+          ]
+        },
+        "skillIncreaseLevels": {
+          "value": [
+            3,
+            5,
+            7,
+            9,
+            11,
+            13,
+            15,
+            17,
+            19
+          ]
+        },
+        "attacks": {
+          "simple": 1,
+          "martial": 1,
+          "unarmed": 1,
+          "advanced": 0,
+          "other": {
+            "name": "",
+            "rank": 0
+          }
+        },
+        "defenses": {
+          "heavy": 0,
+          "light": 1,
+          "medium": 1,
+          "unarmored": 1
+        },
+        "savingThrows": {
+          "fortitude": 2,
+          "reflex": 1,
+          "will": 1
+        },
+        "trainedSkills": {
+          "value": [
+            "athletics"
+          ],
+          "additional": 3
+        },
+        "keyAbility": {
+          "value": [
+            "str",
+            "dex"
+          ]
+        },
+        "hp": 10,
+        "perception": 1,
+        "spellcasting": 0,
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "items": {
+          "fe03ab566ecd7e59": {
+            "name": "Powder Gauge",
+            "level": 1,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.fe03ab566ecd7e59",
+            "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp"
+          },
+          "04cbd7c7e3159f9e": {
+            "name": "Gunbreaker's Combo",
+            "level": 1,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.04cbd7c7e3159f9e",
+            "img": "icons/skills/melee/strike-sword-steel-yellow.webp"
+          },
+          "1f7a9715421e92da": {
+            "name": "Royal Guard",
+            "level": 1,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1f7a9715421e92da",
+            "img": "icons/equipment/shield/heater-steel-worn-grey.webp"
+          },
+          "1aab8f02f7a76d31": {
+            "name": "Heart Of Stone",
+            "level": 1,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1aab8f02f7a76d31",
+            "img": "icons/skills/melee/strike-sword-steel-yellow.webp"
+          },
+          "a61994a226d98bcc": {
+            "name": "Steady Aim",
+            "level": 3,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a61994a226d98bcc",
+            "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp"
+          },
+          "7ea8bba45957ea76": {
+            "name": "Gunblade Weapon Mastery",
+            "level": 5,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.7ea8bba45957ea76",
+            "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp"
+          },
+          "8167449ad5822303": {
+            "name": "Advanced Cartridge Arts",
+            "level": 6,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.8167449ad5822303",
+            "img": "icons/skills/melee/strike-blade-knife-white-red.webp"
+          },
+          "141e49ccd412a33a": {
+            "name": "Continuation",
+            "level": 7,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.141e49ccd412a33a",
+            "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp"
+          },
+          "a40dd44fb62beb04": {
+            "name": "Weapon Specialization",
+            "level": 7,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a40dd44fb62beb04",
+            "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp"
+          },
+          "0e4bd01ae207e03c": {
+            "name": "Armor Expertise",
+            "level": 7,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0e4bd01ae207e03c",
+            "img": "icons/equipment/shield/heater-steel-worn-grey.webp"
+          },
+          "ad484df0b1baae4e": {
+            "name": "Aetheric Fortitude",
+            "level": 9,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.ad484df0b1baae4e",
+            "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp"
+          },
+          "0034c6c64e887ff7": {
+            "name": "Cartridge Expertise",
+            "level": 9,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0034c6c64e887ff7",
+            "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp"
+          },
+          "0a3b3f4bfc68b3d1": {
+            "name": "Gunbreaker Expertise",
+            "level": 9,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0a3b3f4bfc68b3d1",
+            "img": "icons/magic/light/explosion-star-glow-yellow.webp"
+          },
+          "571c5710dc92e12d": {
+            "name": "Battle-Tested",
+            "level": 11,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.571c5710dc92e12d",
+            "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp"
+          },
+          "a5ca84e5a87ea0ea": {
+            "name": "Gunblade Legend",
+            "level": 13,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a5ca84e5a87ea0ea",
+            "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp"
+          },
+          "70faa71375db332e": {
+            "name": "Armor Mastery",
+            "level": 15,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.70faa71375db332e",
+            "img": "icons/equipment/shield/heater-steel-worn-grey.webp"
+          },
+          "5ee5fcd559eedf13": {
+            "name": "Greater Weapon Specialization",
+            "level": 15,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.5ee5fcd559eedf13",
+            "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp"
+          },
+          "81fc94e9fc8dcc22": {
+            "name": "Gunbreaker Mastery",
+            "level": 17,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.81fc94e9fc8dcc22",
+            "img": "icons/magic/light/explosion-star-glow-yellow.webp"
+          },
+          "a7bcbcad2fd2a303": {
+            "name": "Lion's Legend",
+            "level": 19,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a7bcbcad2fd2a303",
+            "img": "icons/magic/light/explosion-star-glow-yellow.webp"
+          }
+        },
+        "traits": {
+          "value": [],
+          "rarity": "uncommon"
+        },
+        "rules": [],
+        "slug": "gunbreaker"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.04cbd7c7e3159f9e",
+    "doc": {
+      "_id": "04cbd7c7e3159f9e",
+      "name": "Gunbreaker's Combo",
+      "type": "feat",
+      "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>You learn Keen Edge, Brutal Shell, Solid Barrel, Burst Strike, Demon Slice, and Demon Slaughter at 1st level. All these actions require you to wield a gunblade. Combo actions can be used only in a combat encounter with a genuine threat.</p><p>You can maintain one combo sequence at a time. Keen Edge opens Brutal Shell, which opens Solid Barrel. Demon Slice opens Demon Slaughter. Each step consumes the previous opening and enables the next until the end of your next turn. Advance the sequence after resolving the action, even on a miss. Starting another sequence replaces the old one. Other actions, including movement, defense, normal Strikes, and cartridge spenders that do not start a sequence, do not interrupt it.</p><p>All Strikes use and increase multiple attack penalty normally. Bonus damage belongs to the Strike and doubles on a critical hit unless specified otherwise. Count only the base weapon damage die and fundamental striking rune dice when a feature refers to weapon damage dice; extra dice from abilities or property runes do not count. No Mercy modifies gunblade Strike damage, not separate save-based blasts or Continuation damage.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [
+          {
+            "key": "GrantItem",
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0f2a8e0288fb91c8",
+            "allowDuplicate": false
+          },
+          {
+            "key": "GrantItem",
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.78f54cb87f5eafaa",
+            "allowDuplicate": false
+          },
+          {
+            "key": "GrantItem",
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.b886b4f9b5e0ef3a",
+            "allowDuplicate": false
+          },
+          {
+            "key": "GrantItem",
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.148481d3f7d0f02b",
+            "allowDuplicate": false
+          },
+          {
+            "key": "GrantItem",
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.be479ddf19c2509a",
+            "allowDuplicate": false
+          },
+          {
+            "key": "GrantItem",
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.de5ec634e0595e50",
+            "allowDuplicate": false
+          }
+        ],
+        "slug": "gunbreakers-combo"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1aab8f02f7a76d31",
+    "doc": {
+      "_id": "1aab8f02f7a76d31",
+      "name": "Heart Of Stone",
+      "type": "feat",
+      "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Trigger</strong> An ally other than you within 15 feet would take damage from an enemy's Strike. <strong>Requirements</strong> You wield a gunblade and can see the ally and attacker.</p><p>You project a protective ward. The ally gains resistance to all damage from the triggering Strike equal to 2 + half your level (rounded down). Before applying the resistance, you can spend 1 cartridge to increase it to 2 + your level. This is resistance, not additional damage reduction; overlapping resistances use the highest applicable value. This does not move either creature or change the target of the attack.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "reaction"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "heart-of-stone"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.291e00009610fbc7",
+    "doc": {
+      "_id": "291e00009610fbc7",
+      "name": "Hypervelocity",
+      "type": "feat",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Requirements</strong> Continuation; your immediately preceding action this turn was a successful Burst Strike Strike against an enemy still in your melee reach. <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Trigger a close-range aetheric discharge against that enemy: deal 2d6 fire damage, increasing to 3d6 at 11th level and 4d6 at 17th. No attack roll or save is required because the preceding Strike established the hit. This is separate damage and never doubles on a critical hit. Consume the opening.</p><p>@Damage[(2+floor((@actor.level-5)/6))d6[fire]]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 7
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "hypervelocity",
+        "frequency": {
+          "max": 1,
+          "per": "round"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.84d4d65427e30457",
+    "doc": {
+      "_id": "84d4d65427e30457",
+      "name": "Jugular Rip",
+      "type": "feat",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Requirements</strong> Continuation; your immediately preceding action this turn was a successful Gnashing Fang Strike against an enemy still in your melee reach. <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Trigger a close-range aetheric discharge against that enemy: deal 2d6 fire damage, increasing to 3d6 at 11th level and 4d6 at 17th. No attack roll or save is required because the preceding Strike established the hit. This is separate damage and never doubles on a critical hit. Consume the opening.</p><p>@Damage[(2+floor((@actor.level-5)/6))d6[fire]]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 7
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "jugular-rip",
+        "frequency": {
+          "max": 1,
+          "per": "round"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0f2a8e0288fb91c8",
+    "doc": {
+      "_id": "0f2a8e0288fb91c8",
+      "name": "Keen Edge",
+      "type": "feat",
+      "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Make a melee gunblade Strike against an enemy. After resolving it, begin the single-target combo, enabling Brutal Shell until the end of your next turn.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "keen-edge"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.36bba5488759245c",
+    "doc": {
+      "_id": "36bba5488759245c",
+      "name": "Lion Heart",
+      "type": "feat",
+      "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Requirements</strong> Your Noble Blood combo opening and Reign of Beasts. Make a melee gunblade Strike with 4d6 additional slashing damage. On a hit, up to two other enemies both within your reach and adjacent to the target each take 4d6 fire damage with a basic Reflex save against your class DC. Secondary damage is not doubled by a critical hit on the primary Strike.</p><p>You may use only one Reign sequence action per turn. End the sequence. This does not grant Continuation.</p><p>Additional Strike damage @Damage[4d6[slashing]]; secondary @Damage[4d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 18
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "lion-heart"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a7bcbcad2fd2a303",
+    "doc": {
+      "_id": "a7bcbcad2fd2a303",
+      "name": "Lion's Legend",
+      "type": "feat",
+      "img": "icons/magic/light/explosion-star-glow-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>At the start of each combat encounter you begin with 2 cartridges instead of 1. When you spend a cartridge on Heart of Stone, its resistance increases to 4 + your level. Your weapon proficiency remains master. Reign of Beasts remains an optional feat and is not granted a second time.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 19
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "lions-legend"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.11e1ba1ee195f05c",
+    "doc": {
+      "_id": "11e1ba1ee195f05c",
+      "name": "Noble Blood",
+      "type": "feat",
+      "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Requirements</strong> Your Reign of Beasts combo opening and Reign of Beasts. Make a melee gunblade Strike with 3d6 additional slashing damage. On a hit, up to two other enemies both within your reach and adjacent to the target each take 3d6 fire damage with a basic Reflex save against your class DC. Secondary damage is not doubled by a critical hit on the primary Strike.</p><p>You may use only one Reign sequence action per turn. Consume the opening and enable Lion Heart until the end of your next turn. This does not grant Continuation.</p><p>Additional Strike damage @Damage[3d6[slashing]]; secondary @Damage[3d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 18
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "noble-blood"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.fe03ab566ecd7e59",
+    "doc": {
+      "_id": "fe03ab566ecd7e59",
+      "name": "Powder Gauge",
+      "type": "feat",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your gunblade stores aether in a Powder Gauge with a maximum of 3 cartridges. At the start of a combat encounter, begin with 1 cartridge; unspent cartridges dissipate at its end. You cannot build cartridges outside a combat encounter with a genuine threat, as determined by the GM. A training target or cooperative creature is not a threat.</p><p>Completing Solid Barrel or Demon Slaughter loads 1 cartridge, even if the Strike misses or every target succeeds at its save. Each activity loads only once, regardless of targets. You cannot exceed your maximum. Costs are paid before resolving an action and are not refunded on a miss. Cartridges are class resources, not ammunition or trade goods. Round fractional values down, to a minimum of 1 only where stated.</p><p>Use the Gunbreaker Tracker macro to record cartridges, combos, and cooldowns. Posting an item to chat never spends or grants resources. Effects, attacks, saves, damage, healing, and reactions are resolved on the sheet with your GM.</p><p>Unless a feature says otherwise, you must wield a gunblade to use Gunbreaker actions and reactions. Passive features do not require this. Aurora and defensive abilities without an encounter requirement may be used during exploration; their cooldowns still apply.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "powder-gauge"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1f7a9715421e92da",
+    "doc": {
+      "_id": "1f7a9715421e92da",
+      "name": "Royal Guard",
+      "type": "feat",
+      "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Requirements</strong> You wield a gunblade.</p><p>You adopt the protective posture of Gunnhildr's guard. Gain a +1 circumstance bonus to AC while in this stance. Your damage is unchanged. The stance ends if you cease wielding a gunblade, become unconscious, or combat ends. Your Heart of Stone reaction works with or without the stance. This stance does not force enemies to attack you.</p><p>Apply the linked Royal Guard effect when you enter, and remove it when you leave.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.a74a5130c0f43674]{Royal Guard (Stance)}. Apply manually after recording the action.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "stance"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [
+          {
+            "key": "GrantItem",
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.ca203eb3b1f22fda",
+            "allowDuplicate": false
+          }
+        ],
+        "slug": "royal-guard"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.c92a9a4f65aed576",
+    "doc": {
+      "_id": "c92a9a4f65aed576",
+      "name": "Savage Claw",
+      "type": "feat",
+      "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Requirements</strong> Your Gnashing Fang combo opening.</p><p>Make a melee gunblade Strike with 1d6 additional slashing damage, increasing by 1d6 at 11th and 17th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, consume the opening and enable Wicked Talon until the end of your next turn. A hit enables Abdomen Tear if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(1+floor((@actor.level-5)/6))d6[slashing]]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 6
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "savage-claw"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.b886b4f9b5e0ef3a",
+    "doc": {
+      "_id": "b886b4f9b5e0ef3a",
+      "name": "Solid Barrel",
+      "type": "feat",
+      "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Requirements</strong> Your Brutal Shell combo opening.</p><p>Make a melee gunblade Strike. On a hit, deal additional damage of the weapon's damage type equal to the number of weapon damage dice. After resolving the Strike, end the combo and load 1 cartridge, even on a miss.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "solid-barrel"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a61994a226d98bcc",
+    "doc": {
+      "_id": "a61994a226d98bcc",
+      "name": "Steady Aim",
+      "type": "feat",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your proficiency in Perception and Will saves increases to expert. When you use Lightning Shot, ignore the circumstance bonus to AC from lesser cover; cover and greater cover still apply.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 3
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "steady-aim",
+        "subfeatures": {
+          "proficiencies": {
+            "perception": {
+              "rank": 2
+            },
+            "will": {
+              "rank": 2
+            }
+          }
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a40dd44fb62beb04",
+    "doc": {
+      "_id": "a40dd44fb62beb04",
+      "name": "Weapon Specialization",
+      "type": "feat",
+      "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your Strikes deal 2 additional damage with weapons and unarmed attacks in which you are expert, 3 if master, or 4 if legendary.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 7
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [
+          {
+            "key": "FlatModifier",
+            "selector": "strike-damage",
+            "slug": "weapon-specialization",
+            "value": 2,
+            "predicate": [
+              {
+                "gte": [
+                  "item:proficiency:rank",
+                  2
+                ]
+              }
+            ]
+          },
+          {
+            "key": "AdjustModifier",
+            "selector": "strike-damage",
+            "slug": "weapon-specialization",
+            "mode": "upgrade",
+            "value": 3,
+            "predicate": [
+              "item:proficiency:rank:3"
+            ],
+            "priority": 0
+          },
+          {
+            "key": "AdjustModifier",
+            "selector": "strike-damage",
+            "slug": "weapon-specialization",
+            "mode": "upgrade",
+            "value": 4,
+            "predicate": [
+              "item:proficiency:rank:4"
+            ],
+            "priority": 0
+          }
+        ],
+        "slug": "weapon-specialization"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.901295e96cdc5cc2",
+    "doc": {
+      "_id": "901295e96cdc5cc2",
+      "name": "Wicked Talon",
+      "type": "feat",
+      "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Requirements</strong> Your Savage Claw combo opening.</p><p>Make a melee gunblade Strike with 2d6 additional slashing damage, increasing by 1d6 at 11th and 17th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, end this sequence. A hit enables Eye Gouge if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(2+floor((@actor.level-5)/6))d6[slashing]]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 6
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "wicked-talon"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.c4a9b1d0fe5e6f72",
+    "doc": {
+      "_id": "c4a9b1d0fe5e6f72",
+      "name": "Bloodfest",
+      "type": "effect",
+      "img": "icons/magic/unholy/strike-hand-glow-pink.webp",
+      "system": {
+        "description": {
+          "value": "<p>Reminder only: maximum cartridges +3 for 1 minute or until encounter end. The tracker manages this capacity and the three cartridges gained.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 10
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "sustained": false,
+          "value": 1,
+          "unit": "minutes",
+          "expiry": null
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [],
+        "slug": "bloodfest"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.47ab3c3e65986371",
+    "doc": {
+      "_id": "47ab3c3e65986371",
+      "name": "Camouflage",
+      "type": "effect",
+      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p>+2 circumstance AC against melee attacks and physical resistance equal to half your level (minimum 1), until the start of your next turn.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "sustained": false,
+          "value": 1,
+          "unit": "rounds",
+          "expiry": "turn-start"
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [
+          {
+            "key": "FlatModifier",
+            "selector": "ac",
+            "type": "circumstance",
+            "value": 2,
+            "predicate": [
+              "item:melee"
+            ]
+          },
+          {
+            "key": "Resistance",
+            "type": "physical",
+            "value": "max(1,floor(@actor.level/2))"
+          }
+        ],
+        "slug": "camouflage"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.7ac01ee061a8f728",
+    "doc": {
+      "_id": "7ac01ee061a8f728",
+      "name": "Combo: Brutal Shell Ready",
+      "type": "effect",
+      "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
+      "system": {
+        "description": {
+          "value": "<p>Legacy combo reminder. The tracker is authoritative: this opening lasts until the end of your next turn and is consumed by its next step. Delete obsolete reminders when migrating.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "value": 1,
+          "unit": "rounds",
+          "expiry": "turn-end"
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [],
+        "slug": "combo-brutal-shell-ready"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.c37990e182342366",
+    "doc": {
+      "_id": "c37990e182342366",
+      "name": "Combo: Demon Slice Ready",
+      "type": "effect",
+      "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
+      "system": {
+        "description": {
+          "value": "<p>Legacy combo reminder. The tracker is authoritative: this opening lasts until the end of your next turn and is consumed by its next step. Delete obsolete reminders when migrating.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "value": 1,
+          "unit": "rounds",
+          "expiry": "turn-end"
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [],
+        "slug": "combo-demon-slice-ready"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.16f79119478d9aa4",
+    "doc": {
+      "_id": "16f79119478d9aa4",
+      "name": "Combo: Gnashing Fang Ready",
+      "type": "effect",
+      "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
+      "system": {
+        "description": {
+          "value": "<p>Legacy combo reminder. The tracker is authoritative: this opening lasts until the end of your next turn and is consumed by its next step. Delete obsolete reminders when migrating.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "value": 1,
+          "unit": "rounds",
+          "expiry": "turn-end"
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [],
+        "slug": "combo-gnashing-fang-ready"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.331249351add9e72",
+    "doc": {
+      "_id": "331249351add9e72",
+      "name": "Combo: Keen Edge Ready",
+      "type": "effect",
+      "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
+      "system": {
+        "description": {
+          "value": "<p>Legacy combo reminder. The tracker is authoritative: this opening lasts until the end of your next turn and is consumed by its next step. Delete obsolete reminders when migrating.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "value": 1,
+          "unit": "rounds",
+          "expiry": "turn-end"
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [],
+        "slug": "combo-keen-edge-ready"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.b79130079a98d5e0",
+    "doc": {
+      "_id": "b79130079a98d5e0",
+      "name": "Combo: Savage Claw Ready",
+      "type": "effect",
+      "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
+      "system": {
+        "description": {
+          "value": "<p>Legacy combo reminder. The tracker is authoritative: this opening lasts until the end of your next turn and is consumed by its next step. Delete obsolete reminders when migrating.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "value": 1,
+          "unit": "rounds",
+          "expiry": "turn-end"
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [],
+        "slug": "combo-savage-claw-ready"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.2bf2c8bbde2e358d",
+    "doc": {
+      "_id": "2bf2c8bbde2e358d",
+      "name": "Great Nebula",
+      "type": "effect",
+      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p>Resistance to all damage equal to your level and temporary HP equal to your level, until the start of your second subsequent turn.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "sustained": false,
+          "value": 2,
+          "unit": "rounds",
+          "expiry": "turn-start"
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [
+          {
+            "key": "Resistance",
+            "type": "all-damage",
+            "value": "@actor.level"
+          },
+          {
+            "key": "TempHP",
+            "value": "@actor.level"
+          }
+        ],
+        "slug": "great-nebula"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.bbf2b441d6c80fae",
+    "doc": {
+      "_id": "bbf2b441d6c80fae",
+      "name": "Nebula",
+      "type": "effect",
+      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p>Resistance to all damage equal to half your level (minimum 1), until the start of your second subsequent turn.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "sustained": false,
+          "value": 2,
+          "unit": "rounds",
+          "expiry": "turn-start"
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [
+          {
+            "key": "Resistance",
+            "type": "all-damage",
+            "value": "max(1,floor(@actor.level/2))"
+          }
+        ],
+        "slug": "nebula"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.698e269ba38bcb47",
+    "doc": {
+      "_id": "698e269ba38bcb47",
+      "name": "No Mercy",
+      "type": "effect",
+      "img": "icons/magic/control/buff-flight-wings-runes-purple.webp",
+      "system": {
+        "description": {
+          "value": "<p>Status bonus to gunblade Strike damage: +2, +3 at 11, +4 at 17. Lasts until the start of your third subsequent turn. Record the cartridge and Ready to Break in the tracker.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "sustained": false,
+          "value": 3,
+          "unit": "rounds",
+          "expiry": "turn-start"
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [
+          {
+            "key": "FlatModifier",
+            "selector": "strike-damage",
+            "type": "status",
+            "value": "2+max(0,floor((@actor.level-5)/6))",
+            "predicate": [
+              "item:trait:gunbreaker"
+            ]
+          }
+        ],
+        "slug": "no-mercy"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.d85fd2974ad8971c",
+    "doc": {
+      "_id": "d85fd2974ad8971c",
+      "name": "Ready to Blast",
+      "type": "effect",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Legacy readiness reminder. Use the tracker and the linked action's requirements; the reminder alone does not authorize an action. Continuation requires a successful preceding Strike and the same target, and is limited to once per round.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "value": 1,
+          "unit": "rounds",
+          "sustained": false,
+          "expiry": "turn-end"
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [],
+        "slug": "ready-to-blast"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.de55178b35fdfb4c",
+    "doc": {
+      "_id": "de55178b35fdfb4c",
+      "name": "Ready to Break",
+      "type": "effect",
+      "img": "icons/magic/fire/flame-burning-creature-skeleton.webp",
+      "system": {
+        "description": {
+          "value": "<p>Legacy readiness reminder. Use the tracker and the linked action's requirements; the reminder alone does not authorize an action. Continuation requires a successful preceding Strike and the same target, and is limited to once per round.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "value": 3,
+          "unit": "rounds",
+          "sustained": false,
+          "expiry": "turn-start"
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [],
+        "slug": "ready-to-break"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.4791a8210f7e88da",
+    "doc": {
+      "_id": "4791a8210f7e88da",
+      "name": "Ready to Gouge",
+      "type": "effect",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Legacy readiness reminder. Use the tracker and the linked action's requirements; the reminder alone does not authorize an action. Continuation requires a successful preceding Strike and the same target, and is limited to once per round.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "value": 1,
+          "unit": "rounds",
+          "sustained": false,
+          "expiry": "turn-end"
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [],
+        "slug": "ready-to-gouge"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.5f11dd5176112b3c",
+    "doc": {
+      "_id": "5f11dd5176112b3c",
+      "name": "Ready to Raze",
+      "type": "effect",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Legacy readiness reminder. Use the tracker and the linked action's requirements; the reminder alone does not authorize an action. Continuation requires a successful preceding Strike and the same target, and is limited to once per round.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "value": 1,
+          "unit": "rounds",
+          "sustained": false,
+          "expiry": "turn-end"
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [],
+        "slug": "ready-to-raze"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.e8d2c7a4b9f01356",
+    "doc": {
+      "_id": "e8d2c7a4b9f01356",
+      "name": "Ready to Reign",
+      "type": "effect",
+      "img": "icons/creatures/abilities/lion-roar-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Legacy readiness reminder. Use the tracker and the linked action's requirements; the reminder alone does not authorize an action. Continuation requires a successful preceding Strike and the same target, and is limited to once per round.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 10
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "value": 1,
+          "unit": "minutes",
+          "sustained": false,
+          "expiry": null
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [],
+        "slug": "ready-to-reign"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.f94b9d922ff30784",
+    "doc": {
+      "_id": "f94b9d922ff30784",
+      "name": "Ready to Rip",
+      "type": "effect",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Legacy readiness reminder. Use the tracker and the linked action's requirements; the reminder alone does not authorize an action. Continuation requires a successful preceding Strike and the same target, and is limited to once per round.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "value": 1,
+          "unit": "rounds",
+          "sustained": false,
+          "expiry": "turn-end"
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [],
+        "slug": "ready-to-rip"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.14d57475c050642d",
+    "doc": {
+      "_id": "14d57475c050642d",
+      "name": "Ready to Tear",
+      "type": "effect",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Legacy readiness reminder. Use the tracker and the linked action's requirements; the reminder alone does not authorize an action. Continuation requires a successful preceding Strike and the same target, and is limited to once per round.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "value": 1,
+          "unit": "rounds",
+          "sustained": false,
+          "expiry": "turn-end"
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [],
+        "slug": "ready-to-tear"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.a74a5130c0f43674",
+    "doc": {
+      "_id": "a74a5130c0f43674",
+      "name": "Royal Guard (Stance)",
+      "type": "effect",
+      "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+      "system": {
+        "description": {
+          "value": "<p>+1 circumstance AC while conscious, wielding a gunblade, and in combat. Remove when any requirement ends. Damage is unchanged.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "sustained": false,
+          "value": -1,
+          "unit": "unlimited",
+          "expiry": null
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [
+          {
+            "key": "FlatModifier",
+            "selector": "ac",
+            "type": "circumstance",
+            "value": 1
+          },
+          {
+            "key": "RollOption",
+            "domain": "all",
+            "option": "royal-guard"
+          }
+        ],
+        "slug": "royal-guard-stance"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.d00ba9863847115e",
+    "doc": {
+      "_id": "d00ba9863847115e",
+      "name": "Superbolide",
+      "type": "effect",
+      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p>After manually reducing your current HP to 1, apply resistance to all damage equal to twice your level until the start of your next turn. No condition immunity.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "sustained": false,
+          "value": 1,
+          "unit": "rounds",
+          "expiry": "turn-start"
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [
+          {
+            "key": "Resistance",
+            "type": "all-damage",
+            "value": "2*@actor.level"
+          }
+        ],
+        "slug": "superbolide"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-equipment.Item.b9c89a75351f5198",
+    "doc": {
+      "_id": "b9c89a75351f5198",
+      "name": "Gunblade",
+      "type": "weapon",
+      "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
+      "system": {
+        "description": {
+          "value": "<p>A one-handed martial sword with an aetheric firing chamber: 1d8 slashing, two-hand d12, sword group, Bulk 1. Gunbreaker actions discharge its cartridges; it is not a firearm or combination weapon and has no separate ammunition, reload, or ranged Strike without a class ability. Fire damage comes from abilities or runes, not a versatile trait.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 0
+        },
+        "traits": {
+          "value": [
+            "two-hand-d12",
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "baseItem": "gunblade",
+        "category": "martial",
+        "group": "sword",
+        "damage": {
+          "damageType": "slashing",
+          "dice": 1,
+          "die": "d8"
+        },
+        "bonus": {
+          "value": 0
+        },
+        "bonusDamage": {
+          "value": 0
+        },
+        "splashDamage": {
+          "value": 0
+        },
+        "range": null,
+        "reload": {
+          "value": ""
+        },
+        "usage": {
+          "canBeAmmo": false,
+          "value": "held-in-one-hand"
+        },
+        "bulk": {
+          "value": 1
+        },
+        "price": {
+          "value": {
+            "gp": 10
+          }
+        },
+        "quantity": 1,
+        "hp": {
+          "value": 0,
+          "max": 0
+        },
+        "hardness": 0,
+        "size": "med",
+        "material": {
+          "type": null,
+          "grade": null
+        },
+        "runes": {
+          "potency": 0,
+          "striking": 0,
+          "property": []
+        },
+        "containerId": null,
+        "rules": [],
+        "slug": "gunblade"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-equipment.Item.b17d1aac074341e7",
+    "doc": {
+      "_id": "b17d1aac074341e7",
+      "name": "Light Gunblade",
+      "type": "weapon",
+      "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
+      "system": {
+        "description": {
+          "value": "<p>A one-handed martial sword with a lighter aetheric chamber: 1d6 slashing, finesse, sword group, Bulk 1, price 10 gp. It qualifies as a gunblade for all class abilities. It has no two-hand trait. Use Dexterity for melee attack rolls if desired; Strength still modifies melee damage normally. Its cartridges function identically to those of a standard gunblade.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 0
+        },
+        "traits": {
+          "value": [
+            "finesse",
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "baseItem": "gunblade",
+        "category": "martial",
+        "group": "sword",
+        "damage": {
+          "damageType": "slashing",
+          "dice": 1,
+          "die": "d6"
+        },
+        "bonus": {
+          "value": 0
+        },
+        "bonusDamage": {
+          "value": 0
+        },
+        "splashDamage": {
+          "value": 0
+        },
+        "range": null,
+        "reload": {
+          "value": ""
+        },
+        "usage": {
+          "canBeAmmo": false,
+          "value": "held-in-one-hand"
+        },
+        "bulk": {
+          "value": 1
+        },
+        "price": {
+          "value": {
+            "gp": 10
+          }
+        },
+        "quantity": 1,
+        "hp": {
+          "value": 0,
+          "max": 0
+        },
+        "hardness": 0,
+        "size": "med",
+        "material": {
+          "type": null,
+          "grade": null
+        },
+        "runes": {
+          "potency": 0,
+          "striking": 0,
+          "property": []
+        },
+        "containerId": null,
+        "rules": [],
+        "slug": "light-gunblade"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-equipment.Item.08d3cdb6d1686a2b",
+    "doc": {
+      "_id": "08d3cdb6d1686a2b",
+      "name": "Lion Heart Gunblade plus2 Greater Striking",
+      "type": "weapon",
+      "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
+      "system": {
+        "description": {
+          "value": "<p>A one-handed martial sword with an aetheric firing chamber: 1d8 slashing, two-hand d12, sword group, Bulk 1. Gunbreaker actions discharge its cartridges; it is not a firearm or combination weapon and has no separate ammunition, reload, or ranged Strike without a class ability. Fire damage comes from abilities or runes, not a versatile trait.</p><p>+2 greater striking flaming gunblade.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 12
+        },
+        "traits": {
+          "value": [
+            "two-hand-d12",
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "baseItem": "gunblade",
+        "category": "martial",
+        "group": "sword",
+        "damage": {
+          "damageType": "slashing",
+          "dice": 3,
+          "die": "d8"
+        },
+        "bonus": {
+          "value": 0
+        },
+        "bonusDamage": {
+          "value": 0
+        },
+        "splashDamage": {
+          "value": 0
+        },
+        "range": null,
+        "reload": {
+          "value": ""
+        },
+        "usage": {
+          "canBeAmmo": false,
+          "value": "held-in-one-hand"
+        },
+        "bulk": {
+          "value": 1
+        },
+        "price": {
+          "value": {
+            "gp": 9000
+          }
+        },
+        "quantity": 1,
+        "hp": {
+          "value": 0,
+          "max": 0
+        },
+        "hardness": 0,
+        "size": "med",
+        "material": {
+          "type": null,
+          "grade": null
+        },
+        "runes": {
+          "potency": 2,
+          "striking": 2,
+          "property": [
+            "flaming"
+          ]
+        },
+        "containerId": null,
+        "rules": [],
+        "slug": "lion-heart-gunblade-plus2-greater-striking"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-equipment.Item.ade19e71609ae875",
+    "doc": {
+      "_id": "ade19e71609ae875",
+      "name": "Shadowbane Gunblade plus1 Striking",
+      "type": "weapon",
+      "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
+      "system": {
+        "description": {
+          "value": "<p>A one-handed martial sword with an aetheric firing chamber: 1d8 slashing, two-hand d12, sword group, Bulk 1. Gunbreaker actions discharge its cartridges; it is not a firearm or combination weapon and has no separate ammunition, reload, or ranged Strike without a class ability. Fire damage comes from abilities or runes, not a versatile trait.</p><p>+1 striking gunblade.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 4
+        },
+        "traits": {
+          "value": [
+            "two-hand-d12",
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "baseItem": "gunblade",
+        "category": "martial",
+        "group": "sword",
+        "damage": {
+          "damageType": "slashing",
+          "dice": 2,
+          "die": "d8"
+        },
+        "bonus": {
+          "value": 0
+        },
+        "bonusDamage": {
+          "value": 0
+        },
+        "splashDamage": {
+          "value": 0
+        },
+        "range": null,
+        "reload": {
+          "value": ""
+        },
+        "usage": {
+          "canBeAmmo": false,
+          "value": "held-in-one-hand"
+        },
+        "bulk": {
+          "value": 1
+        },
+        "price": {
+          "value": {
+            "gp": 500
+          }
+        },
+        "quantity": 1,
+        "hp": {
+          "value": 0,
+          "max": 0
+        },
+        "hardness": 0,
+        "size": "med",
+        "material": {
+          "type": null,
+          "grade": null
+        },
+        "runes": {
+          "potency": 1,
+          "striking": 1,
+          "property": []
+        },
+        "containerId": null,
+        "rules": [],
+        "slug": "shadowbane-gunblade-plus1-striking"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.87c2de972d0bd9dd",
+    "doc": {
+      "_id": "87c2de972d0bd9dd",
+      "name": "Aetheric Ward",
+      "type": "feat",
+      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p>You can use Heart of Stone when you would take damage from an enemy's Strike, targeting yourself. You must spend a cartridge when using it this way. It uses the same reaction as Heart of Stone and provides its cartridge-enhanced resistance.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 4
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "aetheric-ward"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.8edcc57f3326f12a",
+    "doc": {
+      "_id": "8edcc57f3326f12a",
+      "name": "Aurora",
+      "type": "feat",
+      "img": "icons/magic/life/cross-area-circle-green-white.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per 10 minutes. Choose yourself or a living ally within 30 feet. The target gains fast healing equal to half your level (minimum 1) for 3 rounds, healing at the start of each of its next three turns. It is then immune to your Aurora for 10 minutes. Multiple Auroras do not stack. This is fast healing, not regeneration; it does not prevent death.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 4
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "healing",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "aurora",
+        "frequency": {
+          "max": 1,
+          "per": "PT10M"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.5332df7babf82362",
+    "doc": {
+      "_id": "5332df7babf82362",
+      "name": "Auroral Mastery",
+      "type": "feat",
+      "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Aurora gains a second use per 10 minutes. Each target is still immune to your Aurora for 10 minutes after receiving it; spend the second use on a different target. Its healing does not otherwise increase.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 10
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": [
+            {
+              "value": "Aurora"
+            }
+          ]
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "auroral-mastery"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.fd5d34cfa27b9f42",
+    "doc": {
+      "_id": "fd5d34cfa27b9f42",
+      "name": "Blasting Zone",
+      "type": "feat",
+      "img": "icons/magic/fire/explosion-fireball-large-orange.webp",
+      "system": {
+        "description": {
+          "value": "<p>Danger Zone deals d8s instead of d6s and has a range of 30 feet. It retains the same action cost and shares Danger Zone's once-per-10-minutes frequency; this is an upgrade, not a second blast.</p><p>@Damage[(ceil(@actor.level/2))d8[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 14
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": [
+            {
+              "value": "Danger Zone"
+            }
+          ]
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "blasting-zone"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.39542260a7548fc5",
+    "doc": {
+      "_id": "39542260a7548fc5",
+      "name": "Bloodfest",
+      "type": "feat",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per 10 minutes. <strong>Requirements</strong> A genuine enemy is within 30 feet and you wield a gunblade. Draw aether from the foe. Increase your maximum cartridges by 3 (normally to 6) for 1 minute or until the encounter ends, whichever comes first, then load 3 cartridges. When this ends, discard cartridges above your normal maximum. You gain Ready to Reign for the same duration; it allows one Reign of Beasts sequence if you have that feat.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 10
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "bloodfest",
+        "frequency": {
+          "max": 1,
+          "per": "PT10M"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.a13c446852a3c79a",
+    "doc": {
+      "_id": "a13c446852a3c79a",
+      "name": "Bow Shock",
+      "type": "feat",
+      "img": "icons/magic/fire/flame-burning-creature-skeleton.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per 10 minutes. Enemies in a 5-foot emanation attempt a basic Reflex save against your class DC against 1d4 fire damage per 2 levels, rounded up. On a failure or critical failure, they also take 1d4 persistent fire damage, increasing to 2d4 at 12th level. Persistent damage is not doubled on a critical failure and ends normally using recovery checks; it has no fixed three-round duration.</p><p>@Damage[(ceil(@actor.level/2))d4[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]; persistent @Damage[(1+floor(@actor.level/12))d4[persistent,fire]]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 4
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 2
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "bow-shock",
+        "frequency": {
+          "max": 1,
+          "per": "PT10M"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.e8bc64e1402c18d9",
+    "doc": {
+      "_id": "e8bc64e1402c18d9",
+      "name": "Bulwark Protocol",
+      "type": "feat",
+      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p>When using Heart of Stone, you may Step before applying its protection, provided you finish closer to the protected ally. Check the reaction's range and other requirements before this Step. Resolve the triggering Strike against its original target; you do not become its target. The Step is part of the reaction.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 8
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "bulwark-protocol"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.c50351ac7f7790a9",
+    "doc": {
+      "_id": "c50351ac7f7790a9",
+      "name": "Camouflage",
+      "type": "feat",
+      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per 10 minutes. <strong>Requirements</strong> You wield a gunblade.</p><p>Until the start of your next turn, gain a +2 circumstance bonus to AC against melee attacks and resistance to physical damage equal to half your level (minimum 1). Apply the Camouflage effect. Its AC bonus does not stack with Royal Guard.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.47ab3c3e65986371]{Camouflage}. Apply manually after recording the action.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "camouflage",
+        "frequency": {
+          "max": 1,
+          "per": "PT10M"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.916a69431d6bcbfe",
+    "doc": {
+      "_id": "916a69431d6bcbfe",
+      "name": "Continued Assault",
+      "type": "feat",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per round. After you resolve a Continuation follow-up, you may Step as a free action. Alternatively, if you are in Royal Guard, grant one adjacent ally temporary Hit Points equal to half your level until the start of your next turn. This does not grant another Strike or follow-up.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 12
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "continued-assault"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.073a72a5ae307d5f",
+    "doc": {
+      "_id": "073a72a5ae307d5f",
+      "name": "Danger Zone",
+      "type": "feat",
+      "img": "icons/magic/fire/explosion-fireball-large-orange.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per 10 minutes. One enemy within 15 feet attempts a basic Reflex save against your class DC against 1d6 fire damage per 2 levels, rounded up. This is a separate blast, not a Strike, and does not affect multiple attack penalty.</p><p>@Damage[(ceil(@actor.level/2))d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 6
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "danger-zone",
+        "frequency": {
+          "max": 1,
+          "per": "PT10M"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.29de0db157247ab8",
+    "doc": {
+      "_id": "29de0db157247ab8",
+      "name": "Executioner's Cadence",
+      "type": "feat",
+      "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per round. After you critically hit a genuine enemy with Wicked Talon, load 1 cartridge. At 14th level, you may instead gain this benefit when at least one enemy critically fails its save against Double Down. Double Down grants at most 1 cartridge regardless of targets. This cannot combine with Powder Discipline on the same Strike.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 8
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "executioners-cadence"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.2a461f10c3b7e0f4",
+    "doc": {
+      "_id": "2a461f10c3b7e0f4",
+      "name": "Expanded Gauge",
+      "type": "feat",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your maximum cartridges increases by 1, to 4 normally or 7 during Bloodfest. This does not increase the cartridges you start an encounter with.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 12
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "expanded-gauge"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.2bfa1496cb9fdf2b",
+    "doc": {
+      "_id": "2bfa1496cb9fdf2b",
+      "name": "Fated Resolve",
+      "type": "feat",
+      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per round. When you use Fated Circle or Double Down, gain temporary Hit Points equal to half your level until the start of your next turn. These do not stack with other temporary Hit Points.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 14
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "fated-resolve"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.6e8aab4b359497e2",
+    "doc": {
+      "_id": "6e8aab4b359497e2",
+      "name": "Great Nebula",
+      "type": "feat",
+      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p>Nebula instead grants resistance to all damage equal to your level until the start of your second subsequent turn. When you use it, also gain temporary Hit Points equal to your level for that duration. This replaces Nebula's resistance, shares its frequency, and does not grant a separate use. Apply Great Nebula instead of Nebula.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.2bf2c8bbde2e358d]{Great Nebula}.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 16
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": [
+            {
+              "value": "Nebula"
+            }
+          ]
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "great-nebula"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.2fedcd38de2a7855",
+    "doc": {
+      "_id": "2fedcd38de2a7855",
+      "name": "Guardian's Instinct",
+      "type": "feat",
+      "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+      "system": {
+        "description": {
+          "value": "<p>Heart of Stone's range increases to 30 feet. At the start of each of your turns, gain one additional reaction that can be used only for Heart of Stone to protect an ally other than yourself. It expires at the start of your next turn. You cannot use more than one reaction on the same triggering Strike. Aetheric Ward cannot use this extra reaction.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 16
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "guardians-instinct"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.f9d4caba9fc5e062",
+    "doc": {
+      "_id": "f9d4caba9fc5e062",
+      "name": "Gunmetal Soul",
+      "type": "feat",
+      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per day. <strong>Requirements</strong> You can act and wield a gunblade. You and allies currently within 30 feet gain resistance to all damage equal to your level until the start of your next turn. Recipients retain the benefit if they leave the area. This does not stack with other resistance to the same damage. You cannot activate it while unconscious or otherwise unable to take its two actions.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 20
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 2
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "gunmetal-soul",
+        "frequency": {
+          "max": 1,
+          "per": "day"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.4c778ba7ff5d693e",
+    "doc": {
+      "_id": "4c778ba7ff5d693e",
+      "name": "Heart of Corundum",
+      "type": "feat",
+      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per 10 minutes. <strong>Requirements</strong> You wield a gunblade. Choose yourself or an ally within 30 feet. Until the start of your second subsequent turn, the target gains resistance to all damage equal to half your level (minimum 1). After an instance of damage leaves it at or below half its maximum HP during this duration, it regains 2d8 + your level HP, then the healing portion ends. This healing triggers at most once, even if the target was already below half HP when you used the action. It cannot heal a dead creature. Untriggered healing expires with the resistance. Apply manually using the originating Gunbreaker's level and turn.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 8
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "healing",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "heart-of-corundum",
+        "frequency": {
+          "max": 1,
+          "per": "PT10M"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.7ed023a7a4b05819",
+    "doc": {
+      "_id": "7ed023a7a4b05819",
+      "name": "Heart of Light",
+      "type": "feat",
+      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per 10 minutes. You and allies currently within 15 feet gain a +1 status bonus to saving throws against spells and resistance to damage from spells equal to half your level (minimum 1), until the start of your second subsequent turn. The resistance applies only to spells, not every magical ability. Recipients retain the benefit if they leave the area. Apply these situational benefits manually.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 6
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "heart-of-light",
+        "frequency": {
+          "max": 1,
+          "per": "PT10M"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.47bc76d1092a9061",
+    "doc": {
+      "_id": "47bc76d1092a9061",
+      "name": "Lightning Shot",
+      "type": "feat",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Make a ranged gunblade Strike with a range increment of 30 feet and a maximum range of 120 feet. Use Dexterity for the attack. Deal fire damage using the gunblade's one-handed base damage die and its runes; add specialization normally, but do not add Strength to damage. This does not consume a cartridge or require reloading. Normal ranged attack rules, including cover, multiple attack penalty, and reactions, apply. It does not advance a combo or grant Continuation. Roll the attack and damage manually; the melee weapon entry is not converted automatically.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "lightning-shot"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.cc8dfc414f174066",
+    "doc": {
+      "_id": "cc8dfc414f174066",
+      "name": "Nebula",
+      "type": "feat",
+      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per 10 minutes. Gain resistance to all damage equal to half your level (minimum 1) until the start of your second subsequent turn. Apply Nebula. Overlapping resistances do not add together.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.bbf2b441d6c80fae]{Nebula}. Apply manually after recording the action.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 4
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "nebula",
+        "frequency": {
+          "max": 1,
+          "per": "PT10M"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.4b87be96d6c648d2",
+    "doc": {
+      "_id": "4b87be96d6c648d2",
+      "name": "No Mercy",
+      "type": "feat",
+      "img": "icons/magic/control/buff-flight-wings-runes-purple.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per 10 minutes.</p><p>For 3 rounds, until the start of your third subsequent turn, gain a +2 status bonus to gunblade Strike damage; this becomes +3 at 11th level and +4 at 17th. Load 1 cartridge immediately and gain Ready to Break for the same duration, allowing one Sonic Break if you have that feat. Apply No Mercy. This bonus does not affect Continuation or save-based blasts.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.698e269ba38bcb47]{No Mercy}. Apply manually after recording the action.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 2
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "no-mercy",
+        "frequency": {
+          "max": 1,
+          "per": "PT10M"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.dc733707043788dc",
+    "doc": {
+      "_id": "dc733707043788dc",
+      "name": "Overcharged Gauge",
+      "type": "feat",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p>Your maximum cartridges increases by another 1, to 5 normally or 8 during Bloodfest. This stacks with Expanded Gauge and does not increase encounter starting cartridges.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 14
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": [
+            {
+              "value": "Expanded Gauge"
+            }
+          ]
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "overcharged-gauge"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.1698d186eff6f736",
+    "doc": {
+      "_id": "1698d186eff6f736",
+      "name": "Overpowered Round",
+      "type": "feat",
+      "img": "icons/magic/fire/explosion-fireball-large-orange.webp",
+      "system": {
+        "description": {
+          "value": "<p>When Burst Strike hits, you can deal splash fire damage equal to the number of weapon damage dice to other creatures within 5 feet of the target, including allies and yourself if in the area. This damage is not dealt to the primary target, does not double on a critical hit, and is not dealt on a miss. This is an explicit secondary damage effect, not the splash weapon trait.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 6
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "overpowered-round"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.e0f1268439d77a85",
+    "doc": {
+      "_id": "e0f1268439d77a85",
+      "name": "Perfect Chamber",
+      "type": "feat",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per day. <strong>Requirements</strong> You wield a gunblade. For 1 minute or until the encounter ends, whichever comes first, reduce the cartridge cost of the first cartridge-spending action or reaction you use each round by 1 (minimum 0). You choose whether to apply the reduction when spending. This includes the optional cartridge enhancement to Heart of Stone. Costs otherwise apply normally, and cooldowns and combo requirements are unchanged. This does not increase cartridge generation.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 20
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "perfect-chamber",
+        "frequency": {
+          "max": 1,
+          "per": "day"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.86023718d8bb7327",
+    "doc": {
+      "_id": "86023718d8bb7327",
+      "name": "Powder Discipline",
+      "type": "feat",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per encounter. After you critically hit a genuine enemy with a gunblade Strike, you may load 1 cartridge. This is not an action. You cannot use it on a training target or cooperative creature.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 2
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "powder-discipline"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.d2baacee6625134d",
+    "doc": {
+      "_id": "d2baacee6625134d",
+      "name": "Reign of Beasts",
+      "type": "feat",
+      "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Requirements</strong> Ready to Reign from Bloodfest; you wield a gunblade. Consume Ready to Reign and begin the Reign sequence. Make a melee gunblade Strike with 2d6 additional slashing damage. On a hit, deal 2d6 fire damage to up to two other enemies that are both within your melee reach and adjacent to the primary target; each attempts a basic Reflex save against your class DC. The secondary damage does not depend on the primary Strike's critical result.</p><p>After resolving the Strike, enable Noble Blood until the end of your next turn. You may use only one Reign sequence action per turn. Strikes use and increase multiple attack penalty normally. The sequence does not grant Continuation.</p><p>Additional Strike damage @Damage[2d6[slashing]]; secondary @Damage[2d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 18
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": [
+            {
+              "value": "Bloodfest"
+            }
+          ]
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [
+          {
+            "key": "GrantItem",
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.11e1ba1ee195f05c",
+            "allowDuplicate": false
+          },
+          {
+            "key": "GrantItem",
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.36bba5488759245c",
+            "allowDuplicate": false
+          }
+        ],
+        "slug": "reign-of-beasts"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.ca203eb3b1f22fda",
+    "doc": {
+      "_id": "ca203eb3b1f22fda",
+      "name": "Release Royal Guard",
+      "type": "feat",
+      "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+      "system": {
+        "description": {
+          "value": "<p>End your Royal Guard stance. This is a granted action, not a selectable class feat.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "classfeature",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "release-royal-guard"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.0814b62891d4161f",
+    "doc": {
+      "_id": "0814b62891d4161f",
+      "name": "Relentless Combo",
+      "type": "feat",
+      "img": "icons/skills/movement/figure-running-gray.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per round. Immediately after completing Solid Barrel or Demon Slaughter, you may Step as a free action. This movement does not require the Strike to hit or a save to fail.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 2
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "relentless-combo"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.dfeb44d09e34a0f3",
+    "doc": {
+      "_id": "dfeb44d09e34a0f3",
+      "name": "Relentless Rush",
+      "type": "feat",
+      "img": "icons/magic/light/explosion-star-glow-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per 10 minutes. <strong>Requirements</strong> You wield a gunblade. Enemies in a 5-foot emanation take 8d6 fire damage with a basic Reflex save against your class DC. Gain resistance to all damage equal to half your level until the start of your next turn. At the start of your next turn, enemies then in a 5-foot emanation take 4d6 fire damage with a new basic Reflex save against your class DC. The second blast occurs only if you remain conscious and wielding a gunblade. Neither blast uses or increases multiple attack penalty.</p><p>@Damage[8d6[fire]], then @Damage[4d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 18
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 2
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "relentless-rush",
+        "frequency": {
+          "max": 1,
+          "per": "PT10M"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.9f2bc306955bb80b",
+    "doc": {
+      "_id": "9f2bc306955bb80b",
+      "name": "Saturation Fire",
+      "type": "feat",
+      "img": "icons/magic/fire/projectile-fireball-smoke-strong-orange.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Cost</strong> 1 cartridge. <strong>Requirements</strong> You wield a gunblade. Creatures in a 30-foot line attempt a basic Reflex save against your class DC against 1d6 fire damage per 2 levels, rounded up. This includes allies, does not open Fated Brand, and does not affect multiple attack penalty.</p><p>@Damage[(ceil(@actor.level/2))d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 12
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 2
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "saturation-fire"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.fd0cd59b38944c65",
+    "doc": {
+      "_id": "fd0cd59b38944c65",
+      "name": "Sonic Break",
+      "type": "feat",
+      "img": "icons/magic/fire/flame-burning-creature-skeleton.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Requirements</strong> Ready to Break from your No Mercy; you wield a gunblade. Consume Ready to Break and make a melee gunblade Strike. On a hit, add 1d6 persistent bleed damage, increasing to 2d6 at 11th level and 3d6 at 17th. Double the persistent damage on a critical hit as part of the Strike. It uses normal recovery checks and does not open Continuation. The opening is consumed even if you miss.</p><p>@Damage[(1+floor((@actor.level-5)/6))d6[persistent,bleed]]</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 6
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": [
+            {
+              "value": "No Mercy"
+            }
+          ]
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "sonic-break"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.92a076708eb700d2",
+    "doc": {
+      "_id": "92a076708eb700d2",
+      "name": "Superbolide",
+      "type": "feat",
+      "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per day. <strong>Requirements</strong> You are conscious, have at least 2 HP, and wield a gunblade. Reduce your current HP to 1; this loss cannot be prevented, redirected, or reduced and does not trigger damage-based abilities. Until the start of your next turn, gain resistance to all damage equal to twice your level. This does not prevent conditions, death effects, or damage exceeding the resistance. Normal dying rules apply if you are reduced to 0 HP. Apply Superbolide.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.d00ba9863847115e]{Superbolide}. Apply manually after recording the action.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 10
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "magical"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "superbolide",
+        "frequency": {
+          "max": 1,
+          "per": "day"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.a94257a79a9f51d7",
+    "doc": {
+      "_id": "a94257a79a9f51d7",
+      "name": "Suppressing Fire",
+      "type": "feat",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Requirements</strong> You wield a gunblade. Choose one enemy within 30 feet that can see you. Attempt to Demoralize it using Intimidation; your gunblade's threatening discharge replaces the auditory trait with the visual trait and removes the penalty for not sharing a language. All other Demoralize rules, including its immunity, apply. This is not a Strike and consumes no cartridge.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "emotion",
+            "fear",
+            "mental",
+            "visual"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "suppressing-fire"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.f686a3539d9ebe62",
+    "doc": {
+      "_id": "f686a3539d9ebe62",
+      "name": "Trajectory",
+      "type": "feat",
+      "img": "icons/skills/movement/figure-running-gray.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per round. <strong>Requirements</strong> You wield a gunblade and can see an enemy or ally within twice your Speed.</p><p>Stride up to twice your Speed, ignoring difficult terrain but not greater difficult terrain. You must finish adjacent to the chosen creature and be able to reach a legal space; otherwise you cannot use this action. You cannot move through creatures or obstacles, and this movement triggers reactions normally. It does not include a Strike or interrupt your combo.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 2
+        },
+        "traits": {
+          "value": [
+            "gunbreaker",
+            "move",
+            "flourish"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "action"
+        },
+        "actions": {
+          "value": 1
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "trajectory",
+        "frequency": {
+          "max": 1,
+          "per": "round"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.ae787e7b74d7659f",
+    "doc": {
+      "_id": "ae787e7b74d7659f",
+      "name": "Twin Cartridge",
+      "type": "feat",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "system": {
+        "description": {
+          "value": "<p><strong>Frequency</strong> once per 10 minutes. <strong>Trigger</strong> You complete Solid Barrel or Demon Slaughter. Load 2 cartridges instead of 1. This free action cannot combine with Cartridge Expertise; a single finisher loads at most 2 cartridges.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 8
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "free"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "twin-cartridge",
+        "frequency": {
+          "max": 1,
+          "per": "PT10M"
+        }
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.d394e2f9352abfe7",
+    "doc": {
+      "_id": "d394e2f9352abfe7",
+      "name": "Vortex Guard",
+      "type": "feat",
+      "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p>When Brutal Shell grants you temporary Hit Points, you may grant one adjacent ally the same number of temporary Hit Points until the end of your next turn. Temporary Hit Points do not stack. This can occur only once per round.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "uncommon"
+        },
+        "category": "class",
+        "actionType": {
+          "value": "passive"
+        },
+        "actions": {
+          "value": null
+        },
+        "prerequisites": {
+          "value": []
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+          "remaster": true
+        },
+        "rules": [],
+        "slug": "vortex-guard"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-macros.Macro.GnbTracker130001",
+    "doc": {
+      "_id": "GnbTracker130001",
+      "name": "Gunbreaker Tracker",
+      "type": "script",
+      "scope": "global",
+      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "command": "const api = game.modules.get('gunbreaker-pf2e')?.api;\nif (!api) ui.notifications.warn('Enable Gunbreaker first.');\nelse await api.tracker();",
+      "ownership": {
+        "default": 2
+      }
+    }
+  }
+]

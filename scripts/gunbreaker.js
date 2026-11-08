@@ -1,6 +1,8 @@
+import {createNativeRunner,nativePanel} from './native.mjs';
 import {initialState,normalizeState,capacity,transition} from './state.mjs';
 import {catalogue,sourceIds} from './catalogue.mjs';
 const MOD='gunbreaker-pf2e',openActors=new Set(),queues=new Map();
+let nativeRunner;
 const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const slug=item=>sourceIds[item.sourceId ?? item.flags?.core?.sourceId] ?? item.slug ?? item.system?.slug;
 function registerTraits(){
@@ -35,6 +37,7 @@ export async function record(actor,op,expected){
   return queue(actor,async()=>{
     permitted(actor);
     const raw=actor.getFlag(MOD,'tracker')??initialState();
+    if(['reserved','committed','recovery'].includes(actor.getFlag(MOD,'execution')?.status))throw Error('Reconcile the pending native execution before changing the tracker.');
     if(expected!==undefined && raw.revision!==expected)throw Error('Tracker changed while open. Refreshed; record the action again.');
     const next=transition(raw,op,contextFor(actor),catalogue);
     await actor.setFlag(MOD,'tracker',next);return next;
@@ -51,8 +54,8 @@ export async function tracker(explicitActor){
     while(actor.isOwner){
       const raw=actor.getFlag(MOD,'tracker')??initialState(),context=contextFor(actor),state=normalizeState(raw,context);
       const learned=new Set(context.learned),label=s=>catalogue[s]?.name??s;
-      const options=Object.entries(catalogue).filter(([s,v])=>learned.has(s)&&v.level<=context.level&&['action','reaction','free'].includes(v.actionType)&&s!=='twin-cartridge');
-      const checks=[['enhance','Spend a cartridge to enhance Heart of Stone'],['self','Heart of Stone targets me (Aetheric Ward)'],['expertise','Use Cartridge Expertise on this finisher'],['twin','Use Twin Cartridge on this finisher'],['discipline','Use Powder Discipline on this critical hit'],['cadence','Use Executioner’s Cadence'],['perfect','Use this round’s Perfect Chamber discount']];
+      const options=Object.entries(catalogue).filter(([s,v])=>learned.has(s)&&v.level<=context.level&&['action','reaction','free'].includes(v.actionType));
+      const checks=[['enhance','Spend a cartridge to enhance Heart of Stone'],['self','Heart of Stone targets me (Aetheric Ward)'],['expertise','Use Cartridge Expertise on this finisher'],['reserve','Use Reserved Cartridge for ally protection'],['instinct','Use Guardian’s Instinct extra ally-only reaction'],['discipline','Use Powder Discipline on this critical hit'],['cadence','Use Executioner’s Cadence'],['perfect','Use this round’s Perfect Chamber discount']];
       const content=`<div class="gunbreaker-tracker"><p><strong>${escape(actor.name)}</strong> · Cartridges <strong>${state.cartridges}/${capacity(state,context)}</strong></p>
         <p>Combo: ${escape(state.combo?label(state.combo.next):'none')} · Continuation: ${escape(state.continuation?label(state.continuation.slug):'none')}</p>
         <p>Ready to Break: ${state.breakUntil>context.time?'yes':'no'} · Ready to Reign: ${state.reignUntil>context.time?'yes':'no'}</p>
@@ -65,15 +68,23 @@ export async function tracker(explicitActor){
       const button=(action,label,op)=>({action,label,callback:()=>op});
       const op=await foundry.applications.api.DialogV2.wait({window:{title:'Gunbreaker — Powder Gauge'},classes:['gunbreaker-dialog'],position:{width:620},rejectClose:false,content,buttons:[
         {action:'record',label:'Record resolved action',callback:(_e,b)=>({type:'use',slug:b.form.elements.action.value,outcome:b.form.elements.outcome.value,
+          struck:b.form.elements.action.value==='guarded-advance' && ['miss','hit','critical'].includes(b.form.elements.outcome.value),
           failedTargetIds:[...b.form.querySelectorAll('input[name="failed-target"]:checked')].map(e=>e.value),
           ...Object.fromEntries(checks.map(([key])=>[key,b.form.elements[key].checked]))})},
-        button('other','Record other action',{type:'other'}),button('start','Initialize encounter',{type:'start'}),
+        ...(game.user.isGM?[button('native','Native action beta',{type:'native'})]:[]),
+        button('other','Record other action',{type:'other'}),button('reaction','Record other reaction',{type:'other',reaction:true}),button('start','Initialize encounter',{type:'start'}),
         button('end','Clear ended encounter',{type:'end'}),button('plus','Correct gauge +1',{type:'adjust',delta:1}),
         button('minus','Correct gauge −1',{type:'adjust',delta:-1}),button('daily','Daily preparations',{type:'daily'}),button('close','Close',null)
       ]});
       if(!op || typeof op!=='object')break;
       try{
-        if(op.type==='daily' && !await foundry.applications.api.DialogV2.confirm({window:{title:'Daily preparations'},content:'<p>Have you completed daily preparations? This refreshes daily and timed uses and clears encounter resources.</p>',rejectClose:false}))continue;
+        if(op.type==='native'){await nativePanel(actor,nativeRunner,contextFor);continue;}
+        if(op.type==='daily' && !await foundry.applications.api.DialogV2.confirm({window:{title:'Daily preparations'},content:'<p>Have you completed daily preparations? This refreshes daily uses only on a later in-game day. Minute cooldowns continue to use world time.</p>',rejectClose:false}))continue;
+        if(op.type==='daily' && learned.has('aetheric-calibration')){
+          const choice=await foundry.applications.api.DialogV2.wait({window:{title:'Aetheric Calibration'},content:'<p>Choose the cartridge damage type for these daily preparations.</p>',rejectClose:false,buttons:['fire','cold','electricity'].map(type=>({action:type,label:type,callback:()=>type}))});
+          if(!['fire','cold','electricity'].includes(choice))continue;
+          op.calibration=choice;
+        }
         await record(actor,op,raw.revision);
       }catch(e){ui.notifications.warn(e.message);}
     }
@@ -81,6 +92,7 @@ export async function tracker(explicitActor){
 }
 Hooks.once('ready',()=>{
   if(game.system.id!=='pf2e')return;
-  game.modules.get(MOD).api={tracker,record,adjustCartridges:(actor,delta)=>record(actor,{type:'adjust',delta}),getState:actor=>normalizeState(actor.getFlag(MOD,'tracker'),contextFor(actor))};
+  nativeRunner=createNativeRunner(contextFor);
+  game.modules.get(MOD).api={tracker,record,execute:(actor,request)=>nativeRunner.execute(actor,request),nativeActions:actor=>nativePanel(actor,nativeRunner,contextFor),adjustCartridges:(actor,delta)=>record(actor,{type:'adjust',delta}),getState:actor=>normalizeState(actor.getFlag(MOD,'tracker'),contextFor(actor))};
 });
 // A chat rules card never executes a tracker transition.

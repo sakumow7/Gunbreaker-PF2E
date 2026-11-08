@@ -29,10 +29,56 @@
             "value": []
         },
         "publication": {
-            "title": "Gunbreaker PF2e Homebrew Playtest 1.3.0",
+            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
             "remaster": true
         },
-        "rules": [],
+        "rules": [
+            {
+                "key": "DamageDice",
+                "selector": "strike-damage",
+                "slug": "gunbreaker-burst-strike",
+                "diceNumber": "1+floor((@actor.level+1)/6)",
+                "dieSize": "d6",
+                "damageType": "fire",
+                "predicate": [
+                    "item:trait:gunbreaker",
+                    "item:melee",
+                    "gunbreaker:action:burst-strike",
+                    "gunbreaker:calibration:fire"
+                ],
+                "hideIfDisabled": true
+            },
+            {
+                "key": "DamageDice",
+                "selector": "strike-damage",
+                "slug": "gunbreaker-burst-strike",
+                "diceNumber": "1+floor((@actor.level+1)/6)",
+                "dieSize": "d6",
+                "damageType": "cold",
+                "predicate": [
+                    "item:trait:gunbreaker",
+                    "item:melee",
+                    "gunbreaker:action:burst-strike",
+                    "gunbreaker:calibration:cold"
+                ],
+                "hideIfDisabled": true
+            },
+            {
+                "key": "DamageDice",
+                "selector": "strike-damage",
+                "slug": "gunbreaker-burst-strike",
+                "diceNumber": "1+floor((@actor.level+1)/6)",
+                "dieSize": "d6",
+                "damageType": "electricity",
+                "predicate": [
+                    "item:trait:gunbreaker",
+                    "item:melee",
+                    "gunbreaker:action:burst-strike",
+                    "gunbreaker:calibration:electricity"
+                ],
+                "hideIfDisabled": true
+            }
+        ],
         "slug": "burst-strike"
     },
     "folder": null,

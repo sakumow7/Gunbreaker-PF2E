@@ -287,6 +287,13 @@ export const catalogue={
     "actions": 1,
     "prerequisites": []
   },
+  "aetheric-calibration": {
+    "name": "Aetheric Calibration",
+    "level": 4,
+    "actionType": "passive",
+    "actions": null,
+    "prerequisites": []
+  },
   "aetheric-ward": {
     "name": "Aetheric Ward",
     "level": 4,
@@ -360,7 +367,7 @@ export const catalogue={
     "prerequisites": [],
     "frequency": {
       "max": 1,
-      "per": "PT10M"
+      "per": "PT1M"
     }
   },
   "continued-assault": {
@@ -411,6 +418,13 @@ export const catalogue={
       "nebula"
     ]
   },
+  "guarded-advance": {
+    "name": "Guarded Advance",
+    "level": 4,
+    "actionType": "action",
+    "actions": 2,
+    "prerequisites": []
+  },
   "guardians-instinct": {
     "name": "Guardian's Instinct",
     "level": 16,
@@ -428,6 +442,13 @@ export const catalogue={
       "max": 1,
       "per": "day"
     }
+  },
+  "gunnhildr-escort": {
+    "name": "Gunnhildr Escort",
+    "level": 2,
+    "actionType": "passive",
+    "actions": null,
+    "prerequisites": []
   },
   "heart-of-corundum": {
     "name": "Heart of Corundum",
@@ -479,15 +500,6 @@ export const catalogue={
       "max": 1,
       "per": "PT10M"
     }
-  },
-  "overcharged-gauge": {
-    "name": "Overcharged Gauge",
-    "level": 14,
-    "actionType": "passive",
-    "actions": null,
-    "prerequisites": [
-      "expanded-gauge"
-    ]
   },
   "overpowered-round": {
     "name": "Overpowered Round",
@@ -548,6 +560,13 @@ export const catalogue={
       "per": "PT10M"
     }
   },
+  "reserved-cartridge": {
+    "name": "Reserved Cartridge",
+    "level": 8,
+    "actionType": "passive",
+    "actions": null,
+    "prerequisites": []
+  },
   "saturation-fire": {
     "name": "Saturation Fire",
     "level": 12,
@@ -591,17 +610,6 @@ export const catalogue={
     "frequency": {
       "max": 1,
       "per": "round"
-    }
-  },
-  "twin-cartridge": {
-    "name": "Twin Cartridge",
-    "level": 8,
-    "actionType": "free",
-    "actions": null,
-    "prerequisites": [],
-    "frequency": {
-      "max": 1,
-      "per": "PT10M"
     }
   },
   "vortex-guard": {
@@ -674,6 +682,7 @@ export const sourceIds={
   "Compendium.gunbreaker-pf2e.gunbreaker-equipment.Item.b17d1aac074341e7": "light-gunblade",
   "Compendium.gunbreaker-pf2e.gunbreaker-equipment.Item.08d3cdb6d1686a2b": "lion-heart-gunblade-plus2-greater-striking",
   "Compendium.gunbreaker-pf2e.gunbreaker-equipment.Item.ade19e71609ae875": "shadowbane-gunblade-plus1-striking",
+  "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.35a9caf57d156ced": "aetheric-calibration",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.87c2de972d0bd9dd": "aetheric-ward",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.8edcc57f3326f12a": "aurora",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.5332df7babf82362": "auroral-mastery",
@@ -688,14 +697,15 @@ export const sourceIds={
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.2a461f10c3b7e0f4": "expanded-gauge",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.2bfa1496cb9fdf2b": "fated-resolve",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.6e8aab4b359497e2": "great-nebula",
+  "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.677832a37dd0865c": "guarded-advance",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.2fedcd38de2a7855": "guardians-instinct",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.f9d4caba9fc5e062": "gunmetal-soul",
+  "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.c475ac3a902152e3": "gunnhildr-escort",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.4c778ba7ff5d693e": "heart-of-corundum",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.7ed023a7a4b05819": "heart-of-light",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.47bc76d1092a9061": "lightning-shot",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.cc8dfc414f174066": "nebula",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.4b87be96d6c648d2": "no-mercy",
-  "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.dc733707043788dc": "overcharged-gauge",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.1698d186eff6f736": "overpowered-round",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.e0f1268439d77a85": "perfect-chamber",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.86023718d8bb7327": "powder-discipline",
@@ -703,11 +713,11 @@ export const sourceIds={
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.ca203eb3b1f22fda": "release-royal-guard",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.0814b62891d4161f": "relentless-combo",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.dfeb44d09e34a0f3": "relentless-rush",
+  "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.dd803762c60bc33a": "reserved-cartridge",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.9f2bc306955bb80b": "saturation-fire",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.fd0cd59b38944c65": "sonic-break",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.92a076708eb700d2": "superbolide",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.a94257a79a9f51d7": "suppressing-fire",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.f686a3539d9ebe62": "trajectory",
-  "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.ae787e7b74d7659f": "twin-cartridge",
   "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.d394e2f9352abfe7": "vortex-guard"
 };
