@@ -1,6 +1,7 @@
 import {transition,normalizeState,initialState} from './state.mjs';
 import {catalogue} from './catalogue.mjs';
 import {strikeOutcome,nativeWeaponDice} from './mechanics.mjs';
+import {ActorQueue} from './queue.mjs';
 export const CORE_STRIKES=new Set(['keen-edge','brutal-shell','solid-barrel','burst-strike','gnashing-fang','savage-claw','wicked-talon','sonic-break']);
 export const CORE_FOLLOWUPS=new Set(['hypervelocity','jugular-rip','abdomen-tear','eye-gouge']);
 export const CORE_EFFECTS=new Set(['royal-guard','release-royal-guard','camouflage','nebula','no-mercy','superbolide','perfect-chamber']);
@@ -11,13 +12,9 @@ export const SUPPORTED=new Set([...CORE_STRIKES,...CORE_FOLLOWUPS,...CORE_EFFECT
  * Pending/recovery events block new execution until the GM reconciles them.
  */
 export class ActionRunner {
-  #queues=new Map();
-  constructor(ports){this.ports=ports;}
+  constructor(ports,queue=new ActorQueue()){this.ports=ports;this.queue=queue;}
   execute(actor,request){
-    const previous=this.#queues.get(actor.uuid)??Promise.resolve();
-    const task=previous.catch(()=>{}).then(()=>this.#execute(actor,request));
-    this.#queues.set(actor.uuid,task);
-    return task.finally(()=>{if(this.#queues.get(actor.uuid)===task)this.#queues.delete(actor.uuid);});
+    return this.queue.run(actor,()=>this.#execute(actor,request));
   }
   async #execute(actor,request){
     const p=this.ports;
@@ -33,8 +30,9 @@ export class ActionRunner {
     }
     if(existing && ['reserved','committed','recovery'].includes(existing.status))throw Error('Resolve the pending action before starting another.');
     if(state.events.includes(request.id))return {id:request.id,status:'complete',duplicate:true};
+    await p.preflight?.(actor,request,context,state);
     if(context.encounterId && state.encounter!==context.encounterId){
-      state=transition(state,{type:'start'},context,catalogue);await p.write(actor,state);
+      state=transition(state,{type:'start'},context,catalogue);
     }
     const strike=CORE_STRIKES.has(request.slug);
     const options=request.options??{};
@@ -45,12 +43,14 @@ export class ActionRunner {
     delete preOp.discipline;delete preOp.cadence;
     transition(state,preOp,context,catalogue);
     await p.validate(actor,request,context,state);
+    await p.authorize(actor,request);
     const entry={id:request.id,slug:request.slug,status:'reserved',before:state,context,request,started:context.time};
     await p.saveJournal(actor,entry);
     let committed=false;
     try {
       let result;
       if(strike){
+        await p.authorize(actor,request);
         result=await p.attack(actor,request,context);
         if(!result){await p.saveJournal(actor,{...entry,status:'canceled'});return {id:request.id,status:'canceled'};}
         committed=true;

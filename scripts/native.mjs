@@ -1,16 +1,22 @@
 import {ActionRunner,CORE_STRIKES,CORE_FOLLOWUPS,SUPPORTED} from './execution.mjs';
 import {damageType,followupFormula,superbolideHP,nativeWeaponDice} from './mechanics.mjs';
 import {sourceIds,catalogue} from './catalogue.mjs';
+import {assertFreshIntent} from './requests.mjs';
 const MOD='gunbreaker-pf2e';
 const slug=i=>i.slug??i.system?.slug;
 const effectUuid=name=>Object.entries(sourceIds).find(([id,s])=>s===name&&id.includes('gunbreaker-effects'))?.[0];
 const isHeld=w=>w.type==='weapon'&&w.system.traits.value.includes('gunbreaker')&&w.system.equipped.carryType==='held'&&w.system.equipped.handsHeld>0;
 const esc=s=>foundry.utils.escapeHTML(String(s));
-function activeGM(){return game.users.filter(u=>u.active&&u.isGM).sort((a,b)=>a.id.localeCompare(b.id))[0];}
-/** This beta intentionally gates native execution to the one active GM coordinator. */
-function authority(actor){
-  if(!game.user.isGM || activeGM()?.id!==game.user.id)throw Error('Native beta execution requires the active GM coordinator. Player request routing is pending two-client verification.');
+export function activeGM(){return game.users.filter(u=>u.active&&u.isGM).sort((a,b)=>a.id.localeCompare(b.id))[0];}
+export function authority(actor,req){
+  if(!game.user.isGM || activeGM()?.id!==game.user.id)throw Error('Native execution requires the active GM coordinator.');
   if(actor.type!=='character'||!actor.isOwner)throw Error('Select an owned character.');
+  if(game.settings.get(MOD,'playerRequests')&&game.users.filter(u=>u.active&&u.isGM).length!==1)throw Error('Experimental player routing requires exactly one active GM.');
+  if(req?.requesterId){
+    const user=game.users.get(req.requesterId);
+    if(!game.settings.get(MOD,'playerRequests')||req.intent.gmId!==game.user.id||!user?.active||!actor.testUserPermission(user,'OWNER'))throw Error('Player action permission changed; submit a new request.');
+    if(canvas.scene?.id!==req.intent.sceneId)throw Error('The GM coordinator must view the same scene before this action can run.');
+  }
 }
 function actorToken(actor){
   const tokens=actor.getActiveTokens();
@@ -38,17 +44,19 @@ async function applyEffect(actor,name,requestId){
   data.system.start={value:game.time.worldTime,initiative:actor.combatant?.initiative??null};
   await actor.createEmbeddedDocuments('Item',[data]);
 }
-export function createNativeRunner(contextFor){
+export function createNativeRunner(contextFor,queue){
   return new ActionRunner({
-    authorize:async actor=>authority(actor),
+    authorize:async(actor,req)=>authority(actor,req),
+    preflight:async(actor,req,c,state)=>{if(req.intent||req.expected)assertFreshIntent(req.intent??req.expected,c,state);},
     context:async(actor,req)=>{
       const c=contextFor(actor),w=weaponFor(actor,req.weaponId);
+      if(req.targetIds)c.targetIds=[...req.targetIds];
       const old=actor.getFlag(MOD,'tracker');
       if(CORE_FOLLOWUPS.has(req.slug))c.targetIds=[...(old?.continuation?.targets??[])];
       return {...c,weaponDice:nativeWeaponDice(w),weaponId:w.id,map:req.map??0};
     },
-    read:actor=>actor.getFlag(MOD,'tracker'),write:(actor,state)=>actor.setFlag(MOD,'tracker',state),
-    journal:actor=>actor.getFlag(MOD,'execution'),saveJournal:(actor,entry)=>actor.setFlag(MOD,'execution',entry),
+    read:actor=>actor.getFlag(MOD,'tracker'),write:(actor,state)=>{authority(actor);return actor.setFlag(MOD,'tracker',state);},
+    journal:actor=>actor.getFlag(MOD,'execution'),saveJournal:(actor,entry)=>{authority(actor);return actor.setFlag(MOD,'execution',entry);},
     validate:async(actor,req,c,state)=>{
       if(actor.hasCondition('unconscious')||actor.hasCondition('paralyzed'))throw Error('This character cannot act.');
       const matches=game.combat?.turns.filter(t=>t.actor?.uuid===actor.uuid)??[];
@@ -61,13 +69,15 @@ export function createNativeRunner(contextFor){
       if(CORE_STRIKES.has(req.slug)||CORE_FOLLOWUPS.has(req.slug)){
         if(c.targetIds.length!==1)throw Error('Select one enemy target.');
         const t=await target(c),self=actorToken(actor),w=weaponFor(actor,c.weaponId);
+        if(t.document.parent?.id!==self.document.parent?.id)throw Error('The target must be on the character’s scene.');
         if(!actor.isEnemyOf(t.actor))throw Error('Select a genuine enemy; the GM must adjudicate unusual allegiances.');
         if(self.distanceTo(t)>actor.getReach({action:'attack',weapon:w}))throw Error('Target is outside melee reach.');
-        if(!t.isVisible)throw Error('Target visibility requires GM adjudication.');
+        if(!t.isVisible||(req.requesterId&&!game.users.get(req.requesterId)?.isGM&&t.document.hidden))throw Error('Target visibility requires GM adjudication.');
         if(CORE_FOLLOWUPS.has(req.slug)&&state.continuation?.weaponId!==w.id)throw Error('Use the opening gunblade for this follow-up.');
       }
     },
     attack:async(actor,req,c)=>{
+      if(req.intent||req.expected)assertFreshIntent(req.intent??req.expected,contextFor(actor),actor.getFlag(MOD,'tracker'));
       const w=weaponFor(actor,c.weaponId),strike=strikeFor(actor,w.id),t=await target(c);
       const calibration=actor.getFlag(MOD,'tracker')?.calibration??'fire';
       let messageId=null;
@@ -76,6 +86,7 @@ export function createNativeRunner(contextFor){
       return {degree:roll.degreeOfSuccess,weaponDice:nativeWeaponDice(w),weaponId:w.id,messageId};
     },
     resolve:async(actor,req,c,before,after,result)=>{
+      authority(actor,req);
       if(CORE_STRIKES.has(req.slug)){
         if(result.degree<2)return;
         // Native damage includes critical doubling, property runes and action-predicated DamageDice.
@@ -108,15 +119,20 @@ export function createNativeRunner(contextFor){
         await applyEffect(actor,name,req.id);
       }
     }
-  });
+  },queue);
 }
 export async function nativePanel(actor,runner,contextFor){
-  authority(actor);
+  if(!actor?.isOwner||actor.type!=='character')throw Error('Select an owned character.');
+  if(!game.user.isGM&&!game.settings.get(MOD,'playerRequests'))throw Error('The GM has not enabled experimental player requests.');
   const c=contextFor(actor),state=actor.getFlag(MOD,'tracker');
+  const expected={revision:state?.revision??0,encounterId:c.encounterId,round:c.round,turn:c.turn};
   const choices=[...SUPPORTED].filter(s=>c.learned.includes(s)&&catalogue[s].level<=c.level);
   const weapons=actor.itemTypes.weapon.filter(isHeld);
-  const content=`<p>Native execution beta · Cartridges ${state?.cartridges??0}. Costs and combo outcomes update automatically. Native damage controls remain available.</p><label>Ability<select name="ability">${choices.map(s=>`<option value="${s}">${esc(catalogue[s].name)}</option>`).join('')}</select></label><label>Gunblade<select name="weapon">${weapons.map(w=>`<option value="${w.id}">${esc(w.name)}</option>`).join('')}</select></label><label>Attack stage<select name="map"><option value="0">First attack</option><option value="1">Second attack</option><option value="2">Third or later attack</option></select></label><p>This beta is GM-only. Check action availability and terrain. Party protection, area saves, movement and player routing are still pending.</p>`;
+  const content=`<p>Native execution beta · Cartridges ${state?.cartridges??0}. Costs and combo outcomes update automatically. Native damage controls remain available.</p><label>Ability<select name="ability">${choices.map(s=>`<option value="${s}">${esc(catalogue[s].name)}</option>`).join('')}</select></label><label>Gunblade<select name="weapon">${weapons.map(w=>`<option value="${w.id}">${esc(w.name)}</option>`).join('')}</select></label><label>Attack stage<select name="map"><option value="0">First attack</option><option value="1">Second attack</option><option value="2">Third or later attack</option></select></label><p>Player requests go to the GM coordinator. Check action availability and terrain. Party protection, area saves and movement are still pending.</p>`;
   const req=await foundry.applications.api.DialogV2.wait({window:{title:'Gunbreaker — Native Actions Beta'},content,rejectClose:false,buttons:[{action:'execute',label:'Use ability',callback:(_event,b)=>({id:foundry.utils.randomID(),slug:b.form.elements.ability.value,weaponId:b.form.elements.weapon.value,map:Number(b.form.elements.map.value)})}]});
   if(!req||typeof req!=='object')return;
+  // Snapshot when the panel opens: a stale selection must not spend changed resources.
+  req.targetIds=[...c.targetIds];
+  req.expected=expected;
   try{return await runner.execute(actor,req);}catch(e){ui.notifications.error(e.message);}
 }

@@ -17,11 +17,15 @@ Unlisted class progression and abilities retain the 1.3 baseline. Ordinary Stren
 
 ## Native-action prototype
 
-The tracker has a **Native action beta** button for the active GM coordinator. It can execute the basic melee combo, Burst Strike, Gnashing sequence, Sonic Break, four single-target Continuations, Royal Guard, Camouflage, Nebula/Great Nebula, No Mercy, Superbolide, and Perfect Chamber. Select the ability, held gunblade, and native MAP stage. It reads native attack outcomes, records costs/openings, rolls native damage, and applies the listed self-effects. A canceled pre-roll selection spends nothing; a miss or canceled damage dialog does not refund the attack. Failed post-roll work blocks further native execution for GM recovery.
+The tracker has a **Native action beta** button for the active GM coordinator. A disabled-by-default **Experimental player action requests** world setting enables the player entry path for disposable-character tests; the existing tracker macro then opens the native panel directly for players. It can execute the basic melee combo, Burst Strike, Gnashing sequence, Sonic Break, four single-target Continuations, Royal Guard, Camouflage, Nebula/Great Nebula, No Mercy, Superbolide, and Perfect Chamber. Select the ability, held gunblade, and native MAP stage. It reads native attack outcomes, records costs/openings, rolls native damage, and applies the listed self-effects. A canceled pre-roll selection spends nothing; a miss or canceled damage dialog does not refund the attack. Failed post-roll work blocks further native execution for GM recovery.
 
 This prototype requires exactly one active token and combatant for the actor. It checks melee reach and target allegiance; the GM still checks terrain, visibility edge cases, action availability, and genuine threats. Native damage controls still apply damage. Optional feat riders are not all integrated. The manual tracker remains for uncovered actions; do not record a natively executed action again.
 
-**Player routing, triggered party reactions, area saves, movement, external-action observation, and complete feat-rider coverage are pending.** Keep one GM operator per character during prototype testing. No multi-client safety or live compatibility claim is made.
+**Player routing is implemented as an experimental transport; live two-client verification remains pending.** It requires exactly one active GM on the same scene. The player selects an ability, held gunblade, attack stage, and target. A private request card carries that intent to the GM, who runs the normal PF2e roll/damage dialogs. This still requires GM participation; it is not the final minimal-interface experience.
+
+The server-delivered creation-event user ID identifies the requester. The coordinator rechecks ownership, resource revision and combat turn, and shares one actor queue with manual tracker writes. Manual tracker writes from players are blocked while routing is enabled; the GM records uncovered actions. Ordinary rules cards and edited request cards never execute. Timed-out or uncertain submissions stay locally blocked until a GM acknowledgement arrives; they are not automatically retried or replayed on reconnect. See [request transport and recovery limits](docs/PLAYER-REQUESTS.md).
+
+**Triggered party reactions, area saves, movement, external-action observation, and complete feat-rider coverage remain pending.** No distributed-lock, seamless GM failover, multi-client runtime safety, or live compatibility claim is made.
 
 ## Build and review
 
@@ -35,4 +39,4 @@ npm run balance
 
 Build generates the catalogue, all five LevelDB packs, RULES.html, migration source snapshots, and `dist/gunbreaker-pf2e-1.4.0-beta.1.zip`. The ZIP has module.json at its root. It is a local candidate; no release assets are published by building it.
 
-Target environment: **Foundry 14 build 369 / PF2e 8.7.0**. Those versions and installed Gunbreaker 1.3.0 were observed in Forge. This candidate itself has not been installed or tested there. Tests use pure transitions and mocked native ports; they cannot certify the real Foundry adapter. Follow SMOKE-TEST.md on disposable characters before replacing campaign copies.
+Target environment: **Foundry 14 build 369 / PF2e 8.7.0**. Those versions and installed Gunbreaker 1.3.0 were observed in Forge. This candidate itself has not been installed or tested there. Tests use pure transitions, mocked document lifecycle events and mocked native ports; they cannot certify the real Foundry adapter. Follow SMOKE-TEST.md on disposable characters before replacing campaign copies.

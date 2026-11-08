@@ -1,8 +1,10 @@
-import {createNativeRunner,nativePanel} from './native.mjs';
+import {createNativeRunner,nativePanel,authority} from './native.mjs';
+import {ActorQueue} from './queue.mjs';
+import {installRequests} from './transport.mjs';
 import {initialState,normalizeState,capacity,transition} from './state.mjs';
 import {catalogue,sourceIds} from './catalogue.mjs';
-const MOD='gunbreaker-pf2e',openActors=new Set(),queues=new Map();
-let nativeRunner;
+const MOD='gunbreaker-pf2e',openActors=new Set(),actorQueue=new ActorQueue();
+let nativeRunner,requestActions;
 const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const slug=item=>sourceIds[item.sourceId ?? item.flags?.core?.sourceId] ?? item.slug ?? item.system?.slug;
 function registerTraits(){
@@ -10,7 +12,10 @@ function registerTraits(){
   for(const key of ['classTraits','featTraits','actionTraits','weaponTraits','creatureTraits','effectTraits'])if(cfg[key])cfg[key].gunbreaker='GUNBREAKER.TraitGunbreaker';
   if(cfg.baseWeaponTypes)cfg.baseWeaponTypes.gunblade='Gunblade';
 }
-Hooks.once('init',registerTraits);Hooks.once('setup',registerTraits);
+Hooks.once('init',()=>{
+  registerTraits();
+  game.settings.register(MOD,'playerRequests',{name:'Experimental player action requests',hint:'Route supported native actions through the active GM. Requires the GM on the same scene. Keep disabled until disposable-character two-client testing is complete.',scope:'world',config:true,type:Boolean,default:false});
+});Hooks.once('setup',registerTraits);
 export function contextFor(actor){
   const combat=game.combat?.started?game.combat:null;
   const index=combat?.turns.findIndex(c=>c.actor?.uuid===actor.uuid)??-1;
@@ -27,14 +32,11 @@ function permitted(actor){
   if(!actor || actor.type!=='character' || !actor.isOwner)throw Error('Select one character you own.');
   if(!actor.items.some(i=>i.type==='class' && (i.slug==='gunbreaker'||i.name==='Gunbreaker')))throw Error('This character needs the Gunbreaker class.');
 }
-function queue(actor,fn){
-  const task=(queues.get(actor.uuid)??Promise.resolve()).catch(()=>{}).then(fn);queues.set(actor.uuid,task);
-  return task.finally(()=>{if(queues.get(actor.uuid)===task)queues.delete(actor.uuid);});
-}
 /** Commit the entire transition in one flag update. Use one operator per character. */
 export async function record(actor,op,expected){
   permitted(actor);
-  return queue(actor,async()=>{
+  return actorQueue.run(actor,async()=>{
+    if(game.settings?.get(MOD,'playerRequests'))authority(actor);
     permitted(actor);
     const raw=actor.getFlag(MOD,'tracker')??initialState();
     if(['reserved','committed','recovery'].includes(actor.getFlag(MOD,'execution')?.status))throw Error('Reconcile the pending native execution before changing the tracker.');
@@ -48,6 +50,7 @@ export async function tracker(explicitActor){
   if(!explicitActor && selected.length>1)return ui.notifications.warn('Select only one Gunbreaker token.');
   const actor=explicitActor??selected[0]?.actor??game.user.character;
   try{permitted(actor);}catch(e){return ui.notifications.warn(e.message);}
+  if(!game.user.isGM&&game.settings.get(MOD,'playerRequests'))return nativePanel(actor,requestActions,contextFor);
   if(openActors.has(actor.uuid))return ui.notifications.info('This character’s tracker is already open.');
   openActors.add(actor.uuid);
   try{
@@ -71,14 +74,14 @@ export async function tracker(explicitActor){
           struck:b.form.elements.action.value==='guarded-advance' && ['miss','hit','critical'].includes(b.form.elements.outcome.value),
           failedTargetIds:[...b.form.querySelectorAll('input[name="failed-target"]:checked')].map(e=>e.value),
           ...Object.fromEntries(checks.map(([key])=>[key,b.form.elements[key].checked]))})},
-        ...(game.user.isGM?[button('native','Native action beta',{type:'native'})]:[]),
+        ...((game.user.isGM||game.settings.get(MOD,'playerRequests'))?[button('native','Native action beta',{type:'native'})]:[]),
         button('other','Record other action',{type:'other'}),button('reaction','Record other reaction',{type:'other',reaction:true}),button('start','Initialize encounter',{type:'start'}),
         button('end','Clear ended encounter',{type:'end'}),button('plus','Correct gauge +1',{type:'adjust',delta:1}),
         button('minus','Correct gauge −1',{type:'adjust',delta:-1}),button('daily','Daily preparations',{type:'daily'}),button('close','Close',null)
       ]});
       if(!op || typeof op!=='object')break;
       try{
-        if(op.type==='native'){await nativePanel(actor,nativeRunner,contextFor);continue;}
+        if(op.type==='native'){await nativePanel(actor,requestActions,contextFor);continue;}
         if(op.type==='daily' && !await foundry.applications.api.DialogV2.confirm({window:{title:'Daily preparations'},content:'<p>Have you completed daily preparations? This refreshes daily uses only on a later in-game day. Minute cooldowns continue to use world time.</p>',rejectClose:false}))continue;
         if(op.type==='daily' && learned.has('aetheric-calibration')){
           const choice=await foundry.applications.api.DialogV2.wait({window:{title:'Aetheric Calibration'},content:'<p>Choose the cartridge damage type for these daily preparations.</p>',rejectClose:false,buttons:['fire','cold','electricity'].map(type=>({action:type,label:type,callback:()=>type}))});
@@ -92,7 +95,8 @@ export async function tracker(explicitActor){
 }
 Hooks.once('ready',()=>{
   if(game.system.id!=='pf2e')return;
-  nativeRunner=createNativeRunner(contextFor);
-  game.modules.get(MOD).api={tracker,record,execute:(actor,request)=>nativeRunner.execute(actor,request),nativeActions:actor=>nativePanel(actor,nativeRunner,contextFor),adjustCartridges:(actor,delta)=>record(actor,{type:'adjust',delta}),getState:actor=>normalizeState(actor.getFlag(MOD,'tracker'),contextFor(actor))};
+  nativeRunner=createNativeRunner(contextFor,actorQueue);
+  requestActions=installRequests(nativeRunner,contextFor);
+  game.modules.get(MOD).api={tracker,record,execute:(actor,request)=>requestActions.execute(actor,request),nativeActions:actor=>nativePanel(actor,requestActions,contextFor),adjustCartridges:(actor,delta)=>record(actor,{type:'adjust',delta}),getState:actor=>normalizeState(actor.getFlag(MOD,'tracker'),contextFor(actor))};
 });
-// A chat rules card never executes a tracker transition.
+// Ordinary rules cards never execute transitions; only bounded explicit request envelopes do.
