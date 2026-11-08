@@ -29,3 +29,16 @@ Observed environment: Foundry 14 build 369, PF2e 8.7.0, Gunbreaker 1.3.0. The ca
 ## Full automation release gate
 
 Every remaining item in docs/AUTOMATION.md must have both implementation evidence and a GM/player live test, including party reactions, external actions, areas, movement, allied expiry, all riders and migrations. Test with relevant campaign modules enabled and disabled. Do not mark compatibility verified or describe the class as fully automated before that gate passes.
+
+## Experimental player requests — two-client gate
+
+Use one GM and one real player session on disposable actors. Keep the setting off in the campaign until all checks pass.
+
+- Enable Experimental player action requests. Confirm the player's tracker macro opens the native panel and only the GM/requester see the request card. The GM must see the same scene.
+- Select different targets on GM and player clients. Request Burst Strike as the player: the player's target is used, one native attack occurs, and exactly one cartridge is spent. Verify the normal GM roll/damage dialog flow and damage application.
+- Try an unowned actor, revoked ownership while queued, a second active GM, no GM, and a GM on another scene. All must fail without an unauthorized roll or state write.
+- Hold the panel open while the GM changes the tracker or advances combat. Submission must reject with no spend or opening change. Cancel the first encounter's roll and verify lazy initialization was not persisted.
+- Issue simultaneous requests for the same actor and a GM manual correction. Verify serialized work, revision rejection, and no lost updates. Ordinary rules cards and edits to a request card must not execute.
+- Try to supply a forged requester ID, hit result, or cost in a request. Reject it. Verify the server-reported create/update event user IDs with a second real client, not only a local hook call.
+- Timeout an outstanding request, deliver its acknowledgement late, then disconnect/reconnect clients. No automatic request replay or retry; reconcile the actual native roll and actor journal first.
+- Stop or replace the GM during a pending write. Treat this as an unresolved recovery case, not proof of failover safety. Keep routing disabled for regular play until the observed behavior and recovery procedure are accepted.

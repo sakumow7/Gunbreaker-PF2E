@@ -12,7 +12,7 @@ function actor(){
   getFlag:()=>state,setFlag:async(_mod,_key,next)=>{await new Promise(r=>setTimeout(r,5));state=structuredClone(next);}};
  game.combat.turns=[{actor:a},{actor:{uuid:'Actor.enemy'}}];return a;
 }
-test('posting cards has no registered mutation hook',()=>assert(!hooks.has('createChatMessage')));
+test('request transport is installed at ready, not at module import',()=>assert(!hooks.has('createChatMessage')));
 test('one atomic write stores resource and combo changes; stale duplicate is rejected',async()=>{
  const a=actor();const s=await record(a,{type:'start'},0);
  const results=await Promise.allSettled([record(a,{type:'use',slug:'keen-edge',outcome:'miss'},s.revision),record(a,{type:'use',slug:'keen-edge',outcome:'miss'},s.revision)]);

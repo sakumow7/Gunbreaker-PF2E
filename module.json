@@ -1,7 +1,7 @@
 {
   "id": "gunbreaker-pf2e",
   "title": "Gunbreaker Class (PF2e)",
-  "description": "PF2e Gunbreaker v1.4 rules revision with cartridge state tracking and a GM-only native-action automation prototype.",
+  "description": "PF2e Gunbreaker v1.4 rules revision with cartridge state tracking and a native-action prototype with optional experimental player requests.",
   "version": "1.4.0-beta.1",
   "authors": [
     {

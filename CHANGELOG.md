@@ -1,3 +1,12 @@
+# Unreleased — experimental player requests
+
+- Route explicit player intents through Foundry ChatMessage creation events, using the workflow creator ID for permission checks. Default off; requires one active GM on the same scene.
+- Open the native action panel directly from the tracker macro for players when enabled. Leave PF2e roll/damage dialogs on the GM client.
+- Revalidate ownership and stale resource/turn snapshots; preserve the requesting player's selected target. Share one queue between native and GM manual tracker changes.
+- Block uncertain deliveries and timeouts without retry; accept acknowledgements only from the selected GM's update events. Never replay old cards at startup.
+- Delay lazy encounter initialization until a valid action commits, so canceled or invalid first actions leave resources unchanged.
+- Add protocol, transport, concurrency, timeout and permission regression tests. Live GM/player verification is still pending; no release published.
+
 # 1.4.0-beta.1 — design implementation and native core prototype
 
 - Implement the approved rules revisions and three new selectable options plus Reserved Cartridge replacement.

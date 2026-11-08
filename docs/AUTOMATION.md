@@ -6,8 +6,8 @@ Design: DESIGN-v1.4.md. Branch candidate: 1.4.0-beta.1. No new release published
 |---|---|---|
 | Design | Approved in conversation; pinned in this repository | Numerical playtest |
 | Rules data | Revised JSON, stable compatible IDs, new feat IDs, retired-feat decisions; generated rules/packs | Live import/schema verification |
-| Core execution | Pure transaction runner, native PF2e adapter, GM prototype panel, persistent recovery journal | Native adapter smoke test; player routing; remaining actions |
-| Reactions and permissions | Trigger/cost specifications and resource gates | Full attack-bound reaction window, GM authority requests, two-client tests |
+| Core execution | Pure transaction runner, native PF2e adapter, native panel, persistent recovery journal, optional player transport | Native adapter and two-client smoke tests; remaining actions |
+| Reactions and permissions | Trigger/cost specifications, resource gates, creation-event ownership checks | Full attack-bound reaction window, live two-client tests |
 | Release candidate | Local build and static checks | Coverage completion, migration review, encounter tests, release approval |
 
 ## Implemented prototype coverage
@@ -22,7 +22,7 @@ Design: DESIGN-v1.4.md. Branch candidate: 1.4.0-beta.1. No new release published
 
 ## Required remaining scope
 
-1. Route authenticated owner requests to one GM authority; coordinate manual and native writes across clients. One local queue is not distributed locking. The prototype is deliberately GM-only and not a player-facing finished interface.
+1. Verify the experimental player request transport in a real GM/player session. Bounded intents, workflow-creator identity, ownership/revision/turn checks, a shared GM queue, no-replay behavior, and acknowledgement guards are implemented. The setting remains off by default; exactly one active GM and the same scene are required. One local queue is not distributed locking. GM disconnect/failover, world reload and delayed writes require adjudication, not automatic replay. The finished player sheet interface and player-side roll choices remain pending. See PLAYER-REQUESTS.md.
 2. Bind Heart of Stone to a native successful attack before damage, consolidate base/enhanced/reserve decisions, reconcile the regular and Guardian's Instinct reaction pools, apply native IWR once, and handle declined/timed-out prompts. Include spell attacks, delayed damage, rerolls and Bulwark Protocol.
 3. Area selection, saves, outcomes and damage for Demon Slice/Slaughter, Fated Circle/Brand, Double Down, Danger/Blasting Zone, Bow Shock, Saturation Fire, Reign secondary targets and Relentless Rush. Fated Brand must use fresh saves and original failed-save eligibility.
 4. Aurora recipient-turn ticks and immunity; Corundum post-damage one-shot healing; Heart of Light and Gunmetal Soul recipient effects and source-turn expiry. Do not infer damage from every HP update.
@@ -38,3 +38,5 @@ Design: DESIGN-v1.4.md. Branch candidate: 1.4.0-beta.1. No new release published
 Native calls were checked against official foundryvtt/pf2e source, v14-dev commit `57ba5add8352fd3162a05e0007717a93618be12a` (package version 8.7.0): character Strike variants/damage callbacks, CheckRoll.degreeOfSuccess, creature reach, Actor.applyDamage, DamageDice, RollOption, and encounter roll options. This is source compatibility evidence, not a live runtime test.
 
 Relevant campaign modules observed: PF2e Toolbelt, Workbench, HUD, Automated Animations and socketlib are active. Integrations must be tested before being relied on. No optional module is currently a new required dependency.
+
+Document transport references: [Foundry v14 createDocument hook](https://foundryvtt.com/api/v14/functions/hookEvents.createDocument.html) and [ChatMessage API](https://foundryvtt.com/api/v14/classes/foundry.documents.ChatMessage.html). These describe workflow creator IDs and document updates. Local transport tests mock that contract; they do not verify the live server behavior.

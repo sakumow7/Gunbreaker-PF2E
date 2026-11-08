@@ -39,3 +39,24 @@ test('new runner after reconnect refuses to replay an unresolved committed actio
  const h=setup({resolveError:true});await assert.rejects(()=>h.runner.execute(h.actor,{id:'persist',slug:'burst-strike'}));
  const fresh=new ActionRunner(h.ports);await assert.rejects(()=>fresh.execute(h.actor,{id:'persist',slug:'burst-strike'}),/recovery/);assert.equal(h.attacks,1);
 });
+test('stale request preflight runs inside the queue and cannot reserve or roll',async()=>{
+ const h=setup();h.ports.preflight=()=>{throw Error('stale');};
+ await assert.rejects(()=>h.runner.execute(h.actor,{id:'stale',slug:'burst-strike'}),/stale/);
+ assert.equal(h.attacks,0);assert.equal(h.journal,null);
+});
+test('first encounter initialization is not persisted by an invalid or canceled action',async()=>{
+ for(const cancel of [false,true]){
+  const h=setup({cancel});h.ports.read=()=>initialState();let writes=0;h.ports.write=()=>writes++;
+  if(!cancel)h.ports.validate=()=>{throw Error('invalid');};
+  const request={id:'first',slug:'burst-strike'};
+  if(cancel)assert.equal((await h.runner.execute(h.actor,request)).status,'canceled');
+  else await assert.rejects(()=>h.runner.execute(h.actor,request),/invalid/);
+  assert.equal(writes,0);
+ }
+});
+test('ownership lost during preflight prevents journal reservation and native roll',async()=>{
+ const h=setup();let allowed=true;h.ports.authorize=()=>{if(!allowed)throw Error('permission revoked');};
+ h.ports.validate=()=>{allowed=false;};
+ await assert.rejects(()=>h.runner.execute(h.actor,{id:'revoked',slug:'burst-strike'}),/permission revoked/);
+ assert.equal(h.journal,null);assert.equal(h.attacks,0);
+});
