@@ -8,6 +8,8 @@ Enable **Experimental player action requests** in the module's world settings on
 
 For Demon Slice/Slaughter, Fated Circle/Brand, Double Down, Bow Shock and Saturation Fire, the intent contains no targets and uses MAP zero. For Saturation Fire the GM first places and aims a native line region; the player cannot supply a region ID or target list. The GM discovers and confirms the area, resolves native saves, then reviews and applies area damage through the workflow. Danger Zone instead requires exactly one player-selected enemy; the GM rechecks that target, its range, and the passive Blasting Zone upgrade. It never substitutes the GM's current selection. Every save intent uses MAP zero and rejects client damage values. Detailed area recovery evidence stays in a GM-private chat journal; the actor execution flag contains its reference and status only. See AREA-COMBOS.md.
 
+Bloodfest and each Reign step require exactly one selected primary enemy. Reign requests preserve the player’s MAP selection; secondary target choices happen on the GM after a native hit, and cannot be supplied in the player intent. Primary HP application stays on normal card controls after the workflow completes. See REIGN.md.
+
 Only abilities already covered by the native core executor can be requested. Optional feat riders are rejected on the player request path until their choices are integrated. Follow-ups use the stored original target, not a newly selected target. Owned action data must be updated to the v1.4 compendium.
 
 ## Request contract
