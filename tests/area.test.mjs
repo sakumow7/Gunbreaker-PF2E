@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {AreaRunner,areaFormula,basicMultiplier,areaCommit,areaFinish} from '../scripts/area.mjs';
+import {AreaRunner,areaFormula,basicMultiplier,areaCommit,areaFinish,areaProfile,areaPersistentFormula} from '../scripts/area.mjs';
 import {ActorQueue} from '../scripts/queue.mjs';
 import {initialState,transition} from '../scripts/state.mjs';
 import {catalogue} from '../scripts/catalogue.mjs';
@@ -21,7 +21,7 @@ function setup({degrees=[0,1,2,3],slug='fated-circle'}={}){
 test('area formulas use level, calibration and fixed Brand dice without weapon or No Mercy bonuses',()=>{
  assert.equal(areaFormula('demon-slice',1),'1d4[slashing]');assert.equal(areaFormula('demon-slaughter',20),'10d4[slashing]');
  assert.equal(areaFormula('fated-circle',13,'cold'),'7d6[cold]');assert.equal(areaFormula('fated-brand',16,'electricity'),'2d6[electricity]');assert.equal(areaFormula('fated-brand',17),'3d6[fire]');
- assert.throws(()=>areaFormula('fated-circle',12,'force'));assert.throws(()=>areaFormula('double-down',14));
+ assert.throws(()=>areaFormula('fated-circle',12,'force'));assert.throws(()=>areaFormula('saturation-fire',14));
  assert.deepEqual([0,1,2,3].map(basicMultiplier),[2,1,.5,0]);assert.throws(()=>basicMultiplier(null));
 });
 test('Circle spends before any save, rolls damage once, applies native degrees and stores only original failures',async()=>{
@@ -98,4 +98,41 @@ test('finishing rejects missing or duplicated target results',()=>{
  const h=setup(),committed=areaCommit(h.state,'fated-circle',h.c,'id');
  assert.throws(()=>areaFinish(h.state,committed,'fated-circle',h.c,'id',[]),/exactly once/);
  assert.throws(()=>areaFinish(h.state,committed,'fated-circle',h.c,'id',h.c.targetIds.map(()=>({target:h.c.targetIds[0],degree:1}))),/exactly once/);
+});
+
+test('save power profiles preserve distinct range, upgrade and calibration rules',()=>{
+ assert.equal(areaProfile('double-down',14).range,10);
+ assert.equal(areaFormula('double-down',17,'cold'),'10d6[cold]');assert.equal(areaFormula('double-down',18,'electricity'),'12d6[electricity]');
+ assert.deepEqual([areaProfile('danger-zone',6).shape,areaProfile('danger-zone',6).range],['target',15]);
+ assert.equal(areaProfile('danger-zone',14,['blasting-zone']).range,30);
+ assert.equal(areaFormula('danger-zone',14,'cold',['blasting-zone']),'7d8[fire]');
+ assert.equal(areaFormula('danger-zone',7,'electricity'),'4d6[fire]');
+ assert.throws(()=>areaProfile('danger-zone',13,['blasting-zone']),/level 14/);
+ assert.equal(areaFormula('bow-shock',11,'cold'),'6d4[fire]');
+ assert.equal(areaPersistentFormula('bow-shock',11),'1d4[persistent,fire]');assert.equal(areaPersistentFormula('bow-shock',12),'2d4[persistent,fire]');
+ assert.equal(areaPersistentFormula('double-down',18),null);
+});
+test('frequency and cartridge costs commit before saves and survive canceled save resolution',async()=>{
+ for(const slug of ['double-down','danger-zone','bow-shock']){
+  const h=setup({slug,degrees:[1]});h.c.level=14;h.c.learned.push(slug);h.state={...h.state,cartridges:3};
+  h.p.save=()=>{assert.deepEqual(h.state.cooldowns[slug],[1000]);assert.equal(h.state.cartridges,slug==='double-down'?1:3);return null;};
+  await assert.rejects(()=>h.runner.execute(h.actor,h.req),/degree/);assert.equal(h.journal.status,'recovery');
+  assert.throws(()=>transition({...h.state,cartridges:3},{type:'use',slug},h.c,catalogue),/frequency/);
+ }
+});
+test('successful save powers spend one shared frequency and become available at the exact boundary',async()=>{
+ for(const slug of ['double-down','danger-zone','bow-shock']){
+  const h=setup({slug,degrees:[2]});h.c.level=14;h.c.learned.push(slug);h.state={...h.state,cartridges:3};
+  await h.runner.execute(h.actor,h.req);assert.deepEqual(h.state.cooldowns[slug],[1000]);
+  h.state={...h.state,cartridges:3};h.c.time+=slug==='double-down'?59:599;
+  await assert.rejects(()=>h.runner.execute(h.actor,{...h.req,id:'early'}),/frequency/);
+  h.c.time++;await h.runner.execute(h.actor,{...h.req,id:'ready'});assert.equal(h.damageRolls,2);
+ }
+});
+test('persistent application is independent of initial damage and cannot be added to a successful save',async()=>{
+ const h=setup({slug:'bow-shock',degrees:[1]});h.c.learned.push('bow-shock');
+ h.p.review=()=>[{target:h.c.targetIds[0],multiplier:0,persistent:true}];
+ await h.runner.execute(h.actor,h.req);assert.equal(h.applications.length,1);assert.equal(h.journal.applications[0].persistent,true);assert.equal(h.journal.applications[0].status,'complete');
+ const invalid=setup({slug:'bow-shock',degrees:[2]});invalid.c.learned.push('bow-shock');invalid.p.review=()=>[{target:invalid.c.targetIds[0],multiplier:1,persistent:true}];
+ await assert.rejects(()=>invalid.runner.execute(invalid.actor,invalid.req),/Invalid damage review/);assert.equal(invalid.applications.length,0);
 });

@@ -1,6 +1,6 @@
 import {RequestRouter,validateIntent} from './requests.mjs';
 import {activeGM} from './native.mjs';
-import {CORE_AREAS} from './area.mjs';
+import {SAVE_ACTIONS,TARGETED_SAVES} from './area.mjs';
 const MOD='gunbreaker-pf2e';
 /** Document lifecycle transport. No raw socket RPC or caller-supplied identity. */
 export function installRequests(runner,contextFor){
@@ -48,7 +48,7 @@ export function installRequests(runner,contextFor){
     if([...pending.values()].some(p=>p.actorUuid===actor.uuid))throw Error('This character has an unresolved request. Wait for its GM result before acting again.');
     const c=contextFor(actor),expected=request.expected??{revision:actor.getFlag(MOD,'tracker')?.revision??0,encounterId:c.encounterId,round:c.round,turn:c.turn};
     const intent=validateIntent({version:1,id:request.id??foundry.utils.randomID(),actorUuid:actor.uuid,sceneId:canvas.scene?.id,
-      gmId:gm.id,slug:request.slug,weaponId:request.weaponId,map:CORE_AREAS.has(request.slug)?0:request.map??0,targetIds:CORE_AREAS.has(request.slug)?[]:request.targetIds??c.targetIds,...expected});
+      gmId:gm.id,slug:request.slug,weaponId:request.weaponId,map:SAVE_ACTIONS.has(request.slug)?0:request.map??0,targetIds:SAVE_ACTIONS.has(request.slug)&&!TARGETED_SAVES.has(request.slug)?[]:request.targetIds??c.targetIds,...expected});
     if(pending.has(intent.id))throw Error('This request identifier is already pending.');
     // Register before create: the GM may answer before create's promise resolves.
     return new Promise((resolve,reject)=>{

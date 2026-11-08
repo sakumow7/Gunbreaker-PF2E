@@ -64,3 +64,13 @@ test('timeout never automatically retries and late GM acknowledgement releases t
  globalThis.ChatMessage.create=async()=>{throw Error('new request reached transport');};
  await assert.rejects(()=>h.api.execute(h.actor,{id:'next',slug:'burst-strike',weaponId:'blade'}),/delivery is uncertain/);
 });
+
+test('player save requests retain Danger Zone target but clear emanation targets and ignore MAP',async()=>{
+ for(const slug of ['danger-zone','double-down','bow-shock']){
+  const h=setup(false);let created;globalThis.ChatMessage={create:async data=>{created=data;return {};}};
+  const pending=h.api.execute(h.actor,{id:'click',slug,weaponId:'blade',map:2});await flush();
+  const request=created.flags[MOD].request;assert.equal(request.map,0);assert.deepEqual(request.targetIds,slug==='danger-zone'?['Scene.scene.Token.enemy']:[]);
+  const m={getFlag:(_m,k)=>k==='request'?request:{id:'click',status:'complete'}};
+  h.hooks.get('updateChatMessage')(m,{flags:{[MOD]:{response:{}}}},{},'gm');await pending;
+ }
+});

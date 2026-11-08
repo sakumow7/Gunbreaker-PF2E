@@ -1,5 +1,5 @@
 import {SUPPORTED} from './execution.mjs';
-import {CORE_AREAS} from './area.mjs';
+import {SAVE_ACTIONS,TARGETED_SAVES} from './area.mjs';
 const assert=(ok,message)=>{if(!ok)throw Error(message);};
 const plain=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
 const id=v=>typeof v==='string'&&/^[a-zA-Z0-9_-]{1,64}$/.test(v);
@@ -14,7 +14,7 @@ export function validateIntent(raw){
   assert(SUPPORTED.has(raw.slug),'This ability is not supported by native execution.');
   assert(Number.isInteger(raw.map)&&raw.map>=0&&raw.map<=2,'Invalid attack stage.');
   assert(Array.isArray(raw.targetIds)&&raw.targetIds.length<=1&&raw.targetIds.every(t=>token(t)&&t.startsWith(`Scene.${raw.sceneId}.Token.`)),'Select at most one target on the current scene.');
-  assert(!CORE_AREAS.has(raw.slug)||raw.targetIds.length===0,'Area targets are determined on the GM scene, not supplied by the requester.');
+  assert(!SAVE_ACTIONS.has(raw.slug)||(raw.map===0&&raw.targetIds.length===(TARGETED_SAVES.has(raw.slug)?1:0)),'Save activities use MAP zero; select one target for Danger Zone and no targets for emanations.');
   assert(Number.isSafeInteger(raw.revision)&&raw.revision>=0,'Invalid tracker revision.');
   assert(raw.encounterId===null||id(raw.encounterId),'Invalid encounter.');
   assert(Number.isSafeInteger(raw.round)&&raw.round>=0&&Number.isSafeInteger(raw.turn)&&raw.turn>=0,'Invalid turn.');

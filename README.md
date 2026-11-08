@@ -27,11 +27,11 @@ The server-delivered creation-event user ID identifies the requester. The coordi
 
 **Automatic damage interception, complete party reaction coverage, remaining area abilities, movement, external-action observation, and complete feat-rider coverage remain pending.** No distributed-lock, seamless GM failover, multi-client runtime safety, or live compatibility claim is made.
 
-## Core area prototype
+## Save-action prototype
 
-Demon Slice, Demon Slaughter, Fated Circle and Fated Brand now run from the same native panel. The GM confirms eligible enemies in the 5-foot emanation, resolves native Reflex saves against the Gunbreaker DC, and reviews damage before one native application per target. Each activity rolls damage once. Demon Slaughter loads its cartridge after every save resolves, including when all enemies succeed; Fated Brand makes fresh saves against original failed-save targets still in range.
+Demon Slice, Demon Slaughter, Fated Circle, Fated Brand, Double Down, Danger Zone and Bow Shock run from the same native panel. The GM confirms eligible enemies and geometry, resolves native Reflex saves against the Gunbreaker DC, and reviews damage before one native application per target. Double Down uses a 10-foot emanation; the other emanations use 5 feet. Danger Zone uses one selected enemy within 15 feet, automatically upgrading to Blasting Zone at 30 feet when learned. The upgrade shares Danger Zone's frequency. Each activity rolls damage once. Demon Slaughter loads its cartridge after every save resolves, including when all enemies succeed; Fated Brand makes fresh saves against original failed-save targets still in range.
 
-The player does not select targets or MAP for these four areas. Geometry, exceptional save-damage rules and outstanding reactions remain GM decisions. Hidden enemies require manual adjudication. Costs commit before saves; interruption records a private GM journal and blocks replay. Optional feat riders and the remaining area abilities are pending. See [area coverage and recovery](docs/AREA-COMBOS.md).
+Emanations need no player target selection; Danger Zone preserves the player's one selected target. These save abilities do not use MAP. Geometry, exceptional save-damage rules and outstanding reactions remain GM decisions. Hidden enemies require manual adjudication. Bow Shock includes native persistent fire on failed saves, without doubling it or applying an immediate tick. Its later ticks and recovery use PF2e's normal persistent-damage controls. Cartridge costs and frequencies commit before saves; interruption records a private GM journal and blocks replay. Optional feat riders and the remaining area abilities are pending. See [area coverage and recovery](docs/AREA-COMBOS.md).
 
 ## Heart of Stone prototype
 
