@@ -1,3 +1,4 @@
+import {createBulwarkService} from './bulwark-native.mjs';
 import {nativeDamageContext} from './native-damage.mjs';
 import {StoneRunner,stoneAttack,stoneDamage,stoneOptions,stoneEffect} from './stone.mjs';
 import {activeGM} from './native.mjs';
@@ -38,7 +39,9 @@ export function installStone(contextFor,actorQueue){
     return structuredClone(w);
   };
   const context=(actor,w)=>({...contextFor(actor),targetIds:[w.attack.target],selfTargetIds:[]});
+  const bulwark=createBulwarkService({authority:a=>{gm();if(!a.isOwner)throw Error('The reacting character is not owned.');},actorToken:singleToken});
   const runner=new StoneRunner({
+    prepareStep:bulwark.prepare,validateStep:bulwark.validate,stepEvidence:bulwark.evidence,moveStep:bulwark.move,
     gm,
     authorize:async(actor,userId)=>{gm();const user=game.users.get(userId);if(!user?.active||!actor.testUserPermission(user,'OWNER'))throw Error('You must own this reacting character.');},
     readWindow:async id=>windowData(id),
@@ -46,7 +49,7 @@ export function installStone(contextFor,actorQueue){
     attack:async id=>stoneAttack(game.messages.get(id)),sameTurn:w=>JSON.stringify(w.turn)===JSON.stringify(turnSnapshot()),
     context:async(actor,w)=>{const c=context(actor,w);const target=await fromUuid(w.attack.target);if(target?.actor?.uuid===actor.uuid)c.selfTargetIds=[w.attack.target];return c;},
     facts:factsFor,readActor:a=>a.getFlag(MOD,'tracker'),writeActor:(a,s)=>{gm();return a.setFlag(MOD,'tracker',s);},
-    journal:a=>a.getFlag(MOD,'execution'),saveJournal:(a,j)=>{gm();return a.setFlag(MOD,'execution',j);},
+    journal:a=>['prompting','planning','applying','recovery'].includes(a.getFlag(MOD,'followup')?.status)?{status:'recovery'}:a.getFlag(MOD,'execution'),saveJournal:(a,j)=>{gm();return a.setFlag(MOD,'execution',j);},
     damage:async(attack,id)=>stoneDamage(attack,game.messages.get(id)),
     targetActor:async uuid=>{const token=await fromUuid(uuid);if(!token?.actor)throw Error('Protected target no longer exists.');return token.actor;},
     applied:async(id,actorUuid)=>game.messages.get(id)?.getFlag(MOD,'stoneApplications')?.some(e=>e.actor===actorUuid),
@@ -97,10 +100,10 @@ export function installStone(contextFor,actorQueue){
     const timer=setTimeout(()=>ui.notifications.warn('Heart of Stone is still unresolved. The GM can explicitly continue without protection.'),60000);
     try{
       const choice=await foundry.applications.api.DialogV2.wait({window:{title:`Heart of Stone — ${candidate.name}`},rejectClose:false,
-        content:`<p>Protect <strong>${esc(w.targetName)}</strong> from the triggering ${w.attack.kind}?</p><p>Accept only if you can see both the ally and attacker and can legally react. These options do not include Bulwark Protocol movement. Costs are checked again when accepted.</p>`,
-        buttons:[...candidate.choices.map(c=>({action:c.id,label:`${c.label} · resistance ${c.resistance}`,callback:()=>c.id})),{action:'decline',label:'Decline',callback:()=> 'decline'}]});
+        content:`<p>Protect <strong>${esc(w.targetName)}</strong> from the triggering ${w.attack.kind}?</p><p>Accept only if you can see both the ally and attacker and can legally react. Costs are checked again when accepted.</p>${actor.items.some(i=>(i.slug??i.system?.slug)==='bulwark-protocol')&&candidate.choices.some(c=>!c.op.self)?'<label><input type="checkbox" name="bulwark"> Bulwark Protocol: plot a Step closer to the ally before protection (GM plans the path; canceling the path still accepts protection).</label>':''}`,
+        buttons:[...candidate.choices.map(c=>({action:c.id,label:`${c.label} · resistance ${c.resistance}`,callback:(_e,b)=>({choiceId:c.id,bulwark:!!b.form.elements.bulwark?.checked})})),{action:'decline',label:'Decline',callback:()=> 'decline'}]});
       await ChatMessage.create({author:game.user.id,whisper:[...new Set([w.gmId,game.user.id])],content:'<p>Heart of Stone response submitted.</p>',
-        flags:{[MOD]:{stoneResponse:{windowId:message.id,actorUuid,choiceId:typeof choice==='string'?choice:'decline',revision:w.revision}}}});
+        flags:{[MOD]:{stoneResponse:{windowId:message.id,actorUuid,choiceId:choice?.choiceId??'decline',bulwark:!!choice?.bulwark,revision:w.revision}}}});
     }finally{clearTimeout(timer);pendingPrompts.delete(key);}
   }
   async function applyDialog(message){
@@ -126,12 +129,12 @@ export function installStone(contextFor,actorQueue){
     if(response){
       const captured=structuredClone(response);
       void (async()=>{
-        if(Object.keys(captured).some(k=>!['windowId','actorUuid','choiceId','revision'].includes(k))||typeof captured.windowId!=='string'||typeof captured.actorUuid!=='string'||typeof captured.choiceId!=='string'||!Number.isSafeInteger(captured.revision))throw Error('Invalid reaction response.');
+        if(Object.keys(captured).some(k=>!['windowId','actorUuid','choiceId','revision','bulwark'].includes(k))||typeof captured.windowId!=='string'||typeof captured.actorUuid!=='string'||typeof captured.choiceId!=='string'||!Number.isSafeInteger(captured.revision)||(captured.bulwark!==undefined&&typeof captured.bulwark!=='boolean'))throw Error('Invalid reaction response.');
         if(message.author?.id!==userId)throw Error('Reaction response creator mismatch.');
         const w=windowData(captured.windowId),user=game.users.get(userId),candidate=w.candidates.find(c=>c.actor===captured.actorUuid);
         if(!candidate||(!user?.isGM&&candidate.owner!==userId))throw Error('This reaction was assigned to another owner.');
         const actor=await fromUuid(captured.actorUuid);if(!actor)throw Error('Reacting actor no longer exists.');
-        await runner.choose(captured.windowId,actor,captured.choiceId,userId,captured.revision);
+        await runner.choose(captured.windowId,actor,captured.choiceId,userId,captured.revision,{bulwark:captured.bulwark??false});
         await message.update({content:'<p>Heart of Stone response resolved.</p>'});
       })().catch(async e=>{ui.notifications.warn(e.message);await message.update({content:`<p>Heart of Stone response: ${esc(e.message)}. Reopen the reaction card if needed.</p>`}).catch(()=>{});});
       return;

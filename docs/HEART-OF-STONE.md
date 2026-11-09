@@ -38,7 +38,7 @@ Reservations are persisted before resource or HP writes. Duplicate module reques
 
 - Ordinary PF2e damage buttons, manual HP edits and automatic damage modules do not wait for this prompt and are not intercepted. In the isolated test, hold damage and use only the reaction card for the protected application. Do not enable this in normal play alongside automatic damage application until those integrations are implemented and tested.
 - This prototype accepts one protector per triggering attack window. Additional Gunbreakers reacting to the same attack must be adjudicated manually; the homebrew rules themselves are not changed to prohibit them.
-- Bulwark Protocol's optional Step is not automated. These prompts execute the no-Step option. Use a manual workflow when choosing the Step, checking original range before movement.
+- Bulwark Protocol offers an optional native Step after checking original range. The Step must finish closer to the protected ally; unsupported geometry and interrupted movement require adjudication. Live acceptance remains pending; see OPTIONAL-RIDERS.md.
 - Shield Block combinations, damage redirection, separate/split damage packets and manual damage multipliers are unsupported. Use manual adjudication for them.
 - The damage roll must already encode the correct native hit/critical degree. Some PF2e spell cards encode only success; those critical spell cases are blocked rather than manually doubled incorrectly. Successful spell attacks are otherwise eligible. The rule still includes critical spell attacks even where automation is incomplete.
 - The owner declares visibility; the GM confirms it during pairing. GM token visibility alone does not prove the character can see the attacker and ally.
@@ -51,3 +51,7 @@ Reservations are persisted before resource or HP writes. Duplicate module reques
 Unit tests cover trigger filtering, damage identity/outcome checks, range, resources, reaction pools, Aetheric Ward, decline/continue, duplicates, permission/staleness, recovery, and contextual-clone preparation. The native context adapter was checked against official PF2e 8.7.0 source at the commit recorded in AUTOMATION.md. Tests mock the Foundry document and damage APIs; they do not verify live IWR totals or server event identity.
 
 Before campaign use, run the Heart of Stone section of SMOKE-TEST.md with an actual GM and player, mixed damage types, competing resistances, native critical immunity, persistent damage, and the campaign modules. Record exact versions and results. No live installation or acceptance result is claimed by this implementation.
+
+## Bulwark follow-up
+
+The assisted owner prompt now includes optional Bulwark Protocol when learned. Original range is checked before a native Step closer to the protected ally. The original attack target is retained; interrupted movement leaves the reaction window in recovery. Canceling path planning skips only the Step and accepts the selected protection. See OPTIONAL-RIDERS.md for the implemented limits and remaining live acceptance.

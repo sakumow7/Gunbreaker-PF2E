@@ -15,7 +15,7 @@ function reign({slug='reign-of-beasts',degree=2,...options}={}){
   h.attackCalls.push({map,...args});if(h.cancelAttack)return null;
   const roll={degreeOfSuccess:degree,toJSON:()=>({degree,total:31})};
   h.attackMessage=await ChatMessage.create({isCheckRoll:true,actor:h.actor,item:{id:'blade'},rolls:[roll],flags:{pf2e:{context:{type:'attack-roll',action:'strike',target:{token:h.req.targetIds[0]}}}}});
-  args.callback(roll,null,h.attackMessage);return roll;
+  h.onAttack?.();args.callback(roll,null,h.attackMessage);return roll;
  }})),...Object.fromEntries(['damage','critical'].map(kind=>[kind,async args=>{
   h.primaryCalls.push({kind,...args});if(h.cancelPrimary)return null;
   const roll=await new h.DamageRoll('native weapon damage').evaluate();roll.options.degreeOfSuccess=degree;
@@ -98,3 +98,4 @@ test('native damage returns a roll; missing or ambiguous new cards stop secondar
   assert.equal(h.flags.execution.status,'recovery');assert.equal(h.saveArgs.length,0);assert.equal(h.applied.length,0);
  }
 });
+test('native Reign rechecks tracker freshness after the attack before spending or loading',async()=>{const h=reign({degree:3,learned:['bloodfest','reign-of-beasts','powder-discipline']});h.req.options={discipline:true};h.onAttack=()=>h.flags.tracker.revision++;const before=h.flags.tracker.cartridges;await assert.rejects(h.runner.execute(h.actor,h.req),/Tracker changed/);assert.equal(h.flags.tracker.cartridges,before);assert(!h.flags.tracker.once.discipline);assert.equal(h.primaryCalls.length,0);assert.equal(h.flags.execution.status,'recovery');});

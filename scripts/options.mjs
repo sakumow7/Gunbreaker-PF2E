@@ -12,7 +12,7 @@ export function resolvedOptions(raw,slug,outcome){
 export function validateResourceOptions(raw,slug,context,state){
  const options=resourceOptions(raw),learned=new Set(context.learned);
  for(const [key,feat] of [['expertise','cartridge-expertise'],['perfect','perfect-chamber'],['discipline','powder-discipline'],['cadence','executioners-cadence']])if(options[key]&&!learned.has(feat))throw Error(`This character has not learned ${feat}.`);
- if(options.discipline&&(state.once.discipline||!['keen-edge','brutal-shell','solid-barrel','burst-strike','gnashing-fang','savage-claw','wicked-talon','sonic-break','lightning-shot'].includes(slug)))throw Error('Powder Discipline is unavailable for this action.');
+ if(options.discipline&&(state.once.discipline||!['keen-edge','brutal-shell','solid-barrel','burst-strike','gnashing-fang','savage-claw','wicked-talon','sonic-break','lightning-shot','reign-of-beasts','noble-blood','lion-heart'].includes(slug)))throw Error('Powder Discipline is unavailable for this action.');
  if(options.cadence&&(!['wicked-talon','double-down'].includes(slug)||state.lastCadenceRound===context.round))throw Error('Executioner’s Cadence is unavailable for this action.');
  return options;
 }

@@ -77,6 +77,10 @@ export function createReignRunner(deps,queue){
       if(!roll)return null;
       return reignAttackEvidence(game.messages.get(messageId),actor.uuid,prepared.weaponId,prepared.primary.uuid);
     },
+    preCommit:async(actor,request,c,prepared,progress)=>{
+      assertFreshIntent(prepared.expected,contextFor(actor),actor.getFlag(MOD,'tracker'));
+      await verify(actor,request,c,prepared,progress);
+    },
     consumeOpening:async(actor,request)=>{
       if(request.slug!=='reign-of-beasts')return;
       const ids=actor.items.filter(i=>i.type==='effect'&&(i.slug??i.system?.slug)==='ready-to-reign'&&i.flags?.[MOD]?.execution).map(i=>i.id);
