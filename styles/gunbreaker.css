@@ -13,3 +13,17 @@
 .gunbreaker-tracker .note { font-size: .85em; line-height: 1.4; }
 .gunbreaker-dialog .form-footer { flex-wrap: wrap; }
 .gunbreaker-dialog .form-footer button { flex: 1 1 160px; }
+
+.gunbreaker-controls-dialog .form-footer { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+.gunbreaker-controls-dialog .form-footer button { white-space: normal; min-height: 36px; height: auto; padding: .4rem; }
+.gunbreaker-controls-dialog .dialog-content { max-height: 55vh; overflow-y: auto; }
+.gunbreaker-controls dl { display: grid; grid-template-columns: 7rem 1fr; gap: .25rem; }
+.gunbreaker-controls dd { margin: 0; }
+.gunbreaker-controls label,.gb-resource { display: flex; align-items: center; gap: .5rem; margin: .5rem 0; }
+.gunbreaker-controls select { flex: 1; min-width: 0; }
+.gunbreaker-controls .gb-gauge { border-bottom: 1px solid #b8860b; padding-bottom: .5rem; }
+.gunbreaker-controls details { margin: .6rem 0; font-size: .9em; }
+
+.gunbreaker-controls-dialog { max-height: calc(100vh - 40px); max-width: calc(100vw - 24px); }
+.gunbreaker-controls-dialog .window-content { overflow-y: auto; }
+.gunbreaker-controls-dialog .form-footer { flex-shrink: 0; }

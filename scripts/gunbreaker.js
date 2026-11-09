@@ -1,3 +1,4 @@
+import {installPanelButton} from './player-panel.mjs';
 import {installDemoralizeObserver} from './demoralize.mjs';
 import {installEncounterHooks} from './lifecycle.mjs';
 import {createMaintenance} from './maintenance.mjs';
@@ -104,6 +105,7 @@ Hooks.once('ready',()=>{
   if(game.system.id!=='pf2e')return;
   nativeRunner=createNativeRunner(contextFor,actorQueue);
   requestActions=installRequests(nativeRunner,contextFor);
+  installPanelButton(actor=>nativePanel(actor,requestActions,contextFor));
   installRushHooks(nativeRunner);
   installSupportHooks(actorQueue);
   installDemoralizeObserver(actorQueue);
