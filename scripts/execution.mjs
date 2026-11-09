@@ -9,7 +9,7 @@ import {SAVE_ACTIONS} from './area.mjs';
 export const CORE_STRIKES=new Set(['keen-edge','brutal-shell','solid-barrel','burst-strike','gnashing-fang','savage-claw','wicked-talon','sonic-break','lightning-shot']);
 export const CORE_FOLLOWUPS=new Set(['hypervelocity','jugular-rip','abdomen-tear','eye-gouge']);
 export const CORE_EFFECTS=new Set(['royal-guard','release-royal-guard','camouflage','nebula','no-mercy','superbolide','perfect-chamber','bloodfest']);
-export const SUPPORTED=new Set([...CORE_STRIKES,...CORE_FOLLOWUPS,...CORE_EFFECTS,...SAVE_ACTIONS,...REIGN_STEPS,...SUPPORT_ACTIONS]);
+export const SUPPORTED=new Set([...CORE_STRIKES,...CORE_FOLLOWUPS,...CORE_EFFECTS,...SAVE_ACTIONS,...REIGN_STEPS,...SUPPORT_ACTIONS,'guarded-advance','trajectory','suppressing-fire']);
 /**
  * Side-effect orchestration with injected native ports. One authority owns this runner.
  * A journal reservation survives client crashes. Never refund after a native check resolves.
@@ -26,7 +26,7 @@ export class ActionRunner {
     const p=this.ports;
     await p.authorize(actor,request);
     if(!request.id || typeof request.id!=='string' || request.id.length>100)throw Error('A valid execution ID is required.');
-    if(!SUPPORTED.has(request.slug)||SAVE_ACTIONS.has(request.slug)||REIGN_STEPS.has(request.slug)||SUPPORT_ACTIONS.has(request.slug))throw Error('This action is not yet supported by this native executor.');
+    if(!SUPPORTED.has(request.slug)||SAVE_ACTIONS.has(request.slug)||REIGN_STEPS.has(request.slug)||SUPPORT_ACTIONS.has(request.slug)||['guarded-advance','trajectory','suppressing-fire'].includes(request.slug))throw Error('This action is not yet supported by this native executor.');
     let context=await p.context(actor,request);
     const raw=await p.read(actor);
     const checkpoint={revision:raw?.revision??0,encounterId:context.encounterId,round:context.round,turn:context.turn};

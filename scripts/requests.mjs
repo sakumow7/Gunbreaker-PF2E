@@ -16,7 +16,7 @@ export function validateIntent(raw){
   assert(SUPPORTED.has(raw.slug),'This ability is not supported by native execution.');
   assert(Number.isInteger(raw.map)&&raw.map>=0&&raw.map<=2,'Invalid attack stage.');
   assert(Array.isArray(raw.targetIds)&&raw.targetIds.length<=1&&raw.targetIds.every(t=>token(t)&&t.startsWith(`Scene.${raw.sceneId}.Token.`)),'Select at most one target on the current scene.');
-  assert(!(REIGN_STEPS.has(raw.slug)||raw.slug==='bloodfest')||raw.targetIds.length===1,'Select exactly one primary enemy.');
+  assert(!(REIGN_STEPS.has(raw.slug)||['bloodfest','trajectory','suppressing-fire'].includes(raw.slug))||raw.targetIds.length===1,'Select exactly one primary creature.');
   assert(!SAVE_ACTIONS.has(raw.slug)||(raw.map===0&&raw.targetIds.length===(TARGETED_SAVES.has(raw.slug)?1:0)),'Save activities use MAP zero; select one target for Danger Zone and no targets for emanations.');
   assert(Number.isSafeInteger(raw.revision)&&raw.revision>=0,'Invalid tracker revision.');
   assert(raw.encounterId===null||id(raw.encounterId),'Invalid encounter.');

@@ -1,3 +1,4 @@
+import {installDemoralizeObserver} from './demoralize.mjs';
 import {installEncounterHooks} from './lifecycle.mjs';
 import {createMaintenance} from './maintenance.mjs';
 import {createNativeRunner,nativePanel,authority} from './native.mjs';
@@ -105,6 +106,7 @@ Hooks.once('ready',()=>{
   requestActions=installRequests(nativeRunner,contextFor);
   installRushHooks(nativeRunner);
   installSupportHooks(actorQueue);
+  installDemoralizeObserver(actorQueue);
   installEncounterHooks(contextFor,actorQueue);
   const heartOfStone=installStone(contextFor,actorQueue);
   const maintenance=createMaintenance(actorQueue);

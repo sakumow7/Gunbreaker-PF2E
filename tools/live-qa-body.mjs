@@ -24,5 +24,24 @@ await check('Native TempHP grants 9 and does not stack over 11',()=>{
 await check('Deleting TempHP source clears only its own barrier',()=>{
  return ['qaEffect12345678','otherEffect12345'].every(tempSource=>{const a=npc([{key:'TempHP',value:9}],{temp:9,tempSource}),r=a.rules.find(r=>r.key==='TempHP'),updates={};r.onDelete(updates);return tempSource==='qaEffect12345678'?foundry.utils.getProperty(updates,'system.attributes.hp.temp')===0:Object.keys(updates).length===0;});
 });
+await check('Suppressing Fire creates an isolated native visual Demoralize',()=>{
+ const base=game.pf2e.actions.get('demoralize'),before=JSON.stringify({traits:base.traits,modifiers:base.modifiers});
+ const action=suppressingAction(base);
+ return action.slug==='demoralize'&&action.traits.includes('visual')&&!action.traits.includes('auditory')&&action.modifiers.length===0&&action.rollOptions.includes('action:demoralize')&&action.rollOptions.includes('gunbreaker:action:suppressing-fire')&&JSON.stringify({traits:base.traits,modifiers:base.modifiers})===before;
+});
+await check('Native fear, mental, emotion and visual immunity recognize Suppressing Fire',()=>{
+ const source={name:'Suppressing Fire',type:'effect',system:{traits:{value:DEMORALIZE_TRAITS},duration:{value:-1,unit:'unlimited',expiry:null},rules:[]}};
+ return ['fear-effects','mental','emotion','visual'].every(type=>npc([{key:'Immunity',type}]).isImmuneTo(source));
+});
+await check('Foundry movement planning, completion and terrain APIs are present',()=>{
+ return typeof CONFIG.Token.objectClass.prototype.planMovement==='function'&&typeof CONFIG.Token.documentClass.prototype.move==='function'&&typeof CONFIG.Token.documentClass.prototype.stopMovement==='function'&&typeof CONFIG.Token.movement.TerrainData.getMovementCostFunction==='function';
+});
+await check('Native path measurement uses ordinary and greater terrain costs',()=>{
+ const token=new CONFIG.Token.documentClass({name:'Detached movement QA',x:0,y:0,width:1,height:1,elevation:0},{parent:canvas.scene});
+ const cost=CONFIG.Token.movement.TerrainData.getMovementCostFunction(token);
+ const path=[{x:0,y:0,elevation:0,width:1,height:1,action:'walk',terrain:{difficulty:2}},{x:canvas.grid.size,y:0,elevation:0,width:1,height:1,action:'walk',terrain:{difficulty:2}}];
+ const measured=token.measureMovementPath(path,{cost});
+ return measured.distance===5&&measured.cost===10&&cost({}, {},5,{terrain:{difficulty:3}})===15;
+});
 const esc=s=>foundry.utils.escapeHTML(String(s));
 await foundry.applications.api.DialogV2.wait({window:{title:'Gunbreaker isolated QA results'},position:{width:680},content:`<p>Foundry ${esc(game.version)} / PF2e ${esc(game.system.version)} / installed Gunbreaker ${esc(game.modules.get('gunbreaker-pf2e')?.version)}</p><p>Detached native models only. No actors, scene, combat or HP records changed.</p><ul>${results.map(r=>`<li>${r.pass?'PASS':'FAIL'} — ${esc(r.name)}${r.error?`: ${esc(r.error)}`:''}</li>`).join('')}</ul>`,buttons:[{action:'close',label:'Close'}]});
