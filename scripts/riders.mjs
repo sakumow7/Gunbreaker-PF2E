@@ -1,17 +1,30 @@
 import {nativeDamageContext} from './native-damage.mjs';
+import {assertFreshIntent} from './requests.mjs';
 const MOD='gunbreaker-pf2e';
 const position=t=>JSON.stringify([t.document.parent.id,t.document.x,t.document.y,t.document.elevation,t.document.width,t.document.height]);
 const coordinator=()=>{if(!game.user.isGM||game.users.filter(u=>u.active&&u.isGM).length!==1)throw Error('Riders require exactly one active GM.');};
 export function tempHPEffect(name,source,c,value,id,expiry='turn-start'){
  return {name,type:'effect',img:'icons/magic/defensive/shield-barrier-glowing-blue.webp',system:{slug:`gunbreaker-${name.toLowerCase().replaceAll(' ','-')}`,level:{value:c.level},duration:{value:1,unit:'rounds',expiry,sustained:false},start:{value:c.time,initiative:source.combatant?.initiative??null},context:{origin:{actor:source.uuid,token:null,item:null,rollOptions:[]},target:null,roll:null},rules:[{key:'TempHP',value}]},flags:{[MOD]:{execution:id}}};
 }
-export async function vortexGuard(actor,request,c,state,self){
+export async function vortexGuard(actor,request,c,state,self,deps={}){
  if(!c.learned.includes('vortex-guard')||state.once.vortexRound===c.round)return;
  const allies=canvas.tokens.placeables.filter(t=>t.actor&&t.actor.uuid!==actor.uuid&&actor.isAllyOf(t.actor)&&!t.actor.isDead&&!t.document.hidden&&t.isVisible!==false&&self.distanceTo(t)<=5);
  if(!allies.length)return;
- const origin=position(self);
- const selected=await foundry.applications.api.DialogV2.wait({window:{title:'Vortex Guard'},content:'<p>Grant the Brutal Shell barrier to one adjacent ally?</p>',rejectClose:false,buttons:[...allies.map(t=>({action:t.id??t.document.id,label:t.name,callback:()=>t.document.uuid})),{action:'skip',label:'Skip',callback:()=>null}]});
+ const origin=position(self),checkpoint={revision:state.revision,encounterId:c.encounterId,round:c.round,turn:c.turn};
+ let selected;
+ if(request.requesterId){
+  if(!deps.ownerChoices)throw Error('Owner rider choices are unavailable; reconcile the parent action.');
+  const options=allies.map((t,i)=>({id:`ally${i}`,label:`Protect ${t.name}`,target:t.document.uuid}));
+  const id=await deps.ownerChoices.ask(actor,request,{title:'Vortex Guard',text:'Grant the Brutal Shell barrier to one adjacent ally? Skip preserves this round’s Vortex Guard use.',choices:options.map(({id,label})=>({id,label}))});
+  if(id!==null&&!options.some(o=>o.id===id))throw Error('Invalid owner rider choice.');
+  selected=options.find(o=>o.id===id)?.target??null;
+ }else selected=await foundry.applications.api.DialogV2.wait({window:{title:'Vortex Guard'},content:'<p>Grant the Brutal Shell barrier to one adjacent ally?</p>',rejectClose:false,buttons:[...allies.map(t=>({action:t.id??t.document.id,label:t.name,callback:()=>t.document.uuid})),{action:'skip',label:'Skip',callback:()=>null}]});
+ if(deps.contextFor){
+  const now=deps.contextFor(actor);assertFreshIntent(checkpoint,now,actor.getFlag(MOD,'tracker'));
+  if(!now.learned.includes('vortex-guard')||now.level!==c.level||!now.inTurn||!now.wielding)throw Error('Vortex Guard source eligibility changed.');
+ }
  if(!selected)return;
+ if(actor.isDead||['unconscious','paralyzed','stunned'].some(s=>actor.hasCondition(s)))throw Error('The source can no longer use Vortex Guard.');
  coordinator();if(origin!==position(self))throw Error('Vortex Guard source moved.');
  const target=allies.find(t=>t.document.uuid===selected);
  if(!target||target.actor.isDead||target.document.hidden||target.isVisible===false||!request.lockedActors?.includes(target.actor.uuid)||!actor.isAllyOf(target.actor)||self.distanceTo(target)>5)throw Error('Vortex Guard recipient changed.');

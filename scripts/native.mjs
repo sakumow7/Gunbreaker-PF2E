@@ -58,7 +58,7 @@ async function applyEffect(actor,name,requestId){
   data.system.start={value:game.time.worldTime,initiative:actor.combatant?.initiative??null};
   await actor.createEmbeddedDocuments('Item',[data]);
 }
-export function createNativeRunner(contextFor,queue){
+export function createNativeRunner(contextFor,queue,ownerChoices){
   const single=new ActionRunner({
     authorize:async(actor,req)=>authority(actor,req),
     lockActors:async(actor,req)=>{authority(actor,req);const all=[actor,...canvas.tokens.placeables.map(t=>t.actor).filter(Boolean)];req.lockedActors=all.map(a=>a.uuid);return all;},
@@ -123,7 +123,7 @@ export function createNativeRunner(contextFor,queue){
           const value=Math.max(1,Math.floor(actor.level/2)),priorTemp=actor.system.attributes.hp.temp??0;
           await actor.applyDamage({damage:-value,token:actorToken(actor).document});
           await actor.createEmbeddedDocuments('Item',[{name:'Brutal Shell Barrier',type:'effect',img:'icons/magic/defensive/shield-barrier-glowing-blue.webp',system:{slug:'gunbreaker-brutal-shell-barrier',level:{value:actor.level},duration:{value:1,unit:'rounds',expiry:'turn-end',sustained:false},start:{value:game.time.worldTime,initiative:actor.combatant?.initiative??null},rules:[{key:'TempHP',value}]},flags:{[MOD]:{execution:req.id}}}]);
-          if(value>priorTemp)await vortexGuard(actor,req,c,after,actorToken(actor));
+          if(value>priorTemp)await vortexGuard(actor,req,c,after,actorToken(actor),{ownerChoices,contextFor});
         }
         if(req.slug==='burst-strike')await overpoweredRound(actor,req,c,after,t,weaponFor(actor,c.weaponId));
       }else if(req.slug==='bloodfest'){
@@ -153,7 +153,7 @@ export function createNativeRunner(contextFor,queue){
   const support=createSupportRunner({authority,contextFor,actorToken,weaponFor},queue);
   const movement=createMovementRunner({authority,contextFor,actorToken,weaponFor,strikeFor,applyEffect},queue);
   const demoralize=createDemoralizeRunner({authority,contextFor,actorToken,weaponFor},queue);
-  const followups=createFollowupRunner({authority,contextFor,actorToken},queue);
+  const followups=createFollowupRunner({authority,contextFor,actorToken,ownerChoices},queue);
   const executeBase=(actor,request)=>MOVEMENT_ACTIONS.has(request.slug)?movement.execute(actor,request):request.slug==='suppressing-fire'?demoralize.execute(actor,request):SUPPORT_ACTIONS.has(request.slug)?support.execute(actor,request):request.slug==='relentless-rush'?rush.execute(actor,request):REIGN_STEPS.has(request.slug)?reign.execute(actor,request):SAVE_ACTIONS.has(request.slug)?area.execute(actor,request):single.execute(actor,request);
   return {advanceRush:rush.advance,reconcileRush:rush.reconcile,async execute(actor,request){
     request=structuredClone(request);

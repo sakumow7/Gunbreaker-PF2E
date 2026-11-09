@@ -55,3 +55,17 @@ test('native entry offers Relentless Combo after a missed Solid Barrel and captu
  await runner.execute(h.actor,original);assert.equal(attacks,1);assert.equal(prompts,1);
  h.flags.followup.status='recovery';await assert.rejects(runner.execute(h.actor,{...original,id:'new'}),/pending optional rider/);assert.equal(attacks,1);
 });
+test('player Continued Assault maps only an offered owner choice to an adjacent ally',async()=>{
+ const h=fixture('hypervelocity');h.req.requesterId='player';h.actor.itemTypes.effect=[{slug:'royal-guard-stance'}];
+ h.deps.ownerChoices={ask:async(actor,req,options)=>{assert.equal(actor,h.actor);assert.equal(req.requesterId,'player');assert.equal(options.title,'Continued Assault');assert.deepEqual(options.choices.map(c=>c.id),['step','ally0']);return 'ally0';}};
+ await h.runner.execute(h.actor,h.req,h.parent,h.trigger);assert.equal(h.dialogs,0);assert.equal(h.effects.length,1);assert.equal(h.flags.followup.status,'complete');
+});
+test('player Skip preserves the rider use and never falls back to a GM choice',async()=>{
+ const h=fixture();h.req.requesterId='player';h.deps.ownerChoices={ask:async()=>null};const before=structuredClone(h.flags.tracker);
+ await h.runner.execute(h.actor,h.req,h.parent,h.trigger);assert.equal(h.dialogs,0);assert.equal(h.moves,0);assert.deepEqual(h.flags.tracker,before);assert.equal(h.flags.followup.status,'declined');
+});
+for(const mode of ['timeout','forged','stale','missing'])test(`owner rider ${mode} leaves the parent in recovery without spending the optional use`,async()=>{
+ const h=fixture();h.req.requesterId='player';
+ if(mode!=='missing')h.deps.ownerChoices={ask:async()=>{if(mode==='timeout')throw Error('owner timeout');if(mode==='stale')h.c.turn++;return mode==='forged'?'unoffered':'step';}};
+ await assert.rejects(h.runner.execute(h.actor,h.req,h.parent,h.trigger));assert.equal(h.dialogs,0);assert.equal(h.moves,0);assert.equal(h.flags.tracker.once['relentless-combo'],undefined);assert.equal(h.flags.followup.status,'recovery');assert.equal(h.flags.execution.status,'recovery');
+});

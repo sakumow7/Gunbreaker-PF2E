@@ -1,4 +1,5 @@
 import {installPanelButton} from './player-panel.mjs';
+import {installOwnerChoices} from './owner-choices-native.mjs';
 import {installDemoralizeObserver} from './demoralize.mjs';
 import {installEncounterHooks} from './lifecycle.mjs';
 import {createMaintenance} from './maintenance.mjs';
@@ -103,7 +104,7 @@ export async function tracker(explicitActor){
 }
 Hooks.once('ready',()=>{
   if(game.system.id!=='pf2e')return;
-  nativeRunner=createNativeRunner(contextFor,actorQueue);
+  nativeRunner=createNativeRunner(contextFor,actorQueue,installOwnerChoices());
   requestActions=installRequests(nativeRunner,contextFor);
   installPanelButton(actor=>nativePanel(actor,requestActions,contextFor));
   installRushHooks(nativeRunner);
