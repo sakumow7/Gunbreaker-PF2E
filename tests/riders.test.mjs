@@ -36,3 +36,24 @@ test('Fated Resolve reserves its round gate before applying TempHP and cannot aw
 test('temporary-HP effects use native non-stacking rules and carry a managed-expiry marker',()=>{
  const e=tempHPEffect('Fated Resolve',{uuid:'Actor.hero',combatant:{initiative:17}},{level:18,time:1000},9,'execution');assert.deepEqual(e.system.rules,[{key:'TempHP',value:9}]);assert.equal(e.flags[MOD].execution,'execution');assert.equal(e.system.start.initiative,17);
 });
+test('Vortex Guard uses an owner choice mapped to the GM candidate list',async()=>{
+ const h=fixture('vortex-guard');h.req.requesterId='player';let ownerPrompts=0;
+ foundry.applications.api.DialogV2.wait=async()=>assert.fail('must not ask the GM');
+ await vortexGuard(h.actor,h.req,h.c,h.flags.tracker,h.self,{contextFor:()=>h.c,ownerChoices:{ask:async(_actor,req,p)=>{ownerPrompts++;assert.equal(req.requesterId,'player');assert.equal(p.choices[0].id,'ally0');return 'ally0';}}});
+ assert.equal(ownerPrompts,1);assert.equal(h.effects.length,1);assert.equal(h.flags.tracker.once.vortexRound,1);
+});
+for(const mode of ['decline','stale','timeout','forged'])test(`Vortex Guard owner ${mode} cannot grant an unintended barrier`,async()=>{
+ const h=fixture('vortex-guard');h.req.requesterId='player';
+ const run=()=>vortexGuard(h.actor,h.req,h.c,h.flags.tracker,h.self,{contextFor:()=>h.c,ownerChoices:{ask:async()=>{
+  if(mode==='decline')return null;if(mode==='stale')h.c.turn++;if(mode==='timeout')throw Error('owner timeout');return mode==='forged'?'other':'ally0';
+ }}});
+ if(mode==='decline')await run();else await assert.rejects(run());assert.equal(h.effects.length,0);assert.equal(h.flags.tracker.once.vortexRound,undefined);
+});
+test('Vortex Guard rechecks source consciousness and feature ownership before granting a barrier',async()=>{
+ for(const mode of ['unconscious','feature']){
+  const h=fixture('vortex-guard');h.req.requesterId='player';let answered=false;
+  if(mode==='unconscious')h.actor.hasCondition=s=>answered&&s==='unconscious';
+  await assert.rejects(vortexGuard(h.actor,h.req,h.c,h.flags.tracker,h.self,{contextFor:()=>({...h.c,learned:mode==='feature'?[]:h.c.learned}),ownerChoices:{ask:async()=>{answered=true;return 'ally0';}}}));
+  assert.equal(h.effects.length,0);assert.equal(h.flags.tracker.once.vortexRound,undefined);
+ }
+});

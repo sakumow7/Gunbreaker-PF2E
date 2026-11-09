@@ -21,7 +21,7 @@ GM recovery, migration, rollback and Escort setup are behind **GM tools**. The l
 - Availability previews simulate the existing pure rules transition without actor writes. They do not certify range, terrain, valid recipients, line of effect, action budget, or pending transport delivery. Execution performs the actual checks.
 - The reaction label says **Not marked spent**, not that every other reaction has been observed. Ordinary actions/reactions and token dragging are not comprehensively observed. The GM must reconcile these before using an opening or reaction that may have been consumed.
 - A PF2e roll's attack/skill type alone does not establish whether it was an independent action, a subordinate check or a reaction. Posting a rules card is not execution evidence. This change adds no speculative external-action observer.
-- Native rolls still use the coordinator workflow. Player-side roll dialogs, owner-side optional rider prompts, primary damage interception, third-party module compatibility and real two-client acceptance remain unfinished.
+- Native rolls still use the coordinator workflow. Player-side roll dialogs, live acceptance of the owner-side rider prompts in OWNER-RIDER-CHOICES.md, primary damage interception, third-party module compatibility and real two-client acceptance remain unfinished.
 - No new release, campaign module installation, migration or actor-sheet item replacement accompanies this change.
 
 ## Validation

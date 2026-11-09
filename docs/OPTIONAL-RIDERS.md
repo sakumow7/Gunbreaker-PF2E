@@ -43,4 +43,8 @@ Cartridge Expertise only improves cartridge-generating finishers; the Reign step
 
 Regression coverage uses injected/mocked native APIs for trigger selection, round gates, all Reign attack degrees, cancellation, stale contexts, native Step constraints, Bulwark original-range/closer-destination checks, original-target preservation, queue release, partial writes and recovery. Native SpeedStatistic and Token.distanceTo contracts were checked against PF2e source commit `57ba5add8352fd3162a05e0007717a93618be12a` (8.7.0). The prior detached Forge checks in LIVE-QA-2026-11-08.md verify shared native model contracts; they do not establish that these new workflows have run in a live encounter.
 
-Still required: installed-candidate path planning and interruption tests, source-turn TempHP expiry in a real encounter, GM/player consent routing, ordinary external-action observation, automatic reaction interception and interaction with third-party automation. See AUTOMATION.md.
+Still required: installed-candidate path planning and interruption tests, source-turn TempHP expiry in a real encounter, real GM/player acceptance of the implemented owner-choice routing, ordinary external-action observation, automatic reaction interception and interaction with third-party automation. See AUTOMATION.md.
+
+## Acting-player choices
+
+Player-initiated Relentless Combo and Continued Assault now offer their tactical choice to the initiating owner. Step paths still require the GM. Vortex Guard uses the same bounded owner-choice transport. See [OWNER-RIDER-CHOICES.md](OWNER-RIDER-CHOICES.md) for recovery behavior and live acceptance gates.
