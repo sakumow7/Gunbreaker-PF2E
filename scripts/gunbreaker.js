@@ -46,7 +46,7 @@ export async function record(actor,op,expected){
     if(game.settings?.get(MOD,'playerRequests')||game.settings?.get(MOD,'stoneReactions'))authority(actor);
     permitted(actor);
     const raw=actor.getFlag(MOD,'tracker')??initialState();
-    if(['reserved','committed','recovery'].includes(actor.getFlag(MOD,'execution')?.status))throw Error('Reconcile the pending native execution before changing the tracker.');
+    if(['prompting','planning','applying','recovery'].includes(actor.getFlag(MOD,'followup')?.status)||['reserved','committed','recovery'].includes(actor.getFlag(MOD,'execution')?.status))throw Error('Reconcile the pending native execution before changing the tracker.');
     if(expected!==undefined && raw.revision!==expected)throw Error('Tracker changed while open. Refreshed; record the action again.');
     const next=transition(raw,op,contextFor(actor),catalogue);
     await actor.setFlag(MOD,'tracker',next);return next;

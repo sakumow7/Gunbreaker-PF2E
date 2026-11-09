@@ -1,3 +1,4 @@
+import {resourceOptions,resolvedOptions,validateResourceOptions} from './options.mjs';
 import {normalizeState,transition} from './state.mjs';
 import {catalogue} from './catalogue.mjs';
 import {strikeOutcome} from './mechanics.mjs';
@@ -21,7 +22,7 @@ export class ReignRunner{
   async #prepare(actor,request){
     const p=this.p;await p.authorize(actor,request);
     assert(REIGN_STEPS.has(request.slug)&&typeof request.id==='string'&&request.id.length>0&&request.id.length<=100,'Invalid Reign request.');
-    assert(!request.options||!Object.keys(request.options).length,'Optional Reign riders are not integrated.');
+    resourceOptions(request.options);
     const existing=await p.journal(actor);
     if(existing?.id===request.id&&['complete','canceled'].includes(existing.status))return existing;
     assert(!['reserved','committed','recovery'].includes(existing?.status),'Resolve the pending action first.');
@@ -39,7 +40,8 @@ export class ReignRunner{
     const c=await p.validate(actor,request,prepared);let before=normalizeState(await p.read(actor),c);
     if(before.events.includes(request.id))return {id:request.id,status:'complete',duplicate:true};
     if(before.encounter!==c.encounterId)before=transition(before,{type:'start'},c,catalogue);
-    transition(before,{type:'use',slug:request.slug,outcome:'miss'},c,catalogue);
+    const options=validateResourceOptions(request.options,request.slug,c,before);
+    transition(before,{type:'use',slug:request.slug,...resolvedOptions(options,request.slug,'miss'),outcome:'miss'},c,catalogue);
     let progress={id:request.id,slug:request.slug,status:'reserved',before,context:c,prepared,saves:[],applications:[]};
     await p.saveJournal(actor,progress);
     try{
@@ -49,7 +51,9 @@ export class ReignRunner{
       const attack=await p.attack(actor,request,c,prepared);
       if(!attack){progress.status='canceled';await p.saveJournal(actor,progress);return progress;}
       progress.attack=attack;await p.saveJournal(actor,progress);
-      const after=transition(before,{type:'use',slug:request.slug,id:request.id,outcome:strikeOutcome(attack.degree)},c,catalogue);
+      await p.preCommit?.(actor,request,c,prepared,progress);
+      const outcome=strikeOutcome(attack.degree);
+      const after=transition(before,{type:'use',slug:request.slug,id:request.id,...resolvedOptions(options,request.slug,outcome),outcome},c,catalogue);
       await p.write(actor,after);progress.revision=after.revision;await p.saveJournal(actor,progress);
       await p.consumeOpening?.(actor,request);
       if(attack.degree>=2){

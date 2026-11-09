@@ -27,7 +27,9 @@ The server-delivered creation-event user ID identifies the requester. The coordi
 
 Support powers, Lightning Shot, optional resource/rider controls, encounter cleanup, recovery/migration controls and Escort setup are now implemented as prototypes; see [coverage and limits](docs/SUPPORT-AND-RIDERS.md) and [detached live QA](docs/LIVE-QA-2026-11-08.md).
 
-**Automatic damage interception, complete party reaction coverage, live area validation, movement, external-action observation, and complete feat-rider coverage remain pending.** No distributed-lock, seamless GM failover, multi-client runtime safety, or live compatibility claim is made.
+Trajectory, Guarded Advance and Suppressing Fire have native prototypes. Relentless Combo and Continued Assault now offer their optional post-action Step or eligible ally barrier, and assisted Heart of Stone supports Bulwark Protocol. Reign Strikes support Powder Discipline. See [optional riders and their limits](docs/OPTIONAL-RIDERS.md).
+
+**Automatic damage interception, complete party reaction coverage, live area/movement/rider acceptance, and external-action observation remain pending.** No distributed-lock, seamless GM failover, multi-client runtime safety, or live compatibility claim is made.
 
 ## Save-action prototype
 
@@ -35,7 +37,7 @@ Demon Slice, Demon Slaughter, Fated Circle, Fated Brand, Double Down, Danger Zon
 
 Saturation Fire adds native placement for a 30-foot line. The GM places the origin on a grid corner along the acting token’s edge, aims it, then confirms enemies found through PF2e’s covered-space checks. It spends one cartridge and uses calibrated damage. This prototype requires a flat scene with 5-foot square spaces; unsupported elevations/grids need manual adjudication. Preview lines clear after completion/cancellation and stay for interrupted-action recovery.
 
-Emanations and Saturation Fire need no player target selection; Danger Zone preserves the player's one selected target. These save abilities do not use MAP. Geometry, exceptional save-damage rules and outstanding reactions remain GM decisions. Hidden enemies require manual adjudication. Bow Shock includes native persistent fire on failed saves, without doubling it or applying an immediate tick. Its later ticks and recovery use PF2e's normal persistent-damage controls. Cartridge costs and frequencies commit before saves; interruption records a private GM journal and blocks replay. Optional feat riders and live area validation are pending. See [area coverage and recovery](docs/AREA-COMBOS.md).
+Emanations and Saturation Fire need no player target selection; Danger Zone preserves the player's one selected target. These save abilities do not use MAP. Geometry, exceptional save-damage rules and outstanding reactions remain GM decisions. Hidden enemies require manual adjudication. Bow Shock includes native persistent fire on failed saves, without doubling it or applying an immediate tick. Its later ticks and recovery use PF2e's normal persistent-damage controls. Cartridge costs and frequencies commit before saves; interruption records a private GM journal and blocks replay. Demon Slaughter and Fated Brand now offer their learned post-action riders; live area validation remains pending. See [area coverage and recovery](docs/AREA-COMBOS.md).
 
 ## Reign sequence prototype
 
@@ -53,7 +55,7 @@ A separate, disabled-by-default **Experimental Heart of Stone reactions** settin
 
 The GM must pair the exact native damage card and apply it through the reaction card. The adapter supplies a temporary Resistance rule to a contextual target clone for one native damage application. It leaves no general resistance effect on the ally and does not subtract protection after PF2e IWR.
 
-**This is an assisted reaction workflow, not automatic interception of every damage application.** Ordinary damage buttons and other modules bypass it. Bulwark movement, Shield Block combinations, split damage packets, some critical spell damage representations, automatic visibility adjudication and recovery UI remain manual. Exactly one GM is required, and old windows after a GM reload cannot resume without manual reconciliation. See [full coverage and test boundaries](docs/HEART-OF-STONE.md). No live GM/player test has been completed.
+**This is an assisted reaction workflow, not automatic interception of every damage application.** Ordinary damage buttons and other modules bypass it. Bulwark movement is implemented with conservative Step constraints and still needs live acceptance. Shield Block combinations, split damage packets, some critical spell damage representations, automatic visibility adjudication and reaction-window recovery remain manual. Exactly one GM is required, and old windows after a GM reload cannot resume without manual reconciliation. See [full coverage and test boundaries](docs/HEART-OF-STONE.md). No live GM/player test has been completed.
 
 ## Build and review
 

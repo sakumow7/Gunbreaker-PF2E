@@ -3,11 +3,11 @@ import {catalogue} from './catalogue.mjs';
 import {assertFreshIntent} from './requests.mjs';
 export const MOVEMENT_ACTIONS=new Set(['guarded-advance','trajectory']);
 const assert=(ok,m)=>{if(!ok)throw Error(m);};
-export function capturePath(movement,origin){
+export function capturePath(movement,origin,action='walk'){
  assert(!movement.constrainOptions?.ignoreWalls&&!movement.constrainOptions?.ignoreCost,'Movement cannot bypass walls or terrain constraints.');
  const raw=movement.pending?.waypoints;assert(Array.isArray(raw)&&raw.length&&raw.length<=250,'A measured movement path is required.');
  const points=[origin,...raw].map(p=>{
-  assert(Number.isFinite(p.x)&&Number.isFinite(p.y)&&!p.teleport&&(!p.action||p.action==='walk'),'Use an ordinary ground movement path.');
+  assert(Number.isFinite(p.x)&&Number.isFinite(p.y)&&!p.teleport&&(!p.action||p.action===action),'Use an ordinary ground movement path.');
   assert((p.elevation??origin.elevation)===origin.elevation&&(p.level??origin.level)===origin.level,'Elevation/level-changing paths require manual adjudication.');
   assert((p.width??origin.width)===origin.width&&(p.height??origin.height)===origin.height,'Resizing during movement is unsupported.');
   return {x:p.x,y:p.y,elevation:origin.elevation,level:origin.level,width:origin.width,height:origin.height,terrain:{difficulty:p.terrain?.difficulty??1}};

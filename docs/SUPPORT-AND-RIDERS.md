@@ -25,7 +25,7 @@ The native panel shows an expandable resource section only for learned features.
 - Fated Resolve grants native TempHP once per round on Fated Circle/Double Down, with the gate committed before the effect write and expiry at the source's next turn start.
 - Overpowered Round offers secondary damage after Burst Strike hits. It excludes the primary target, source and allies, uses captured weapon-dice count and calibration, never doubles for the critical hit, and applies native IWR once per other enemy. Each application is journaled before HP. Hidden/duplicate/stale targets stop for adjudication.
 
-Relentless Combo, Continued Assault and Bulwark Protocol movement are not implemented here. Reign resource riders still require their own integration. Primary Strike and ordinary Continuation HP remain on native card controls; this PR does not intercept every damage button/module.
+Relentless Combo, Continued Assault, Bulwark Protocol movement and Reign Powder Discipline now have separate native prototypes documented in OPTIONAL-RIDERS.md; live acceptance remains pending. Primary Strike and ordinary Continuation HP remain on native card controls; this PR does not intercept every damage button/module.
 
 ## Lifecycle
 

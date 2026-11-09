@@ -56,7 +56,8 @@ Use disposable characters and exactly one GM. Disable automatic damage applicati
 - Apply an attack containing persistent bleed. Initial native application should create the condition; its later tick receives no Heart of Stone protection. A separate later attack also receives none.
 - Double-click responses/application; try simultaneous protectors and concurrent tracker corrections. At most one managed acceptance/application occurs. Confirm manual player writes are blocked while the setting is enabled.
 - Reroll/delete the attack, change ownership, advance combat before acceptance, or simulate a failed HP write. No silent refund, replay or guessed result. On GM reload, old windows require manual reconciliation.
-- Test Bulwark movement, Shield Block, split packets and third-party auto-apply as explicitly unsupported paths. Do not declare full reaction automation until they have implemented integrations and passing tests.
+- Test Bulwark's optional native Step on a disposable scene: original range must qualify before movement, the destination must be closer to the original ally, and the original attack target must be retained. Canceling planning still accepts the chosen protection; interrupted movement must stop acceptance and retain the spent reaction for recovery. Verify no queue deadlock when movement pauses.
+- Test Shield Block, split packets and third-party auto-apply as explicitly unsupported paths. Do not declare full reaction automation until they have implemented integrations and passing tests.
 
 ## Core areas — GM and player gate
 
@@ -126,3 +127,12 @@ Use disposable characters and exactly one GM. Disable automatic damage applicati
 - Overpowered Round/Fated Resolve/Vortex Guard: native IWR/TempHP, exact targets, primary damage-card automation, per-target failures and no replays.
 - Encounter/stance lifecycle: initiative start/end, weapon unequip, unconsciousness, same-actor tokens, off-scene actors, pending executions, reload and two active GMs.
 - Maintenance on copies: migration preview/conflicts, explicit retired-feat choice, complete actor backup, rollback retaining unrelated HP/custom edits, partial-write recovery, Escort duplicates and same-checkpoint repeated clicks.
+
+## Optional post-action riders and Reign resources
+
+- Complete Solid Barrel on a miss and Demon Slaughter with only successful saves. If Relentless Combo is learned and unused, each must offer a Step immediately after resolution; skipping leaves the round use available for a later trigger. Reopening the same request must not prompt or execute again.
+- Complete each single-target Continuation and Fated Brand. Continued Assault must offer one Step, or an adjacent ally barrier while Royal Guard is active, sharing one round use. Verify half-level TempHP and expiry at the source's next turn start using a real encounter.
+- Plot a native five-foot Step: reject difficult terrain, walls, occupied/crossed creature spaces, level/elevation changes, stale scene geometry and oversized sources. Verify the native action remains Step, with installed reaction modules enabled and disabled.
+- Interrupt a Step or TempHP write after commitment. The rider must remain spent, block replay, and preserve actual outcomes. Stop pending movement before accepting GM Recovery; recovery must not move, refund or grant another barrier.
+- Opt into Powder Discipline on Reign of Beasts, Noble Blood and Lion Heart. Only a critical hit grants one cartridge, once per encounter; secondary damage failure must not refund/regrant it. Mutating the tracker during the primary roll must stop commitment for reconciliation.
+- Run these choices from real GM/player clients. Post-action rider choices and path planning currently occur on the GM; confirm consent and request acknowledgements before declaring minimal-interface acceptance.

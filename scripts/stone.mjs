@@ -51,46 +51,62 @@ export function stoneEffect(value,eventId){
 /** Durable window state plus actor queue. The GM pairs damage explicitly; no guessed links. */
 export class StoneRunner {
   constructor(ports,actorQueue=new ActorQueue()){this.p=ports;this.actors=actorQueue;this.windows=new ActorQueue();}
-  choose(windowId,actor,choiceId,userId,revision){
-    return this.windows.run({uuid:windowId},()=>this.actors.run(actor,async()=>{
-      const p=this.p;await p.authorize(actor,userId);
-      const w=await p.readWindow(windowId);
-      assert(w?.status==='awaiting'&&w.revision===revision,'This reaction window has changed or closed.');
-      assert(w.candidates.some(c=>c.actor===actor.uuid)&&!w.declined.includes(actor.uuid),'This character has no pending choice.');
-      assert((await p.attack(w.attack.id))?.fingerprint===w.attack.fingerprint,'Attack changed or was rerolled; GM reconciliation is required.');
-      assert(p.sameTurn(w),'Combat advanced while this reaction was pending.');
-      if(choiceId==='decline'){
-        const declined=[...w.declined,actor.uuid];
-        const status=declined.length===w.candidates.length?'declined':'awaiting';
-        const next={...w,declined,status,revision:w.revision+(status==='declined'?1:0)};
-        await p.writeWindow(windowId,next);return next;
-      }
-      const context=await p.context(actor,w),facts=await p.facts(actor,w),raw=await p.readActor(actor);
-      const choice=stoneOptions(raw,context,facts).find(c=>c.id===choiceId);
-      assert(choice,'That protection option is no longer available.');
-      const journal=await p.journal(actor);
-      assert(!['reserved','committed','recovery'].includes(journal?.status),'Resolve the character’s pending action first.');
-      const id=`stone:${w.attack.id}:${actor.id??actor.uuid}`;
-      let state=normalizeState(raw,context);
-      assert(!state.events.includes(id),'This character already reacted to that attack.');
-      if(state.encounter!==context.encounterId)state=transition(state,{type:'start'},context,catalogue);
-      const nextState=transition(state,{...choice.op,id},context,catalogue);
-      const reserved={...w,status:'reserving',revision:w.revision+1,protector:actor.uuid,choice};
-      await p.authorize(actor,userId);
-      assert((await p.attack(w.attack.id))?.fingerprint===w.attack.fingerprint&&p.sameTurn(w),'Attack or turn changed before commitment.');
-      // Reserve on the window first. Failed later writes require reconciliation, never a replay.
-      await p.writeWindow(windowId,reserved);
+  choose(windowId,actor,choiceId,userId,revision,{bulwark=false}={}){
+    return this.windows.run({uuid:windowId},async()=>{
+      const p=this.p;let reserved,id,nextState,step=null;
+      const decline=await this.actors.run(actor,async()=>{
+        await p.authorize(actor,userId);assert(typeof bulwark==='boolean','Invalid Bulwark choice.');
+        const w=await p.readWindow(windowId);
+        assert(w?.status==='awaiting'&&w.revision===revision,'This reaction window has changed or closed.');
+        assert(w.candidates.some(c=>c.actor===actor.uuid)&&!w.declined.includes(actor.uuid),'This character has no pending choice.');
+        assert((await p.attack(w.attack.id))?.fingerprint===w.attack.fingerprint,'Attack changed or was rerolled; GM reconciliation is required.');
+        assert(p.sameTurn(w),'Combat advanced while this reaction was pending.');
+        if(choiceId==='decline'){
+          const declined=[...w.declined,actor.uuid],status=declined.length===w.candidates.length?'declined':'awaiting';
+          const next={...w,declined,status,revision:w.revision+(status==='declined'?1:0)};await p.writeWindow(windowId,next);return next;
+        }
+        const context=await p.context(actor,w),facts=await p.facts(actor,w),raw=await p.readActor(actor);
+        const choice=stoneOptions(raw,context,facts).find(c=>c.id===choiceId);
+        assert(choice,'That protection option is no longer available.');
+        const journal=await p.journal(actor);assert(!['reserved','committed','recovery'].includes(journal?.status),'Resolve the character’s pending action first.');
+        id=`stone:${w.attack.id}:${actor.id??actor.uuid}`;
+        let state=normalizeState(raw,context);assert(!state.events.includes(id),'This character already reacted to that attack.');
+        if(state.encounter!==context.encounterId)state=transition(state,{type:'start'},context,catalogue);
+        nextState=transition(state,{...choice.op,id},context,catalogue);
+        if(bulwark){
+          assert(!facts.self&&context.learned.includes('bulwark-protocol')&&context.level>=8&&p.prepareStep,'Bulwark Protocol requires its learned feat and another protected ally.');
+          step=await p.prepareStep(actor,w); // All original range/eligibility checks precede any Step.
+        }
+        await p.authorize(actor,userId);
+        assert((await p.attack(w.attack.id))?.fingerprint===w.attack.fingerprint&&p.sameTurn(w),'Attack or turn changed before commitment.');
+        assert(((await p.readActor(actor))?.revision??0)===(raw?.revision??0),'The tracker changed during the reaction choice.');
+        assert(stoneOptions(raw,await p.context(actor,w),await p.facts(actor,w)).some(c=>c.id===choiceId),'Reaction eligibility changed before commitment.');
+        if(step)await p.validateStep(actor,w,step);
+        reserved={...w,status:'reserving',revision:w.revision+1,protector:actor.uuid,choice,...(step?{bulwark:p.stepEvidence(step)}:{})};
+        await p.writeWindow(windowId,reserved);
+        try{
+          await p.saveJournal(actor,{id,slug:'heart-of-stone',status:'reserved',windowId,before:raw??initialState(),...(step?{bulwark:reserved.bulwark}:{})});
+          await p.writeActor(actor,nextState);
+        }catch(error){await p.writeWindow(windowId,{...reserved,status:'recovery',error:String(error.message??error)});throw error;}
+        return null;
+      });
+      if(decline)return decline;
       try{
-        await p.saveJournal(actor,{id,slug:'heart-of-stone',status:'reserved',windowId,before:raw??initialState()});
-        await p.writeActor(actor,nextState);
-        await p.saveJournal(actor,{id,slug:'heart-of-stone',status:'complete',revision:nextState.revision});
-        const accepted={...reserved,status:'accepted'};await p.writeWindow(windowId,accepted);return accepted;
-      }catch(error){
-        await p.writeWindow(windowId,{...reserved,status:'recovery',error:String(error.message??error)});
-        throw error;
-      }
-    }));
+        // Leave the actor queue available while native movement is paused. The window stays reserved,
+        // so damage cannot apply until movement has completed and protection is accepted.
+        if(step)await p.moveStep(actor,reserved,step);
+        return await this.actors.run(actor,async()=>{
+          await p.authorize(actor,userId);
+          assert((await p.attack(reserved.attack.id))?.fingerprint===reserved.attack.fingerprint&&p.sameTurn(reserved),'Attack or turn changed during the reaction.');
+          assert((await p.readActor(actor))?.revision===nextState.revision,'The tracker changed before protection was accepted.');
+          if(step){const f=await p.facts(actor,reserved),c=await p.context(actor,reserved);assert(f.conscious&&f.seesBoth&&f.enemy&&f.ally&&!f.self&&c.wielding&&c.learned.includes('heart-of-stone')&&Number.isFinite(f.distance)&&f.distance<=(c.learned.includes('guardians-instinct')?30:15),'Reaction eligibility changed during Bulwark movement.');}
+          await p.saveJournal(actor,{id,slug:'heart-of-stone',status:'complete',revision:nextState.revision,...(step?{bulwark:reserved.bulwark}:{})});
+          const accepted={...reserved,status:'accepted'};await p.writeWindow(windowId,accepted);return accepted;
+        });
+      }catch(error){await p.writeWindow(windowId,{...reserved,status:'recovery',error:String(error.message??error)});throw error;}
+    });
   }
+
   continue(windowId){return this.windows.run({uuid:windowId},async()=>{
     const p=this.p;await p.gm();const w=await p.readWindow(windowId);
     assert(w?.status==='awaiting','Only an unresolved reaction can be continued without protection.');

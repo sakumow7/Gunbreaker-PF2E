@@ -7,21 +7,23 @@ async function backup(actor,purpose){
  const message=await ChatMessage.create({whisper:game.users.filter(u=>u.isGM).map(u=>u.id),content:`<p>Gunbreaker ${esc(purpose)} backup — ${esc(actor.name)}. This private record preserves the pre-change actor.</p>`,flags:{[MOD]:{backup:data,purpose}}});
  if(!message?.id)throw Error('Backup could not be saved.');return message.id;
 }
+function stoppedForRecovery(actor){if(actor.getActiveTokens?.().some(t=>['planned','pending','paused'].includes(t.document.movement?.state)))throw Error('Stop the pending native movement before accepting recovery.');}
 export function createMaintenance(queue){
  return {
   async recover(actor){
-   gm(actor);const marker=structuredClone(actor.getFlag(MOD,'execution')),rush=structuredClone(actor.getFlag(MOD,'rush'));
+   gm(actor);stoppedForRecovery(actor);const marker=structuredClone(actor.getFlag(MOD,'execution')),rush=structuredClone(actor.getFlag(MOD,'rush')),followup=structuredClone(actor.getFlag(MOD,'followup'));
    const effects=actor.items.filter(i=>i.flags?.[MOD]?.support&&(['applying','recovery'].includes(i.flags[MOD].support.status)||['applying','recovery'].includes(i.flags[MOD].support.healing)));
    const effectSnapshot=JSON.stringify(effects.map(e=>[e.id,e.flags[MOD].support]));
-   if(!['reserved','committed','recovery'].includes(marker?.status)&&!['arming','resolving','recovery'].includes(rush?.status)&&!effects.length)throw Error('No interrupted automation was found.');
+   if(!['reserved','committed','recovery'].includes(marker?.status)&&!['arming','resolving','recovery'].includes(rush?.status)&&!effects.length&&!['prompting','planning','applying','recovery'].includes(followup?.status))throw Error('No interrupted automation was found.');
    const decision=await foundry.applications.api.DialogV2.wait({window:{title:'Resolve interrupted Gunbreaker automation'},rejectClose:false,
-    content:`<p>${esc(actor.name)} · action ${esc(marker?.slug??'none')} · ${esc(marker?.status??'none')}.</p><p>Inspect native chat, HP, effects and the private journal first. Accepting preserves current HP, effects and resources, closes interrupted follow-ups, and unlocks future actions. It never replays damage or refunds a cost.</p><label>Reconciliation note<textarea name="note"></textarea></label><label><input type="checkbox" name="verified"> I have reconciled the actual outcome and resource cost.</label>`,
+    content:`<p>${esc(actor.name)} · action ${esc(marker?.slug??'none')} · ${esc(marker?.status??'none')}.</p><p>Inspect native chat, position, HP, effects and the private journal first. Stop any pending native movement before accepting. Accepting preserves current HP, effects and resources, closes interrupted follow-ups, and unlocks future actions. It never replays damage or refunds a cost.</p><label>Reconciliation note<textarea name="note"></textarea></label><label><input type="checkbox" name="verified"> I have reconciled the actual outcome and resource cost.</label>`,
     buttons:[{action:'accept',label:'Accept current outcome',callback:(_e,b)=>b.form.elements.verified.checked?b.form.elements.note.value.trim():null}]});
    if(!decision)return;
    return queue.run(actor,async()=>{
-    gm(actor);if(effectSnapshot!==JSON.stringify(effects.map(e=>[e.id,actor.items.get(e.id)?.flags[MOD]?.support])))throw Error('Support recovery changed; review it again.');if(JSON.stringify(marker)!==JSON.stringify(actor.getFlag(MOD,'execution'))||JSON.stringify(rush)!==JSON.stringify(actor.getFlag(MOD,'rush')))throw Error('The pending record changed; review it again.');
+    gm(actor);stoppedForRecovery(actor);if(effectSnapshot!==JSON.stringify(effects.map(e=>[e.id,actor.items.get(e.id)?.flags[MOD]?.support])))throw Error('Support recovery changed; review it again.');if(JSON.stringify(followup)!==JSON.stringify(actor.getFlag(MOD,'followup'))||JSON.stringify(marker)!==JSON.stringify(actor.getFlag(MOD,'execution'))||JSON.stringify(rush)!==JSON.stringify(actor.getFlag(MOD,'rush')))throw Error('The pending record changed; review it again.');
     const backupId=await backup(actor,'recovery');
     if(marker)await actor.setFlag(MOD,'execution',{...marker,status:'complete',reconciliation:{note:decision.slice(0,2000),backupId,time:game.time.worldTime}});
+    if(followup&&['prompting','planning','applying','recovery'].includes(followup.status))await actor.setFlag(MOD,'followup',{...followup,status:'reconciled',reconciliation:{note:decision.slice(0,2000),backupId,time:game.time.worldTime}});
     if(rush&&['arming','resolving','recovery'].includes(rush.status))await actor.setFlag(MOD,'rush',{...rush,status:'skipped',reconciliation:backupId});
     for(const effect of effects){const s=effect.flags[MOD].support;await effect.setFlag(MOD,'support',{...s,status:s.kind==='aurora'?'complete':'active',healing:'complete',reconciliation:backupId});}
     return {backupId};

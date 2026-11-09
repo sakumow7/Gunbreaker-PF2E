@@ -2,7 +2,7 @@ import {initialState,transition} from './state.mjs';
 import {catalogue} from './catalogue.mjs';
 const MOD='gunbreaker-pf2e';
 const coordinator=()=>game.user.isGM&&game.users.filter(u=>u.active&&u.isGM).length===1;
-const busy=actor=>['reserved','committed','recovery'].includes(actor.getFlag(MOD,'execution')?.status);
+const busy=actor=>['prompting','planning','applying','recovery'].includes(actor.getFlag(MOD,'followup')?.status)||['reserved','committed','recovery'].includes(actor.getFlag(MOD,'execution')?.status);
 export function createEncounterLifecycle(contextFor,queue){
  return {sync:async actor=>{
   if(!coordinator()||actor?.type!=='character'||!actor.isOwner||!actor.items.some(i=>i.type==='class'&&(i.slug??i.system.slug)==='gunbreaker'))return;

@@ -51,3 +51,16 @@ test('expired readiness, expired combo and a missing Reign feat block before rol
  assert.throws(()=>transition(state,{type:'use',slug:'noble-blood',outcome:'hit'},missing.c,catalogue),/not learned reign/);
  assert.throws(()=>transition({...state,combo:{next:'noble-blood',untilTurn:0}},{type:'use',slug:'noble-blood',outcome:'hit'},h.c,catalogue),/opening/);
 });
+for(const slug of ['reign-of-beasts','noble-blood','lion-heart'])test(`${slug} critical can load Powder Discipline once`,async()=>{
+ const h=setup({degree:3});h.c.learned.push('powder-discipline');h.state.cartridges=0;if(slug!=='reign-of-beasts')h.state.combo={next:slug,untilTurn:2};
+ await h.runner.execute(h.actor,{...h.req,slug,options:{discipline:true}});assert.equal(h.state.cartridges,1);assert.equal(h.state.once.discipline,true);assert.equal(h.journal.status,'complete');
+});
+test('Reign hit/miss preserve unused Powder Discipline and invalid resource combinations reject before rolling',async()=>{
+ for(const degree of [0,1,2]){const h=setup({degree});h.c.learned.push('powder-discipline');h.state.cartridges=0;await h.runner.execute(h.actor,{...h.req,options:{discipline:true}});assert.equal(h.state.cartridges,0);assert(!h.state.once.discipline);}
+ for(const options of [{discipline:true},{expertise:true},{perfect:true},{cadence:true}]){const h=setup();await assert.rejects(h.runner.execute(h.actor,{...h.req,options}));assert.equal(h.attacks,0);}
+});
+test('Reign interrupted secondary damage keeps already-resolved Powder Discipline and never awards twice',async()=>{
+ const h=setup({degree:3});h.c.learned.push('powder-discipline');h.state.cartridges=0;h.p.apply=()=>{throw Error('partial damage');};
+ await assert.rejects(h.runner.execute(h.actor,{...h.req,options:{discipline:true}}),/partial/);assert.equal(h.state.cartridges,1);assert(h.state.once.discipline);await assert.rejects(h.runner.execute(h.actor,h.req),/pending/);assert.equal(h.state.cartridges,1);
+});
+test('learned resource feats cannot discount or enhance ineligible Reign steps',async()=>{for(const [key,feat] of [['expertise','cartridge-expertise'],['perfect','perfect-chamber'],['cadence','executioners-cadence']]){const h=setup();h.c.learned.push(feat);h.state.perfectUntil=1100;await assert.rejects(h.runner.execute(h.actor,{...h.req,options:{[key]:true}}));assert.equal(h.attacks,0);}});
