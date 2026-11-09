@@ -70,3 +70,7 @@ npm run balance
 Build generates the catalogue, all five LevelDB packs, RULES.html, migration source snapshots, and `dist/gunbreaker-pf2e-1.4.0-beta.1.zip`. The ZIP has module.json at its root. It is a local candidate; no release assets are published by building it.
 
 Target environment: **Foundry 14 build 369 / PF2e 8.7.0**. Those versions and installed Gunbreaker 1.3.0 were observed in Forge. This candidate itself has not been installed or tested there. Tests use pure transitions, mocked document lifecycle events and mocked native ports; they cannot certify the real Foundry adapter. Follow SMOKE-TEST.md on disposable characters before replacing campaign copies.
+
+### Compact action controls
+
+Owned Gunbreaker sheets have a **Gunbreaker** header button for grouped native actions, gauge/combo status and the current Continuation. Players still require experimental player requests. See [PLAYER-CONTROLS.md](docs/PLAYER-CONTROLS.md) for use, checks and remaining manual boundaries.
