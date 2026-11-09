@@ -46,3 +46,7 @@ test('shared actor queue serializes manual and native writes, and recovers from 
  assert.deepEqual(events,['native','other actor']);release();await Promise.all([failed,second]);
  assert.deepEqual(events,['native','other actor','native done','manual']);
 });
+test('new movement and Demoralize intents keep bounded target selection',()=>{
+ for(const slug of ['trajectory','suppressing-fire']){assert.equal(validateIntent({...intent(),slug}).slug,slug);assert.throws(()=>validateIntent({...intent(),slug,targetIds:[]}),/one primary/);}
+ assert.equal(validateIntent({...intent(),slug:'guarded-advance',targetIds:[]}).slug,'guarded-advance');
+});

@@ -1,6 +1,6 @@
 import {readFile,writeFile} from 'node:fs/promises';
 const root=new URL('../',import.meta.url),read=p=>readFile(new URL(p,root),'utf8');
-const helpers=(await read('scripts/lightning.mjs')).replaceAll('export ', '')+'\n'+(await read('scripts/support.mjs')).replaceAll('export ', '');
+const helpers=(await read('scripts/lightning.mjs')).replaceAll('export ', '')+'\n'+(await read('scripts/support.mjs')).replaceAll('export ', '')+'\n'+(await read('scripts/demoralize.mjs')).replace("const MOD='gunbreaker-pf2e';",'').replaceAll('export ', '');
 const weapon=JSON.parse(await read('packs/_source/gunbreaker-equipment/gunblade.json')),cls=JSON.parse(await read('packs/_source/gunbreaker-class/gunbreaker.json'));
 // Keep native preparation fields; reference prose and grant UUIDs are unnecessary for detached models.
 for(const d of [weapon,cls])delete d.system.description;cls.system.items={};

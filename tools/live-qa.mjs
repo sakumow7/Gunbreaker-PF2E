@@ -51,6 +51,47 @@ function supportActive(effect,time){
     &&(s.kind==='aurora'||time<s.created+(s.kind==='gunmetal-soul'?6:12)||effect.remainingDuration?.expired===false);
 }
 
+
+const DEMORALIZE_TRAITS=['visual','concentrate','emotion','fear','mental'];
+/** Build a separate native action; never mutate the shared system action or global language penalties. */
+function suppressingAction(base){
+ if(!base||base.slug!=='demoralize'||typeof base.use!=='function')throw Error('Native Demoralize action is unavailable.');
+ return new base.constructor({cost:1,name:'Suppressing Fire',description:base.description,img:base.img,slug:'demoralize',section:'skill',statistic:'intimidation',difficultyClass:'will',traits:[...DEMORALIZE_TRAITS],modifiers:[],notes:base.notes,rollOptions:['gunbreaker:action:suppressing-fire']});
+}
+function demoralizeEvidence(message){
+ const c=message?.flags?.pf2e?.context;
+ if(!message.isCheckRoll||c?.type!=='skill-check'||!c.options?.includes('action:demoralize')||!c.target?.actor||!message.actor?.uuid||![0,1,2,3].includes(message.rolls?.[0]?.degreeOfSuccess))return null;
+ if(c.isReroll)return null;
+ return {id:message.id,source:message.actor.uuid,target:c.target.actor,managed:c.options.includes('gunbreaker:action:suppressing-fire')};
+}
+function immunityActive(entries,source,time){return (entries??[]).some(e=>e.source===source&&e.until>time);}
+function immunityEntry(source,time,id){return {source,until:time+600,event:id};}
+function frightenedValue(degree){if(![0,1,2,3].includes(degree))throw Error('Demoralize has no resolved native outcome.');return Math.max(0,degree-1);}
+async function setFrightenedAtLeast(actor,value){
+ const current=actor.getCondition('frightened')?.value??0;
+ if(value<=current)return;
+ // PF2e's value parameter is an addend. A maximum plus a current-value check preserves stronger frightened.
+ const condition=await actor.increaseCondition('frightened',{value,max:value});
+ if(!condition)throw Error('Native frightened condition was not created.');
+}
+function installDemoralizeObserver(queue){
+ Hooks.on('createChatMessage',(message,_options,creator)=>{
+  const evidence=demoralizeEvidence(message);if(!evidence||evidence.managed||!game.user.isGM||game.users.filter(u=>u.active&&u.isGM).length!==1)return;
+  const time=game.time.worldTime;
+  void (async()=>{
+   const user=game.users.get(creator),target=await fromUuid(evidence.target);
+   if(!user||message.author?.id!==creator||!message.actor.testUserPermission(user,'OWNER')||!target?.isOwner)return;
+   await queue.run(target,async()=>{
+    if(!game.user.isGM||game.users.filter(u=>u.active&&u.isGM).length!==1)return;
+    const old=(target.getFlag(MOD,'demoralizeImmunity')??[]).filter(e=>e.until>time);
+    // An attempt against an already immune creature does not extend its immunity.
+    if(immunityActive(old,evidence.source,time))return;
+    await target.setFlag(MOD,'demoralizeImmunity',[...old,immunityEntry(evidence.source,time,evidence.id)]);
+   });
+  })().catch(e=>ui.notifications.warn(`Gunbreaker Demoralize immunity: ${e.message}`));
+ });
+}
+
 const qaWeapon={"_id":"b9c89a75351f5198","name":"Gunblade","type":"weapon","img":"icons/weapons/swords/greatsword-crossguard-steel.webp","system":{"level":{"value":0},"traits":{"value":["two-hand-d12","gunbreaker"],"rarity":"uncommon"},"publication":{"title":"Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1","remaster":true},"baseItem":"gunblade","category":"martial","group":"sword","damage":{"damageType":"slashing","dice":1,"die":"d8"},"bonus":{"value":0},"bonusDamage":{"value":0},"splashDamage":{"value":0},"range":null,"reload":{"value":""},"usage":{"canBeAmmo":false,"value":"held-in-one-hand"},"bulk":{"value":1},"price":{"value":{"gp":10}},"quantity":1,"hp":{"value":0,"max":0},"hardness":0,"size":"med","material":{"type":null,"grade":null},"runes":{"potency":0,"striking":0,"property":[]},"containerId":null,"rules":[{"key":"RollOption","domain":"all","option":"gunbreaker:wielding","predicate":["parent:equipped",{"or":["parent:hands-held:1","parent:hands-held:2"]}]}],"slug":"gunblade"},"folder":null,"sort":0,"ownership":{"default":0},"flags":{}};
 const qaClass={"_id":"d5d26315a5c8cd5e","name":"Gunbreaker","type":"class","img":"icons/weapons/swords/greatsword-crossguard-steel.webp","system":{"ancestryFeatLevels":{"value":[1,5,9,13,17]},"classFeatLevels":{"value":[1,2,4,6,8,10,12,14,16,18,20]},"skillFeatLevels":{"value":[2,4,6,8,10,12,14,16,18,20]},"generalFeatLevels":{"value":[3,7,11,15,19]},"skillIncreaseLevels":{"value":[3,5,7,9,11,13,15,17,19]},"attacks":{"simple":1,"martial":1,"unarmed":1,"advanced":0,"other":{"name":"","rank":0}},"defenses":{"heavy":0,"light":1,"medium":1,"unarmored":1},"savingThrows":{"fortitude":2,"reflex":1,"will":1},"trainedSkills":{"value":["athletics"],"additional":3},"keyAbility":{"value":["str","dex"]},"hp":10,"perception":1,"spellcasting":0,"publication":{"title":"Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1","remaster":true},"items":{},"traits":{"value":[],"rarity":"uncommon"},"rules":[],"slug":"gunbreaker"},"folder":null,"sort":0,"ownership":{"default":0},"flags":{}};
 const results=[];
@@ -78,6 +119,25 @@ await check('Native TempHP grants 9 and does not stack over 11',()=>{
 });
 await check('Deleting TempHP source clears only its own barrier',()=>{
  return ['qaEffect12345678','otherEffect12345'].every(tempSource=>{const a=npc([{key:'TempHP',value:9}],{temp:9,tempSource}),r=a.rules.find(r=>r.key==='TempHP'),updates={};r.onDelete(updates);return tempSource==='qaEffect12345678'?foundry.utils.getProperty(updates,'system.attributes.hp.temp')===0:Object.keys(updates).length===0;});
+});
+await check('Suppressing Fire creates an isolated native visual Demoralize',()=>{
+ const base=game.pf2e.actions.get('demoralize'),before=JSON.stringify({traits:base.traits,modifiers:base.modifiers});
+ const action=suppressingAction(base);
+ return action.slug==='demoralize'&&action.traits.includes('visual')&&!action.traits.includes('auditory')&&action.modifiers.length===0&&action.rollOptions.includes('action:demoralize')&&action.rollOptions.includes('gunbreaker:action:suppressing-fire')&&JSON.stringify({traits:base.traits,modifiers:base.modifiers})===before;
+});
+await check('Native fear, mental, emotion and visual immunity recognize Suppressing Fire',()=>{
+ const source={name:'Suppressing Fire',type:'effect',system:{traits:{value:DEMORALIZE_TRAITS},duration:{value:-1,unit:'unlimited',expiry:null},rules:[]}};
+ return ['fear-effects','mental','emotion','visual'].every(type=>npc([{key:'Immunity',type}]).isImmuneTo(source));
+});
+await check('Foundry movement planning, completion and terrain APIs are present',()=>{
+ return typeof CONFIG.Token.objectClass.prototype.planMovement==='function'&&typeof CONFIG.Token.documentClass.prototype.move==='function'&&typeof CONFIG.Token.documentClass.prototype.stopMovement==='function'&&typeof CONFIG.Token.movement.TerrainData.getMovementCostFunction==='function';
+});
+await check('Native path measurement uses ordinary and greater terrain costs',()=>{
+ const token=new CONFIG.Token.documentClass({name:'Detached movement QA',x:0,y:0,width:1,height:1,elevation:0},{parent:canvas.scene});
+ const cost=CONFIG.Token.movement.TerrainData.getMovementCostFunction(token);
+ const path=[{x:0,y:0,elevation:0,width:1,height:1,action:'walk',terrain:{difficulty:2}},{x:canvas.grid.size,y:0,elevation:0,width:1,height:1,action:'walk',terrain:{difficulty:2}}];
+ const measured=token.measureMovementPath(path,{cost});
+ return measured.distance===5&&measured.cost===10&&cost({}, {},5,{terrain:{difficulty:3}})===15;
 });
 const esc=s=>foundry.utils.escapeHTML(String(s));
 await foundry.applications.api.DialogV2.wait({window:{title:'Gunbreaker isolated QA results'},position:{width:680},content:`<p>Foundry ${esc(game.version)} / PF2e ${esc(game.system.version)} / installed Gunbreaker ${esc(game.modules.get('gunbreaker-pf2e')?.version)}</p><p>Detached native models only. No actors, scene, combat or HP records changed.</p><ul>${results.map(r=>`<li>${r.pass?'PASS':'FAIL'} — ${esc(r.name)}${r.error?`: ${esc(r.error)}`:''}</li>`).join('')}</ul>`,buttons:[{action:'close',label:'Close'}]});
