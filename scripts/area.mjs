@@ -1,3 +1,4 @@
+import {resourceOptions,resolvedOptions,validateResourceOptions} from './options.mjs';
 import {normalizeState,transition,COSTS} from './state.mjs';
 import {catalogue} from './catalogue.mjs';
 import {ActorQueue} from './queue.mjs';
@@ -28,18 +29,21 @@ export function basicMultiplier(degree){
   assert([0,1,2,3].includes(degree),'Native save has no resolved degree of success.');
   return [2,1,0.5,0][degree];
 }
-export function areaCommit(before,slug,context,id){
+export function areaCommit(before,slug,context,id,options={}){
   // Validate the complete activity before separating its start costs from completion rewards.
-  const preview=transition(before,{type:'use',slug,id,outcome:slug==='fated-circle'?'none':undefined},context,catalogue);
+  validateResourceOptions(options,slug,context,before);
+  const preOptions=resolvedOptions(options,slug,null);
+  const preview=transition(before,{type:'use',slug,id,...preOptions,outcome:slug==='fated-circle'?'none':undefined},context,catalogue);
   return {...structuredClone(before),revision:preview.revision,events:preview.events,
-    cartridges:before.cartridges-(COSTS[slug]??0),cooldowns:preview.cooldowns,dailyUses:preview.dailyUses,
+    cartridges:before.cartridges-(COSTS[slug]??0)+(preOptions.perfect?1:0),perfectRound:preview.perfectRound,once:{...before.once,...(preview.once.fatedRound!==undefined?{fatedRound:preview.once.fatedRound}:{})},cooldowns:preview.cooldowns,dailyUses:preview.dailyUses,
     continuation:null,lastFollowRound:preview.lastFollowRound};
 }
-export function areaFinish(before,committed,slug,context,id,saves){
+export function areaFinish(before,committed,slug,context,id,saves,options={}){
   assert(saves.length===context.targetIds.length&&new Set(saves.map(s=>s.target)).size===saves.length&&saves.every(s=>context.targetIds.includes(s.target)),'Save results must cover each affected target exactly once.');
   for(const save of saves)basicMultiplier(save.degree);
   const failed=saves.filter(s=>s.degree<=1).map(s=>s.target);
-  const next=transition(before,{type:'use',slug,id,outcome:slug==='fated-circle'?(failed.length?'failed':'none'):undefined,failedTargetIds:failed},context,catalogue);
+  const outcome=slug==='fated-circle'?(failed.length?'failed':'none'):slug==='double-down'&&saves.some(s=>s.degree===0)?'critical-failure':undefined;
+  const next=transition(before,{type:'use',slug,id,...resolvedOptions(options,slug,outcome),outcome,failedTargetIds:failed},context,catalogue);
   return {...next,revision:committed.revision+1};
 }
 export class AreaRunner{
@@ -54,7 +58,8 @@ export class AreaRunner{
   async #prepare(actor,request){
     const p=this.p;await p.authorize(actor,request);
     assert(typeof request.id==='string'&&request.id.length>0&&request.id.length<=100&&SAVE_ACTIONS.has(request.slug),'Invalid area request.');
-    assert(!request.options||!Object.keys(request.options).length,'Optional area riders are not yet supported.');
+    resourceOptions(request.options);
+    assert(!request.options?.discipline,'Powder Discipline requires a critical Strike.');
     const prior=await p.journal(actor);
     if(prior?.id===request.id&&['complete','canceled'].includes(prior.status))return prior;
     assert(!['reserved','committed','recovery'].includes(prior?.status),'Resolve the pending action before starting another.');
@@ -75,13 +80,14 @@ export class AreaRunner{
     let before=normalizeState(await p.read(actor),c);
     if(before.events.includes(request.id))return {id:request.id,status:'complete',duplicate:true};
     if(before.encounter!==c.encounterId)before=transition(before,{type:'start'},c,catalogue);
-    const committed=p.commit?await p.commit(actor,request,before,c):areaCommit(before,request.slug,c,request.id);
+    const committed=p.commit?await p.commit(actor,request,before,c):areaCommit(before,request.slug,c,request.id,request.options);
     let progress={id:request.id,slug:request.slug,status:'reserved',before,context:c,prepared,saves:[],applications:[]};
     await p.saveJournal(actor,progress);
     try{
       await p.authorize(actor,request);
       // Committing the activity precedes native saves. Later cancellation cannot refund a begun activity.
       progress={...progress,status:'committed'};await p.saveJournal(actor,progress);await p.write(actor,committed);
+      await p.onCommitted?.(actor,request,c,before,committed);
       progress.damage=prepared.targets.length?await p.damage(actor,request,c,prepared,committed):null;await p.saveJournal(actor,progress);
       for(const target of prepared.targets){
         await p.authorize(actor,request);
@@ -90,7 +96,7 @@ export class AreaRunner{
         basicMultiplier(result?.degree);
       }
       // These rewards follow resolution of all saves, even if later HP application is interrupted.
-      const after=p.finish?await p.finish(actor,request,before,committed,c):areaFinish(before,committed,request.slug,c,request.id,progress.saves);
+      const after=p.finish?await p.finish(actor,request,before,committed,c):areaFinish(before,committed,request.slug,c,request.id,progress.saves,request.options);
       await p.write(actor,after);
       const review=prepared.targets.length?await p.review(actor,request,c,prepared,progress):[];
       assert(review&&review.length===progress.saves.length,'Area resolution needs GM recovery; no damage was applied by this workflow.');

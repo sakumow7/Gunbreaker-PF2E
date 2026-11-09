@@ -41,14 +41,13 @@ export function installRequests(runner,contextFor){
   return {async execute(actor,request){
     if(game.user.isGM&&activeGM()?.id===game.user.id)return runner.execute(actor,request);
     if(!game.settings.get(MOD,'playerRequests'))throw Error('Experimental player requests are disabled.');
-    if(request.options&&Object.keys(request.options).length)throw Error('Optional feat riders are not yet supported by player requests.');
     const gm=activeGM();if(!gm)throw Error('An active GM coordinator is required.');
     if(game.users.filter(u=>u.active&&u.isGM).length!==1)throw Error('Experimental player routing requires exactly one active GM.');
     if(!actor?.isOwner||actor.type!=='character')throw Error('Select an owned character.');
     if([...pending.values()].some(p=>p.actorUuid===actor.uuid))throw Error('This character has an unresolved request. Wait for its GM result before acting again.');
     const c=contextFor(actor),expected=request.expected??{revision:actor.getFlag(MOD,'tracker')?.revision??0,encounterId:c.encounterId,round:c.round,turn:c.turn};
     const intent=validateIntent({version:1,id:request.id??foundry.utils.randomID(),actorUuid:actor.uuid,sceneId:canvas.scene?.id,
-      gmId:gm.id,slug:request.slug,weaponId:request.weaponId,map:SAVE_ACTIONS.has(request.slug)?0:request.map??0,targetIds:SAVE_ACTIONS.has(request.slug)&&!TARGETED_SAVES.has(request.slug)?[]:request.targetIds??c.targetIds,...expected});
+      gmId:gm.id,slug:request.slug,weaponId:request.weaponId,...(request.options?{options:request.options}:{}),map:SAVE_ACTIONS.has(request.slug)?0:request.map??0,targetIds:SAVE_ACTIONS.has(request.slug)&&!TARGETED_SAVES.has(request.slug)?[]:request.targetIds??c.targetIds,...expected});
     if(pending.has(intent.id))throw Error('This request identifier is already pending.');
     // Register before create: the GM may answer before create's promise resolves.
     return new Promise((resolve,reject)=>{

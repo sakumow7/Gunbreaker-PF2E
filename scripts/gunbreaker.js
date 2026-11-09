@@ -1,6 +1,9 @@
+import {installEncounterHooks} from './lifecycle.mjs';
+import {createMaintenance} from './maintenance.mjs';
 import {createNativeRunner,nativePanel,authority} from './native.mjs';
 import {ActorQueue} from './queue.mjs';
 import {installRequests} from './transport.mjs';
+import {installSupportHooks} from './support-native.mjs';
 import {installRushHooks} from './rush-native.mjs';
 import {installStone} from './stone-native.mjs';
 import {initialState,normalizeState,capacity,transition} from './state.mjs';
@@ -101,7 +104,10 @@ Hooks.once('ready',()=>{
   nativeRunner=createNativeRunner(contextFor,actorQueue);
   requestActions=installRequests(nativeRunner,contextFor);
   installRushHooks(nativeRunner);
+  installSupportHooks(actorQueue);
+  installEncounterHooks(contextFor,actorQueue);
   const heartOfStone=installStone(contextFor,actorQueue);
-  game.modules.get(MOD).api={tracker,record,heartOfStone,execute:(actor,request)=>requestActions.execute(actor,request),nativeActions:actor=>nativePanel(actor,requestActions,contextFor),adjustCartridges:(actor,delta)=>record(actor,{type:'adjust',delta}),getState:actor=>normalizeState(actor.getFlag(MOD,'tracker'),contextFor(actor))};
+  const maintenance=createMaintenance(actorQueue);
+  game.modules.get(MOD).api={tracker,record,heartOfStone,maintenance,execute:(actor,request)=>requestActions.execute(actor,request),nativeActions:actor=>nativePanel(actor,requestActions,contextFor),adjustCartridges:(actor,delta)=>record(actor,{type:'adjust',delta}),getState:actor=>normalizeState(actor.getFlag(MOD,'tracker'),contextFor(actor))};
 });
 // Ordinary rules cards never execute transitions; only bounded explicit request envelopes do.

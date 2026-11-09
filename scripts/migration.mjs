@@ -42,3 +42,29 @@ export function actorBackup(actor){
   if(copy.flags?.[MOD])delete copy.flags[MOD].backups;
   return {format:1,created:new Date().toISOString(),actor:copy};
 }
+
+const readPath=(value,path)=>path.split('.').reduce((v,k)=>v?.[k],value);
+const plain=v=>!!v&&typeof v==='object'&&!Array.isArray(v);
+function restorePath(update,path,before,after){
+  if(equal(before,after))return;
+  if(plain(before)&&plain(after)){
+    for(const key of new Set([...Object.keys(before),...Object.keys(after)]))restorePath(update,`${path}.${key}`,before[key],after[key]);
+  }else if(before===undefined){const parts=path.split('.');parts[parts.length-1]=`-=${parts.at(-1)}`;update[parts.join('.')]=null;}
+  else update[path]=structuredClone(before);
+}
+/** Roll back only migration-owned fields. Refuse later edits to those fields; retain HP and unrelated customizations. */
+export function rollbackMigration(current,before,after,changes){
+  const updates=[],conflicts=[];
+  for(const change of changes){
+    const old=before.items.find(i=>i._id===change._id),migrated=after.items.find(i=>i._id===change._id),live=current.items.find(i=>i._id===change._id);
+    if(!old||!migrated||!live){conflicts.push({itemId:change._id,field:'missing item'});continue;}
+    const update={_id:change._id};
+    for(const key of Object.keys(change).filter(k=>k!=='_id')){
+      const path=key.replace(/(^|\.)-=/g,'$1');
+      if(!equal(readPath(live,path),readPath(migrated,path))){conflicts.push({itemId:change._id,field:path});continue;}
+      restorePath(update,path,readPath(old,path),readPath(migrated,path));
+    }
+    if(Object.keys(update).length>1)updates.push(update);
+  }
+  return {updates,conflicts,ready:conflicts.length===0};
+}

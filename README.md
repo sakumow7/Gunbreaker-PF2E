@@ -25,6 +25,8 @@ This prototype requires exactly one active token and combatant for the actor. It
 
 The server-delivered creation-event user ID identifies the requester. The coordinator rechecks ownership, resource revision and combat turn, and shares one actor queue with manual tracker writes. Manual tracker writes from players are blocked while routing is enabled; the GM records uncovered actions. Ordinary rules cards and edited request cards never execute. Timed-out or uncertain submissions stay locally blocked until a GM acknowledgement arrives; they are not automatically retried or replayed on reconnect. See [request transport and recovery limits](docs/PLAYER-REQUESTS.md).
 
+Support powers, Lightning Shot, optional resource/rider controls, encounter cleanup, recovery/migration controls and Escort setup are now implemented as prototypes; see [coverage and limits](docs/SUPPORT-AND-RIDERS.md) and [detached live QA](docs/LIVE-QA-2026-11-08.md).
+
 **Automatic damage interception, complete party reaction coverage, live area validation, movement, external-action observation, and complete feat-rider coverage remain pending.** No distributed-lock, seamless GM failover, multi-client runtime safety, or live compatibility claim is made.
 
 ## Save-action prototype

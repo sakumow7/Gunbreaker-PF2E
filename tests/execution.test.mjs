@@ -60,3 +60,30 @@ test('ownership lost during preflight prevents journal reservation and native ro
  await assert.rejects(()=>h.runner.execute(h.actor,{id:'revoked',slug:'burst-strike'}),/permission revoked/);
  assert.equal(h.journal,null);assert.equal(h.attacks,0);
 });
+test('Perfect Chamber permits a zero-cartridge Burst Strike and spends its round discount on a miss',async()=>{
+ const h=setup({degree:1});h.context.learned.push('perfect-chamber');h.state.cartridges=0;h.state.perfectUntil=1060;
+ await h.runner.execute(h.actor,{id:'perfect',slug:'burst-strike',options:{perfect:true}});
+ assert.equal(h.state.cartridges,0);assert.equal(h.state.perfectRound,1);
+ await assert.rejects(()=>h.runner.execute(h.actor,{id:'perfect-again',slug:'burst-strike',options:{perfect:true}}),/cannot reduce/);assert.equal(h.attacks,1);
+});
+test('Powder Discipline only loads on the actual critical result and unavailable choices do not roll',async()=>{
+ for(const degree of [1,2,3]){
+  const h=setup({degree});h.context.learned.push('powder-discipline');
+  await h.runner.execute(h.actor,{id:'discipline',slug:'burst-strike',options:{discipline:true}});
+  assert.equal(h.state.cartridges,degree===3?1:0);assert.equal(!!h.state.once.discipline,degree===3);
+ }
+ const h=setup();await assert.rejects(()=>h.runner.execute(h.actor,{id:'unlearned',slug:'burst-strike',options:{discipline:true}}),/not learned/);assert.equal(h.attacks,0);
+ h.context.learned.push('powder-discipline');h.state.once.discipline=true;
+ await assert.rejects(()=>h.runner.execute(h.actor,{id:'spent',slug:'burst-strike',options:{discipline:true}}),/unavailable/);assert.equal(h.attacks,0);
+});
+test('native attack exceptions retain recovery and partial rider evidence',async()=>{
+ const h=setup();h.ports.attack=()=>{throw Error('callback failed after visible roll');};
+ await assert.rejects(()=>h.runner.execute(h.actor,{id:'unknown-roll',slug:'burst-strike'}));assert.equal(h.journal.status,'recovery');
+ const r=setup();r.ports.resolve=()=>{r.ports.saveJournal(r.actor,{...r.journal,riders:[{actor:'target',status:'applying'}]});throw Error('uncertain HP');};
+ await assert.rejects(()=>r.runner.execute(r.actor,{id:'rider',slug:'burst-strike'}));assert.equal(r.journal.riders[0].status,'applying');assert.equal(r.journal.status,'recovery');
+});
+test('turn or tracker changes during a native roll retain evidence and stop for recovery',async()=>{
+ for(const mode of ['turn','tracker']){const h=setup(),attack=h.ports.attack;h.ports.attack=async()=>{const result=await attack();if(mode==='turn')h.context.round++;else h.state.revision++;return result;};
+  await assert.rejects(()=>h.runner.execute(h.actor,{id:'changed',slug:'burst-strike'}),/changed during/);assert.equal(h.resolves,0);assert.equal(h.journal.status,'recovery');assert.equal(h.journal.result.degree,2);
+ }
+});
