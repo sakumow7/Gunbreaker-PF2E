@@ -1,3 +1,11 @@
+# Unreleased — Persistent Forge playtest fixes
+
+- Add a reusable private test-scene builder/console using real native actors, tokens, HP and combat events.
+- Register the Gunbreaker weapon trait in PF2e's native attack-trait validation and correct Continuation's document-collection membership check.
+- Keep damage evidence strict while tolerating observed Dice So Nice cosmetic metadata.
+- Replace removed nested tracker gates atomically under Foundry's recursive flag merge behavior.
+- 417 local tests pass; live observations and remaining acceptance gates are in docs/PLAYTEST-SCENE-2026-11-10.md. No release or installed-module update.
+
 # Unreleased — Native dialog cancellation and Forge validation
 
 - Correct native DialogV2 cancellation: explicit `false` prevents Cancel/Skip and unchecked verification boxes from becoming button action IDs. Apply the correction to owner/GM riders, the player panel, area review, movement, recovery and Heart of Stone damage pairing.

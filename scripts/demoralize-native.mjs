@@ -1,3 +1,4 @@
+import {writeTracker} from './tracker-storage.mjs';
 import {normalizeState,transition} from './state.mjs';
 import {catalogue} from './catalogue.mjs';
 import {assertFreshIntent} from './requests.mjs';
@@ -43,7 +44,7 @@ export function createDemoralizeRunner({authority,contextFor,actorToken,weaponFo
     journal={...journal,degree:result.roll.degreeOfSuccess,messageId:result.message?.id??null};await actor.setFlag(MOD,'execution',journal);
     authority(actor,req);assertFreshIntent(checkpoint,contextFor(actor),actor.getFlag(MOD,'tracker'));
     assert(position(self)===origin&&position(target)===destination,'Positions changed during the check; reconcile the attempt.');
-    await actor.setFlag(MOD,'tracker',after);
+    await writeTracker(actor,after);
     const old=(target.actor.getFlag(MOD,'demoralizeImmunity')??[]).filter(e=>e.until>c.time);
     assert(!immunityActive(old,actor.uuid,c.time),'Another Demoralize attempt resolved during this check.');
     // Claim immunity and condition application before writing a condition; a failure cannot be retried.

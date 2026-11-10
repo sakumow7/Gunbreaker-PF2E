@@ -1,3 +1,4 @@
+import {writeTracker} from './tracker-storage.mjs';
 import {assertFreshIntent} from './requests.mjs';
 import {MovementRunner,capturePath,pathCrossesCreature,adjacentAt} from './movement.mjs';
 const MOD='gunbreaker-pf2e',assert=(x,m)=>{if(!x)throw Error(m);};
@@ -51,7 +52,7 @@ export function createMovementRunner({authority,contextFor,actorToken,weaponFor,
  };
  return new MovementRunner({
   authorize:authority,context:(a,r)=>({...contextFor(a),targetIds:r.targetIds??contextFor(a).targetIds}),
-  read:a=>a.getFlag(MOD,'tracker'),write:(a,s)=>a.setFlag(MOD,'tracker',s),journal:a=>a.getFlag(MOD,'execution'),saveJournal:(a,j)=>a.setFlag(MOD,'execution',j),
+  read:a=>a.getFlag(MOD,'tracker'),write:(a,s)=>writeTracker(a,s),journal:a=>a.getFlag(MOD,'execution'),saveJournal:(a,j)=>a.setFlag(MOD,'execution',j),
   prepare:async(actor,req,c)=>{
    const {self,speed}=inspect(actor,req),ids=req.targetIds??c.targetIds;
    assert(ids.length<=1&&(req.slug!=='trajectory'||ids.length===1),'Trajectory needs one chosen creature; Guarded Advance accepts at most one preferred enemy.');

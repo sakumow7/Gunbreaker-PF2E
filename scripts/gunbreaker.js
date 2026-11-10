@@ -1,3 +1,5 @@
+import {writeTracker} from './tracker-storage.mjs';
+import {registerGunbreakerTraits} from './traits.mjs';
 import {installPanelButton} from './player-panel.mjs';
 import {installOwnerChoices} from './owner-choices-native.mjs';
 import {installDemoralizeObserver} from './demoralize.mjs';
@@ -15,11 +17,7 @@ const MOD='gunbreaker-pf2e',openActors=new Set(),actorQueue=new ActorQueue();
 let nativeRunner,requestActions;
 const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const slug=item=>sourceIds[item.sourceId ?? item.flags?.core?.sourceId] ?? item.slug ?? item.system?.slug;
-function registerTraits(){
-  const cfg=CONFIG.PF2E;if(!cfg)return;
-  for(const key of ['classTraits','featTraits','actionTraits','weaponTraits','creatureTraits','effectTraits'])if(cfg[key])cfg[key].gunbreaker='GUNBREAKER.TraitGunbreaker';
-  if(cfg.baseWeaponTypes)cfg.baseWeaponTypes.gunblade='Gunblade';
-}
+const registerTraits=()=>registerGunbreakerTraits(CONFIG.PF2E);
 Hooks.once('init',()=>{
   registerTraits();
   game.settings.register(MOD,'playerRequests',{name:'Experimental player action requests',hint:'Route supported native actions through the active GM. Requires the GM on the same scene. Keep disabled until disposable-character two-client testing is complete.',scope:'world',config:true,type:Boolean,default:false});
@@ -51,7 +49,7 @@ export async function record(actor,op,expected){
     if(['prompting','planning','applying','recovery'].includes(actor.getFlag(MOD,'followup')?.status)||['reserved','committed','recovery'].includes(actor.getFlag(MOD,'execution')?.status))throw Error('Reconcile the pending native execution before changing the tracker.');
     if(expected!==undefined && raw.revision!==expected)throw Error('Tracker changed while open. Refreshed; record the action again.');
     const next=transition(raw,op,contextFor(actor),catalogue);
-    await actor.setFlag(MOD,'tracker',next);return next;
+    await writeTracker(actor,next);return next;
   });
 }
 export async function tracker(explicitActor){

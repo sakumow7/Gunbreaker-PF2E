@@ -1,3 +1,4 @@
+import {writeTracker} from './tracker-storage.mjs';
 import {initialState,transition} from './state.mjs';
 import {catalogue} from './catalogue.mjs';
 const MOD='gunbreaker-pf2e';
@@ -12,8 +13,8 @@ export function createEncounterLifecycle(contextFor,queue){
    if((game.combat?.turns.filter(t=>t.actor?.uuid===actor.uuid).length??0)>1)return;
    const c=contextFor(actor),raw=actor.getFlag(MOD,'tracker')??initialState();
    if(c.learned.some(s=>['twin-cartridge','overcharged-gauge'].includes(s)))return;
-   if(c.encounterId&&raw.encounter!==c.encounterId)await actor.setFlag(MOD,'tracker',transition(raw,{type:'start'},c,catalogue));
-   else if(!c.encounterId&&raw.encounter)await actor.setFlag(MOD,'tracker',transition(raw,{type:'end'},c,catalogue));
+   if(c.encounterId&&raw.encounter!==c.encounterId)await writeTracker(actor,transition(raw,{type:'start'},c,catalogue));
+   else if(!c.encounterId&&raw.encounter)await writeTracker(actor,transition(raw,{type:'end'},c,catalogue));
    if(!c.encounterId||!c.wielding||actor.isDead||actor.hasCondition('unconscious')){
     const ids=actor.items.filter(i=>i.type==='effect'&&(i.slug??i.system.slug)==='royal-guard-stance'&&i.flags?.[MOD]?.execution).map(i=>i.id);
     if(ids.length)await actor.deleteEmbeddedDocuments('Item',ids);

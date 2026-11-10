@@ -1,3 +1,4 @@
+import {writeTracker} from './tracker-storage.mjs';
 import {followupFeat,followupAvailable,commitFollowup} from './followup-riders.mjs';
 import {createStepService,stepPosition} from './step-native.mjs';
 import {tempHPEffect} from './riders.mjs';
@@ -61,7 +62,7 @@ export function createFollowupRunner(deps,queue,steps=createStepService(deps)){
     if(target)assert(guard(actor)&&allies(actor,self).includes(target),'The stance or recipient changed.');
     entry={...entry,status:'applying',kind:choice.kind,target:target?.document.uuid??null,...(plan?{plan:steps.evidence(plan)}:{})};
     await actor.setFlag(MOD,'followup',entry);
-    const after=commitFollowup(actor.getFlag(MOD,'tracker'),c,feat,req.id);await actor.setFlag(MOD,'tracker',after);checkpoint={...checkpoint,revision:after.revision};
+    const after=commitFollowup(actor.getFlag(MOD,'tracker'),c,feat,req.id);await writeTracker(actor,after);checkpoint={...checkpoint,revision:after.revision};
     if(target)await target.actor.createEmbeddedDocuments('Item',[tempHPEffect('Continued Assault',actor,c,Math.max(1,Math.floor(c.level/2)),req.id)]);
    });
    // Do not hold reaction/recipient actor queues while native movement may pause.

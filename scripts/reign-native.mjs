@@ -1,3 +1,4 @@
+import {rollFingerprint} from './roll-evidence.mjs';
 import {ReignRunner,REIGN_STEPS} from './reign.mjs';
 import {createSavePorts,nativePosition} from './area-native.mjs';
 import {assertFreshIntent} from './requests.mjs';
@@ -10,7 +11,7 @@ export function reignAttackEvidence(message,actorUuid,weaponId,targetUuid){
   const roll=message?.rolls?.[0],context=message?.flags?.pf2e?.context;
   assert(message?.isCheckRoll&&context?.type==='attack-roll'&&context.action==='strike'&&!message.isReroll&&!context.isReroll
     &&message.actor?.uuid===actorUuid&&message.item?.id===weaponId&&context.target?.token===targetUuid&&[0,1,2,3].includes(roll?.degreeOfSuccess),'The Reign attack evidence is missing, changed or rerolled.');
-  return {degree:roll.degreeOfSuccess,messageId:message.id,fingerprint:JSON.stringify(roll.toJSON())};
+  return {degree:roll.degreeOfSuccess,messageId:message.id,fingerprint:rollFingerprint(roll)};
 }
 export function createReignRunner(deps,queue){
   const {contextFor,actorToken,weaponFor,strikeFor}=deps,save=createSavePorts(deps);

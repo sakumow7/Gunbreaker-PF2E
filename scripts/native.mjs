@@ -1,3 +1,4 @@
+import {writeTracker} from './tracker-storage.mjs';
 import {createFollowupRunner,FOLLOWUP_BUSY} from './followup-native.mjs';
 import {createMovementRunner} from './movement-native.mjs';
 import {MOVEMENT_ACTIONS} from './movement.mjs';
@@ -73,7 +74,7 @@ export function createNativeRunner(contextFor,queue,ownerChoices){
       if(CORE_FOLLOWUPS.has(req.slug))c.targetIds=[...(old?.continuation?.targets??[])];
       return {...c,weaponDice:nativeWeaponDice(w),weaponId:w.id,map:req.map??0};
     },
-    read:actor=>actor.getFlag(MOD,'tracker'),write:(actor,state)=>{authority(actor);return actor.setFlag(MOD,'tracker',state);},
+    read:actor=>actor.getFlag(MOD,'tracker'),write:(actor,state)=>{authority(actor);return writeTracker(actor,state);},
     journal:actor=>actor.getFlag(MOD,'execution'),saveJournal:(actor,entry)=>{authority(actor);return actor.setFlag(MOD,'execution',entry);},
     validate:async(actor,req,c,state)=>{
       if(actor.hasCondition('unconscious')||actor.hasCondition('paralyzed'))throw Error('This character cannot act.');
@@ -126,7 +127,7 @@ export function createNativeRunner(contextFor,queue,ownerChoices){
           options:new Set([`gunbreaker:action:${req.slug}`,`gunbreaker:calibration:${after.calibration}`])});
         if(req.slug==='brutal-shell' && before.once.brutalRound!==c.round){
           // Store the rider gate before HP/effect writes; a recovery must never re-award it.
-          after.once.brutalRound=c.round;await actor.setFlag(MOD,'tracker',after);
+          after.once.brutalRound=c.round;await writeTracker(actor,after);
           const value=Math.max(1,Math.floor(actor.level/2)),priorTemp=actor.system.attributes.hp.temp??0;
           await actor.applyDamage({damage:-value,token:actorToken(actor).document});
           await actor.createEmbeddedDocuments('Item',[{name:'Brutal Shell Barrier',type:'effect',img:'icons/magic/defensive/shield-barrier-glowing-blue.webp',system:{slug:'gunbreaker-brutal-shell-barrier',level:{value:actor.level},duration:{value:1,unit:'rounds',expiry:'turn-end',sustained:false},start:{value:game.time.worldTime,initiative:actor.combatant?.initiative??null},rules:[{key:'TempHP',value}]},flags:{[MOD]:{execution:req.id}}}]);

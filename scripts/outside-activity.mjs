@@ -1,3 +1,4 @@
+import {writeTracker} from './tracker-storage.mjs';
 import {transition} from './state.mjs';
 import {assertFreshIntent} from './requests.mjs';
 import {OUTSIDE_ACTIVITIES} from './outside-controls.mjs';
@@ -32,7 +33,7 @@ export function createOutsideActivityRunner({authority,contextFor},queue){
    assert(reaction||c.inTurn,'Record another action only on your own turn.');
    const next=transition(state,{type:'other',reaction,id:req.id},c);
    next.lastOutsideActivity={id:req.id,slug:req.slug,encounterId:c.encounterId,round:c.round,turn:c.turn};
-   await actor.setFlag(MOD,'tracker',next);
+   await writeTracker(actor,next);
    return {id:req.id,status:'complete',revision:next.revision};
   });
  }};

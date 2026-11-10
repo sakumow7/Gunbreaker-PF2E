@@ -1,3 +1,4 @@
+import {rollFingerprint} from './roll-evidence.mjs';
 import {initialState,normalizeState,transition} from './state.mjs';
 import {catalogue} from './catalogue.mjs';
 import {stoneResistance} from './mechanics.mjs';
@@ -12,7 +13,7 @@ export function stoneAttack(message){
   const e={id:message.id,attacker:message.actor?.uuid,origin:c.origin?.token??message.token?.uuid,
     target:c.target?.token,item:item?.uuid,kind:strike?'strike':'spell',degree:roll.degreeOfSuccess};
   if(!e.id||!e.attacker||!e.origin||!e.target||!e.item)return null;
-  return {...e,fingerprint:JSON.stringify([e,roll.toJSON()])};
+  return {...e,fingerprint:JSON.stringify([e,rollFingerprint(roll)])};
 }
 export function stoneDamage(attack,message){
   const c=message?.flags?.pf2e?.context,roll=message?.rolls?.[0];
@@ -22,7 +23,7 @@ export function stoneDamage(attack,message){
   assert(roll?.constructor?.name==='DamageRoll'&&Number.isFinite(roll.total)&&roll.total>0,'A positive native DamageRoll is required.');
   assert(roll.instances?.some(i=>!i.persistent)&&!roll.instances.some(i=>i.options?.evaluatePersistent),'Persistent ticks cannot trigger Heart of Stone.');
   assert(roll.options?.degreeOfSuccess===attack.degree,'The damage roll must already use the triggering hit or critical-hit outcome. Do not manually double it here.');
-  return {id:message.id,fingerprint:JSON.stringify(roll.toJSON())};
+  return {id:message.id,fingerprint:rollFingerprint(roll)};
 }
 export function stoneOptions(raw,context,facts){
   if(!facts.conscious||!facts.seesBoth||!facts.enemy||(!facts.self&&!facts.ally))return [];
