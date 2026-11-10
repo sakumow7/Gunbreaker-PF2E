@@ -24,7 +24,7 @@ Only abilities covered by the native executor can be requested. Eligible resourc
 
 No requester identity, hit outcome, cost, damage amount, actor state or arbitrary function is accepted in the intent. The creation hook copies the intent before awaiting documents. Posting an ordinary rules card or editing an existing request never starts execution. Startup does not scan or replay old request cards. Hidden-token checks do not replace GM adjudication of player line of sight and terrain.
 
-The module's GM manual writes and native executor share one per-actor queue. While routing or experimental Heart of Stone is enabled, players must ask the GM to record uncovered actions, daily preparations and corrections through the manual tracker. When routing is disabled, the earlier one-operator manual workflow remains available.
+The module's GM manual writes and native executor share one per-actor queue. With player routing enabled, players can use **Record outside activity** to record an already resolved action or regular reaction through the GM queue; see OUTSIDE-ACTIVITIES.md. Daily preparations, corrections and extra-reaction adjudication still use the GM manual tracker. When only experimental Heart of Stone is enabled, uncovered activities still require the GM. When routing is disabled, the earlier one-operator manual workflow remains available.
 
 ## Failure and recovery boundaries
 

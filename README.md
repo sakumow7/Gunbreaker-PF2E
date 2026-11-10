@@ -74,3 +74,5 @@ Target environment: **Foundry 14 build 369 / PF2e 8.7.0**. Those versions and in
 ### Compact action controls
 
 Owned Gunbreaker sheets have a **Gunbreaker** header button for grouped native actions, gauge/combo status and the current Continuation. Players still require experimental player requests. See [PLAYER-CONTROLS.md](docs/PLAYER-CONTROLS.md) for use, checks and remaining manual boundaries.
+
+Players can now record a completed outside action or regular reaction from **Record outside activity** in the compact panel when experimental player requests are enabled. This updates Continuation/reaction tracking through the GM queue without rerolling or applying effects. See [outside activity controls](docs/OUTSIDE-ACTIVITIES.md) for limits and recovery receipts.

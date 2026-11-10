@@ -1,4 +1,5 @@
 import {controlsModel,controlRequest,RESOURCE_LABELS} from './player-controls.mjs';
+import {outsideActivityRequest} from './outside-controls.mjs';
 const MOD='gunbreaker-pf2e',open=new Set();
 const esc=s=>foundry.utils.escapeHTML(String(s));
 const held=w=>w.type==='weapon'&&w.system.traits.value.includes('gunbreaker')&&w.system.equipped.carryType==='held'&&w.system.equipped.handsHeld>0;
@@ -12,7 +13,7 @@ export function panelContent(actor,model,weapons,group){
     ${weapons.length===1?`<input type="hidden" name="weapon" value="${esc(weapons[0].id)}"><p>Gunblade: ${esc(weapons[0].name)}</p>`:`<label>Gunblade<select name="weapon">${weapons.map(w=>`<option value="${esc(w.id)}">${esc(w.name)}</option>`).join('')}</select></label>`}
     <label>Attack stage (Strikes only)<select name="map"><option value="0">First attack</option><option value="1">Second attack</option><option value="2">Third or later attack</option></select></label>
     ${unavailable.length?`<details><summary>Unavailable abilities (${unavailable.length})</summary><ul>${unavailable.map(r=>`<li><strong>${esc(r.name)}:</strong> ${esc(r.reason)}</li>`).join('')}</ul></details>`:''}
-    <details><summary>Play notes</summary><p>Continuation uses its original target. Optional resources are offered only when relevant. Damage cards and GM confirmations remain part of this beta. Refresh after outside changes; changed tracker or combat state rejects a stale action.</p><p>Other actions and reactions are not fully observed. Ask the GM to record those before using an unused Continuation or reaction.</p></details></div>`;
+    <details><summary>Play notes</summary><p>Continuation uses its original target. Optional resources are offered only when relevant. Damage cards and GM confirmations remain part of this beta. Refresh after outside changes; changed tracker or combat state rejects a stale action.</p><p>After completing an action or regular reaction outside this panel, use Record outside activity. Other actions close Continuation; regular reactions mark it spent without closing a current opening. Do not record an activity already handled by this panel.</p></details></div>`;
 }
 
 async function resourcesFor(row){
@@ -40,6 +41,7 @@ export async function nativePanel(actor,runner,contextFor){
             callback:(_e,b)=>({row,request:controlRequest(row.slug,{state:model.state,context:contextFor(actor),expected,weaponId:b.form.elements.weapon.value,map:Number(b.form.elements.map.value),id:foundry.utils.randomID()})})})),
           ...['strikes','powers','area','support'].filter(g=>g!==group).map(g=>({action:g,label:{strikes:'Strikes',powers:'Powers',area:'Area abilities',support:'Protection & movement'}[g],callback:()=>({group:g})})),
           {action:'refresh',label:'Refresh',callback:()=>({refresh:true})},
+          {action:'outside',label:'Record outside activity',disabled:busy(actor)||!c.encounterId||raw?.encounter!==c.encounterId,callback:()=>({outside:true})},
           ...(game.user.isGM?[{action:'tools',label:'GM tools',callback:()=>({tools:true})}]:[]),
           {action:'close',label:'Close',callback:()=>null}
         ]});
@@ -47,6 +49,16 @@ export async function nativePanel(actor,runner,contextFor){
       if(choice.group){group=choice.group;continue;}
       if(choice.refresh)continue;
       try{
+        if(choice.outside){
+          const slug=await foundry.applications.api.DialogV2.wait({window:{title:'Record a completed outside activity'},rejectClose:false,
+            content:'<p>Use this only after resolving an activity outside the Gunbreaker panel. It updates the tracker; it does not roll, move, apply damage or spend Foundry actions.</p><p>Another action closes unused Continuation. A regular reaction marks that reaction spent and preserves a current Continuation. Do not record a subordinate check, an already recorded activity, or an extra reaction granted by another feature.</p>',
+            buttons:[{action:'record-other-action',label:'Used another action',disabled:!c.inTurn,callback:()=> 'record-other-action'},
+              {action:'record-other-reaction',label:'Used my regular reaction',disabled:model.state.lastReactionTurn===c.turn,callback:()=> 'record-other-reaction'},
+              {action:'cancel',label:'Cancel',callback:()=>null}]});
+          if(!slug)continue;
+          lastResult=await runner.execute(actor,outsideActivityRequest(slug,foundry.utils.randomID(),expected));
+          continue;
+        }
         if(choice.tools){
           const action=await foundry.applications.api.DialogV2.wait({window:{title:'Gunbreaker — GM tools'},rejectClose:false,content:'<p>Review recovery or character setup.</p>',buttons:[['recover','Recovery'],['migrate','Migration'],['rollback','Rollback migration'],['escort','Escort setup']].map(([action,label])=>({action,label,callback:()=>action}))});
           if(['recover','migrate','rollback','escort'].includes(action))await game.modules.get(MOD).api.maintenance[action](actor);

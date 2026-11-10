@@ -26,7 +26,7 @@ export function installRequests(runner,contextFor){
       try{
         await message.update({[`flags.${MOD}.response`]:response,
           content:`<p>Gunbreaker action: ${foundry.utils.escapeHTML(response.status)}${response.error?` — ${foundry.utils.escapeHTML(response.error)}`:''}.</p>`});
-      }catch{ui.notifications.warn('Gunbreaker result could not be delivered. Check the actor execution journal before retrying.');}
+      }catch{ui.notifications.warn('Gunbreaker result could not be delivered. Check the actor tracker receipt and execution journal before retrying.');}
     })();
   });
   Hooks.on('updateChatMessage',(message,changes,_options,updaterId)=>{
@@ -54,14 +54,14 @@ export function installRequests(runner,contextFor){
       const entry={actorUuid:actor.uuid,gmId:gm.id,resolve,reject,timedOut:false};pending.set(intent.id,entry);
       entry.timer=setTimeout(()=>{
         entry.timedOut=true;
-        reject(Error('No GM result yet. The request may have executed; do not repeat it. Have the GM inspect the execution journal.'));
+        reject(Error('No GM result yet. The request may have executed; do not repeat it. Have the GM inspect the tracker receipt and execution journal.'));
         // Retain the local pending guard until a genuine GM acknowledgement arrives.
       },90000);
       ChatMessage.create({author:game.user.id,whisper:[...new Set([gm.id,game.user.id])],
         content:'<p>Gunbreaker action requested. Awaiting the GM result.</p>',flags:{[MOD]:{request:intent}}})
         .catch(()=>{
           clearTimeout(entry.timer);entry.timedOut=true;
-          reject(Error('Request delivery is uncertain. It may have executed; have the GM inspect the execution journal before retrying.'));
+          reject(Error('Request delivery is uncertain. It may have executed; have the GM inspect the tracker receipt and execution journal before retrying.'));
         });
     });
   }};

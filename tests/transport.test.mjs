@@ -1,6 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {installRequests} from '../scripts/transport.mjs';
+import {outsideActivityRequest} from '../scripts/outside-controls.mjs';
 const MOD='gunbreaker-pf2e';
 const intent=()=>({version:1,id:'click',actorUuid:'Actor.hero',sceneId:'scene',gmId:'gm',slug:'burst-strike',weaponId:'blade',map:0,targetIds:['Scene.scene.Token.enemy'],revision:0,encounterId:'combat',round:1,turn:1});
 function setup(gm=true){
@@ -73,4 +74,12 @@ test('player save requests retain Danger Zone target but clear area targets and 
   const m={getFlag:(_m,k)=>k==='request'?request:{id:'click',status:'complete'}};
   h.hooks.get('updateChatMessage')(m,{flags:{[MOD]:{response:{}}}},{},'gm');await pending;
  }
+});
+test('player outside activity submissions keep an empty target list despite current targeting',async()=>{
+ const h=setup(false);let created;globalThis.ChatMessage={create:async data=>{created=data;return {};}};
+ const req=outsideActivityRequest('record-other-reaction','click',{revision:0,encounterId:'combat',round:1,turn:1});
+ const p=h.api.execute(h.actor,req);await flush();const raw=created.flags[MOD].request;
+ assert.deepEqual(raw.targetIds,[]);assert.equal(raw.weaponId,'none');assert.equal(raw.slug,'record-other-reaction');assert.equal(h.calls.length,0);
+ const m={getFlag:(_m,k)=>k==='request'?raw:{id:'click',status:'complete'}};
+ h.hooks.get('updateChatMessage')(m,{flags:{[MOD]:{response:{}}}},{},'gm');assert.equal((await p).status,'complete');
 });

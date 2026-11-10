@@ -16,6 +16,8 @@ import {createRushRunner} from './rush-native.mjs';
 import {createReignRunner} from './reign-native.mjs';
 import {REIGN_STEPS} from './reign.mjs';
 import {SAVE_ACTIONS} from './area.mjs';
+import {OUTSIDE_ACTIVITIES} from './outside-controls.mjs';
+import {createOutsideActivityRunner} from './outside-activity.mjs';
 const MOD='gunbreaker-pf2e';
 const slug=i=>i.slug??i.system?.slug;
 const effectUuid=name=>Object.entries(sourceIds).find(([id,s])=>s===name&&id.includes('gunbreaker-effects'))?.[0];
@@ -154,10 +156,12 @@ export function createNativeRunner(contextFor,queue,ownerChoices){
   const movement=createMovementRunner({authority,contextFor,actorToken,weaponFor,strikeFor,applyEffect},queue);
   const demoralize=createDemoralizeRunner({authority,contextFor,actorToken,weaponFor},queue);
   const followups=createFollowupRunner({authority,contextFor,actorToken,ownerChoices},queue);
+  const outside=createOutsideActivityRunner({authority,contextFor},queue);
   const executeBase=(actor,request)=>MOVEMENT_ACTIONS.has(request.slug)?movement.execute(actor,request):request.slug==='suppressing-fire'?demoralize.execute(actor,request):SUPPORT_ACTIONS.has(request.slug)?support.execute(actor,request):request.slug==='relentless-rush'?rush.execute(actor,request):REIGN_STEPS.has(request.slug)?reign.execute(actor,request):SAVE_ACTIONS.has(request.slug)?area.execute(actor,request):single.execute(actor,request);
   return {advanceRush:rush.advance,reconcileRush:rush.reconcile,async execute(actor,request){
     request=structuredClone(request);
     authority(actor,request);
+    if(OUTSIDE_ACTIVITIES.has(request.slug))return outside.execute(actor,request);
     if(FOLLOWUP_BUSY.has(actor.getFlag(MOD,'followup')?.status))throw Error('Resolve the pending optional rider before starting another action.');
     const trigger=contextFor(actor),result=await executeBase(actor,request);
     return followups.execute(actor,request,result,trigger);

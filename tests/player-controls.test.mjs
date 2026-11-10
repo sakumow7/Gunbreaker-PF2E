@@ -93,3 +93,28 @@ test('sheet entry only appears for owned Gunbreakers with authorized player rout
  game.settings.get=()=>true;hook({actor:f.actor},playerButtons);assert.equal(playerButtons.length,1);
  f.actor.isOwner=false;const denied=[];hook({actor:f.actor},denied);assert.equal(denied.length,0);
 });
+test('outside activity panel retains its checkpoint and sends no selected target, weapon or resources',async()=>{
+ let calls=0,request;const f=panelFixture(async config=>{
+  if(++calls===1){assert.equal(config.buttons.find(b=>b.action==='outside').disabled,false);return config.buttons.find(b=>b.action==='outside').callback();}
+  if(calls===2){assert.match(config.content,/already recorded/);f.s.revision=3;return config.buttons.find(b=>b.action==='record-other-action').callback();}
+  return null;
+ });f.actor.itemTypes.weapon=[];
+ await nativePanel(f.actor,{execute:async(_a,r)=>request=r},()=>f.c);
+ assert.equal(request.slug,'record-other-action');assert.equal(request.expected.revision,2);assert.equal(request.weaponId,'none');assert.equal(request.map,0);assert.deepEqual(request.targetIds,[]);assert.deepEqual(request.options,{});
+});
+test('outside activity cancel sends nothing; off-turn actions and spent regular reactions are disabled',async()=>{
+ let calls=0;const f=panelFixture(async config=>{
+  if(++calls===1)return config.buttons.find(b=>b.action==='outside').callback();
+  if(calls===2){assert(config.buttons.find(b=>b.action==='record-other-action').disabled);assert(config.buttons.find(b=>b.action==='record-other-reaction').disabled);return config.buttons.find(b=>b.action==='cancel').callback();}
+  return null;
+ });f.c.inTurn=false;f.s.lastReactionTurn=f.c.turn;
+ await nativePanel(f.actor,{execute:()=>assert.fail('canceled record')},()=>f.c);
+});
+test('outside activity recording is disabled before encounter initialization and while busy',async()=>{
+ for(const mode of ['uninitialized','busy']){
+  const f=panelFixture(async config=>{assert(config.buttons.find(b=>b.action==='outside').disabled);return null;});
+  if(mode==='uninitialized')f.s.encounter=null;
+  else{const read=f.actor.getFlag;f.actor.getFlag=(m,k)=>k==='execution'?{status:'recovery'}:read(m,k);}
+  await nativePanel(f.actor,{execute:()=>assert.fail('disabled record')},()=>f.c);
+ }
+});

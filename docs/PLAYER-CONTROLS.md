@@ -14,12 +14,12 @@ Cartridges/capacity, next combo, current Continuation and the **recorded** react
 
 Continuation uses the original target and weapon snapshot for the four single-target follow-ups. Fated Brand retains its existing original failed-target area workflow. Ordinary activities capture the current target selection at click time, before any resource prompt. Area saves clear irrelevant selection/MAP. The panel retains its opening revision and combat checkpoint through every prompt; a stale request is rejected by the executor, not silently refreshed and spent.
 
-GM recovery, migration, rollback and Escort setup are behind **GM tools**. The legacy tracker remains available for GM corrections and recording unsupported outside actions/reactions.
+GM recovery, migration, rollback and Escort setup are behind **GM tools**. **Record outside activity** lets the acting player record another completed action or regular reaction through the same GM queue. It needs no weapon or target, closes Continuation for another action, and marks the regular reaction spent without closing a current opening. Cancel changes nothing. Do not record subordinate checks, extra reactions, or activities already handled by the panel. See OUTSIDE-ACTIVITIES.md. The legacy tracker remains available for GM corrections.
 
 ## Boundaries
 
 - Availability previews simulate the existing pure rules transition without actor writes. They do not certify range, terrain, valid recipients, line of effect, action budget, or pending transport delivery. Execution performs the actual checks.
-- The reaction label says **Not marked spent**, not that every other reaction has been observed. Ordinary actions/reactions and token dragging are not comprehensively observed. The GM must reconcile these before using an opening or reaction that may have been consumed.
+- The reaction label says **Not marked spent**, not that every other reaction has been observed. Ordinary actions/reactions and token dragging are not comprehensively observed. Use the outside-activity control after an uncovered action or regular reaction; ask the GM to reconcile ambiguous cases and extra reaction pools.
 - A PF2e roll's attack/skill type alone does not establish whether it was an independent action, a subordinate check or a reaction. Posting a rules card is not execution evidence. This change adds no speculative external-action observer.
 - Native rolls still use the coordinator workflow. Player-side roll dialogs, live acceptance of the owner-side rider prompts in OWNER-RIDER-CHOICES.md, primary damage interception, third-party module compatibility and real two-client acceptance remain unfinished.
 - No new release, campaign module installation, migration or actor-sheet item replacement accompanies this change.
