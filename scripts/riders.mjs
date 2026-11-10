@@ -1,5 +1,6 @@
 import {nativeDamageContext} from './native-damage.mjs';
 import {assertFreshIntent} from './requests.mjs';
+import {calibratedItem,damageType} from './mechanics.mjs';
 const MOD='gunbreaker-pf2e';
 const position=t=>JSON.stringify([t.document.parent.id,t.document.x,t.document.y,t.document.elevation,t.document.width,t.document.height]);
 const coordinator=()=>{if(!game.user.isGM||game.users.filter(u=>u.active&&u.isGM).length!==1)throw Error('Riders require exactly one active GM.');};
@@ -40,8 +41,8 @@ export async function overpoweredRound(actor,request,c,state,primary,weapon){
  if(targets.some(t=>t.document.hidden||t.isVisible===false))throw Error('Overpowered Round visibility needs adjudication.');
  const yes=await foundry.applications.api.DialogV2.confirm({window:{title:'Overpowered Round'},content:'<p>Apply secondary damage to the other enemies within 5 feet of the primary target? Confirm line of effect and that no other control has applied it.</p>',rejectClose:false});if(!yes)return;coordinator();
  if(position(primary)!==origin||targets.some((t,i)=>position(t)!==positions[i]))throw Error('Overpowered Round positions changed during confirmation.');
- const DamageRoll=CONFIG.Dice.rolls.find(r=>r.name==='DamageRoll'),roll=await new DamageRoll(`${c.weaponDice}[${state.calibration}]`).evaluate();
- const item=actor.items.find(i=>(i.slug??i.system.slug)==='overpowered-round');
+ const DamageRoll=CONFIG.Dice.rolls.find(r=>r.name==='DamageRoll'),roll=await new DamageRoll(`${c.weaponDice}[${damageType('overpowered-round',state.calibration)}]`).evaluate();
+ const item=calibratedItem(actor.items.find(i=>(i.slug??i.system.slug)==='overpowered-round'),'overpowered-round',state.calibration);
  const options=[...actor.getSelfRollOptions('self'),...item.getRollOptions('item'),...[...new Set([...item.system.traits.value,'magical'])].map(t=>`origin:action:trait:${t}`),'area-damage','origin:action:slug:overpowered-round'];
  await roll.toMessage({speaker:ChatMessage.getSpeaker({actor}),flavor:'Overpowered Round',flags:{pf2e:{suppressDamageButtons:true},[MOD]:{execution:request.id}}});
  for(const target of targets){

@@ -1,4 +1,5 @@
 /** Pure v1.4 action transitions. No document writes: the execution coordinator commits atomically. */
+import {calibrationType} from './mechanics.mjs';
 export const VERSION = 2;
 export const CHAINS = Object.freeze({
   'keen-edge': {next:'brutal-shell'},
@@ -40,6 +41,7 @@ export function normalizeState(raw,context) {
     for(const slug of ['superbolide','gunmetal-soul','perfect-chamber'])if(s.cooldowns[slug]?.length){s.dailyUses[slug]=1;s.dailyDay=Math.max(s.dailyDay??-Infinity,Math.floor(Math.max(...s.cooldowns[slug])/86400));}
   }
   assert(s.version === VERSION,'Unsupported tracker version; migrate this character before recording actions.');
+  calibrationType(s.calibration);
   assert(Number.isFinite(context.time),'World time is unavailable.');
   if(s.encounter !== context.encounterId) {
     s.cartridges=0;s.bloodfestUntil=0;s.breakUntil=0;s.breakTurn=null;s.reignUntil=0;s.perfectUntil=0;

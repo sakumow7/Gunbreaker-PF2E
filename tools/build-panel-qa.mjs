@@ -5,7 +5,7 @@ import {REIGN_STEPS} from '../scripts/reign.mjs';
 const sets={SUPPORTED,CORE_STRIKES,CORE_FOLLOWUPS,SAVE_ACTIONS,TARGETED_SAVES,REIGN_STEPS};
 let code='// Detached Gunbreaker panel QA. No actor, combat, HP or setting writes.\n';
 for(const [key,value] of Object.entries(sets))code+=`const ${key}=new Set(${JSON.stringify([...value])});\n`;
-for(const file of ['catalogue.mjs','state.mjs','options.mjs','player-controls.mjs','player-panel.mjs']){
+for(const file of ['catalogue.mjs','mechanics.mjs','state.mjs','options.mjs','player-controls.mjs','player-panel.mjs']){
  const src=await readFile(new URL('../scripts/'+file,import.meta.url),'utf8');
  code+=src.replace(/^import .*;\n/gm,'').replace(/\bexport /g,'')+'\n';
 }
