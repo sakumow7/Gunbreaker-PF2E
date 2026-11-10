@@ -5,7 +5,7 @@ import {REIGN_STEPS} from '../scripts/reign.mjs';
 const sets={SUPPORTED,CORE_STRIKES,CORE_FOLLOWUPS,SAVE_ACTIONS,TARGETED_SAVES,REIGN_STEPS};
 let code='// Detached Gunbreaker panel QA. No actor, combat, HP or setting writes.\n';
 for(const [key,value] of Object.entries(sets))code+=`const ${key}=new Set(${JSON.stringify([...value])});\n`;
-for(const file of ['catalogue.mjs','mechanics.mjs','state.mjs','options.mjs','player-controls.mjs','player-panel.mjs']){
+for(const file of ['catalogue.mjs','mechanics.mjs','state.mjs','options.mjs','outside-controls.mjs','player-controls.mjs','player-panel.mjs']){
  const src=await readFile(new URL('../scripts/'+file,import.meta.url),'utf8');
  code+=src.replace(/^import .*;\n/gm,'').replace(/\bexport /g,'')+'\n';
 }
@@ -20,7 +20,8 @@ try{
  await nativePanel(qaActor,{execute:async(_actor,req)=>{
   if(req.expected.revision!==qaState.revision)throw Error('Stale QA request');
   receipts.push(req.slug);
-  qaState=transition(qaState,{type:'use',slug:req.slug,id:req.id,outcome:'hit',...req.options},{...qaContext,targetIds:req.targetIds,weaponId:req.weaponId,weaponDice:2},catalogue);
+  const op=OUTSIDE_ACTIVITIES.has(req.slug)?{type:'other',reaction:req.slug==='record-other-reaction',id:req.id}:{type:'use',slug:req.slug,id:req.id,outcome:'hit',...req.options};
+  qaState=transition(qaState,op,{...qaContext,targetIds:req.targetIds,weaponId:req.weaponId,weaponDice:2},catalogue);
   ui.notifications.info('QA simulated '+req.slug+'; no actor writes.');
   return {status:'complete'};
  }},()=>qaContext);

@@ -25,7 +25,7 @@ const EXPLORATION_ACTIONS = new Set(['aurora','camouflage','nebula','heart-of-co
 export function initialState() {
   return {version:VERSION,revision:0,encounter:null,cartridges:0,combo:null,continuation:null,
     cooldowns:{},dailyUses:{},dailyDay:null,calibration:"fire",events:[],once:{},lastReactionTurn:null,lastInstinctTurn:null,lastFlourishTurn:null,lastGnashingTurn:null,lastReignTurn:null,lastFollowRound:null,
-    lastCadenceRound:null,bloodfestUntil:0,breakUntil:0,breakTurn:null,reignUntil:0,perfectUntil:0,perfectRound:null};
+    lastCadenceRound:null,bloodfestUntil:0,breakUntil:0,breakTurn:null,reignUntil:0,perfectUntil:0,perfectRound:null,lastOutsideActivity:null};
 }
 function assert(condition,message) {if(!condition) throw Error(message);}
 export function capacity(state, context) {

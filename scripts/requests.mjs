@@ -2,6 +2,7 @@ import {resourceOptions} from './options.mjs';
 import {REIGN_STEPS} from './reign.mjs';
 import {SUPPORTED} from './execution.mjs';
 import {SAVE_ACTIONS,TARGETED_SAVES} from './area.mjs';
+import {OUTSIDE_ACTIVITIES} from './outside-controls.mjs';
 const assert=(ok,message)=>{if(!ok)throw Error(message);};
 const plain=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
 const id=v=>typeof v==='string'&&/^[a-zA-Z0-9_-]{1,64}$/.test(v);
@@ -13,7 +14,7 @@ export function validateIntent(raw){
   assert(Object.keys(raw).every(k=>keys.includes(k)),'Unexpected action request fields.');
   assert(raw.version===1&&id(raw.id)&&id(raw.gmId)&&id(raw.sceneId)&&id(raw.weaponId),'Invalid request identifiers.');
   assert(typeof raw.actorUuid==='string'&&/^(Actor\.[a-zA-Z0-9_-]+|Scene\.[a-zA-Z0-9_-]+\.Token\.[a-zA-Z0-9_-]+\.Actor\.[a-zA-Z0-9_-]+)$/.test(raw.actorUuid),'Invalid character reference.');
-  assert(SUPPORTED.has(raw.slug),'This ability is not supported by native execution.');
+  assert(SUPPORTED.has(raw.slug)||OUTSIDE_ACTIVITIES.has(raw.slug),'This ability is not supported by native execution.');
   assert(Number.isInteger(raw.map)&&raw.map>=0&&raw.map<=2,'Invalid attack stage.');
   assert(Array.isArray(raw.targetIds)&&raw.targetIds.length<=1&&raw.targetIds.every(t=>token(t)&&t.startsWith(`Scene.${raw.sceneId}.Token.`)),'Select at most one target on the current scene.');
   assert(!(REIGN_STEPS.has(raw.slug)||['bloodfest','trajectory','suppressing-fire'].includes(raw.slug))||raw.targetIds.length===1,'Select exactly one primary creature.');
@@ -22,6 +23,7 @@ export function validateIntent(raw){
   assert(raw.encounterId===null||id(raw.encounterId),'Invalid encounter.');
   assert(Number.isSafeInteger(raw.round)&&raw.round>=0&&Number.isSafeInteger(raw.turn)&&raw.turn>=0,'Invalid turn.');
   if(raw.options!==undefined)resourceOptions(raw.options);
+  if(OUTSIDE_ACTIVITIES.has(raw.slug))assert(raw.weaponId==='none'&&raw.map===0&&raw.targetIds.length===0&&Object.keys(raw.options??{}).length===0,'Outside activity records cannot include weapons, targets, attack stages or resources.');
   return structuredClone(raw);
 }
 export function assertFreshIntent(intent,context,state){
