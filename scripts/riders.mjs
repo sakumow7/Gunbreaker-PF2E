@@ -1,3 +1,4 @@
+import {writeTracker} from './tracker-storage.mjs';
 import {nativeDamageContext} from './native-damage.mjs';
 import {assertFreshIntent} from './requests.mjs';
 import {calibratedItem,damageType} from './mechanics.mjs';
@@ -29,7 +30,7 @@ export async function vortexGuard(actor,request,c,state,self,deps={}){
  coordinator();if(origin!==position(self))throw Error('Vortex Guard source moved.');
  const target=allies.find(t=>t.document.uuid===selected);
  if(!target||target.actor.isDead||target.document.hidden||target.isVisible===false||!request.lockedActors?.includes(target.actor.uuid)||!actor.isAllyOf(target.actor)||self.distanceTo(target)>5)throw Error('Vortex Guard recipient changed.');
- state.once.vortexRound=c.round;await actor.setFlag(MOD,'tracker',state);
+ state.once.vortexRound=c.round;await writeTracker(actor,state);
  await target.actor.createEmbeddedDocuments('Item',[tempHPEffect('Vortex Guard',actor,c,Math.max(1,Math.floor(c.level/2)),request.id,'turn-end')]);
 }
 export async function overpoweredRound(actor,request,c,state,primary,weapon){

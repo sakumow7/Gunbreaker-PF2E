@@ -1,3 +1,4 @@
+import {rollFingerprint} from './roll-evidence.mjs';
 import {calibratedItem,damageType,followupFormula} from './mechanics.mjs';
 import {nativeDamageContext} from './native-damage.mjs';
 import {assertFreshIntent} from './requests.mjs';
@@ -24,7 +25,7 @@ export async function applyContinuationDamage(actor,req,c,before,after,deps){
  const verify=()=>{
   authority(actor,req);const now=contextFor(actor),state=actor.getFlag(MOD,'tracker');assertFreshIntent(expected,now,state);
   assert(now.inTurn&&now.level===c.level&&now.learned.includes(req.slug)&&now.learned.includes('continuation')&&state.calibration===after.calibration,'Continuation source state changed.');
-  assert(actor.items.includes(rawItem)&&JSON.stringify(rawItem.system.traits.value)===itemTraits,'Continuation ability changed during damage.');
+  assert(actor.items.some(i=>i===rawItem)&&JSON.stringify(rawItem.system.traits.value)===itemTraits,'Continuation ability changed during damage.');
   const journal=actor.getFlag(MOD,'execution');
   assert(journal?.id===req.id&&journal.status==='committed'&&!journal.reconciliation,'Continuation execution was superseded or reconciled.');
   assert(game.pf2e.settings.iwr,'Enable native IWR automation before managed Continuation damage.');
@@ -54,13 +55,13 @@ export async function applyContinuationDamage(actor,req,c,before,after,deps){
   flags:{[MOD]:{execution:req.id,target:token.uuid},pf2e:{suppressDamageButtons:true,origin:item.getOriginData(),
    context:{type:'damage-roll',sourceType:'check',outcome:null,options,target:{actor:recipient.uuid,token:token.uuid}}}}});
  assert(message?.id,'Continuation damage evidence could not be saved.');
- const fingerprint=JSON.stringify(roll.toJSON());
+ const fingerprint=rollFingerprint(roll);
  await mark({status:'rolled',messageId:message.id,roll:roll.toJSON()});
  const {clone,rollOptions}=await nativeDamageContext(recipient,{actor,item,flags:{pf2e:{context:{options}}}});
  verify();
- assert(JSON.stringify(game.messages.get(message.id)?.rolls?.[0]?.toJSON())===fingerprint,'Continuation damage evidence changed.');
+ assert(rollFingerprint(game.messages.get(message.id)?.rolls?.[0])===fingerprint,'Continuation damage evidence changed.');
  await mark({status:'applying'});verify();
- assert(JSON.stringify(game.messages.get(message.id)?.rolls?.[0]?.toJSON())===fingerprint,'Continuation damage evidence changed.');
+ assert(rollFingerprint(game.messages.get(message.id)?.rolls?.[0])===fingerprint,'Continuation damage evidence changed.');
  // One separate energy effect: no attack multiplier, no property runes, no No Mercy, no second button application.
  await clone.applyDamage({damage:roll,token,item,rollOptions,skipIWR:false,shieldBlockRequest:false});
  await mark({status:'complete'});

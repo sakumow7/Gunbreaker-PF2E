@@ -76,3 +76,9 @@ Target environment: **Foundry 14 build 369 / PF2e 8.7.0**. Those versions and in
 Owned Gunbreaker sheets have a **Gunbreaker** header button for grouped native actions, gauge/combo status and the current Continuation. Players still require experimental player requests. See [PLAYER-CONTROLS.md](docs/PLAYER-CONTROLS.md) for use, checks and remaining manual boundaries.
 
 Players can now record a completed outside action or regular reaction from **Record outside activity** in the compact panel when experimental player requests are enabled. This updates Continuation/reaction tracking through the GM queue without rerolling or applying effects. See [outside activity controls](docs/OUTSIDE-ACTIVITIES.md) for limits and recovery receipts.
+
+## Disposable Forge verification arena
+
+Run `node tools/build-playtest.mjs` and paste `build/playtest.mjs` into a GM Script Macro. Its **Create playtest scene** option creates a private square-grid arena, four marked test actors and a reusable results log. Run the macro again for native damage, combo, area, Aurora-turn and tracker-persistence checks. Normal attack/save/review dialogs remain visible for the GM to resolve. Only the marked fixtures are reset; ordinary campaign actors are not selected.
+
+This console bundles the current candidate executor and embeds its authored abilities directly. It does not install the module, test compendium grants, enable multiplayer settings, or explicitly update shared world time. It records the source commit plus a code checksum. The installed 1.3.0 module remains separate; real two-client routing and full installed-hook acceptance still require the smoke-test checklist.

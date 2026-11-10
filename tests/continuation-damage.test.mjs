@@ -46,3 +46,8 @@ test('changed native damage evidence is never applied',async()=>{
  const h=fixture();h.actor.synthetics.ephemeralEffects={'damage-received':{target:[async()=>{[...h.messages.values()].find(m=>m.isDamageRoll).rolls[0].formula='999[fire]';return null;}]}};
  await assert.rejects(h.runner.execute(h.actor,h.req),/evidence changed/);assert.equal(h.applications.length,0);assert.equal(h.flags.execution.status,'recovery');
 });
+
+test('native item collection without Array.includes supports Continuation validation',async()=>{
+ const h=fixture();h.actor.items.includes=undefined;
+ assert.equal((await h.runner.execute(h.actor,h.req)).status,'complete');assert.equal(h.applications.length,1);
+});

@@ -1,3 +1,4 @@
+import {writeTracker} from './tracker-storage.mjs';
 import {createBulwarkService} from './bulwark-native.mjs';
 import {nativeDamageContext} from './native-damage.mjs';
 import {StoneRunner,stoneAttack,stoneDamage,stoneOptions,stoneEffect} from './stone.mjs';
@@ -48,7 +49,7 @@ export function installStone(contextFor,actorQueue){
     writeWindow:async(id,w)=>{gm();await game.messages.get(id).update({[`flags.${MOD}.stoneWindow`]:w,content:`<p><strong>Heart of Stone</strong> · ${esc(w.targetName)} · ${esc(w.status)}${w.choice?` · Resistance ${w.choice.resistance}`:''}.</p><p>Resolve through this reaction card. Ordinary damage buttons and other modules are outside this workflow.</p>`});},
     attack:async id=>stoneAttack(game.messages.get(id)),sameTurn:w=>JSON.stringify(w.turn)===JSON.stringify(turnSnapshot()),
     context:async(actor,w)=>{const c=context(actor,w);const target=await fromUuid(w.attack.target);if(target?.actor?.uuid===actor.uuid)c.selfTargetIds=[w.attack.target];return c;},
-    facts:factsFor,readActor:a=>a.getFlag(MOD,'tracker'),writeActor:(a,s)=>{gm();return a.setFlag(MOD,'tracker',s);},
+    facts:factsFor,readActor:a=>a.getFlag(MOD,'tracker'),writeActor:(a,s)=>{gm();return writeTracker(a,s);},
     journal:a=>['prompting','planning','applying','recovery'].includes(a.getFlag(MOD,'followup')?.status)?{status:'recovery'}:a.getFlag(MOD,'execution'),saveJournal:(a,j)=>{gm();return a.setFlag(MOD,'execution',j);},
     damage:async(attack,id)=>stoneDamage(attack,game.messages.get(id)),
     targetActor:async uuid=>{const token=await fromUuid(uuid);if(!token?.actor)throw Error('Protected target no longer exists.');return token.actor;},

@@ -1,3 +1,5 @@
+import {writeTracker} from './tracker-storage.mjs';
+import {rollFingerprint} from './roll-evidence.mjs';
 import {tempHPEffect} from './riders.mjs';
 import {resolvedOptions} from './options.mjs';
 import {AreaRunner,areaFormula,areaProfile,areaPersistentFormula,basicMultiplier} from './area.mjs';
@@ -19,7 +21,7 @@ const damageClass=()=>{const cls=CONFIG.Dice.rolls.find(r=>r.name==='DamageRoll'
 export function areaSaveEvidence(message,actorUuid){
   const roll=message?.rolls?.[0];
   if(!message?.isCheckRoll||message.flags?.pf2e?.context?.type!=='saving-throw'||(actorUuid&&message.actor?.uuid!==actorUuid)||message.isReroll||message.flags?.pf2e?.context?.isReroll||![0,1,2,3].includes(roll?.degreeOfSuccess))throw Error('A save changed, was rerolled, or has no native outcome. Reconcile this activity.');
-  return {degree:roll.degreeOfSuccess,messageId:message.id,fingerprint:JSON.stringify(roll.toJSON())};
+  return {degree:roll.degreeOfSuccess,messageId:message.id,fingerprint:rollFingerprint(roll)};
 }
 export function scaledAreaDamage(DamageRoll,data,multiplier){
   if(![0,0.5,1,2].includes(multiplier))throw Error('Invalid basic-save damage multiplier.');
@@ -102,7 +104,7 @@ export function createSavePorts({authority,contextFor,actorToken,weaponFor},{aut
       if(marker?.id===request.id&&['reserved','committed','recovery'].includes(marker.status))return;
       await lines.cleanup(prepared.line);
     },
-    read:a=>a.getFlag(MOD,'tracker'),write:(a,s)=>{authority(a);return a.setFlag(MOD,'tracker',s);},
+    read:a=>a.getFlag(MOD,'tracker'),write:(a,s)=>{authority(a);return writeTracker(a,s);},
     prepare:async(actor,request)=>{
       const {self,dc}=inspect(actor,request),c=contextFor(actor),raw=actor.getFlag(MOD,'tracker');
       const profile=areaProfile(request.slug,c.level,c.learned);
@@ -165,7 +167,7 @@ export function createSavePorts({authority,contextFor,actorToken,weaponFor},{aut
       if(!message?.id)throw Error('Damage evidence could not be saved.');
       const persistentFormula=areaPersistentFormula(request.slug,c.level);
       const persistent=persistentFormula?await new DamageRoll(persistentFormula,{}, {evaluatePersistent:false}).evaluate():null;
-      return {formula,roll:roll.toJSON(),fingerprint:JSON.stringify(roll.toJSON()),messageId:message.id,options,
+      return {formula,roll:roll.toJSON(),fingerprint:rollFingerprint(roll),messageId:message.id,options,
         persistent:persistent?{formula:persistentFormula,roll:persistent.toJSON()}:null};
     },
     save:async(actor,request,c,t)=>{
@@ -193,7 +195,7 @@ export function createSavePorts({authority,contextFor,actorToken,weaponFor},{aut
     apply:async(actor,request,c,prepared,progress,row)=>{
       inspect(actor,request);verifySaves(progress);await verifyTargets(actor,prepared,progress.applications.filter(a=>a.status==='complete').map(a=>a.target));
       const damageMessage=game.messages.get(progress.damage.messageId);
-      if(JSON.stringify(damageMessage?.rolls?.[0]?.toJSON())!==progress.damage.fingerprint)throw Error('The area damage roll changed.');
+      if(rollFingerprint(damageMessage?.rolls?.[0])!==progress.damage.fingerprint)throw Error('The area damage roll changed.');
       if(row.persistent&&!progress.damage.persistent)throw Error('Persistent damage evidence is missing.');
       const roll=combinedSaveDamage(damageClass(),progress.damage.roll,row.multiplier,row.persistent?progress.damage.persistent.roll:null);
       const saved=progress.saves.find(s=>s.target===row.target);
