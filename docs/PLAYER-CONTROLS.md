@@ -8,7 +8,7 @@ The Gunbreaker button in an owned Gunbreaker character sheet opens the native ac
 2. Choose Strikes, Powers, Area abilities, or Protection & movement. Only learned, level-appropriate supported activities appear. The current Continuation appears first in every group; unrelated follow-ups are hidden.
 3. Choose the attack stage for each Strike. MAP is still explicit; the panel does not count other attacks or spent actions. Select a gunblade only when more than one is held.
 4. Click an ability. If it has eligible optional resources, choose those in one small prompt; nothing is selected automatically. Cancel spends nothing. Perfect Chamber can make an otherwise unaffordable action available, marked with an asterisk, but still requires explicit selection.
-5. Resolve the existing native/GM workflow. The panel reopens with updated resources and combo state.
+5. Resolve the existing native/GM workflow. The four single-target Continuation follow-ups now apply their original-target damage automatically through native IWR; do not apply their damage cards again. Primary Strikes retain ordinary damage controls. The panel reopens with updated resources and combo state.
 
 Cartridges/capacity, next combo, current Continuation and the **recorded** reaction state are visible. Unavailable activities are disabled with a reason; all reasons are also readable in an expandable list. Active minute cooldowns include the seconds remaining in world time. This is a snapshot, not a countdown. Refresh after external changes.
 

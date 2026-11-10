@@ -3,7 +3,8 @@ import {createMovementRunner} from './movement-native.mjs';
 import {MOVEMENT_ACTIONS} from './movement.mjs';
 import {createDemoralizeRunner} from './demoralize-native.mjs';
 import {ActionRunner,CORE_STRIKES,CORE_FOLLOWUPS,SUPPORTED} from './execution.mjs';
-import {damageType,followupFormula,superbolideHP,nativeWeaponDice} from './mechanics.mjs';
+import {superbolideHP,nativeWeaponDice,calibrationType} from './mechanics.mjs';
+import {applyContinuationDamage,continuationPosition} from './continuation-damage.mjs';
 import {sourceIds,catalogue} from './catalogue.mjs';
 import {assertFreshIntent} from './requests.mjs';
 import {createAreaRunner} from './area-native.mjs';
@@ -96,12 +97,16 @@ export function createNativeRunner(contextFor,queue,ownerChoices){
         }else if(self.distanceTo(t)>actor.getReach({action:'attack',weapon:w}))throw Error('Target is outside melee reach.');
         if(!t.isVisible||(req.requesterId&&!game.users.get(req.requesterId)?.isGM&&t.document.hidden))throw Error('Target visibility requires GM adjudication.');
         if(CORE_FOLLOWUPS.has(req.slug)&&state.continuation?.weaponId!==w.id)throw Error('Use the opening gunblade for this follow-up.');
+        if(CORE_FOLLOWUPS.has(req.slug)){
+          if(!game.pf2e.settings.iwr)throw Error('Enable native IWR automation before managed Continuation damage.');
+          req.continuationSnapshot={actorUuid:t.actor.uuid,origin:continuationPosition(self),destination:continuationPosition(t)};
+        }
       }
     },
     attack:async(actor,req,c)=>{
       if(req.intent||req.expected)assertFreshIntent(req.intent??req.expected,contextFor(actor),actor.getFlag(MOD,'tracker'));
       const w=weaponFor(actor,c.weaponId),strike=strikeFor(actor,w.id,req.slug),t=await target(c);
-      const calibration=actor.getFlag(MOD,'tracker')?.calibration??'fire';
+      const calibration=calibrationType(actor.getFlag(MOD,'tracker')?.calibration??'fire');
       let messageId=null;
       const roll=await strike.variants[c.map].roll({target:t,options:[`gunbreaker:action:${req.slug}`,`gunbreaker:calibration:${calibration}`],callback:(_roll,_outcome,message)=>{messageId=message?.id??null;}});
       if(!roll)return null;
@@ -129,12 +134,7 @@ export function createNativeRunner(contextFor,queue,ownerChoices){
       }else if(req.slug==='bloodfest'){
         await applyEffect(actor,'bloodfest',req.id);await applyEffect(actor,'ready-to-reign',req.id);
       }else if(CORE_FOLLOWUPS.has(req.slug)){
-        const DamageRoll=CONFIG.Dice.rolls.find(r=>r.name==='DamageRoll');
-        if(!DamageRoll)throw Error('PF2e DamageRoll is unavailable.');
-        const formula=followupFormula(actor.level,before.continuation.weaponDice,damageType(req.slug,after.calibration));
-        const roll=await new DamageRoll(formula).evaluate();
-        await roll.toMessage({speaker:ChatMessage.getSpeaker({actor}),flavor:catalogue[req.slug].name,flags:{[MOD]:{execution:req.id,target:c.targetIds[0]}}});
-        // Use native damage controls; do not write unowned HP or bypass native IWR.
+        await applyContinuationDamage(actor,req,c,before,after,{authority,contextFor,actorToken,weaponFor});
       }else if(req.slug==='release-royal-guard'){
         await actor.deleteEmbeddedDocuments('Item',actor.itemTypes.effect.filter(i=>slug(i)==='royal-guard-stance').map(i=>i.id));
       }else if(req.slug==='perfect-chamber'){

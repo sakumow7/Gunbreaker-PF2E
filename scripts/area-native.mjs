@@ -7,6 +7,7 @@ import {assertFreshIntent} from './requests.mjs';
 import {REIGN_STEPS,reignFormula} from './reign.mjs';
 import {LineRegionService} from './line-native.mjs';
 import {nativeDamageContext} from './native-damage.mjs';
+import {calibratedItem} from './mechanics.mjs';
 const MOD='gunbreaker-pf2e';
 const esc=s=>foundry.utils.escapeHTML(String(s));
 const degreeNames=['criticalFailure','failure','success','criticalSuccess'];
@@ -156,7 +157,7 @@ export function createSavePorts({authority,contextFor,actorToken,weaponFor},{aut
     damage:async(actor,request,c,prepared,state)=>{
       const formula=formulaFor?formulaFor(request,c,state):REIGN_STEPS.has(request.slug)?reignFormula(request.slug):areaFormula(request.slug,c.level,state.calibration,c.learned),DamageRoll=damageClass();
       const roll=await new DamageRoll(formula).evaluate();
-      const item=itemFor(actor,request.slug);
+      const item=calibratedItem(itemFor(actor,request.slug),request.slug,state.calibration);
       const options=[...actor.getSelfRollOptions('self'),...item.getRollOptions('item'),...saveOptions(prepared.profile),...item.system.traits.value.map(t=>`origin:action:trait:${t}`),`origin:action:slug:${request.slug}`];
       const message=await roll.toMessage({speaker:ChatMessage.getSpeaker({actor}),flavor:prepared.profile.name,
         flags:{[MOD]:{execution:request.id},pf2e:{suppressDamageButtons:true,context:{type:'damage-roll',sourceType:'save',options}}}},
@@ -170,7 +171,7 @@ export function createSavePorts({authority,contextFor,actorToken,weaponFor},{aut
     save:async(actor,request,c,t)=>{
       inspect(actor,request);await verifyTargets(actor,c.prepared);
       const now=contextFor(actor);if(now.encounterId!==c.encounterId||now.round!==c.round||now.turn!==c.turn||!now.inTurn)throw Error('Combat advanced during the activity.');
-      const token=await fromUuid(t.uuid),item=itemFor(actor,request.slug);let messageId=null;
+      const token=await fromUuid(t.uuid),item=calibratedItem(itemFor(actor,request.slug),request.slug,actor.getFlag(MOD,'tracker')?.calibration);let messageId=null;
       const roll=await token.actor.saves.reflex.check.roll({dc:{value:c.dc,slug:'gunbreaker'},origin:actor,item,token,damaging:true,
         extraRollOptions:saveOptions(c.prepared.profile),traits:[...item.system.traits.value],
         messageMode:c.prepared.privateResults?'gm':undefined,
@@ -197,7 +198,7 @@ export function createSavePorts({authority,contextFor,actorToken,weaponFor},{aut
       const roll=combinedSaveDamage(damageClass(),progress.damage.roll,row.multiplier,row.persistent?progress.damage.persistent.roll:null);
       const saved=progress.saves.find(s=>s.target===row.target);
       // Doubling a failed basic save is not a critical attack; never give it critical-hit IWR semantics.
-      const token=await fromUuid(row.target),item=itemFor(actor,request.slug);
+      const token=await fromUuid(row.target),item=calibratedItem(itemFor(actor,request.slug),request.slug,actor.getFlag(MOD,'tracker')?.calibration);
       const options=[...progress.damage.options,`gunbreaker:save:degree:${saved.degree}`];
       const {clone,rollOptions}=await nativeDamageContext(token.actor,{actor,item,flags:{pf2e:{context:{options}}}});
       check(actor,request);verifySaves(progress);

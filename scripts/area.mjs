@@ -1,4 +1,5 @@
 import {resourceOptions,resolvedOptions,validateResourceOptions} from './options.mjs';
+import {damageType} from './mechanics.mjs';
 import {normalizeState,transition,COSTS} from './state.mjs';
 import {catalogue} from './catalogue.mjs';
 import {ActorQueue} from './queue.mjs';
@@ -21,7 +22,7 @@ export function areaFormula(slug,level,calibration='fire',learned=[]){
   if(slug.startsWith('demon-'))return `${Math.ceil(level/2)}d4[slashing]`;
   if(slug==='bow-shock')return `${Math.ceil(level/2)}d4[fire]`;
   if(slug==='danger-zone')return `${Math.ceil(level/2)}d${areaProfile(slug,level,learned).upgraded?8:6}[fire]`;
-  assert(['fire','cold','electricity'].includes(calibration),'Invalid calibration.');
+  calibration=damageType(slug,calibration);
   if(slug==='double-down')return `${level>=18?12:10}d6[${calibration}]`;
   return `${slug==='fated-brand'?(level>=17?3:2):Math.ceil(level/2)}d6[${calibration}]`;
 }
