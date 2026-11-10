@@ -128,3 +128,12 @@ test('cleanup never deletes a region whose action ownership marker was replaced'
  const h=setup({slug:'saturation-fire',level:12});h.onConfirm=()=>{h.region.flags[MOD].line.id='different-action';};
  await assert.rejects(()=>h.runner.execute(h.actor,h.req),/removed or replaced/);assert.equal(h.deleted,0);assert.equal(h.flags.execution,undefined);assert.equal(h.flags.tracker.cartridges,3);
 });
+
+test('unchecked native area verification spends nothing despite DialogV2 action fallback',async()=>{
+ const h=setup(),before=structuredClone(h.flags.tracker);h.unverifiedArea=true;
+ assert.equal((await h.runner.execute(h.actor,h.req)).status,'canceled');assert.deepEqual(h.flags.tracker,before);assert.equal(h.saveArgs.length,0);assert.equal(h.applied.length,0);
+});
+test('unchecked native damage verification preserves recovery and never applies HP',async()=>{
+ const h=setup();h.review=elements=>elements.verified.checked=false;
+ await assert.rejects(h.runner.execute(h.actor,h.req));assert.equal(h.flags.execution.status,'recovery');assert.equal(h.applied.length,0);
+});

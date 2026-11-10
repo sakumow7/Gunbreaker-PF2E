@@ -20,7 +20,7 @@ async function resourcesFor(row){
   if(!row.resources.length)return {};
   return foundry.applications.api.DialogV2.wait({window:{title:row.name},rejectClose:false,
     content:`<p>Optional resources${row.needsPerfect?' — this action needs the Perfect Chamber discount':''}. Nothing is spent until execution.</p>${row.resources.map(key=>`<label class="gb-resource"><input type="checkbox" name="${key}"> ${esc(RESOURCE_LABELS[key])}</label>`).join('')}`,
-    buttons:[{action:'use',label:'Use ability',callback:(_e,b)=>Object.fromEntries(row.resources.filter(key=>b.form.elements[key].checked).map(key=>[key,true]))},{action:'cancel',label:'Cancel',callback:()=>null}]});
+    buttons:[{action:'use',label:'Use ability',callback:(_e,b)=>Object.fromEntries(row.resources.filter(key=>b.form.elements[key].checked).map(key=>[key,true]))},{action:'cancel',label:'Cancel',callback:()=>false}]});
 }
 
 export async function nativePanel(actor,runner,contextFor){
@@ -43,7 +43,7 @@ export async function nativePanel(actor,runner,contextFor){
           {action:'refresh',label:'Refresh',callback:()=>({refresh:true})},
           {action:'outside',label:'Record outside activity',disabled:busy(actor)||!c.encounterId||raw?.encounter!==c.encounterId,callback:()=>({outside:true})},
           ...(game.user.isGM?[{action:'tools',label:'GM tools',callback:()=>({tools:true})}]:[]),
-          {action:'close',label:'Close',callback:()=>null}
+          {action:'close',label:'Close',callback:()=>false}
         ]});
       if(!choice||typeof choice!=='object')break;
       if(choice.group){group=choice.group;continue;}
@@ -54,7 +54,7 @@ export async function nativePanel(actor,runner,contextFor){
             content:'<p>Use this only after resolving an activity outside the Gunbreaker panel. It updates the tracker; it does not roll, move, apply damage or spend Foundry actions.</p><p>Another action closes unused Continuation. A regular reaction marks that reaction spent and preserves a current Continuation. Do not record a subordinate check, an already recorded activity, or an extra reaction granted by another feature.</p>',
             buttons:[{action:'record-other-action',label:'Used another action',disabled:!c.inTurn,callback:()=> 'record-other-action'},
               {action:'record-other-reaction',label:'Used my regular reaction',disabled:model.state.lastReactionTurn===c.turn,callback:()=> 'record-other-reaction'},
-              {action:'cancel',label:'Cancel',callback:()=>null}]});
+              {action:'cancel',label:'Cancel',callback:()=>false}]});
           if(!slug)continue;
           lastResult=await runner.execute(actor,outsideActivityRequest(slug,foundry.utils.randomID(),expected));
           continue;

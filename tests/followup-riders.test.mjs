@@ -5,6 +5,7 @@ import {createFollowupRunner} from '../scripts/followup-native.mjs';
 import {createNativeRunner} from '../scripts/native.mjs';
 import {ActorQueue} from '../scripts/queue.mjs';
 import {setup} from './helpers/native-save-harness.mjs';
+import {submitDialog} from './helpers/dialog.mjs';
 function fixture(slug='solid-barrel'){
  const feat=followupFeat(slug),h=setup({slug,level:18,learned:[feat],degrees:[1],killOnApply:false});
  h.flags.tracker.events=['parent'];h.flags.tracker.combo={next:'savage-claw',untilTurn:2};h.flags.execution={id:'parent',slug,status:'complete',revision:h.flags.tracker.revision};
@@ -16,6 +17,10 @@ function fixture(slug='solid-barrel'){
  foundry.applications.api.DialogV2.wait=async()=>{h.dialogs++;h.onPrompt?.();return h.choice;};
  h.queue=new ActorQueue();h.runner=createFollowupRunner(h.deps,h.queue,steps);h.parent={id:'parent',status:'complete',revision:h.flags.tracker.revision};h.trigger=structuredClone(h.c);return h;
 }
+test('native GM Skip declines the rider without recovery, movement or round-use consumption',async()=>{
+ const h=fixture();foundry.applications.api.DialogV2.wait=cfg=>submitDialog(cfg,'skip');
+ await h.runner.execute(h.actor,h.req,h.parent,h.trigger);assert.equal(h.flags.followup.status,'declined');assert.equal(h.flags.execution.status,'complete');assert.equal(h.moves,0);assert.equal(h.flags.tracker.once['relentless-combo'],undefined);
+});
 test('only actual finisher/follow-up slugs offer the correct rider',()=>{
  for(const slug of ['solid-barrel','demon-slaughter'])assert.equal(followupFeat(slug),'relentless-combo');for(const slug of ['hypervelocity','jugular-rip','abdomen-tear','eye-gouge','fated-brand'])assert.equal(followupFeat(slug),'continued-assault');for(const slug of ['burst-strike','keen-edge','lion-heart','heart-of-stone'])assert.equal(followupFeat(slug),null);
 });

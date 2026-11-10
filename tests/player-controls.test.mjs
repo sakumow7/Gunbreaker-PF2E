@@ -4,6 +4,7 @@ import {controlsModel,availableResources,controlRequest} from '../scripts/player
 import {nativePanel,panelContent,installPanelButton} from '../scripts/player-panel.mjs';
 import {initialState} from '../scripts/state.mjs';
 import {catalogue} from '../scripts/catalogue.mjs';
+import {submitDialog} from './helpers/dialog.mjs';
 const context=()=>({time:1000,level:20,learned:Object.keys(catalogue),encounterId:'combat',round:1,turn:1,inTurn:true,wielding:true,targetIds:['Scene.scene.Token.selected']});
 function fixture(){const c=context();c.learned=c.learned.filter(s=>!['twin-cartridge','overcharged-gauge'].includes(s));return {c,s:{...initialState(),encounter:'combat',revision:2,cartridges:1}};}
 test('availability is read-only and gates combo, resources, cooldown, turn and busy state',()=>{
@@ -105,10 +106,19 @@ test('outside activity panel retains its checkpoint and sends no selected target
 test('outside activity cancel sends nothing; off-turn actions and spent regular reactions are disabled',async()=>{
  let calls=0;const f=panelFixture(async config=>{
   if(++calls===1)return config.buttons.find(b=>b.action==='outside').callback();
-  if(calls===2){assert(config.buttons.find(b=>b.action==='record-other-action').disabled);assert(config.buttons.find(b=>b.action==='record-other-reaction').disabled);return config.buttons.find(b=>b.action==='cancel').callback();}
+  if(calls===2){assert(config.buttons.find(b=>b.action==='record-other-action').disabled);assert(config.buttons.find(b=>b.action==='record-other-reaction').disabled);return submitDialog(config,'cancel');}
   return null;
  });f.c.inTurn=false;f.s.lastReactionTurn=f.c.turn;
  await nativePanel(f.actor,{execute:()=>assert.fail('canceled record')},()=>f.c);
+ assert.deepEqual(f.errors,[]);
+});
+test('native Cancel on optional resources never submits an ability or reports an error',async()=>{
+ let calls=0;const f=panelFixture(async config=>{
+  if(++calls===1)return submitDialog(config,'keen-edge',{weapon:{value:'blade'},map:{value:'0'}});
+  if(calls===2)return submitDialog(config,'cancel');
+  return submitDialog(config,'close');
+ });f.c.learned.push('powder-discipline');
+ await nativePanel(f.actor,{execute:()=>assert.fail('cancel must not execute')},()=>f.c);assert.deepEqual(f.errors,[]);
 });
 test('outside activity recording is disabled before encounter initialization and while busy',async()=>{
  for(const mode of ['uninitialized','busy']){

@@ -4,6 +4,7 @@ import {readFileSync} from 'node:fs';
 import {createMaintenance} from '../scripts/maintenance.mjs';
 import {rollbackMigration} from '../scripts/migration.mjs';
 import {ActorQueue} from '../scripts/queue.mjs';
+import {submitDialog} from './helpers/dialog.mjs';
 const MOD='gunbreaker-pf2e';
 function patch(data,update){for(const [path,value] of Object.entries(update)){const keys=path.split('.'),last=keys.pop();let parent=data;for(const key of keys)parent=parent[key]??={};if(last.startsWith('-='))delete parent[last.slice(2)];else if(value&&typeof value==='object'&&!Array.isArray(value))patch(parent[last]??={},value);else parent[last]=structuredClone(value);}}
 function fixture(){
@@ -64,3 +65,8 @@ test('rollback restores removed/new nested fields and refuses missing owned item
 });
 test('recovery reconciles an optional rider without repeating its Step or barrier',async()=>{const h=fixture();await h.actor.setFlag(MOD,'execution',{id:'parent',status:'complete'});await h.actor.setFlag(MOD,'followup',{parentId:'parent',feat:'continued-assault',status:'applying'});await h.actor.setFlag(MOD,'tracker',{once:{'continued-assault':1},cartridges:0});await h.maintenance.recover(h.actor);assert.equal(h.actor.getFlag(MOD,'followup').status,'reconciled');assert.equal(h.actor.getFlag(MOD,'tracker').once['continued-assault'],1);assert.equal(h.writes,0);assert.equal(h.backups,1);});
 test('recovery cannot unlock an actor while native movement remains planned, pending or paused',async()=>{for(const state of ['planned','pending','paused']){const h=fixture();await h.actor.setFlag(MOD,'execution',{status:'recovery'});h.actor.getActiveTokens=()=>[{document:{movement:{state}}}];await assert.rejects(h.maintenance.recover(h.actor),/Stop the pending/);assert.equal(h.backups,0);assert.equal(h.actor.getFlag(MOD,'execution').status,'recovery');}});
+test('unchecked native recovery confirmation cannot unlock or back up the pending action',async()=>{
+ const h=fixture();await h.actor.setFlag(MOD,'execution',{id:'pending',status:'recovery'});
+ foundry.applications.api.DialogV2.wait=cfg=>submitDialog(cfg,'accept',{verified:{checked:false},note:{value:'I have not verified this.'}});
+ await h.maintenance.recover(h.actor);assert.equal(h.backups,0);assert.equal(h.actor.getFlag(MOD,'execution').status,'recovery');
+});

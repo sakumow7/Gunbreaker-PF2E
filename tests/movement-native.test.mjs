@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {submitDialog} from './helpers/dialog.mjs';
 import assert from 'node:assert/strict';
 import {createMovementRunner} from '../scripts/movement-native.mjs';
 import {ActorQueue} from '../scripts/queue.mjs';
@@ -17,7 +18,7 @@ function harness(slug='trajectory'){
  h.actor.deleteEmbeddedDocuments=async()=>{};
  h.deps.applyEffect=async()=>h.stances++;
  h.deps.strikeFor=(_a,_w,s)=>{assert.equal(s,'keen-edge');return {variants:[0,1,2].map(map=>({roll:async args=>{assert.equal(map,1);h.strikes++;h.strikeArgs=args;args.callback(null,null,{id:'strike'});return h.cancelStrike?null:{degreeOfSuccess:h.degree??2};}})),damage:async args=>{h.damage++;h.damageArgs=args;},critical:async()=>h.damage++};};
- foundry.applications.api.DialogV2.wait=async options=>options.buttons[0].callback(null,{form:{elements:{verified:{checked:!h.cancelConfirm},guard:{checked:!h.declineStance}}}});
+ foundry.applications.api.DialogV2.wait=async options=>submitDialog(options,options.buttons[0].action,{verified:{checked:!h.cancelConfirm},guard:{checked:!h.declineStance}});
  h.runner=createMovementRunner(h.deps,new ActorQueue());return h;
 }
 test('native Trajectory plans, cancels preview and then moves after committing',async()=>{

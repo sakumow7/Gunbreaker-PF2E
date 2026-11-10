@@ -19,6 +19,10 @@ test('Vortex Guard rejects an ally changing eligibility before the effect withou
  const h=fixture('vortex-guard');h.onConfirm=()=>h.targets[2].actor.isDead=true;
  await assert.rejects(()=>vortexGuard(h.actor,h.req,h.c,h.flags.tracker,h.self),/recipient changed/);assert.equal(h.effects.length,0);assert.equal(h.flags.tracker.once.vortexRound,undefined);
 });
+test('native Vortex Guard Skip leaves the barrier and gate unchanged',async()=>{
+ const h=fixture('vortex-guard');foundry.applications.api.DialogV2.wait=cfg=>submitDialog(cfg,'skip');
+ await vortexGuard(h.actor,h.req,h.c,h.flags.tracker,h.self);assert.equal(h.effects.length,0);assert.equal(h.flags.tracker.once.vortexRound,undefined);
+});
 test('Overpowered Round excludes primary, source and allies, uses calibration, and preserves per-target evidence',async()=>{
  const h=fixture('overpowered-round');h.flags.tracker.calibration='cold';
  await overpoweredRound(h.actor,h.req,h.c,h.flags.tracker,h.targets[0]);assert.deepEqual(h.rolls,['3[cold]']);assert.equal(h.applied.length,1);assert.equal(h.applied[0].target,h.targets[1].document.uuid);assert.equal(h.flags.execution.riders[0].status,'complete');
@@ -57,3 +61,4 @@ test('Vortex Guard rechecks source consciousness and feature ownership before gr
   assert.equal(h.effects.length,0);assert.equal(h.flags.tracker.once.vortexRound,undefined);
  }
 });
+import {submitDialog} from './helpers/dialog.mjs';

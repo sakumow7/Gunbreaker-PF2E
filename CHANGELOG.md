@@ -1,3 +1,10 @@
+# Unreleased — Native dialog cancellation and Forge validation
+
+- Correct native DialogV2 cancellation: explicit `false` prevents Cancel/Skip and unchecked verification boxes from becoming button action IDs. Apply the correction to owner/GM riders, the player panel, area review, movement, recovery and Heart of Stone damage pairing.
+- Keep Concentrate on the Suppressing Fire action, excluding it from the effect-trait schema used to test immunities.
+- Expand detached native QA with numerical calibrated Continuation IWR, temporary HP and origin-trait checks. Record live observations and limits in docs/LIVE-QA-2026-11-10.md.
+- 411 local tests pass. The installed Forge module remains 1.3.0; candidate installation and real GM/player encounter acceptance remain pending.
+
 # Unreleased — Relentless Rush
 
 ## Unreleased automation expansion
