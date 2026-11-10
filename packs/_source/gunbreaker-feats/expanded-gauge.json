@@ -2,7 +2,7 @@
     "_id": "2a461f10c3b7e0f4",
     "name": "Expanded Gauge",
     "type": "feat",
-    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
     "system": {
         "description": {
             "value": "<p>Your normal cartridge capacity increases by 1. At level 18, the increase becomes 2. This stacks with Bloodfest’s temporary +3 capacity but never increases the cartridges with which you begin an encounter. Your normal capacity is therefore 4 at levels 12–17 and 5 at levels 18–20; during Bloodfest it is 7 or 8, respectively.</p>",

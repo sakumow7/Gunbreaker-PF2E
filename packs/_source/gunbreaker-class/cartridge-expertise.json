@@ -2,7 +2,7 @@
     "_id": "0034c6c64e887ff7",
     "name": "Cartridge Expertise",
     "type": "feat",
-    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
     "system": {
         "description": {
             "value": "<p>Once per encounter, when Solid Barrel or Demon Slaughter would load 1 cartridge, you may load 2 instead. A single finisher can load no more than 2 cartridges.</p>",

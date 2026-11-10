@@ -113,7 +113,7 @@
                 "name": "Powder Gauge",
                 "level": 1,
                 "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.fe03ab566ecd7e59",
-                "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp"
+                "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp"
             },
             "04cbd7c7e3159f9e": {
                 "name": "Gunbreaker's Combo",
@@ -125,7 +125,7 @@
                 "name": "Royal Guard",
                 "level": 1,
                 "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1f7a9715421e92da",
-                "img": "icons/equipment/shield/heater-steel-worn-grey.webp"
+                "img": "icons/equipment/shield/heater-steel-worn.webp"
             },
             "1aab8f02f7a76d31": {
                 "name": "Heart Of Stone",
@@ -137,7 +137,7 @@
                 "name": "Steady Aim",
                 "level": 3,
                 "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a61994a226d98bcc",
-                "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp"
+                "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp"
             },
             "7ea8bba45957ea76": {
                 "name": "Gunblade Weapon Mastery",
@@ -155,7 +155,7 @@
                 "name": "Continuation",
                 "level": 7,
                 "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.141e49ccd412a33a",
-                "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp"
+                "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp"
             },
             "a40dd44fb62beb04": {
                 "name": "Weapon Specialization",
@@ -167,7 +167,7 @@
                 "name": "Armor Expertise",
                 "level": 7,
                 "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0e4bd01ae207e03c",
-                "img": "icons/equipment/shield/heater-steel-worn-grey.webp"
+                "img": "icons/equipment/shield/heater-steel-worn.webp"
             },
             "ad484df0b1baae4e": {
                 "name": "Aetheric Fortitude",
@@ -179,7 +179,7 @@
                 "name": "Cartridge Expertise",
                 "level": 9,
                 "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0034c6c64e887ff7",
-                "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp"
+                "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp"
             },
             "0a3b3f4bfc68b3d1": {
                 "name": "Gunbreaker Expertise",
@@ -203,7 +203,7 @@
                 "name": "Armor Mastery",
                 "level": 15,
                 "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.70faa71375db332e",
-                "img": "icons/equipment/shield/heater-steel-worn-grey.webp"
+                "img": "icons/equipment/shield/heater-steel-worn.webp"
             },
             "5ee5fcd559eedf13": {
                 "name": "Greater Weapon Specialization",

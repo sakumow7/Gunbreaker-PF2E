@@ -2,7 +2,7 @@
     "_id": "92a076708eb700d2",
     "name": "Superbolide",
     "type": "feat",
-    "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+    "img": "icons/equipment/shield/heater-steel-worn.webp",
     "system": {
         "description": {
             "value": "<p>Requirements: You are conscious, have at least 2 HP, and wield a gunblade. Lose HP equal to your level, but this loss cannot reduce you below 1 HP. This loss is not damage, cannot be prevented or redirected, and does not trigger damage-based abilities. Until the start of your next turn, gain resistance to all damage equal to twice your level. This does not prevent conditions, death effects, or damage exceeding your resistance. Normal dying rules apply if damage reduces you to 0 HP.</p>",

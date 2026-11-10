@@ -2,7 +2,7 @@
     "_id": "86023718d8bb7327",
     "name": "Powder Discipline",
     "type": "feat",
-    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
     "system": {
         "description": {
             "value": "<p><strong>Frequency</strong> once per encounter. After you critically hit a genuine enemy with a gunblade Strike, you may load 1 cartridge. This is not an action. You cannot use it on a training target or cooperative creature.</p>",

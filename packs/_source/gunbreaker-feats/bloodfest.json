@@ -2,7 +2,7 @@
     "_id": "39542260a7548fc5",
     "name": "Bloodfest",
     "type": "feat",
-    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
     "system": {
         "description": {
             "value": "<p><strong>Frequency</strong> once per 10 minutes. <strong>Requirements</strong> A genuine enemy is within 30 feet and you wield a gunblade. Draw aether from the foe. Increase your maximum cartridges by 3 (normally to 6) for 1 minute or until the encounter ends, whichever comes first, then load 3 cartridges. When this ends, discard cartridges above your normal maximum. You gain Ready to Reign for the same duration; it allows one Reign of Beasts sequence if you have that feat.</p>",

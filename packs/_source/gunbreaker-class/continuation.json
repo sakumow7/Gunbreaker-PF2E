@@ -2,7 +2,7 @@
     "_id": "141e49ccd412a33a",
     "name": "Continuation",
     "type": "feat",
-    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
     "system": {
         "description": {
             "value": "<p>You learn Hypervelocity, Jugular Rip, Abdomen Tear, and Eye Gouge. Matching follow-ups: Burst Strike → Hypervelocity; Gnashing Fang → Jugular Rip; Savage Claw → Abdomen Tear; Wicked Talon → Eye Gouge.</p><p>After a successful Burst Strike, Gnashing Fang, Savage Claw, or Wicked Talon, you may use its matching follow-up as your next action on the same turn against the same creature, provided it remains within your melee reach. Any intervening action, including a free action, closes the opening. Reactions do not close it. The opening ends at the end of your turn or when consumed. Only one Continuation follow-up, including Fated Brand, can be used per round.</p><p>Hypervelocity, Jugular Rip, Abdomen Tear, and Eye Gouge each cost 1 action and deal 2d6 fire damage plus the number of weapon damage dice of the gunblade used for the opening Strike. The dice become 3d6 at level 11 and 4d6 at level 17. Snapshot the weapon dice when the opening Strike resolves. The follow-up has no attack roll or save, does not increase MAP, and never doubles on a critical opening Strike. It is a separate damage effect for immunity, weakness, and resistance. No Mercy and weapon property-rune damage do not add to it.</p><p>Fated Brand retains its existing damage, fresh basic Reflex saves, eligible-target restrictions, and shared Continuation limit. It receives no weapon-dice bonus. Its opening follows the same intervening-action rule.</p>",

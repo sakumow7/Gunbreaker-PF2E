@@ -2,7 +2,7 @@
     "_id": "70faa71375db332e",
     "name": "Armor Mastery",
     "type": "feat",
-    "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+    "img": "icons/equipment/shield/heater-steel-worn.webp",
     "system": {
         "description": {
             "value": "<p>Your proficiency in light and medium armor and unarmored defense increases to master.</p>",

@@ -5,7 +5,7 @@
       "_id": "d2e7e82195b0d940",
       "name": "Abdomen Tear",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p><strong>Requirements</strong> Continuation; your next action after a successful Savage Claw Strike this turn, against the same enemy still within your melee reach. Intervening reactions do not close this opening; other actions, including free actions, do. <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 2d6 fire damage plus the number of weapon damage dice of the opening gunblade (base die plus fundamental striking rune dice only). Increase the d6s to 3d6 at level 11 and 4d6 at level 17. Snapshot the weapon dice when the opening Strike resolves. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
@@ -221,7 +221,7 @@
       "_id": "0e4bd01ae207e03c",
       "name": "Armor Expertise",
       "type": "feat",
-      "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+      "img": "icons/equipment/shield/heater-steel-worn.webp",
       "system": {
         "description": {
           "value": "<p>Your proficiency in light and medium armor and unarmored defense increases to expert. Your aetheric guards reinforce practiced footwork.</p>",
@@ -280,7 +280,7 @@
       "_id": "70faa71375db332e",
       "name": "Armor Mastery",
       "type": "feat",
-      "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+      "img": "icons/equipment/shield/heater-steel-worn.webp",
       "system": {
         "description": {
           "value": "<p>Your proficiency in light and medium armor and unarmored defense increases to master.</p>",
@@ -442,7 +442,7 @@
       "_id": "148481d3f7d0f02b",
       "name": "Burst Strike",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p><strong>Cost</strong> 1 cartridge.</p><p>Make a melee gunblade Strike. On a hit, deal additional fire damage: 1d6 at 1st level, 2d6 at 5th, 3d6 at 11th, and 4d6 at 17th. If you have Continuation, a hit enables Hypervelocity as your next action this turn against the same target.</p><p><strong>Additional Strike damage:</strong> @Damage[(1+floor((@actor.level+1)/6))d6[fire]]</p>",
@@ -535,7 +535,7 @@
       "_id": "0034c6c64e887ff7",
       "name": "Cartridge Expertise",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p>Once per encounter, when Solid Barrel or Demon Slaughter would load 1 cartridge, you may load 2 instead. A single finisher can load no more than 2 cartridges.</p>",
@@ -581,7 +581,7 @@
       "_id": "141e49ccd412a33a",
       "name": "Continuation",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p>You learn Hypervelocity, Jugular Rip, Abdomen Tear, and Eye Gouge. Matching follow-ups: Burst Strike → Hypervelocity; Gnashing Fang → Jugular Rip; Savage Claw → Abdomen Tear; Wicked Talon → Eye Gouge.</p><p>After a successful Burst Strike, Gnashing Fang, Savage Claw, or Wicked Talon, you may use its matching follow-up as your next action on the same turn against the same creature, provided it remains within your melee reach. Any intervening action, including a free action, closes the opening. Reactions do not close it. The opening ends at the end of your turn or when consumed. Only one Continuation follow-up, including Fated Brand, can be used per round.</p><p>Hypervelocity, Jugular Rip, Abdomen Tear, and Eye Gouge each cost 1 action and deal 2d6 fire damage plus the number of weapon damage dice of the gunblade used for the opening Strike. The dice become 3d6 at level 11 and 4d6 at level 17. Snapshot the weapon dice when the opening Strike resolves. The follow-up has no attack roll or save, does not increase MAP, and never doubles on a critical opening Strike. It is a separate damage effect for immunity, weakness, and resistance. No Mercy and weapon property-rune damage do not add to it.</p><p>Fated Brand retains its existing damage, fresh basic Reflex saves, eligible-target restrictions, and shared Continuation limit. It receives no weapon-dice bonus. Its opening follows the same intervening-action rule.</p>",
@@ -791,7 +791,7 @@
       "_id": "46135863d5cb73ef",
       "name": "Eye Gouge",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p><strong>Requirements</strong> Continuation; your next action after a successful Wicked Talon Strike this turn, against the same enemy still within your melee reach. Intervening reactions do not close this opening; other actions, including free actions, do. <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 2d6 fire damage plus the number of weapon damage dice of the opening gunblade (base die plus fundamental striking rune dice only). Increase the d6s to 3d6 at level 11 and 4d6 at level 17. Snapshot the weapon dice when the opening Strike resolves. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
@@ -842,7 +842,7 @@
       "_id": "11009f00b5d265be",
       "name": "Fated Brand",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p><strong>Requirements</strong> Continuation; your immediately preceding action this turn was Fated Circle and at least one enemy failed its save. <strong>Frequency</strong> once per round, shared with all Continuation follow-ups.</p><p>Each enemy that failed or critically failed that Fated Circle save and remains within a 5-foot emanation takes 2d6 fire damage with a new basic Reflex save against your class DC. Damage increases to 3d6 at 17th level. Consume the opening. This does not use or increase multiple attack penalty.</p><p>@Damage[(2+floor((@actor.level-11)/6))d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
@@ -1413,7 +1413,7 @@
             "name": "Powder Gauge",
             "level": 1,
             "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.fe03ab566ecd7e59",
-            "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp"
+            "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp"
           },
           "04cbd7c7e3159f9e": {
             "name": "Gunbreaker's Combo",
@@ -1425,7 +1425,7 @@
             "name": "Royal Guard",
             "level": 1,
             "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1f7a9715421e92da",
-            "img": "icons/equipment/shield/heater-steel-worn-grey.webp"
+            "img": "icons/equipment/shield/heater-steel-worn.webp"
           },
           "1aab8f02f7a76d31": {
             "name": "Heart Of Stone",
@@ -1437,7 +1437,7 @@
             "name": "Steady Aim",
             "level": 3,
             "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a61994a226d98bcc",
-            "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp"
+            "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp"
           },
           "7ea8bba45957ea76": {
             "name": "Gunblade Weapon Mastery",
@@ -1455,7 +1455,7 @@
             "name": "Continuation",
             "level": 7,
             "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.141e49ccd412a33a",
-            "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp"
+            "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp"
           },
           "a40dd44fb62beb04": {
             "name": "Weapon Specialization",
@@ -1467,7 +1467,7 @@
             "name": "Armor Expertise",
             "level": 7,
             "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0e4bd01ae207e03c",
-            "img": "icons/equipment/shield/heater-steel-worn-grey.webp"
+            "img": "icons/equipment/shield/heater-steel-worn.webp"
           },
           "ad484df0b1baae4e": {
             "name": "Aetheric Fortitude",
@@ -1479,7 +1479,7 @@
             "name": "Cartridge Expertise",
             "level": 9,
             "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0034c6c64e887ff7",
-            "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp"
+            "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp"
           },
           "0a3b3f4bfc68b3d1": {
             "name": "Gunbreaker Expertise",
@@ -1503,7 +1503,7 @@
             "name": "Armor Mastery",
             "level": 15,
             "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.70faa71375db332e",
-            "img": "icons/equipment/shield/heater-steel-worn-grey.webp"
+            "img": "icons/equipment/shield/heater-steel-worn.webp"
           },
           "5ee5fcd559eedf13": {
             "name": "Greater Weapon Specialization",
@@ -1669,7 +1669,7 @@
       "_id": "291e00009610fbc7",
       "name": "Hypervelocity",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p><strong>Requirements</strong> Continuation; your next action after a successful Burst Strike Strike this turn, against the same enemy still within your melee reach. Intervening reactions do not close this opening; other actions, including free actions, do. <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 2d6 fire damage plus the number of weapon damage dice of the opening gunblade (base die plus fundamental striking rune dice only). Increase the d6s to 3d6 at level 11 and 4d6 at level 17. Snapshot the weapon dice when the opening Strike resolves. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
@@ -1720,7 +1720,7 @@
       "_id": "84d4d65427e30457",
       "name": "Jugular Rip",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p><strong>Requirements</strong> Continuation; your next action after a successful Gnashing Fang Strike this turn, against the same enemy still within your melee reach. Intervening reactions do not close this opening; other actions, including free actions, do. <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 2d6 fire damage plus the number of weapon damage dice of the opening gunblade (base die plus fundamental striking rune dice only). Increase the d6s to 3d6 at level 11 and 4d6 at level 17. Snapshot the weapon dice when the opening Strike resolves. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
@@ -1987,7 +1987,7 @@
       "_id": "fe03ab566ecd7e59",
       "name": "Powder Gauge",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p>Your gunblade stores aether in a Powder Gauge with a maximum of 3 cartridges. At the start of a combat encounter, begin with 1 cartridge; unspent cartridges dissipate at its end. You cannot build cartridges outside a combat encounter with a genuine threat, as determined by the GM. A training target or cooperative creature is not a threat.</p><p>Completing Solid Barrel or Demon Slaughter loads 1 cartridge, even if the Strike misses or every target succeeds at its save. Each activity loads only once, regardless of targets. You cannot exceed your maximum. Costs are paid before resolving an action and are not refunded on a miss. Cartridges are class resources, not ammunition or trade goods. Round fractional values down, to a minimum of 1 only where stated.</p><p>Use the Gunbreaker Tracker macro to record cartridges, combos, and cooldowns. Posting an item to chat never spends or grants resources. Effects, attacks, saves, damage, healing, and reactions are resolved on the sheet with your GM.</p><p>Unless a feature says otherwise, you must wield a gunblade to use Gunbreaker actions and reactions. Passive features do not require this. Aurora and defensive abilities without an encounter requirement may be used during exploration; their cooldowns still apply.</p>",
@@ -2033,7 +2033,7 @@
       "_id": "1f7a9715421e92da",
       "name": "Royal Guard",
       "type": "feat",
-      "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+      "img": "icons/equipment/shield/heater-steel-worn.webp",
       "system": {
         "description": {
           "value": "<p><strong>Requirements</strong> You wield a gunblade.</p><p>You adopt the protective posture of Gunnhildr's guard. Gain a +1 circumstance bonus to AC while in this stance. Your damage is unchanged. The stance ends if you cease wielding a gunblade, become unconscious, or combat ends. Your Heart of Stone reaction works with or without the stance. This stance does not force enemies to attack you.</p><p>Apply the linked Royal Guard effect when you enter, and remove it when you leave.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.a74a5130c0f43674]{Royal Guard (Stance)}. Apply manually after recording the action.</p>",
@@ -2194,7 +2194,7 @@
       "_id": "a61994a226d98bcc",
       "name": "Steady Aim",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p>Your proficiency in Perception and Will saves increases to expert. When you use Lightning Shot, ignore the circumstance bonus to AC from lesser cover; cover and greater cover still apply.</p>",
@@ -2941,7 +2941,7 @@
       "_id": "d85fd2974ad8971c",
       "name": "Ready to Blast",
       "type": "effect",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p>Legacy readiness reminder. Use the tracker and the linked action's requirements; the reminder alone does not authorize an action. Continuation requires a successful preceding Strike and the same target, and is limited to once per round.</p>",
@@ -3043,7 +3043,7 @@
       "_id": "4791a8210f7e88da",
       "name": "Ready to Gouge",
       "type": "effect",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p>Legacy readiness reminder. Use the tracker and the linked action's requirements; the reminder alone does not authorize an action. Continuation requires a successful preceding Strike and the same target, and is limited to once per round.</p>",
@@ -3094,7 +3094,7 @@
       "_id": "5f11dd5176112b3c",
       "name": "Ready to Raze",
       "type": "effect",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p>Legacy readiness reminder. Use the tracker and the linked action's requirements; the reminder alone does not authorize an action. Continuation requires a successful preceding Strike and the same target, and is limited to once per round.</p>",
@@ -3196,7 +3196,7 @@
       "_id": "f94b9d922ff30784",
       "name": "Ready to Rip",
       "type": "effect",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p>Legacy readiness reminder. Use the tracker and the linked action's requirements; the reminder alone does not authorize an action. Continuation requires a successful preceding Strike and the same target, and is limited to once per round.</p>",
@@ -3247,7 +3247,7 @@
       "_id": "14d57475c050642d",
       "name": "Ready to Tear",
       "type": "effect",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p>Legacy readiness reminder. Use the tracker and the linked action's requirements; the reminder alone does not authorize an action. Continuation requires a successful preceding Strike and the same target, and is limited to once per round.</p>",
@@ -3298,7 +3298,7 @@
       "_id": "a74a5130c0f43674",
       "name": "Royal Guard (Stance)",
       "type": "effect",
-      "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+      "img": "icons/equipment/shield/heater-steel-worn.webp",
       "system": {
         "description": {
           "value": "<p>+1 circumstance AC while conscious, wielding a gunblade, and in combat. Remove when any requirement ends. Damage is unchanged.</p>",
@@ -3842,7 +3842,7 @@
       "_id": "35a9caf57d156ced",
       "name": "Aetheric Calibration",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p>During daily preparations, choose fire, cold, or electricity; fire is the default. Until your next daily preparations, replace the fire damage of Burst Strike, Hypervelocity, Jugular Rip, Abdomen Tear, Eye Gouge, Fated Circle, Fated Brand, Double Down, Saturation Fire, and Overpowered Round with the chosen type. This changes only those listed damage components. It does not change physical weapon damage, persistent bleed, property runes, Lightning Shot, Danger Zone, Bow Shock, Reign secondary damage, or Relentless Rush. Replace any corresponding fire trait on a modified effect with the chosen damage trait. Other traits and all costs are unchanged.</p>",
@@ -4087,7 +4087,7 @@
       "_id": "39542260a7548fc5",
       "name": "Bloodfest",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p><strong>Frequency</strong> once per 10 minutes. <strong>Requirements</strong> A genuine enemy is within 30 feet and you wield a gunblade. Draw aether from the foe. Increase your maximum cartridges by 3 (normally to 6) for 1 minute or until the encounter ends, whichever comes first, then load 3 cartridges. When this ends, discard cartridges above your normal maximum. You gain Ready to Reign for the same duration; it allows one Reign of Beasts sequence if you have that feat.</p>",
@@ -4286,7 +4286,7 @@
       "_id": "916a69431d6bcbfe",
       "name": "Continued Assault",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p><strong>Frequency</strong> once per round. After you resolve a Continuation follow-up, you may Step as a free action. Alternatively, if you are in Royal Guard, grant one adjacent ally temporary Hit Points equal to half your level until the start of your next turn. This does not grant another Strike or follow-up.</p>",
@@ -4429,7 +4429,7 @@
       "_id": "2a461f10c3b7e0f4",
       "name": "Expanded Gauge",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p>Your normal cartridge capacity increases by 1. At level 18, the increase becomes 2. This stacks with Bloodfest’s temporary +3 capacity but never increases the cartridges with which you begin an encounter. Your normal capacity is therefore 4 at levels 12–17 and 5 at levels 18–20; during Bloodfest it is 7 or 8, respectively.</p>",
@@ -4571,7 +4571,7 @@
       "_id": "677832a37dd0865c",
       "name": "Guarded Advance",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p>Requirements: You wield a gunblade and can enter or are already in Royal Guard. Stride up to your Speed. You may then enter Royal Guard without spending another action, ending an incompatible stance normally. Finally, use Keen Edge against an enemy within your melee reach. If no enemy is in reach, you do not make the Strike or gain a combo opening; the movement and stance still occur. The subordinate Strike uses and increases MAP normally. This activity does not increase your Speed or bypass difficult terrain or reactions.</p><p>It counts as one flourish. It cannot be combined with Trajectory on the same turn. When already in Royal Guard, it still allows Stride and Keen Edge but grants no extra benefit. Its subordinate movement and Strike do not each consume another action.</p>",
@@ -4618,7 +4618,7 @@
       "_id": "2fedcd38de2a7855",
       "name": "Guardian's Instinct",
       "type": "feat",
-      "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+      "img": "icons/equipment/shield/heater-steel-worn.webp",
       "system": {
         "description": {
           "value": "<p>Heart of Stone's range increases to 30 feet. At the start of each of your turns, gain one additional reaction that can be used only for Heart of Stone to protect an ally other than yourself. It expires at the start of your next turn. You cannot use more than one reaction on the same triggering attack. Aetheric Ward cannot use this extra reaction.</p>",
@@ -4715,7 +4715,7 @@
       "_id": "c475ac3a902152e3",
       "name": "Gunnhildr Escort",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p>You become trained in Diplomacy and Escort Lore. If already trained in either, choose another skill in which to become trained for each duplicate. You gain a +1 circumstance bonus to Gather Information checks about route hazards, local security, or threats to a person or group you are escorting. The GM determines whether the inquiry qualifies. This benefit does not apply to initiative, combat checks, or unrelated information gathering.</p><p>Use the class setup workflow to apply the training choices once. The roll option covers only GM-approved Gather Information inquiries.</p>",
@@ -4883,7 +4883,7 @@
       "_id": "47bc76d1092a9061",
       "name": "Lightning Shot",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p>Make a ranged gunblade Strike with a range increment of 30 feet and a maximum range of 120 feet. Use Dexterity for the attack. Deal fire damage using the gunblade's one-handed base damage die and its runes; add specialization normally, but do not add Strength to damage. This does not consume a cartridge or require reloading. Normal ranged attack rules, including cover, multiple attack penalty, and reactions, apply. It does not advance a combo or grant Continuation. </p><p>You may use Lightning Shot while wielding a standard gunblade in one or two hands. Its weapon dice always use the one-handed base die, including fundamental striking dice. It uses Dexterity to attack, adds specialization, and adds no Strength damage. Apply only property runes whose own requirements permit that ranged attack; a discharge does not override a melee-only requirement. Lightning Shot does not grant a second weapon, transfer runes, require ammunition, or open Continuation. Keep its range and existing feat level.</p>",
@@ -5078,7 +5078,7 @@
       "_id": "e0f1268439d77a85",
       "name": "Perfect Chamber",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p><strong>Frequency</strong> once per day. <strong>Requirements</strong> You wield a gunblade. For 1 minute or until the encounter ends, whichever comes first, reduce the cartridge cost of the first cartridge-spending action or reaction you use each round by 1 (minimum 0). You choose whether to apply the reduction when spending. This includes the optional cartridge enhancement to Heart of Stone. Costs otherwise apply normally, and cooldowns and combo requirements are unchanged. This does not increase cartridge generation.</p>",
@@ -5129,7 +5129,7 @@
       "_id": "86023718d8bb7327",
       "name": "Powder Discipline",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p><strong>Frequency</strong> once per encounter. After you critically hit a genuine enemy with a gunblade Strike, you may load 1 cartridge. This is not an action. You cannot use it on a training target or cooperative creature.</p>",
@@ -5251,7 +5251,7 @@
       "_id": "ca203eb3b1f22fda",
       "name": "Release Royal Guard",
       "type": "feat",
-      "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+      "img": "icons/equipment/shield/heater-steel-worn.webp",
       "system": {
         "description": {
           "value": "<p>End your Royal Guard stance. This is a granted action, not a selectable class feat.</p>",
@@ -5394,7 +5394,7 @@
       "_id": "dd803762c60bc33a",
       "name": "Reserved Cartridge",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p><strong>Frequency</strong> once per encounter.</p><p>When you use Heart of Stone to protect an ally other than yourself, you may apply its cartridge enhancement without spending a cartridge. You can do this with no cartridges remaining. It uses your normal available reaction, does not load a cartridge, and cannot enhance Aetheric Ward. Declare the use before resolving the protection. You cannot also apply Perfect Chamber’s discount to the same enhancement.</p>",
@@ -5553,7 +5553,7 @@
       "_id": "92a076708eb700d2",
       "name": "Superbolide",
       "type": "feat",
-      "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+      "img": "icons/equipment/shield/heater-steel-worn.webp",
       "system": {
         "description": {
           "value": "<p>Requirements: You are conscious, have at least 2 HP, and wield a gunblade. Lose HP equal to your level, but this loss cannot reduce you below 1 HP. This loss is not damage, cannot be prevented or redirected, and does not trigger damage-based abilities. Until the start of your next turn, gain resistance to all damage equal to twice your level. This does not prevent conditions, death effects, or damage exceeding your resistance. Normal dying rules apply if damage reduces you to 0 HP.</p>",
@@ -5604,7 +5604,7 @@
       "_id": "a94257a79a9f51d7",
       "name": "Suppressing Fire",
       "type": "feat",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
           "value": "<p><strong>Requirements</strong> You wield a gunblade. Choose one enemy within 30 feet that can see you. Attempt to Demoralize it using Intimidation; your gunblade's threatening discharge replaces the auditory trait with the visual trait and removes the penalty for not sharing a language. All other Demoralize rules, including its immunity, apply. This is not a Strike and consumes no cartridge.</p>",
@@ -5753,7 +5753,7 @@
       "name": "Gunbreaker Tracker",
       "type": "script",
       "scope": "global",
-      "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+      "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "command": "const api = game.modules.get('gunbreaker-pf2e')?.api;\nif (!api) ui.notifications.warn('Enable Gunbreaker first.');\nelse await api.tracker();",
       "ownership": {
         "default": 2

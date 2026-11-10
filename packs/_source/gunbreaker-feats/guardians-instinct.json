@@ -2,7 +2,7 @@
     "_id": "2fedcd38de2a7855",
     "name": "Guardian's Instinct",
     "type": "feat",
-    "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+    "img": "icons/equipment/shield/heater-steel-worn.webp",
     "system": {
         "description": {
             "value": "<p>Heart of Stone's range increases to 30 feet. At the start of each of your turns, gain one additional reaction that can be used only for Heart of Stone to protect an ally other than yourself. It expires at the start of your next turn. You cannot use more than one reaction on the same triggering attack. Aetheric Ward cannot use this extra reaction.</p>",

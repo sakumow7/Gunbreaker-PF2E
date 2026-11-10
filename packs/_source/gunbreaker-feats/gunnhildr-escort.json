@@ -2,7 +2,7 @@
     "_id": "c475ac3a902152e3",
     "name": "Gunnhildr Escort",
     "type": "feat",
-    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
     "system": {
         "description": {
             "value": "<p>You become trained in Diplomacy and Escort Lore. If already trained in either, choose another skill in which to become trained for each duplicate. You gain a +1 circumstance bonus to Gather Information checks about route hazards, local security, or threats to a person or group you are escorting. The GM determines whether the inquiry qualifies. This benefit does not apply to initiative, combat checks, or unrelated information gathering.</p><p>Use the class setup workflow to apply the training choices once. The roll option covers only GM-approved Gather Information inquiries.</p>",

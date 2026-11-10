@@ -1,3 +1,9 @@
+# Unreleased — Icon path repair
+
+- Correct the missing cannon and worn-shield core icon filenames in 35 source documents, including class grant previews, effects and the tracker macro.
+- Add `tools/repair-icons.mjs` for a GM to repair only these known paths in installed Gunbreaker compendia and imported world items; preserve custom images, rules and compendium locks.
+- Both replacements were verified to load as 256×256 images in Forge.
+
 # Unreleased — Persistent Forge playtest fixes
 
 - Add a reusable private test-scene builder/console using real native actors, tokens, HP and combat events.
