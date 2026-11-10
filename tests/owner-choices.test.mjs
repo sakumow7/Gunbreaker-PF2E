@@ -82,6 +82,10 @@ test('closing a prompt sends a decline; changed scene after opening sends nothin
  const h=nativeFixture();h.choice=null;h.deliver({riderPrompt:h.prompt});await flush();assert.equal(h.sent[0].flags['gunbreaker-pf2e'].riderChoice.choiceId,null);
  const f=nativeFixture();f.onDialog=()=>canvas.scene.id='other';f.deliver({riderPrompt:f.prompt});await flush();assert.equal(f.sent.length,0);assert.equal(f.warnings.length,1);
 });
+test('native Skip submits a null decline immediately instead of an unrecognized button ID',async()=>{
+ const h=nativeFixture();foundry.applications.api.DialogV2.wait=cfg=>submitDialog(cfg,'skip-rider');
+ h.deliver({riderPrompt:h.prompt});await flush();assert.equal(h.sent.length,1);assert.equal(h.sent[0].flags['gunbreaker-pf2e'].riderChoice.choiceId,null);assert.deepEqual(h.warnings,[]);
+});
 test('prompt edits after creation cannot change displayed or submitted choices',async()=>{
  const h=nativeFixture();h.deliver({riderPrompt:h.prompt});h.prompt.choices[0].id='forged';h.prompt.text='changed';await flush();
  assert(h.dialogs[0].content.includes('&lt;safely>'));assert.equal(h.sent[0].flags['gunbreaker-pf2e'].riderChoice.choiceId,'step');
@@ -96,3 +100,4 @@ test('GM requests are private and reject lost ownership, disabled setting or ano
  game.users.get('player').viewedScene='other';await assert.rejects(h.api.ask(h.actor,{id:'two',requesterId:'player'},{title:'Rider',text:'Choose',choices:[{id:'step',label:'Step'}]}),/same scene/);
  game.users.get('player').viewedScene='scene';game.settings.get=()=>false;await assert.rejects(h.api.ask(h.actor,{id:'two',requesterId:'player'},{}),/enabled/);
 });
+import {submitDialog} from './helpers/dialog.mjs';

@@ -46,7 +46,7 @@ export function createFollowupRunner(deps,queue,steps=createStepService(deps)){
     const id=await deps.ownerChoices.ask(actor,req,{title,text:'Use the optional once-per-round rider now? Step uses ordinary five-foot ground movement; the GM plans and verifies the path. Skip preserves this round’s rider use.',choices:options.map(({id,label})=>({id,label}))});
     assert(id===null||options.some(o=>o.id===id),'Invalid owner rider choice.');
     choice=options.find(o=>o.id===id)?.value??null;
-   }else choice=await foundry.applications.api.DialogV2.wait({window:{title},rejectClose:false,content:'<p>Use the optional once-per-round rider now? Step uses ordinary five-foot ground movement; verify terrain and hazards. Declining leaves the round use available.</p>',buttons:[{action:'step',label:'Step',callback:()=>({kind:'step'})},...candidates.map((t,i)=>({action:`ally${i}`,label:`Protect ${t.name}`,callback:()=>({kind:'barrier',target:t.document.uuid})})),{action:'skip',label:'Skip',callback:()=>null}]});
+   }else choice=await foundry.applications.api.DialogV2.wait({window:{title},rejectClose:false,content:'<p>Use the optional once-per-round rider now? Step uses ordinary five-foot ground movement; verify terrain and hazards. Declining leaves the round use available.</p>',buttons:[{action:'step',label:'Step',callback:()=>({kind:'step'})},...candidates.map((t,i)=>({action:`ally${i}`,label:`Protect ${t.name}`,callback:()=>({kind:'barrier',target:t.document.uuid})})),{action:'skip',label:'Skip',callback:()=>false}]});
    if(!choice)return await finish('declined');
    fresh();let plan=null,target=null;
    if(choice.kind==='step'){

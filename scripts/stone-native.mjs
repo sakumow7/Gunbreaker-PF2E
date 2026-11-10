@@ -112,7 +112,7 @@ export function installStone(contextFor,actorQueue){
     if(!matches.length)throw Error('No matching native damage card. Roll this attack’s damage with the correct outcome first. Critical spell rolls that are not represented natively require manual adjudication.');
     const choice=await foundry.applications.api.DialogV2.wait({window:{title:'Pair attack damage'},rejectClose:false,
       content:`<p>Select the damage for this exact attack on ${esc(w.targetName)}. This workflow applies one combined damage roll.</p><select name="damage">${matches.map(m=>`<option value="${m.id}">${esc(m.id)} · ${esc(m.item?.name??'Damage')} · ${m.rolls[0].total}</option>`).join('')}</select><label><input name="confirm" type="checkbox"> I confirm the attack link, visibility, and that this damage has not already been applied. No Shield Block, damage redirection or separate damage packet needs resolution.</label>`,
-      buttons:[{action:'apply',label:'Apply once',callback:(_e,b)=>b.form.elements.confirm.checked?b.form.elements.damage.value:null}]});
+      buttons:[{action:'apply',label:'Apply once',callback:(_e,b)=>b.form.elements.confirm.checked?b.form.elements.damage.value:false}]});
     if(typeof choice==='string')return runner.apply(message.id,choice);
   }
   const opening=new Set();

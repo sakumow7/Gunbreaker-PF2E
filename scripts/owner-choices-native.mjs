@@ -26,9 +26,10 @@ export function installOwnerChoices(){
   seen.set(p.id,p.expiresAt);
   const actor=await fromUuid(p.actorUuid);
   if(!actor?.isOwner||actor.type!=='character')return;
+  // DialogV2 substitutes the button action for nullish callback values; false is an explicit decline.
   const choice=await foundry.applications.api.DialogV2.wait({window:{title:p.title},rejectClose:false,
    content:`<p>${esc(p.text)}</p><p>Choose within 60 seconds. Closing or Skip declines this rider only; the parent ability has already resolved.</p>`,
-   buttons:[...p.choices.map(c=>({action:c.id,label:esc(c.label),callback:()=>c.id})),{action:'skip-rider',label:'Skip',callback:()=>null}]});
+   buttons:[...p.choices.map(c=>({action:c.id,label:esc(c.label),callback:()=>c.id})),{action:'skip-rider',label:'Skip',callback:()=>false}]});
   if(clock()>=p.expiresAt||!actor.isOwner||canvas.scene?.id!==p.sceneId||!game.settings.get(MOD,'playerRequests')||!game.users.get(p.gmId)?.active||!singleGM()){
    ui.notifications.warn('The rider choice is no longer current. Ask the GM to reconcile the action.');return;
   }

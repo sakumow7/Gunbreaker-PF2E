@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {suppressingAction,demoralizeEvidence,immunityActive,immunityEntry,frightenedValue,setFrightenedAtLeast,installDemoralizeObserver} from '../scripts/demoralize.mjs';
+import {suppressingEffect,suppressingAction,demoralizeEvidence,immunityActive,immunityEntry,frightenedValue,setFrightenedAtLeast,installDemoralizeObserver} from '../scripts/demoralize.mjs';
 import {createDemoralizeRunner} from '../scripts/demoralize-native.mjs';
 import {ActorQueue} from '../scripts/queue.mjs';
 import {setup} from './helpers/native-save-harness.mjs';
 class NativeAction{constructor(data){Object.assign(this,data);}async use(args){return this.run?.(args);}}
 test('Suppressing Fire constructs an isolated visual native Demoralize without language penalty',()=>{
  const base=new NativeAction({slug:'demoralize',traits:['auditory','fear'],modifiers:[{modifier:-4}],notes:['success']});
- const action=suppressingAction(base);assert.equal(action.slug,'demoralize');assert.equal(action.statistic,'intimidation');assert.equal(action.difficultyClass,'will');assert(action.traits.includes('visual'));assert(!action.traits.includes('auditory'));assert.deepEqual(action.modifiers,[]);assert.deepEqual(base.traits,['auditory','fear']);assert.deepEqual(base.modifiers,[{modifier:-4}]);assert.deepEqual(action.notes,base.notes);
+ const action=suppressingAction(base);assert.equal(action.slug,'demoralize');assert.equal(action.statistic,'intimidation');assert.equal(action.difficultyClass,'will');assert(action.traits.includes('visual'));assert(action.traits.includes('concentrate'));assert(!action.traits.includes('auditory'));assert.deepEqual(action.modifiers,[]);assert.deepEqual(base.traits,['auditory','fear']);assert.deepEqual(base.modifiers,[{modifier:-4}]);assert.deepEqual(action.notes,base.notes);
 });
 test('Demoralize degrees, source-specific immunity and expiration',()=>{
  assert.deepEqual([0,1,2,3].map(frightenedValue),[0,0,1,2]);assert.throws(()=>frightenedValue(undefined));const entries=[immunityEntry('A',100,'check')];assert(immunityActive(entries,'A',699));assert(!immunityActive(entries,'B',699));assert(!immunityActive(entries,'A',700));
@@ -49,4 +49,9 @@ test('ordinary native Demoralize observer records immunity once without extendin
  installDemoralizeObserver(new ActorQueue());const message={id:'ordinary',author:{id:'gm'},isCheckRoll:true,actor:h.actor,rolls:[{degreeOfSuccess:1}],flags:{pf2e:{context:{type:'skill-check',target:{actor:h.targets[0].actor.uuid},options:['action:demoralize']}}}};
  hook(message,{},'gm');await new Promise(setImmediate);assert.equal(h.targetFlags.demoralizeImmunity[0].until,1600);
  game.time.worldTime=1100;hook({...message,id:'repeat'}, {},'gm');await new Promise(setImmediate);assert.equal(h.targetFlags.demoralizeImmunity[0].until,1600);
+});
+
+test('Suppressing Fire immunity probe uses valid effect traits without changing action traits',()=>{
+ const probe=suppressingEffect();assert.deepEqual(probe.system.traits.value,['visual','emotion','fear','mental']);
+ probe.system.traits.value.length=0;assert.equal(suppressingEffect().system.traits.value.length,4);
 });

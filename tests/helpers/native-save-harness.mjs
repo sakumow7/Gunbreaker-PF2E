@@ -60,7 +60,7 @@ export function setup({slug='fated-circle',level=12,degrees=[1,0],distances=[],l
   if(options.window.title.includes('Confirm area')){
    if(h.cancelConfirm)return null;h.onConfirm?.();
    const values=[...options.content.matchAll(/name="target" value="([^"]+)"/g)].map(m=>({value:m[1]}));
-   return options.buttons[0].callback(null,{form:{elements:{verified:{checked:true}},querySelectorAll:()=>values}});
+   return (await options.buttons[0].callback(null,{form:{elements:{verified:{checked:!h.unverifiedArea}},querySelectorAll:()=>values}}))??options.buttons[0].action;
   }
   const elements={verified:{checked:true}};
   for(const match of options.content.matchAll(/<select name="(scale\d+)">([\s\S]*?)<\/select>/g)){
@@ -68,7 +68,7 @@ export function setup({slug='fated-circle',level=12,degrees=[1,0],distances=[],l
   }
   for(const match of options.content.matchAll(/name="(persistent\d+)" checked/g))elements[match[1]]={checked:true};
   h.review?.(elements);
-  return options.buttons[0].callback(null,{form:{elements}});
+  return (await options.buttons[0].callback(null,{form:{elements}}))??options.buttons[0].action;
  }}}}};
  const deps={authority:()=>{},contextFor:()=>structuredClone(c),actorToken:()=>self,weaponFor:()=>({id:'blade'})};
  const runner=createAreaRunner(deps,new ActorQueue());

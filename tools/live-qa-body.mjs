@@ -30,7 +30,9 @@ await check('Suppressing Fire creates an isolated native visual Demoralize',()=>
  return action.slug==='demoralize'&&action.traits.includes('visual')&&!action.traits.includes('auditory')&&action.modifiers.length===0&&action.rollOptions.includes('action:demoralize')&&action.rollOptions.includes('gunbreaker:action:suppressing-fire')&&JSON.stringify({traits:base.traits,modifiers:base.modifiers})===before;
 });
 await check('Native fear, mental, emotion and visual immunity recognize Suppressing Fire',()=>{
- const source={name:'Suppressing Fire',type:'effect',system:{traits:{value:DEMORALIZE_TRAITS},duration:{value:-1,unit:'unlimited',expiry:null},rules:[]}};
+ const source=suppressingEffect();
+ const probe=new CONFIG.Item.documentClass(source);
+ if(probe.system.traits.value.includes('concentrate')||probe.system.traits.value.length!==4)throw Error('Effect traits must survive native validation.');
  return ['fear-effects','mental','emotion','visual'].every(type=>npc([{key:'Immunity',type}]).isImmuneTo(source));
 });
 await check('Foundry movement planning, completion and terrain APIs are present',()=>{
@@ -42,6 +44,52 @@ await check('Native path measurement uses ordinary and greater terrain costs',()
  const path=[{x:0,y:0,elevation:0,width:1,height:1,action:'walk',terrain:{difficulty:2}},{x:canvas.grid.size,y:0,elevation:0,width:1,height:1,action:'walk',terrain:{difficulty:2}}];
  const measured=token.measureMovementPath(path,{cost});
  return measured.distance===5&&measured.cost===10&&cost({}, {},5,{terrain:{difficulty:3}})===15;
+});
+// Run the real native IWR/HP calculation, stopping at its health-delta boundary before any document/chat write.
+async function nativeIwrDelta(type,rules,{temp=0,extraEffects=[]}={}){
+ if(!game.pf2e.settings.iwr)throw Error('Native IWR automation is disabled.');
+ const source=new ActorClass({_id:foundry.utils.randomID(),name:'Detached Continuation source',type:'character',system:{details:{level:{value:17}}},items:[qaFollowup]});
+ const recipient=npc(rules,{temp}),item=calibratedItem(source.items.get(qaFollowup._id),'hypervelocity',type);
+ const options=[...source.getSelfRollOptions('self'),...item.getRollOptions('item'),...item.system.traits.value.map(t=>`origin:action:trait:${t}`),'origin:action:slug:hypervelocity'];
+ const before=JSON.stringify(recipient.toObject());
+ const {clone,rollOptions}=await nativeDamageContext(recipient,{actor:source,item,flags:{pf2e:{context:{options}}}},extraEffects);
+ const D=CONFIG.Dice.rolls.find(c=>c.name==='DamageRoll');
+ const roll=await new D(followupFormula(17,2,type)).evaluate({maximize:true});roll.options.degreeOfSuccess=null;
+ if(roll.total!==26)throw Error('Native maximized follow-up formula did not total 26.');
+ const stop=new Error('QA stopped before document writes'),calculate=clone.calculateHealthDelta.bind(clone);let calculated;
+ clone.calculateHealthDelta=parameters=>{calculated=calculate(parameters);throw stop;};
+ // Defense in depth: only these detached instances are guarded; no global prototype or setting is changed.
+ clone.update=async()=>{throw Error('Unexpected QA document write');};
+ clone.createEmbeddedDocuments=async()=>{throw Error('Unexpected QA embedded-document write');};
+ try{await clone.applyDamage({damage:roll,token:{name:'Detached recipient'},item,rollOptions,skipIWR:false,shieldBlockRequest:false});throw Error('Native calculation did not reach the guarded boundary.');}catch(e){if(e!==stop)throw e;}
+ if(JSON.stringify(recipient.toObject())!==before)throw Error('Detached recipient source changed.');
+ return calculated;
+}
+for(const type of ['fire','cold','electricity']){
+ await check(`Native ${type} Continuation: separate 26 damage, no critical resistance`,async()=>{
+  const r=await nativeIwrDelta(type,[{key:'Resistance',type:'critical-hits',value:99}]);return r.updates['system.attributes.hp.value']===74;
+ });
+ await check(`Native ${type} Continuation: resistance 5 and weakness 3 yield 24`,async()=>{
+  const r=await nativeIwrDelta(type,[{key:'Resistance',type,value:5},{key:'Weakness',type,value:3}]);return r.updates['system.attributes.hp.value']===76;
+ });
+ await check(`Native ${type} Continuation: matching immunity yields zero`,async()=>{
+  const r=await nativeIwrDelta(type,[{key:'Immunity',type}]);return r.updates['system.attributes.hp.value']===100;
+ });
+}
+await check('Native magical ability context activates custom resistance without adding spell traits',async()=>{
+ const r=await nativeIwrDelta('cold',[{key:'Resistance',type:'custom',label:'Magical action',value:7,definition:['damage','origin:action:trait:magical']},{key:'Resistance',type:'custom',label:'Spells only',value:90,definition:['damage','item:type:spell']}]);return r.updates['system.attributes.hp.value']===81;
+});
+await check('Native contextual resistance and TempHP are calculated without persisting either',async()=>{
+ const resistance={...effect([{key:'Resistance',type:'all-damage',value:5}]),_id:foundry.utils.randomID()};
+ const r=await nativeIwrDelta('electricity',[],{temp:6,extraEffects:[resistance]});
+ if(r.updates['system.attributes.hp.value']!==85||r.updates['system.attributes.hp.temp']!==0)throw Error('Unexpected native health delta: '+JSON.stringify(r));
+ return true;
+});
+await check('Calibrated native ability clone preserves owned source traits',()=>{
+ const data=foundry.utils.deepClone(qaFollowup);data.system.traits.value.push('fire');
+ const source=new ActorClass({_id:foundry.utils.randomID(),name:'Detached trait source',type:'character',items:[data]});
+ const item=source.items.get(data._id),copy=calibratedItem(item,'hypervelocity','cold');
+ return copy!==item&&copy.actor===item.actor&&copy.system.traits.value.includes('cold')&&!copy.system.traits.value.includes('fire')&&item.system.traits.value.includes('fire')&&!item.system.traits.value.includes('cold')&&copy.getOriginData().uuid===item.getOriginData().uuid;
 });
 const esc=s=>foundry.utils.escapeHTML(String(s));
 await foundry.applications.api.DialogV2.wait({window:{title:'Gunbreaker isolated QA results'},position:{width:680},content:`<p>Foundry ${esc(game.version)} / PF2e ${esc(game.system.version)} / installed Gunbreaker ${esc(game.modules.get('gunbreaker-pf2e')?.version)}</p><p>Detached native models only. No actors, scene, combat or HP records changed.</p><ul>${results.map(r=>`<li>${r.pass?'PASS':'FAIL'} — ${esc(r.name)}${r.error?`: ${esc(r.error)}`:''}</li>`).join('')}</ul>`,buttons:[{action:'close',label:'Close'}]});

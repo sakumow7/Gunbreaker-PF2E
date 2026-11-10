@@ -1,7 +1,7 @@
 import {normalizeState,transition} from './state.mjs';
 import {catalogue} from './catalogue.mjs';
 import {assertFreshIntent} from './requests.mjs';
-import {suppressingAction,immunityActive,immunityEntry,frightenedValue,setFrightenedAtLeast,DEMORALIZE_TRAITS} from './demoralize.mjs';
+import {suppressingAction,immunityActive,immunityEntry,frightenedValue,setFrightenedAtLeast,suppressingEffect} from './demoralize.mjs';
 const MOD='gunbreaker-pf2e',assert=(x,m)=>{if(!x)throw Error(m);};
 const position=t=>JSON.stringify([t.document.uuid,t.document.x,t.document.y,t.document.elevation,t.document.width,t.document.height]);
 export function createDemoralizeRunner({authority,contextFor,actorToken,weaponFor},queue){
@@ -49,7 +49,7 @@ export function createDemoralizeRunner({authority,contextFor,actorToken,weaponFo
     // Claim immunity and condition application before writing a condition; a failure cannot be retried.
     journal={...journal,application:'applying'};await actor.setFlag(MOD,'execution',journal);
     await target.actor.setFlag(MOD,'demoralizeImmunity',[...old,immunityEntry(actor.uuid,c.time,req.id)]);
-    const effect={name:'Suppressing Fire',type:'effect',system:{traits:{value:DEMORALIZE_TRAITS},duration:{value:-1,unit:'unlimited',expiry:null},rules:[]}};
+    const effect=suppressingEffect();
     if(value&&!target.actor.isDead&&!target.actor.isImmuneTo(effect)&&!target.actor.isImmuneTo('frightened'))await setFrightenedAtLeast(target.actor,value);
     journal={...journal,status:'complete',application:'complete',revision:after.revision};await actor.setFlag(MOD,'execution',journal);return journal;
    }catch(e){await actor.setFlag(MOD,'execution',{...journal,status:'recovery',error:e.message});throw e;}

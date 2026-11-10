@@ -1,6 +1,6 @@
 # v1.4 native candidate smoke test — full encounter execution pending
 
-Observed environment: Foundry 14 build 369, PF2e 8.7.0, Gunbreaker 1.3.0. The candidate has not been installed. Limited detached-model tests passed (docs/LIVE-QA-2026-11-08.md). They do not substitute for these full encounter checks.
+Observed environment: Foundry 14 build 369, PF2e 8.7.0, Gunbreaker 1.3.0. The candidate has not been installed. Limited detached-model tests and native dialog checks passed (docs/LIVE-QA-2026-11-08.md and docs/LIVE-QA-2026-11-10.md). They do not substitute for these full encounter checks.
 
 ## Rules and import
 

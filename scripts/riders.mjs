@@ -19,7 +19,7 @@ export async function vortexGuard(actor,request,c,state,self,deps={}){
   const id=await deps.ownerChoices.ask(actor,request,{title:'Vortex Guard',text:'Grant the Brutal Shell barrier to one adjacent ally? Skip preserves this round’s Vortex Guard use.',choices:options.map(({id,label})=>({id,label}))});
   if(id!==null&&!options.some(o=>o.id===id))throw Error('Invalid owner rider choice.');
   selected=options.find(o=>o.id===id)?.target??null;
- }else selected=await foundry.applications.api.DialogV2.wait({window:{title:'Vortex Guard'},content:'<p>Grant the Brutal Shell barrier to one adjacent ally?</p>',rejectClose:false,buttons:[...allies.map(t=>({action:t.id??t.document.id,label:t.name,callback:()=>t.document.uuid})),{action:'skip',label:'Skip',callback:()=>null}]});
+ }else selected=await foundry.applications.api.DialogV2.wait({window:{title:'Vortex Guard'},content:'<p>Grant the Brutal Shell barrier to one adjacent ally?</p>',rejectClose:false,buttons:[...allies.map(t=>({action:t.id??t.document.id,label:t.name,callback:()=>t.document.uuid})),{action:'skip',label:'Skip',callback:()=>false}]});
  if(deps.contextFor){
   const now=deps.contextFor(actor);assertFreshIntent(checkpoint,now,actor.getFlag(MOD,'tracker'));
   if(!now.learned.includes('vortex-guard')||now.level!==c.level||!now.inTurn||!now.wielding)throw Error('Vortex Guard source eligibility changed.');

@@ -1,5 +1,9 @@
 const MOD='gunbreaker-pf2e';
 export const DEMORALIZE_TRAITS=['visual','concentrate','emotion','fear','mental'];
+/** Concentrate belongs to the action, not PF2e's effect-trait schema. */
+export function suppressingEffect(){
+ return {name:'Suppressing Fire',type:'effect',system:{traits:{value:DEMORALIZE_TRAITS.filter(t=>t!=='concentrate')},duration:{value:-1,unit:'unlimited',expiry:null},rules:[]}};
+}
 /** Build a separate native action; never mutate the shared system action or global language penalties. */
 export function suppressingAction(base){
  if(!base||base.slug!=='demoralize'||typeof base.use!=='function')throw Error('Native Demoralize action is unavailable.');
