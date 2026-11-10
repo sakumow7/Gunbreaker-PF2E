@@ -2,7 +2,7 @@
     "_id": "e0f1268439d77a85",
     "name": "Perfect Chamber",
     "type": "feat",
-    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
     "system": {
         "description": {
             "value": "<p><strong>Frequency</strong> once per day. <strong>Requirements</strong> You wield a gunblade. For 1 minute or until the encounter ends, whichever comes first, reduce the cartridge cost of the first cartridge-spending action or reaction you use each round by 1 (minimum 0). You choose whether to apply the reduction when spending. This includes the optional cartridge enhancement to Heart of Stone. Costs otherwise apply normally, and cooldowns and combo requirements are unchanged. This does not increase cartridge generation.</p>",

@@ -2,7 +2,7 @@
     "_id": "a61994a226d98bcc",
     "name": "Steady Aim",
     "type": "feat",
-    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
     "system": {
         "description": {
             "value": "<p>Your proficiency in Perception and Will saves increases to expert. When you use Lightning Shot, ignore the circumstance bonus to AC from lesser cover; cover and greater cover still apply.</p>",

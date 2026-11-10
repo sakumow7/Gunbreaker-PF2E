@@ -2,7 +2,7 @@
     "_id": "a94257a79a9f51d7",
     "name": "Suppressing Fire",
     "type": "feat",
-    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
     "system": {
         "description": {
             "value": "<p><strong>Requirements</strong> You wield a gunblade. Choose one enemy within 30 feet that can see you. Attempt to Demoralize it using Intimidation; your gunblade's threatening discharge replaces the auditory trait with the visual trait and removes the penalty for not sharing a language. All other Demoralize rules, including its immunity, apply. This is not a Strike and consumes no cartridge.</p>",

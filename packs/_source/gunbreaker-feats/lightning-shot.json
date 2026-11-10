@@ -2,7 +2,7 @@
     "_id": "47bc76d1092a9061",
     "name": "Lightning Shot",
     "type": "feat",
-    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
     "system": {
         "description": {
             "value": "<p>Make a ranged gunblade Strike with a range increment of 30 feet and a maximum range of 120 feet. Use Dexterity for the attack. Deal fire damage using the gunblade's one-handed base damage die and its runes; add specialization normally, but do not add Strength to damage. This does not consume a cartridge or require reloading. Normal ranged attack rules, including cover, multiple attack penalty, and reactions, apply. It does not advance a combo or grant Continuation. </p><p>You may use Lightning Shot while wielding a standard gunblade in one or two hands. Its weapon dice always use the one-handed base die, including fundamental striking dice. It uses Dexterity to attack, adds specialization, and adds no Strength damage. Apply only property runes whose own requirements permit that ranged attack; a discharge does not override a melee-only requirement. Lightning Shot does not grant a second weapon, transfer runes, require ammunition, or open Continuation. Keep its range and existing feat level.</p>",

@@ -2,7 +2,7 @@
     "_id": "916a69431d6bcbfe",
     "name": "Continued Assault",
     "type": "feat",
-    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
     "system": {
         "description": {
             "value": "<p><strong>Frequency</strong> once per round. After you resolve a Continuation follow-up, you may Step as a free action. Alternatively, if you are in Royal Guard, grant one adjacent ally temporary Hit Points equal to half your level until the start of your next turn. This does not grant another Strike or follow-up.</p>",

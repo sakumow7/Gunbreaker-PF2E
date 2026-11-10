@@ -2,7 +2,7 @@
     "_id": "d2e7e82195b0d940",
     "name": "Abdomen Tear",
     "type": "feat",
-    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
     "system": {
         "description": {
             "value": "<p><strong>Requirements</strong> Continuation; your next action after a successful Savage Claw Strike this turn, against the same enemy still within your melee reach. Intervening reactions do not close this opening; other actions, including free actions, do. <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 2d6 fire damage plus the number of weapon damage dice of the opening gunblade (base die plus fundamental striking rune dice only). Increase the d6s to 3d6 at level 11 and 4d6 at level 17. Snapshot the weapon dice when the opening Strike resolves. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",

@@ -2,7 +2,7 @@
     "_id": "148481d3f7d0f02b",
     "name": "Burst Strike",
     "type": "feat",
-    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
     "system": {
         "description": {
             "value": "<p><strong>Cost</strong> 1 cartridge.</p><p>Make a melee gunblade Strike. On a hit, deal additional fire damage: 1d6 at 1st level, 2d6 at 5th, 3d6 at 11th, and 4d6 at 17th. If you have Continuation, a hit enables Hypervelocity as your next action this turn against the same target.</p><p><strong>Additional Strike damage:</strong> @Damage[(1+floor((@actor.level+1)/6))d6[fire]]</p>",

@@ -2,7 +2,7 @@
     "_id": "11009f00b5d265be",
     "name": "Fated Brand",
     "type": "feat",
-    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
     "system": {
         "description": {
             "value": "<p><strong>Requirements</strong> Continuation; your immediately preceding action this turn was Fated Circle and at least one enemy failed its save. <strong>Frequency</strong> once per round, shared with all Continuation follow-ups.</p><p>Each enemy that failed or critically failed that Fated Circle save and remains within a 5-foot emanation takes 2d6 fire damage with a new basic Reflex save against your class DC. Damage increases to 3d6 at 17th level. Consume the opening. This does not use or increase multiple attack penalty.</p><p>@Damage[(2+floor((@actor.level-11)/6))d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",

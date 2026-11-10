@@ -2,7 +2,7 @@
     "_id": "d85fd2974ad8971c",
     "name": "Ready to Blast",
     "type": "effect",
-    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
     "system": {
         "description": {
             "value": "<p>Legacy readiness reminder. Use the tracker and the linked action's requirements; the reminder alone does not authorize an action. Continuation requires a successful preceding Strike and the same target, and is limited to once per round.</p>",

@@ -2,7 +2,7 @@
     "_id": "fe03ab566ecd7e59",
     "name": "Powder Gauge",
     "type": "feat",
-    "img": "icons/skills/ranged/cannon-barrel-fire-yellow.webp",
+    "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
     "system": {
         "description": {
             "value": "<p>Your gunblade stores aether in a Powder Gauge with a maximum of 3 cartridges. At the start of a combat encounter, begin with 1 cartridge; unspent cartridges dissipate at its end. You cannot build cartridges outside a combat encounter with a genuine threat, as determined by the GM. A training target or cooperative creature is not a threat.</p><p>Completing Solid Barrel or Demon Slaughter loads 1 cartridge, even if the Strike misses or every target succeeds at its save. Each activity loads only once, regardless of targets. You cannot exceed your maximum. Costs are paid before resolving an action and are not refunded on a miss. Cartridges are class resources, not ammunition or trade goods. Round fractional values down, to a minimum of 1 only where stated.</p><p>Use the Gunbreaker Tracker macro to record cartridges, combos, and cooldowns. Posting an item to chat never spends or grants resources. Effects, attacks, saves, damage, healing, and reactions are resolved on the sheet with your GM.</p><p>Unless a feature says otherwise, you must wield a gunblade to use Gunbreaker actions and reactions. Passive features do not require this. Aurora and defensive abilities without an encounter requirement may be used during exploration; their cooldowns still apply.</p>",

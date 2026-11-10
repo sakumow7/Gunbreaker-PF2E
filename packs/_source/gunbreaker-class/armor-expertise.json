@@ -2,7 +2,7 @@
     "_id": "0e4bd01ae207e03c",
     "name": "Armor Expertise",
     "type": "feat",
-    "img": "icons/equipment/shield/heater-steel-worn-grey.webp",
+    "img": "icons/equipment/shield/heater-steel-worn.webp",
     "system": {
         "description": {
             "value": "<p>Your proficiency in light and medium armor and unarmored defense increases to expert. Your aetheric guards reinforce practiced footwork.</p>",
