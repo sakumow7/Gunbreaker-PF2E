@@ -5,7 +5,7 @@
     "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Cost</strong> 1 cartridge.</p><p>Make a melee gunblade Strike. On a hit, deal additional fire damage: 1d6 at 1st level, 2d6 at 5th, 3d6 at 12th, and 4d6 at 18th. If you have Continuation, a hit lets you use Hypervelocity against the same target as a free action immediately afterward.</p>",
+            "value": "<p><strong>Cost</strong> 1 cartridge.</p><p>Make a melee gunblade Strike. On a hit, deal additional fire damage: 1d6 at 1st level, 2d6 at 5th, 3d6 at 14th, and 4d6 at 20th. If you have Continuation, a hit lets you use Hypervelocity against the same target as a free action immediately afterward.</p>",
             "gm": ""
         },
         "level": {
@@ -45,16 +45,16 @@
                         },
                         {
                             "start": 5,
-                            "end": 11,
+                            "end": 13,
                             "value": 2
                         },
                         {
-                            "start": 12,
-                            "end": 17,
+                            "start": 14,
+                            "end": 19,
                             "value": 3
                         },
                         {
-                            "start": 18,
+                            "start": 20,
                             "value": 4
                         }
                     ]
@@ -81,16 +81,16 @@
                         },
                         {
                             "start": 5,
-                            "end": 11,
+                            "end": 13,
                             "value": 2
                         },
                         {
-                            "start": 12,
-                            "end": 17,
+                            "start": 14,
+                            "end": 19,
                             "value": 3
                         },
                         {
-                            "start": 18,
+                            "start": 20,
                             "value": 4
                         }
                     ]
@@ -117,16 +117,16 @@
                         },
                         {
                             "start": 5,
-                            "end": 11,
+                            "end": 13,
                             "value": 2
                         },
                         {
-                            "start": 12,
-                            "end": 17,
+                            "start": 14,
+                            "end": 19,
                             "value": 3
                         },
                         {
-                            "start": 18,
+                            "start": 20,
                             "value": 4
                         }
                     ]

@@ -22,7 +22,7 @@ export function followupFormula(level, weaponDice, type='fire') {
   if(!['fire','cold','electricity'].includes(type))throw Error('Invalid damage type.');
   // 2.0: a free action dealing 1d6, 2d6 at 12th and 3d6 at 18th. Weapon dice are still
   // snapshotted and validated for evidence, but no longer add damage.
-  return `${level>=18?3:level>=12?2:1}d6[${type}]`;
+  return `${level>=20?3:level>=14?2:1}d6[${type}]`;
 }
 export function superbolideHP(hp, level) {
   if(!Number.isFinite(hp)||hp<2)throw Error('Superbolide requires at least 2 HP.');

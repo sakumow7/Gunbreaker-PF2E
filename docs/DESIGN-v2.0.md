@@ -6,13 +6,13 @@
 
 | Area | 1.4 | 2.0 |
 |---|---|---|
-| No Mercy | Class feat (level 2) | Level 1 class feature. Status bonus to gunblade Strike damage 2, 3 at 12, 4 at 18 |
-| Continuation follow-ups | 1 action; 2d6, 3d6 at 11, 4d6 at 17, + weapon dice count | **Free action** right after the hit, once per round. 1d6, 2d6 at 12, 3d6 at 18 (no weapon dice) |
-| Burst Strike | 1d6, 2d6 at 5, 3d6 at 11, 4d6 at 17 | 1d6, 2d6 at 5, 3d6 at 12, 4d6 at 18 |
-| Gnashing Fang / Savage Claw / Wicked Talon, Sonic Break | Extra dice step at 11 / 17 | Extra dice step at 12 / 18 |
+| No Mercy | Class feat (level 2) | Level 1 class feature. Status bonus to gunblade Strike damage 2, 3 at 14, 4 at 20 |
+| Continuation follow-ups | 1 action; 2d6, 3d6 at 11, 4d6 at 17, + weapon dice count | **Free action** right after the hit, once per round. 1d6, 2d6 at 14, 3d6 at 20 (no weapon dice) |
+| Burst Strike | 1d6, 2d6 at 5, 3d6 at 11, 4d6 at 17 | 1d6, 2d6 at 5, 3d6 at 14, 4d6 at 20 |
+| Gnashing Fang / Savage Claw / Wicked Talon, Sonic Break | Extra dice step at 11 / 17 | Extra dice step at 14 / 20 |
 | Demon Slice / Demon Slaughter | d4 dice | d8 dice |
 | Fated Circle | d6 dice | d10 dice |
-| Fated Brand | 2d6 | 2d6, 3d6 at 18 |
+| Fated Brand | 2d6 | 2d6, 3d6 at 20 |
 | Royal Guard | +1 AC stance | Also a 5-foot enmity aura: enemies inside take −1 circumstance to attack rolls that don't target you |
 | Heart of Stone | Resistance 2 + half level; enhanced 2 + level | Resistance 2 + level; enhanced 2 + level + half level |
 | Lion's Legend (19) | Start with 2 cartridges; enhanced Heart of Stone 4 + level | Also legendary light/medium/unarmored; enhanced Heart of Stone 2 + 2 × level |
@@ -21,7 +21,7 @@ Engine changes: `scripts/mechanics.mjs` (follow-up and Heart of Stone formulas),
 
 ## Balance
 
-`npm run sim` (tools/balance-sim.mjs) plays whole 4-round encounters and writes SIMULATION.md. Single-target 2.0 sits at roughly 102–134% of a featless martial, about level with 1.4, below a Fighter at every level except 12–13, where the 12th-level step lands at once and matches a Fighter. Against three adjacent foes 2.0 roughly doubles 1.4. Moving the scaling steps to 14/20 (`TIER_AT=14`) flattens the 12–13 peak to about 110%; that is the main open tuning choice.
+`npm run sim` (tools/balance-sim.mjs) plays whole 4-round encounters and writes SIMULATION.md. Single-target 2.0 sits at roughly 103–125% of a featless martial, about level with 1.4 and below a Fighter at every level. Against three adjacent foes 2.0 roughly doubles 1.4. Scaling steps sit at 14 and 20: with steps at 12 and 18 (`TIER_AT=12`) levels 12–13 reached about 133% and tied a Fighter.
 
 ## Animations
 

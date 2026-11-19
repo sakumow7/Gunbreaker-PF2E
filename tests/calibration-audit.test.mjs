@@ -18,17 +18,17 @@ for(const type of ['fire','cold','electricity'])test(`${type} applies to all cal
   for(const slug of CALIBRATED)assert.equal(damageType(slug,type),type);
   for(const slug of ['fated-circle','fated-brand','double-down','saturation-fire']){
    if(level<catalogue[slug].level)continue;
-   const dice=slug==='fated-brand'?(level>=18?3:2):slug==='double-down'?(level>=18?12:10):Math.ceil(level/2);
+   const dice=slug==='fated-brand'?(level>=20?3:2):slug==='double-down'?(level>=18?12:10):Math.ceil(level/2);
    assert.equal(areaFormula(slug,level,type),`${dice}d${slug==='fated-circle'?10:6}[${type}]`);
   }
-  if(level>=7)for(const weaponDice of [1,2,3,4])assert.equal(followupFormula(level,weaponDice,type),`${level>=18?3:level>=12?2:1}d6[${type}]`);
+  if(level>=7)for(const weaponDice of [1,2,3,4])assert.equal(followupFormula(level,weaponDice,type),`${level>=20?3:level>=14?2:1}d6[${type}]`);
  }
 });
 test('Burst Strike activates exactly one bonus-dice rule without editing weapon/rune damage',()=>{
  const rules=items.get('burst-strike').system.rules;
  for(const type of ['fire','cold','electricity']){
   const options=new Set(['item:trait:gunbreaker','item:melee','gunbreaker:action:burst-strike',`gunbreaker:calibration:${type}`]);
-  const enabled=rules.filter(r=>r.predicate.every(p=>options.has(p)));assert.equal(enabled.length,1);assert.equal(enabled[0].damageType,type);assert.deepEqual(enabled[0].diceNumber,{brackets:[{end:4,value:1},{start:5,end:11,value:2},{start:12,end:17,value:3},{start:18,value:4}]});
+  const enabled=rules.filter(r=>r.predicate.every(p=>options.has(p)));assert.equal(enabled.length,1);assert.equal(enabled[0].damageType,type);assert.deepEqual(enabled[0].diceNumber,{brackets:[{end:4,value:1},{start:5,end:13,value:2},{start:14,end:19,value:3},{start:20,value:4}]});
   options.delete('gunbreaker:action:burst-strike');assert.equal(rules.filter(r=>r.predicate.every(p=>options.has(p))).length,0);
  }
  for(const slug of ['gnashing-fang','savage-claw','wicked-talon','reign-of-beasts','noble-blood','lion-heart'])assert(items.get(slug).system.rules.filter(r=>r.key==='DamageDice').every(r=>r.damageType==='slashing'));

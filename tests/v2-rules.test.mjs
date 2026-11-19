@@ -10,7 +10,7 @@ test('No Mercy is a level 1 class feature granted by the class', async ()=>{
  assert.equal(feat.system.category,'classfeature');assert.equal(feat.system.level.value,1);
  assert.equal(cls.system.items[feat._id]?.level,1);
  const effect=await src('gunbreaker-effects/no-mercy');
- assert.deepEqual([1,11,12,17,18,20].map(L=>atLevel(effect.system.rules[0].value,L)),[2,2,3,3,4,4]);
+ assert.deepEqual([1,13,14,19,20].map(L=>atLevel(effect.system.rules[0].value,L)),[2,2,3,3,4]);
 });
 test('Continuation follow-ups are free actions', async ()=>{
  for(const slug of ['hypervelocity','jugular-rip','abdomen-tear','eye-gouge','fated-brand']){
@@ -18,10 +18,10 @@ test('Continuation follow-ups are free actions', async ()=>{
   assert.equal(doc.system.actionType.value,'free',slug);assert.equal(doc.system.actions.value,null,slug);
  }
 });
-test('Burst Strike scales 1/2/3/4 dice at 1/5/12/18', async ()=>{
+test('Burst Strike scales 1/2/3/4 dice at 1/5/14/20', async ()=>{
  const rule=(await src('gunbreaker-class/burst-strike')).system.rules.find(r=>r.key==='DamageDice');
  const at=L=>rule.diceNumber.brackets.find(b=>(b.start??0)<=L&&L<=(b.end??99)).value;
- assert.deepEqual([1,4,5,11,12,17,18,20].map(at),[1,1,2,2,3,3,4,4]);
+ assert.deepEqual([1,4,5,13,14,19,20].map(at),[1,1,2,2,3,3,4]);
 });
 test('Royal Guard projects a 5-foot enmity aura that penalizes attacks on others', async ()=>{
  const stance=await src('gunbreaker-effects/royal-guard-stance'),challenged=await src('gunbreaker-effects/royal-guard-challenged');

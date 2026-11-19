@@ -8,7 +8,7 @@
       "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Requirements</strong> Continuation; you just hit an enemy with Savage Claw, and that enemy is still within your melee reach. Use this immediately after that Strike resolves: any other action in between closes the opening (reactions do not). <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 1d6 fire damage, increasing to 2d6 at 12th level and 3d6 at 18th. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
+          "value": "<p><strong>Requirements</strong> Continuation; you just hit an enemy with Savage Claw, and that enemy is still within your melee reach. Use this immediately after that Strike resolves: any other action in between closes the opening (reactions do not). <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 1d6 fire damage, increasing to 2d6 at 14th level and 3d6 at 20th. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
           "gm": ""
         },
         "level": {
@@ -445,7 +445,7 @@
       "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Cost</strong> 1 cartridge.</p><p>Make a melee gunblade Strike. On a hit, deal additional fire damage: 1d6 at 1st level, 2d6 at 5th, 3d6 at 12th, and 4d6 at 18th. If you have Continuation, a hit lets you use Hypervelocity against the same target as a free action immediately afterward.</p>",
+          "value": "<p><strong>Cost</strong> 1 cartridge.</p><p>Make a melee gunblade Strike. On a hit, deal additional fire damage: 1d6 at 1st level, 2d6 at 5th, 3d6 at 14th, and 4d6 at 20th. If you have Continuation, a hit lets you use Hypervelocity against the same target as a free action immediately afterward.</p>",
           "gm": ""
         },
         "level": {
@@ -485,16 +485,16 @@
                 },
                 {
                   "start": 5,
-                  "end": 11,
+                  "end": 13,
                   "value": 2
                 },
                 {
-                  "start": 12,
-                  "end": 17,
+                  "start": 14,
+                  "end": 19,
                   "value": 3
                 },
                 {
-                  "start": 18,
+                  "start": 20,
                   "value": 4
                 }
               ]
@@ -521,16 +521,16 @@
                 },
                 {
                   "start": 5,
-                  "end": 11,
+                  "end": 13,
                   "value": 2
                 },
                 {
-                  "start": 12,
-                  "end": 17,
+                  "start": 14,
+                  "end": 19,
                   "value": 3
                 },
                 {
-                  "start": 18,
+                  "start": 20,
                   "value": 4
                 }
               ]
@@ -557,16 +557,16 @@
                 },
                 {
                   "start": 5,
-                  "end": 11,
+                  "end": 13,
                   "value": 2
                 },
                 {
-                  "start": 12,
-                  "end": 17,
+                  "start": 14,
+                  "end": 19,
                   "value": 3
                 },
                 {
-                  "start": 18,
+                  "start": 20,
                   "value": 4
                 }
               ]
@@ -647,7 +647,7 @@
       "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
-          "value": "<p>You learn Hypervelocity, Jugular Rip, Abdomen Tear, and Eye Gouge. Matching follow-ups: Burst Strike → Hypervelocity; Gnashing Fang → Jugular Rip; Savage Claw → Abdomen Tear; Wicked Talon → Eye Gouge.</p><p>After you hit with Burst Strike, Gnashing Fang, Savage Claw, or Wicked Talon, you can use its matching follow-up as a <strong>free action</strong> immediately afterward against the same creature, provided it remains within your melee reach. Any other action in between, including another free action, closes the opening. Reactions do not close it. The opening ends at the end of your turn or when consumed. Only one Continuation follow-up, including Fated Brand, can be used per round.</p><p>Each follow-up deals 1d6 fire damage, 2d6 at 12th level and 3d6 at 18th. It has no attack roll or save, does not increase MAP, and never doubles on a critical opening Strike. It is a separate damage effect for immunity, weakness, and resistance. No Mercy and weapon property-rune damage do not add to it.</p><p>Fated Brand keeps its fresh basic Reflex saves, eligible-target restrictions, and the shared Continuation limit. It is also a free action.</p>",
+          "value": "<p>You learn Hypervelocity, Jugular Rip, Abdomen Tear, and Eye Gouge. Matching follow-ups: Burst Strike → Hypervelocity; Gnashing Fang → Jugular Rip; Savage Claw → Abdomen Tear; Wicked Talon → Eye Gouge.</p><p>After you hit with Burst Strike, Gnashing Fang, Savage Claw, or Wicked Talon, you can use its matching follow-up as a <strong>free action</strong> immediately afterward against the same creature, provided it remains within your melee reach. Any other action in between, including another free action, closes the opening. Reactions do not close it. The opening ends at the end of your turn or when consumed. Only one Continuation follow-up, including Fated Brand, can be used per round.</p><p>Each follow-up deals 1d6 fire damage, 2d6 at 14th level and 3d6 at 20th. It has no attack roll or save, does not increase MAP, and never doubles on a critical opening Strike. It is a separate damage effect for immunity, weakness, and resistance. No Mercy and weapon property-rune damage do not add to it.</p><p>Fated Brand keeps its fresh basic Reflex saves, eligible-target restrictions, and the shared Continuation limit. It is also a free action.</p>",
           "gm": ""
         },
         "level": {
@@ -857,7 +857,7 @@
       "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Requirements</strong> Continuation; you just hit an enemy with Wicked Talon, and that enemy is still within your melee reach. Use this immediately after that Strike resolves: any other action in between closes the opening (reactions do not). <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 1d6 fire damage, increasing to 2d6 at 12th level and 3d6 at 18th. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
+          "value": "<p><strong>Requirements</strong> Continuation; you just hit an enemy with Wicked Talon, and that enemy is still within your melee reach. Use this immediately after that Strike resolves: any other action in between closes the opening (reactions do not). <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 1d6 fire damage, increasing to 2d6 at 14th level and 3d6 at 20th. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
           "gm": ""
         },
         "level": {
@@ -908,7 +908,7 @@
       "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Requirements</strong> Continuation; you just used Fated Circle and at least one enemy failed its save. Use this immediately afterward: any other action in between closes the opening. <strong>Frequency</strong> once per round, shared with all Continuation follow-ups.</p><p>Each enemy that failed or critically failed that Fated Circle save and remains within a 5-foot emanation takes 2d6 fire damage with a new basic Reflex save against your class DC. Damage increases to 3d6 at 18th level. Consume the opening. This does not use or increase multiple attack penalty.</p><p>@Damage[(2+floor((@actor.level-12)/6))d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+          "value": "<p><strong>Requirements</strong> Continuation; you just used Fated Circle and at least one enemy failed its save. Use this immediately afterward: any other action in between closes the opening. <strong>Frequency</strong> once per round, shared with all Continuation follow-ups.</p><p>Each enemy that failed or critically failed that Fated Circle save and remains within a 5-foot emanation takes 2d6 fire damage with a new basic Reflex save against your class DC. Damage increases to 3d6 at 20th level. Consume the opening. This does not use or increase multiple attack penalty.</p><p>@Damage[(2+floor((@actor.level-12)/6))d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
           "gm": ""
         },
         "level": {
@@ -1006,7 +1006,7 @@
       "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Cost</strong> 1 cartridge. <strong>Frequency</strong> once per minute.</p><p>Make a melee gunblade Strike with 1d6 additional slashing damage, increasing by 1d6 at 12th and 18th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, begin this sequence and enable Savage Claw until the end of your next turn. A hit lets you use Jugular Rip as a free action immediately afterward if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(1+floor((@actor.level-6)/6))d6[slashing]]</p>",
+          "value": "<p><strong>Cost</strong> 1 cartridge. <strong>Frequency</strong> once per minute.</p><p>Make a melee gunblade Strike with 1d6 additional slashing damage, increasing by 1d6 at 14th and 20th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, begin this sequence and enable Savage Claw until the end of your next turn. A hit lets you use Jugular Rip as a free action immediately afterward if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(1+floor((@actor.level-8)/6))d6[slashing]]</p>",
           "gm": ""
         },
         "level": {
@@ -1038,7 +1038,7 @@
             "key": "DamageDice",
             "selector": "strike-damage",
             "slug": "gunbreaker-gnashing-fang",
-            "diceNumber": "1+floor((@actor.level-6)/6)",
+            "diceNumber": "1+floor((@actor.level-8)/6)",
             "dieSize": "d6",
             "damageType": "slashing",
             "predicate": [
@@ -1741,7 +1741,7 @@
       "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Requirements</strong> Continuation; you just hit an enemy with Burst Strike, and that enemy is still within your melee reach. Use this immediately after that Strike resolves: any other action in between closes the opening (reactions do not). <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 1d6 fire damage, increasing to 2d6 at 12th level and 3d6 at 18th. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
+          "value": "<p><strong>Requirements</strong> Continuation; you just hit an enemy with Burst Strike, and that enemy is still within your melee reach. Use this immediately after that Strike resolves: any other action in between closes the opening (reactions do not). <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 1d6 fire damage, increasing to 2d6 at 14th level and 3d6 at 20th. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
           "gm": ""
         },
         "level": {
@@ -1792,7 +1792,7 @@
       "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Requirements</strong> Continuation; you just hit an enemy with Gnashing Fang, and that enemy is still within your melee reach. Use this immediately after that Strike resolves: any other action in between closes the opening (reactions do not). <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 1d6 fire damage, increasing to 2d6 at 12th level and 3d6 at 18th. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
+          "value": "<p><strong>Requirements</strong> Continuation; you just hit an enemy with Gnashing Fang, and that enemy is still within your melee reach. Use this immediately after that Strike resolves: any other action in between closes the opening (reactions do not). <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 1d6 fire damage, increasing to 2d6 at 14th level and 3d6 at 20th. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
           "gm": ""
         },
         "level": {
@@ -2171,7 +2171,7 @@
       "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Requirements</strong> Your Gnashing Fang combo opening.</p><p>Make a melee gunblade Strike with 1d6 additional slashing damage, increasing by 1d6 at 12th and 18th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, consume the opening and enable Wicked Talon until the end of your next turn. A hit lets you use Abdomen Tear as a free action immediately afterward if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(1+floor((@actor.level-6)/6))d6[slashing]]</p>",
+          "value": "<p><strong>Requirements</strong> Your Gnashing Fang combo opening.</p><p>Make a melee gunblade Strike with 1d6 additional slashing damage, increasing by 1d6 at 14th and 20th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, consume the opening and enable Wicked Talon until the end of your next turn. A hit lets you use Abdomen Tear as a free action immediately afterward if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(1+floor((@actor.level-8)/6))d6[slashing]]</p>",
           "gm": ""
         },
         "level": {
@@ -2203,7 +2203,7 @@
             "key": "DamageDice",
             "selector": "strike-damage",
             "slug": "gunbreaker-savage-claw",
-            "diceNumber": "1+floor((@actor.level-6)/6)",
+            "diceNumber": "1+floor((@actor.level-8)/6)",
             "dieSize": "d6",
             "damageType": "slashing",
             "predicate": [
@@ -2418,7 +2418,7 @@
       "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Requirements</strong> Your Savage Claw combo opening.</p><p>Make a melee gunblade Strike with 2d6 additional slashing damage, increasing by 1d6 at 12th and 18th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, end this sequence. A hit lets you use Eye Gouge as a free action immediately afterward if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(2+floor((@actor.level-6)/6))d6[slashing]]</p>",
+          "value": "<p><strong>Requirements</strong> Your Savage Claw combo opening.</p><p>Make a melee gunblade Strike with 2d6 additional slashing damage, increasing by 1d6 at 14th and 20th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, end this sequence. A hit lets you use Eye Gouge as a free action immediately afterward if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(2+floor((@actor.level-8)/6))d6[slashing]]</p>",
           "gm": ""
         },
         "level": {
@@ -2450,7 +2450,7 @@
             "key": "DamageDice",
             "selector": "strike-damage",
             "slug": "gunbreaker-wicked-talon",
-            "diceNumber": "2+floor((@actor.level-6)/6)",
+            "diceNumber": "2+floor((@actor.level-8)/6)",
             "dieSize": "d6",
             "damageType": "slashing",
             "predicate": [
@@ -2965,7 +2965,7 @@
       "img": "icons/magic/control/buff-flight-wings-runes-purple.webp",
       "system": {
         "description": {
-          "value": "<p>Status bonus to gunblade Strike damage: +2, +3 at 12th level, +4 at 18th. Lasts until the start of your third subsequent turn. The console loads the cartridge and Ready to Break.</p>",
+          "value": "<p>Status bonus to gunblade Strike damage: +2, +3 at 14th level, +4 at 20th. Lasts until the start of your third subsequent turn. The console loads the cartridge and Ready to Break.</p>",
           "gm": ""
         },
         "level": {
@@ -3001,7 +3001,7 @@
             "key": "FlatModifier",
             "selector": "strike-damage",
             "type": "status",
-            "value": "2+max(0,floor((@actor.level-6)/6))",
+            "value": "2+max(0,floor((@actor.level-8)/6))",
             "predicate": [
               "item:trait:gunbreaker"
             ]
@@ -5161,7 +5161,7 @@
       "img": "icons/magic/control/buff-flight-wings-runes-purple.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Frequency</strong> once per 10 minutes.</p><p>Every Gunbreaker learns No Mercy at 1st level. For 3 rounds, until the start of your third subsequent turn, gain a +2 status bonus to gunblade Strike damage; this becomes +3 at 12th level and +4 at 18th. Load 1 cartridge immediately and gain Ready to Break for the same duration, allowing one Sonic Break if you have that feat. This bonus does not affect Continuation or save-based blasts.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.698e269ba38bcb47]{No Mercy}. The Gunbreaker console applies it.</p>",
+          "value": "<p><strong>Frequency</strong> once per 10 minutes.</p><p>Every Gunbreaker learns No Mercy at 1st level. For 3 rounds, until the start of your third subsequent turn, gain a +2 status bonus to gunblade Strike damage; this becomes +3 at 14th level and +4 at 20th. Load 1 cartridge immediately and gain Ready to Break for the same duration, allowing one Sonic Break if you have that feat. This bonus does not affect Continuation or save-based blasts.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.698e269ba38bcb47]{No Mercy}. The Gunbreaker console applies it.</p>",
           "gm": ""
         },
         "level": {
@@ -5667,7 +5667,7 @@
       "img": "icons/magic/fire/flame-burning-creature-skeleton.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Requirements</strong> Ready to Break from your No Mercy; you wield a gunblade. Consume Ready to Break and make a melee gunblade Strike. On a hit, add 1d6 persistent bleed damage, increasing to 2d6 at 12th level and 3d6 at 18th. Double the persistent damage on a critical hit as part of the Strike. It uses normal recovery checks and does not open Continuation. The opening is consumed even if you miss.</p><p>@Damage[(1+floor((@actor.level-6)/6))d6[persistent,bleed]]</p>",
+          "value": "<p><strong>Requirements</strong> Ready to Break from your No Mercy; you wield a gunblade. Consume Ready to Break and make a melee gunblade Strike. On a hit, add 1d6 persistent bleed damage, increasing to 2d6 at 14th level and 3d6 at 20th. Double the persistent damage on a critical hit as part of the Strike. It uses normal recovery checks and does not open Continuation. The opening is consumed even if you miss.</p><p>@Damage[(1+floor((@actor.level-8)/6))d6[persistent,bleed]]</p>",
           "gm": ""
         },
         "level": {
@@ -5702,7 +5702,7 @@
             "key": "DamageDice",
             "selector": "strike-damage",
             "slug": "gunbreaker-sonic-break",
-            "diceNumber": "1+floor((@actor.level-6)/6)",
+            "diceNumber": "1+floor((@actor.level-8)/6)",
             "dieSize": "d6",
             "damageType": "bleed",
             "predicate": [

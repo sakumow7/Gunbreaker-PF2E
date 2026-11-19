@@ -5,7 +5,7 @@
     "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Requirements</strong> Continuation; you just used Fated Circle and at least one enemy failed its save. Use this immediately afterward: any other action in between closes the opening. <strong>Frequency</strong> once per round, shared with all Continuation follow-ups.</p><p>Each enemy that failed or critically failed that Fated Circle save and remains within a 5-foot emanation takes 2d6 fire damage with a new basic Reflex save against your class DC. Damage increases to 3d6 at 18th level. Consume the opening. This does not use or increase multiple attack penalty.</p><p>@Damage[(2+floor((@actor.level-12)/6))d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+            "value": "<p><strong>Requirements</strong> Continuation; you just used Fated Circle and at least one enemy failed its save. Use this immediately afterward: any other action in between closes the opening. <strong>Frequency</strong> once per round, shared with all Continuation follow-ups.</p><p>Each enemy that failed or critically failed that Fated Circle save and remains within a 5-foot emanation takes 2d6 fire damage with a new basic Reflex save against your class DC. Damage increases to 3d6 at 20th level. Consume the opening. This does not use or increase multiple attack penalty.</p><p>@Damage[(2+floor((@actor.level-12)/6))d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
             "gm": ""
         },
         "level": {

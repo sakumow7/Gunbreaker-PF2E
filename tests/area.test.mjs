@@ -20,7 +20,7 @@ function setup({degrees=[0,1,2,3],slug='fated-circle'}={}){
 }
 test('area formulas use level, calibration and fixed Brand dice without weapon or No Mercy bonuses',()=>{
  assert.equal(areaFormula('demon-slice',1),'1d8[slashing]');assert.equal(areaFormula('demon-slaughter',20),'10d8[slashing]');
- assert.equal(areaFormula('fated-circle',13,'cold'),'7d10[cold]');assert.equal(areaFormula('fated-brand',17,'electricity'),'2d6[electricity]');assert.equal(areaFormula('fated-brand',18),'3d6[fire]');
+ assert.equal(areaFormula('fated-circle',13,'cold'),'7d10[cold]');assert.equal(areaFormula('fated-brand',19,'electricity'),'2d6[electricity]');assert.equal(areaFormula('fated-brand',20),'3d6[fire]');
  assert.throws(()=>areaFormula('fated-circle',12,'force'));assert.equal(areaFormula('relentless-rush',18,'cold'),'8d6[fire]');assert.throws(()=>areaFormula('unknown',18));
  assert.deepEqual([0,1,2,3].map(basicMultiplier),[2,1,.5,0]);assert.throws(()=>basicMultiplier(null));
 });

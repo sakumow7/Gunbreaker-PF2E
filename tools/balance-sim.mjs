@@ -3,7 +3,7 @@
 // Usage: node tools/balance-sim.mjs [encounters=20000] [rounds=4]
 // Env knobs for tuning experiments (defaults are the shipped 2.0 rules): LEVELS=1,5,10
 // CONT_DICE=-1 (Continuation d6 offset)  CONT_WEAPON=1 (add weapon dice to follow-ups)
-// AREA_DIE=8  BLOODFEST=3  TIER_AT=12 (2.0 scaling levels 12/18)  NM_FLAT=n  WRITE=1 (SIMULATION.md)
+// AREA_DIE=8  BLOODFEST=3  TIER_AT=14 (2.0 scaling levels 14/20)  NM_FLAT=n  WRITE=1 (SIMULATION.md)
 //
 // Model: one Strength Gunbreaker with a two-handed d12 gunblade, normal martial
 // proficiency, fundamental runes on the usual schedule, and two offensive actions
@@ -30,8 +30,8 @@ const fighterProf = L => L >= 13 ? 8 : L >= 5 ? 6 : 4;
 const classProf = L => L >= 17 ? 6 : L >= 9 ? 4 : 2;
 const spec = (L, prof) => L < 7 ? 0 : (L >= 15 ? 2 : 1) * ({4: 2, 6: 3, 8: 4}[prof] ?? 0);
 const classDC = L => 10 + L + classProf(L) + str(L);
-const TIER_AT = Number(process.env.TIER_AT ?? 12);
-const tier = (L, v2 = true) => Math.max(0, Math.floor((L - (v2 ? TIER_AT : 11) + 6) / 6)); // 1.4: +1 at 11 and 17; 2.0: +1 at 12 and 18
+const TIER_AT = Number(process.env.TIER_AT ?? 14);
+const tier = (L, v2 = true) => Math.max(0, Math.floor((L - (v2 ? TIER_AT : 11) + 6) / 6)); // 1.4: +1 at 11 and 17; 2.0: +1 at 14 and 20
 
 const d = n => 1 + Math.floor(Math.random() * n);
 const roll = (n, s) => { let t = 0; for (let i = 0; i < n; i++) t += d(s); return t; };

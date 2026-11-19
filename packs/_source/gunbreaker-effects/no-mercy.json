@@ -5,7 +5,7 @@
     "img": "icons/magic/control/buff-flight-wings-runes-purple.webp",
     "system": {
         "description": {
-            "value": "<p>Status bonus to gunblade Strike damage: +2, +3 at 12th level, +4 at 18th. Lasts until the start of your third subsequent turn. The console loads the cartridge and Ready to Break.</p>",
+            "value": "<p>Status bonus to gunblade Strike damage: +2, +3 at 14th level, +4 at 20th. Lasts until the start of your third subsequent turn. The console loads the cartridge and Ready to Break.</p>",
             "gm": ""
         },
         "level": {
@@ -41,7 +41,7 @@
                 "key": "FlatModifier",
                 "selector": "strike-damage",
                 "type": "status",
-                "value": "2+max(0,floor((@actor.level-6)/6))",
+                "value": "2+max(0,floor((@actor.level-8)/6))",
                 "predicate": [
                     "item:trait:gunbreaker"
                 ]

@@ -139,9 +139,9 @@ Use disposable characters and exactly one GM. Disable automatic damage applicati
 
 ## 2.0.0-beta.1 checks
 
-1. A new level 1 Gunbreaker gets No Mercy from the class. No Mercy adds +2 status to gunblade Strike damage (+3 at 12).
-2. Burst Strike adds 2d6 at level 5 and 3d6 at level 12 on the native damage card.
-3. After a Burst Strike hit, Hypervelocity is offered as a free action and rolls 1d6 (2d6 at 12) without weapon dice.
+1. A new level 1 Gunbreaker gets No Mercy from the class. No Mercy adds +2 status to gunblade Strike damage (+3 at 14).
+2. Burst Strike adds 2d6 at level 5 and 3d6 at level 14 on the native damage card.
+3. After a Burst Strike hit, Hypervelocity is offered as a free action and rolls 1d6 (2d6 at 14) without weapon dice.
 4. With Royal Guard up, an adjacent enemy that attacks an ally shows a −1 circumstance penalty; attacking the Gunbreaker shows none. Leaving the aura removes the effect.
 5. Demon Slice rolls d8s; Fated Circle rolls d10s.
 6. With Sequencer and JB2A on: a Strike plays a swing and impact on the target; a miss plays a missed swing; Continuation plays a blast; Demon Slice plays a ring around the Gunbreaker; No Mercy and Bloodfest show a burst and a lasting aura; cartridge pips match the tracker during an encounter.

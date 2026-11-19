@@ -1,6 +1,6 @@
 # 2.0.0-beta.1 — rework and animations
 
-- No Mercy becomes a level 1 class feature; Continuation follow-ups become free actions; area combo and Fated Circle hit harder; scaling steps move to 12 and 18. See docs/DESIGN-v2.0.md.
+- No Mercy becomes a level 1 class feature; Continuation follow-ups become free actions; area combo and Fated Circle hit harder; scaling steps move to 14 and 20. See docs/DESIGN-v2.0.md.
 - Royal Guard projects a 5-foot enmity aura (−1 to enemy attacks that ignore you). Heart of Stone resists 2 + level. Lion's Legend reaches legendary armor.
 - Optional Sequencer/JB2A animations for Strikes, Continuation, area actions and buffs, cartridge pips and stance auras (scripts/fx.mjs, scripts/fx-catalogue.mjs).
 - Encounter simulation (`npm run sim`, SIMULATION.md).

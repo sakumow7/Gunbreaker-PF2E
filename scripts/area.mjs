@@ -25,7 +25,7 @@ export function areaFormula(slug,level,calibration='fire',learned=[]){
   calibration=damageType(slug,calibration);
   if(slug==='double-down')return `${level>=18?12:10}d6[${calibration}]`;
   if(slug==='fated-circle')return `${Math.ceil(level/2)}d10[${calibration}]`;
-  return `${slug==='fated-brand'?(level>=18?3:2):Math.ceil(level/2)}d6[${calibration}]`;
+  return `${slug==='fated-brand'?(level>=20?3:2):Math.ceil(level/2)}d6[${calibration}]`;
 }
 export function basicMultiplier(degree){
   assert([0,1,2,3].includes(degree),'Native save has no resolved degree of success.');
