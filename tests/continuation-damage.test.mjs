@@ -19,7 +19,7 @@ function fixture(slug='hypervelocity',calibration='cold',level=17){
 for(const slug of ['hypervelocity','jugular-rip','abdomen-tear','eye-gouge'])for(const type of ['fire','cold','electricity'])test(`${slug} applies one separate ${type} effect to the opening target`,async()=>{
  const h=fixture(slug,type);const before=h.flags.tracker.cartridges;
  const result=await h.runner.execute(h.actor,h.req);
- assert.equal(result.status,'complete');assert.deepEqual(h.rolls,[`(4d6+2)[${type}]`]);assert.equal(h.applications.length,1);
+ assert.equal(result.status,'complete');assert.deepEqual(h.rolls,[`2d6[${type}]`]);assert.equal(h.applications.length,1);
  const applied=h.applications[0];assert.equal(applied.token,h.target.document);assert.equal(applied.item,h.item);assert.equal(applied.skipIWR,false);assert.equal(applied.shieldBlockRequest,false);
  assert.equal(applied.damage.options.degreeOfSuccess,null);assert.equal(applied.outcome,undefined);assert(applied.rollOptions.has('origin:action:trait:magical'));assert(applied.rollOptions.has(`origin:action:slug:${slug}`));assert(!applied.rollOptions.has('area-damage'));
  const message=[...h.messages.values()].find(m=>m.isDamageRoll);assert.equal(message.flags.pf2e.suppressDamageButtons,true);assert.equal(message.flags.pf2e.origin.type,'feat');assert.equal(message.flags.pf2e.context.target.token,h.target.document.uuid);

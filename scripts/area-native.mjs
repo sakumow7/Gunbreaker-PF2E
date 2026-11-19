@@ -15,7 +15,7 @@ const esc=s=>foundry.utils.escapeHTML(String(s));
 const degreeNames=['criticalFailure','failure','success','criticalSuccess'];
 export const nativePosition=t=>({uuid:t.document.uuid,x:t.document.x,y:t.document.y,elevation:t.document.elevation,width:t.document.width,height:t.document.height,level:t.document.level,depth:t.document.depth,shape:t.document.shape});
 const samePosition=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
-const itemFor=(actor,slug)=>actor.items.find(i=>(i.slug??i.system?.slug)===slug&&i.system.publication?.title?.includes('1.4.0'));
+const itemFor=(actor,slug)=>actor.items.find(i=>(i.slug??i.system?.slug)===slug&&i.system.publication?.title?.match(/\b(1\.4|2\.0)\.0/));
 const saveOptions=profile=>['damaging-effect',...(profile.shape!=='target'?['area-damage']:[])];
 const damageClass=()=>{const cls=CONFIG.Dice.rolls.find(r=>r.name==='DamageRoll');if(!cls)throw Error('Native PF2e damage rolls are unavailable.');return cls;};
 export function areaSaveEvidence(message,actorUuid){
@@ -51,7 +51,7 @@ export function createSavePorts({authority,contextFor,actorToken,weaponFor},{aut
     check(actor,request);
     if((automatic?['unconscious']:['unconscious','paralyzed','stunned']).some(c=>actor.hasCondition(c)))throw Error('This character cannot act.');
     if((game.combat?.turns.filter(t=>t.actor?.uuid===actor.uuid).length??0)!==1)throw Error('Area automation requires exactly one combatant for the actor.');
-    const item=itemFor(actor,request.slug);if(!item)throw Error('Update this ability from the v1.4 compendium first.');
+    const item=itemFor(actor,request.slug);if(!item)throw Error('Update this ability from the current Gunbreaker compendium first.');
     const weapon=weaponFor(actor,request.weaponId),self=actorToken(actor);
     if(self.document.parent.id!==canvas.scene?.id)throw Error('The acting token must be on the active scene.');
     const dc=actor.getStatistic('gunbreaker')?.dc?.value;
@@ -108,7 +108,7 @@ export function createSavePorts({authority,contextFor,actorToken,weaponFor},{aut
     prepare:async(actor,request)=>{
       const {self,dc}=inspect(actor,request),c=contextFor(actor),raw=actor.getFlag(MOD,'tracker');
       const profile=areaProfile(request.slug,c.level,c.learned);
-      if(profile.upgraded&&!itemFor(actor,'blasting-zone'))throw Error('Update Blasting Zone from the v1.4 compendium first.');
+      if(profile.upgraded&&!itemFor(actor,'blasting-zone'))throw Error('Update Blasting Zone from the current Gunbreaker compendium first.');
       const expected={revision:raw?.revision??0,encounterId:c.encounterId,round:c.round,turn:c.turn};
       if(request.intent||request.expected)assertFreshIntent(request.intent??request.expected,c,raw);
       let state=normalizeState(raw,c);

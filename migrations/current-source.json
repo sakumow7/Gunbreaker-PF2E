@@ -8,7 +8,7 @@
       "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Requirements</strong> Continuation; your next action after a successful Savage Claw Strike this turn, against the same enemy still within your melee reach. Intervening reactions do not close this opening; other actions, including free actions, do. <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 2d6 fire damage plus the number of weapon damage dice of the opening gunblade (base die plus fundamental striking rune dice only). Increase the d6s to 3d6 at level 11 and 4d6 at level 17. Snapshot the weapon dice when the opening Strike resolves. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
+          "value": "<p><strong>Requirements</strong> Continuation; you just hit an enemy with Savage Claw, and that enemy is still within your melee reach. Use this immediately after that Strike resolves: any other action in between closes the opening (reactions do not). <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 1d6 fire damage, increasing to 2d6 at 12th level and 3d6 at 18th. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
           "gm": ""
         },
         "level": {
@@ -23,16 +23,16 @@
         },
         "category": "classfeature",
         "actionType": {
-          "value": "action"
+          "value": "free"
         },
         "actions": {
-          "value": 1
+          "value": null
         },
         "prerequisites": {
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -82,7 +82,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [
@@ -186,7 +186,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [
@@ -247,7 +247,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -306,7 +306,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -365,7 +365,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -422,7 +422,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -445,7 +445,7 @@
       "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Cost</strong> 1 cartridge.</p><p>Make a melee gunblade Strike. On a hit, deal additional fire damage: 1d6 at 1st level, 2d6 at 5th, 3d6 at 11th, and 4d6 at 17th. If you have Continuation, a hit enables Hypervelocity as your next action this turn against the same target.</p><p><strong>Additional Strike damage:</strong> @Damage[(1+floor((@actor.level+1)/6))d6[fire]]</p>",
+          "value": "<p><strong>Cost</strong> 1 cartridge.</p><p>Make a melee gunblade Strike. On a hit, deal additional fire damage: 1d6 at 1st level, 2d6 at 5th, 3d6 at 12th, and 4d6 at 18th. If you have Continuation, a hit lets you use Hypervelocity against the same target as a free action immediately afterward.</p>",
           "gm": ""
         },
         "level": {
@@ -469,7 +469,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [
@@ -477,7 +477,28 @@
             "key": "DamageDice",
             "selector": "strike-damage",
             "slug": "gunbreaker-burst-strike",
-            "diceNumber": "1+floor((@actor.level+1)/6)",
+            "diceNumber": {
+              "brackets": [
+                {
+                  "end": 4,
+                  "value": 1
+                },
+                {
+                  "start": 5,
+                  "end": 11,
+                  "value": 2
+                },
+                {
+                  "start": 12,
+                  "end": 17,
+                  "value": 3
+                },
+                {
+                  "start": 18,
+                  "value": 4
+                }
+              ]
+            },
             "dieSize": "d6",
             "damageType": "fire",
             "predicate": [
@@ -492,7 +513,28 @@
             "key": "DamageDice",
             "selector": "strike-damage",
             "slug": "gunbreaker-burst-strike",
-            "diceNumber": "1+floor((@actor.level+1)/6)",
+            "diceNumber": {
+              "brackets": [
+                {
+                  "end": 4,
+                  "value": 1
+                },
+                {
+                  "start": 5,
+                  "end": 11,
+                  "value": 2
+                },
+                {
+                  "start": 12,
+                  "end": 17,
+                  "value": 3
+                },
+                {
+                  "start": 18,
+                  "value": 4
+                }
+              ]
+            },
             "dieSize": "d6",
             "damageType": "cold",
             "predicate": [
@@ -507,7 +549,28 @@
             "key": "DamageDice",
             "selector": "strike-damage",
             "slug": "gunbreaker-burst-strike",
-            "diceNumber": "1+floor((@actor.level+1)/6)",
+            "diceNumber": {
+              "brackets": [
+                {
+                  "end": 4,
+                  "value": 1
+                },
+                {
+                  "start": 5,
+                  "end": 11,
+                  "value": 2
+                },
+                {
+                  "start": 12,
+                  "end": 17,
+                  "value": 3
+                },
+                {
+                  "start": 18,
+                  "value": 4
+                }
+              ]
+            },
             "dieSize": "d6",
             "damageType": "electricity",
             "predicate": [
@@ -561,7 +624,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -584,7 +647,7 @@
       "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
-          "value": "<p>You learn Hypervelocity, Jugular Rip, Abdomen Tear, and Eye Gouge. Matching follow-ups: Burst Strike → Hypervelocity; Gnashing Fang → Jugular Rip; Savage Claw → Abdomen Tear; Wicked Talon → Eye Gouge.</p><p>After a successful Burst Strike, Gnashing Fang, Savage Claw, or Wicked Talon, you may use its matching follow-up as your next action on the same turn against the same creature, provided it remains within your melee reach. Any intervening action, including a free action, closes the opening. Reactions do not close it. The opening ends at the end of your turn or when consumed. Only one Continuation follow-up, including Fated Brand, can be used per round.</p><p>Hypervelocity, Jugular Rip, Abdomen Tear, and Eye Gouge each cost 1 action and deal 2d6 fire damage plus the number of weapon damage dice of the gunblade used for the opening Strike. The dice become 3d6 at level 11 and 4d6 at level 17. Snapshot the weapon dice when the opening Strike resolves. The follow-up has no attack roll or save, does not increase MAP, and never doubles on a critical opening Strike. It is a separate damage effect for immunity, weakness, and resistance. No Mercy and weapon property-rune damage do not add to it.</p><p>Fated Brand retains its existing damage, fresh basic Reflex saves, eligible-target restrictions, and shared Continuation limit. It receives no weapon-dice bonus. Its opening follows the same intervening-action rule.</p>",
+          "value": "<p>You learn Hypervelocity, Jugular Rip, Abdomen Tear, and Eye Gouge. Matching follow-ups: Burst Strike → Hypervelocity; Gnashing Fang → Jugular Rip; Savage Claw → Abdomen Tear; Wicked Talon → Eye Gouge.</p><p>After you hit with Burst Strike, Gnashing Fang, Savage Claw, or Wicked Talon, you can use its matching follow-up as a <strong>free action</strong> immediately afterward against the same creature, provided it remains within your melee reach. Any other action in between, including another free action, closes the opening. Reactions do not close it. The opening ends at the end of your turn or when consumed. Only one Continuation follow-up, including Fated Brand, can be used per round.</p><p>Each follow-up deals 1d6 fire damage, 2d6 at 12th level and 3d6 at 18th. It has no attack roll or save, does not increase MAP, and never doubles on a critical opening Strike. It is a separate damage effect for immunity, weakness, and resistance. No Mercy and weapon property-rune damage do not add to it.</p><p>Fated Brand keeps its fresh basic Reflex saves, eligible-target restrictions, and the shared Continuation limit. It is also a free action.</p>",
           "gm": ""
         },
         "level": {
@@ -607,7 +670,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [
@@ -651,7 +714,7 @@
       "img": "icons/magic/fire/projectile-fireball-smoke-strong-orange.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Requirements</strong> Your Demon Slice combo opening. Sweep your gunblade through a 5-foot emanation. Each enemy in the area attempts a basic Reflex save against your Gunbreaker class DC. Roll the damage once: 1d4 slashing damage per 2 levels, rounded up. This is not a Strike; do not add weapon damage, runes, Strength, or specialization. This activity does not use or increase multiple attack penalty.</p><p>After resolving the saves, end the combo and load 1 cartridge, even if all targets succeed. At least one enemy must be in the area.</p><p>@Damage[(ceil(@actor.level/2))d4[slashing]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+          "value": "<p><strong>Requirements</strong> Your Demon Slice combo opening. Sweep your gunblade through a 5-foot emanation. Each enemy in the area attempts a basic Reflex save against your Gunbreaker class DC. Roll the damage once: 1d8 slashing damage per 2 levels, rounded up. This is not a Strike; do not add weapon damage, runes, Strength, or specialization. This activity does not use or increase multiple attack penalty.</p><p>After resolving the saves, end the combo and load 1 cartridge, even if all targets succeed. At least one enemy must be in the area.</p><p>@Damage[(ceil(@actor.level/2))d8[slashing]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
           "gm": ""
         },
         "level": {
@@ -674,7 +737,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -697,7 +760,7 @@
       "img": "icons/magic/fire/projectile-fireball-smoke-strong-orange.webp",
       "system": {
         "description": {
-          "value": "<p>Sweep your gunblade through a 5-foot emanation. Each enemy in the area attempts a basic Reflex save against your Gunbreaker class DC. Roll the damage once: 1d4 slashing damage per 2 levels, rounded up. This is not a Strike; do not add weapon damage, runes, Strength, or specialization. This activity does not use or increase multiple attack penalty.</p><p>After resolving the saves, begin the area combo, enabling Demon Slaughter until the end of your next turn. At least one enemy must be in the area.</p><p>@Damage[(ceil(@actor.level/2))d4[slashing]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+          "value": "<p>Sweep your gunblade through a 5-foot emanation. Each enemy in the area attempts a basic Reflex save against your Gunbreaker class DC. Roll the damage once: 1d8 slashing damage per 2 levels, rounded up. This is not a Strike; do not add weapon damage, runes, Strength, or specialization. This activity does not use or increase multiple attack penalty.</p><p>After resolving the saves, begin the area combo, enabling Demon Slaughter until the end of your next turn. At least one enemy must be in the area.</p><p>@Damage[(ceil(@actor.level/2))d8[slashing]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
           "gm": ""
         },
         "level": {
@@ -720,7 +783,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -767,7 +830,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -794,7 +857,7 @@
       "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Requirements</strong> Continuation; your next action after a successful Wicked Talon Strike this turn, against the same enemy still within your melee reach. Intervening reactions do not close this opening; other actions, including free actions, do. <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 2d6 fire damage plus the number of weapon damage dice of the opening gunblade (base die plus fundamental striking rune dice only). Increase the d6s to 3d6 at level 11 and 4d6 at level 17. Snapshot the weapon dice when the opening Strike resolves. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
+          "value": "<p><strong>Requirements</strong> Continuation; you just hit an enemy with Wicked Talon, and that enemy is still within your melee reach. Use this immediately after that Strike resolves: any other action in between closes the opening (reactions do not). <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 1d6 fire damage, increasing to 2d6 at 12th level and 3d6 at 18th. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
           "gm": ""
         },
         "level": {
@@ -809,16 +872,16 @@
         },
         "category": "classfeature",
         "actionType": {
-          "value": "action"
+          "value": "free"
         },
         "actions": {
-          "value": 1
+          "value": null
         },
         "prerequisites": {
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -845,7 +908,7 @@
       "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Requirements</strong> Continuation; your immediately preceding action this turn was Fated Circle and at least one enemy failed its save. <strong>Frequency</strong> once per round, shared with all Continuation follow-ups.</p><p>Each enemy that failed or critically failed that Fated Circle save and remains within a 5-foot emanation takes 2d6 fire damage with a new basic Reflex save against your class DC. Damage increases to 3d6 at 17th level. Consume the opening. This does not use or increase multiple attack penalty.</p><p>@Damage[(2+floor((@actor.level-11)/6))d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+          "value": "<p><strong>Requirements</strong> Continuation; you just used Fated Circle and at least one enemy failed its save. Use this immediately afterward: any other action in between closes the opening. <strong>Frequency</strong> once per round, shared with all Continuation follow-ups.</p><p>Each enemy that failed or critically failed that Fated Circle save and remains within a 5-foot emanation takes 2d6 fire damage with a new basic Reflex save against your class DC. Damage increases to 3d6 at 18th level. Consume the opening. This does not use or increase multiple attack penalty.</p><p>@Damage[(2+floor((@actor.level-12)/6))d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
           "gm": ""
         },
         "level": {
@@ -860,16 +923,16 @@
         },
         "category": "classfeature",
         "actionType": {
-          "value": "action"
+          "value": "free"
         },
         "actions": {
-          "value": 1
+          "value": null
         },
         "prerequisites": {
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -896,7 +959,7 @@
       "img": "icons/magic/fire/projectile-fireball-smoke-strong-orange.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Cost</strong> 1 cartridge. <strong>Requirements</strong> You wield a gunblade.</p><p>Release aether in a 5-foot emanation. Each enemy attempts a basic Reflex save against your class DC against 1d6 fire damage per 2 levels, rounded up. This is not a Strike and does not use or increase multiple attack penalty. If at least one enemy fails or critically fails, you may use Fated Brand as your next action this turn.</p><p>@Damage[(ceil(@actor.level/2))d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+          "value": "<p><strong>Cost</strong> 1 cartridge. <strong>Requirements</strong> You wield a gunblade.</p><p>Release aether in a 5-foot emanation. Each enemy attempts a basic Reflex save against your class DC against 1d10 fire damage per 2 levels, rounded up. This is not a Strike and does not use or increase multiple attack penalty. If at least one enemy fails or critically fails, you may use Fated Brand as a free action immediately afterward.</p><p>@Damage[(ceil(@actor.level/2))d10[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
           "gm": ""
         },
         "level": {
@@ -920,7 +983,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -943,7 +1006,7 @@
       "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Cost</strong> 1 cartridge. <strong>Frequency</strong> once per minute.</p><p>Make a melee gunblade Strike with 1d6 additional slashing damage, increasing by 1d6 at 11th and 17th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, begin this sequence and enable Savage Claw until the end of your next turn. A hit enables Jugular Rip if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(1+floor((@actor.level-5)/6))d6[slashing]]</p>",
+          "value": "<p><strong>Cost</strong> 1 cartridge. <strong>Frequency</strong> once per minute.</p><p>Make a melee gunblade Strike with 1d6 additional slashing damage, increasing by 1d6 at 12th and 18th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, begin this sequence and enable Savage Claw until the end of your next turn. A hit lets you use Jugular Rip as a free action immediately afterward if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(1+floor((@actor.level-6)/6))d6[slashing]]</p>",
           "gm": ""
         },
         "level": {
@@ -967,7 +1030,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [
@@ -975,7 +1038,7 @@
             "key": "DamageDice",
             "selector": "strike-damage",
             "slug": "gunbreaker-gnashing-fang",
-            "diceNumber": "1+floor((@actor.level-5)/6)",
+            "diceNumber": "1+floor((@actor.level-6)/6)",
             "dieSize": "d6",
             "damageType": "slashing",
             "predicate": [
@@ -1032,7 +1095,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [
@@ -1086,7 +1149,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -1145,7 +1208,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [
@@ -1211,7 +1274,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -1264,7 +1327,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [
@@ -1305,7 +1368,7 @@
       "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
       "system": {
         "description": {
-          "value": "<p><em>Gunnhildr's blades protect their companions with aetheric wards, then unleash explosive sword combinations. This PF2e Remaster playtest adapts the FFXIV job's identity to three-action turns.</em></p><h2>Initial Proficiencies</h2><p>Key attribute Strength or Dexterity; 10 + Constitution modifier HP per level. Trained Perception, expert Fortitude, trained Reflex and Will. Trained simple weapons, martial weapons, unarmed attacks, light and medium armor, unarmored defense, and Gunbreaker class DC. Trained Athletics plus 3 + Intelligence modifier additional skills. Use the d6 finesse Light Gunblade for a Dexterity build, or the d8/two-hand d12 Gunblade for Strength.</p><p>You gain standard attribute boosts at levels 1, 5, 10, 15, and 20, ancestry feats at 1/5/9/13/17, class feats at 1 and every even level, skill feats at every even level, general feats at 3/7/11/15/19, and skill increases at every odd level starting at 3. Skill proficiency is capped at expert before level 7 and master before level 15.</p><h2>Class Features</h2><ul><li>Level 1: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.fe03ab566ecd7e59]{Powder Gauge}</li><li>Level 1: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.04cbd7c7e3159f9e]{Gunbreaker's Combo}</li><li>Level 1: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1f7a9715421e92da]{Royal Guard}</li><li>Level 1: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1aab8f02f7a76d31]{Heart Of Stone}</li><li>Level 3: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a61994a226d98bcc]{Steady Aim}</li><li>Level 5: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.7ea8bba45957ea76]{Gunblade Weapon Mastery}</li><li>Level 6: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.8167449ad5822303]{Advanced Cartridge Arts}</li><li>Level 7: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.141e49ccd412a33a]{Continuation}</li><li>Level 7: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a40dd44fb62beb04]{Weapon Specialization}</li><li>Level 7: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0e4bd01ae207e03c]{Armor Expertise}</li><li>Level 9: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.ad484df0b1baae4e]{Aetheric Fortitude}</li><li>Level 9: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0034c6c64e887ff7]{Cartridge Expertise}</li><li>Level 9: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0a3b3f4bfc68b3d1]{Gunbreaker Expertise}</li><li>Level 11: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.571c5710dc92e12d]{Battle-Tested}</li><li>Level 13: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a5ca84e5a87ea0ea]{Gunblade Legend}</li><li>Level 15: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.70faa71375db332e]{Armor Mastery}</li><li>Level 15: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.5ee5fcd559eedf13]{Greater Weapon Specialization}</li><li>Level 17: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.81fc94e9fc8dcc22]{Gunbreaker Mastery}</li><li>Level 19: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a7bcbcad2fd2a303]{Lion's Legend}</li></ul><p>During exploration, your alertness and Athletics help you escort companions and clear dangerous routes. Outside battle, you may be a bodyguard, weaponsmith, or keeper of Gunnhildr's traditions. There are no mandatory religious edicts.</p><h2>Playtest and Tracker</h2><p>Read RULES.html for the complete class and PLAYTEST.md for balance assumptions. Use the Gunbreaker Tracker macro; recording an action is separate from posting its rules to chat. Roll and apply attacks, saves, and damage normally. Old world copies must be replaced using MIGRATION.md.</p>",
+          "value": "<p><em>Gunnhildr's blades protect their companions with aetheric wards, then unleash explosive sword combinations. This PF2e Remaster playtest adapts the FFXIV job's identity to three-action turns.</em></p><h2>Initial Proficiencies</h2><p>Key attribute Strength or Dexterity; 10 + Constitution modifier HP per level. Trained Perception, expert Fortitude, trained Reflex and Will. Trained simple weapons, martial weapons, unarmed attacks, light and medium armor, unarmored defense, and Gunbreaker class DC. Trained Athletics plus 3 + Intelligence modifier additional skills. Use the d6 finesse Light Gunblade for a Dexterity build, or the d8/two-hand d12 Gunblade for Strength.</p><p>You gain standard attribute boosts at levels 1, 5, 10, 15, and 20, ancestry feats at 1/5/9/13/17, class feats at 1 and every even level, skill feats at every even level, general feats at 3/7/11/15/19, and skill increases at every odd level starting at 3. Skill proficiency is capped at expert before level 7 and master before level 15.</p><h2>Class Features</h2><ul><li>Level 1: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.fe03ab566ecd7e59]{Powder Gauge}</li><li>Level 1: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.04cbd7c7e3159f9e]{Gunbreaker's Combo}</li><li>Level 1: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1f7a9715421e92da]{Royal Guard}</li><li>Level 1: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1aab8f02f7a76d31]{Heart Of Stone}</li><li>Level 1: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.4b87be96d6c648d2]{No Mercy}</li><li>Level 3: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a61994a226d98bcc]{Steady Aim}</li><li>Level 5: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.7ea8bba45957ea76]{Gunblade Weapon Mastery}</li><li>Level 6: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.8167449ad5822303]{Advanced Cartridge Arts}</li><li>Level 7: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.141e49ccd412a33a]{Continuation}</li><li>Level 7: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a40dd44fb62beb04]{Weapon Specialization}</li><li>Level 7: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0e4bd01ae207e03c]{Armor Expertise}</li><li>Level 9: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.ad484df0b1baae4e]{Aetheric Fortitude}</li><li>Level 9: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0034c6c64e887ff7]{Cartridge Expertise}</li><li>Level 9: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.0a3b3f4bfc68b3d1]{Gunbreaker Expertise}</li><li>Level 11: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.571c5710dc92e12d]{Battle-Tested}</li><li>Level 13: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a5ca84e5a87ea0ea]{Gunblade Legend}</li><li>Level 15: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.70faa71375db332e]{Armor Mastery}</li><li>Level 15: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.5ee5fcd559eedf13]{Greater Weapon Specialization}</li><li>Level 17: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.81fc94e9fc8dcc22]{Gunbreaker Mastery}</li><li>Level 19: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-class.Item.a7bcbcad2fd2a303]{Lion's Legend}</li></ul><p>During exploration, your alertness and Athletics help you escort companions and clear dangerous routes. Outside battle, you may be a bodyguard, weaponsmith, or keeper of Gunnhildr's traditions. There are no mandatory religious edicts.</p><h2>Playtest 2.0</h2><p>Read RULES.html for the complete class and docs/DESIGN-v2.0.md for what changed. Use the Gunbreaker console from the token controls or the tracker macro: target, press an action, and the GM's client rolls native Strikes, saves and damage. Optional Sequencer and JB2A animations play for every action.</p>",
           "gm": ""
         },
         "ancestryFeatLevels": {
@@ -1405,7 +1468,7 @@
         "perception": 1,
         "spellcasting": 0,
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "items": {
@@ -1432,6 +1495,12 @@
             "level": 1,
             "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-class.Item.1aab8f02f7a76d31",
             "img": "icons/skills/melee/strike-sword-steel-yellow.webp"
+          },
+          "4b87be96d6c648d2": {
+            "name": "No Mercy",
+            "level": 1,
+            "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-feats.Item.4b87be96d6c648d2",
+            "img": "icons/magic/control/buff-flight-wings-runes-purple.webp"
           },
           "a61994a226d98bcc": {
             "name": "Steady Aim",
@@ -1548,7 +1617,7 @@
       "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
       "system": {
         "description": {
-          "value": "<p>You learn Keen Edge, Brutal Shell, Solid Barrel, Burst Strike, Demon Slice, and Demon Slaughter at 1st level. All these actions require you to wield a gunblade. Combo actions can be used only in a combat encounter with a genuine threat.</p><p>You can maintain one combo sequence at a time. Keen Edge opens Brutal Shell, which opens Solid Barrel. Demon Slice opens Demon Slaughter. Each step consumes the previous opening and enables the next until the end of your next turn. Advance the sequence after resolving the action, even on a miss. Starting another sequence replaces the old one. Other actions, including movement, defense, normal Strikes, and cartridge spenders that do not start a sequence, do not interrupt it.</p><p>All Strikes use and increase multiple attack penalty normally. Bonus damage belongs to the Strike and doubles on a critical hit unless specified otherwise. Count only the base weapon damage die and fundamental striking rune dice when a feature refers to weapon damage dice; extra dice from abilities or property runes do not count. No Mercy modifies gunblade Strike damage, not separate save-based blasts or Continuation damage.</p>",
+          "value": "<p>You learn Keen Edge, Brutal Shell, Solid Barrel, Burst Strike, Demon Slice, and Demon Slaughter at 1st level. All these actions require you to wield a gunblade. Combo actions can be used only in a combat encounter with a genuine threat.</p><p>You can maintain one combo sequence at a time. Keen Edge opens Brutal Shell, which opens Solid Barrel. Demon Slice opens Demon Slaughter. Each step consumes the previous opening and enables the next until the end of your next turn. Advance the sequence after resolving the action, even on a miss. Starting another sequence replaces the old one. Other actions, including movement, defense, normal Strikes, and cartridge spenders that do not start a sequence, do not interrupt it.</p><p>All Strikes use and increase multiple attack penalty normally. Bonus damage belongs to the Strike and doubles on a critical hit unless specified otherwise. Count only the base weapon damage die and fundamental striking rune dice when a feature refers to weapon damage dice; extra dice from abilities or property runes do not count. No Mercy, a 1st-level class feature, modifies gunblade Strike damage, not separate save-based blasts or Continuation damage.</p>",
           "gm": ""
         },
         "level": {
@@ -1571,7 +1640,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [
@@ -1625,7 +1694,7 @@
       "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
       "system": {
         "description": {
-          "value": "<p>Trigger: An ally other than you within 15 feet would take damage from a successful enemy attack roll, including a critical success. Requirements: You wield a gunblade and can see the ally and attacker. The ally gains resistance to all damage from the triggering attack equal to 2 + half your level, rounded down. Before applying the resistance, you may spend 1 cartridge to increase it to 2 + your level. This includes Strikes and spell attacks. Saving-throw effects and automatic damage without a successful attack roll do not trigger it.</p><p>Protection applies to damage resolved as part of that triggering attack, not later persistent-damage ticks or separate follow-up actions. Apply the current PF2e immunity, weakness, and resistance rules once per applicable effect; never turn the resistance into an extra subtraction after native resistance. Aetheric Ward, Bulwark Protocol, Guardian’s Instinct, and Lion’s Legend continue to modify this reaction as written.</p>",
+          "value": "<p>Trigger: An ally other than you within 15 feet would take damage from a successful enemy attack roll, including a critical success. Requirements: You wield a gunblade and can see the ally and attacker. The ally gains resistance to all damage from the triggering attack equal to 2 + your level. Before applying the resistance, you may spend 1 cartridge to increase it to 2 + your level + half your level (rounded down). This includes Strikes and spell attacks. Saving-throw effects and automatic damage without a successful attack roll do not trigger it.</p><p>Protection applies to damage resolved as part of that triggering attack, not later persistent-damage ticks or separate follow-up actions. Apply the current PF2e immunity, weakness, and resistance rules once per applicable effect; never turn the resistance into an extra subtraction after native resistance. Aetheric Ward, Bulwark Protocol, Guardian’s Instinct, and Lion’s Legend continue to modify this reaction as written.</p>",
           "gm": ""
         },
         "level": {
@@ -1649,7 +1718,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -1672,7 +1741,7 @@
       "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Requirements</strong> Continuation; your next action after a successful Burst Strike Strike this turn, against the same enemy still within your melee reach. Intervening reactions do not close this opening; other actions, including free actions, do. <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 2d6 fire damage plus the number of weapon damage dice of the opening gunblade (base die plus fundamental striking rune dice only). Increase the d6s to 3d6 at level 11 and 4d6 at level 17. Snapshot the weapon dice when the opening Strike resolves. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
+          "value": "<p><strong>Requirements</strong> Continuation; you just hit an enemy with Burst Strike, and that enemy is still within your melee reach. Use this immediately after that Strike resolves: any other action in between closes the opening (reactions do not). <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 1d6 fire damage, increasing to 2d6 at 12th level and 3d6 at 18th. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
           "gm": ""
         },
         "level": {
@@ -1687,16 +1756,16 @@
         },
         "category": "classfeature",
         "actionType": {
-          "value": "action"
+          "value": "free"
         },
         "actions": {
-          "value": 1
+          "value": null
         },
         "prerequisites": {
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -1723,7 +1792,7 @@
       "img": "icons/skills/ranged/cannon-barrel-firing-yellow.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Requirements</strong> Continuation; your next action after a successful Gnashing Fang Strike this turn, against the same enemy still within your melee reach. Intervening reactions do not close this opening; other actions, including free actions, do. <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 2d6 fire damage plus the number of weapon damage dice of the opening gunblade (base die plus fundamental striking rune dice only). Increase the d6s to 3d6 at level 11 and 4d6 at level 17. Snapshot the weapon dice when the opening Strike resolves. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
+          "value": "<p><strong>Requirements</strong> Continuation; you just hit an enemy with Gnashing Fang, and that enemy is still within your melee reach. Use this immediately after that Strike resolves: any other action in between closes the opening (reactions do not). <strong>Frequency</strong> once per round, shared by all Continuation follow-ups.</p><p>Deal 1d6 fire damage, increasing to 2d6 at 12th level and 3d6 at 18th. No attack or save; no MAP; no critical doubling. This is a separate damage effect for immunity, weakness, and resistance. No Mercy and property-rune damage do not apply. Aetheric Calibration may change its fire damage. Consume the opening.</p>",
           "gm": ""
         },
         "level": {
@@ -1738,16 +1807,16 @@
         },
         "category": "classfeature",
         "actionType": {
-          "value": "action"
+          "value": "free"
         },
         "actions": {
-          "value": 1
+          "value": null
         },
         "prerequisites": {
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -1797,7 +1866,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -1844,7 +1913,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [
@@ -1882,7 +1951,7 @@
       "img": "icons/magic/light/explosion-star-glow-yellow.webp",
       "system": {
         "description": {
-          "value": "<p>At the start of each combat encounter you begin with 2 cartridges instead of 1. When you spend a cartridge on Heart of Stone, its resistance increases to 4 + your level. Your weapon proficiency remains master. Reign of Beasts remains an optional feat and is not granted a second time.</p>",
+          "value": "<p>Your proficiency in light and medium armor and unarmored defense increases to legendary. At the start of each combat encounter you begin with 2 cartridges instead of 1. When you spend a cartridge on Heart of Stone, its resistance increases to 2 + twice your level. Reign of Beasts remains an optional feat and is not granted a second time.</p>",
           "gm": ""
         },
         "level": {
@@ -1905,11 +1974,24 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
-        "slug": "lions-legend"
+        "slug": "lions-legend",
+        "subfeatures": {
+          "proficiencies": {
+            "light": {
+              "rank": 4
+            },
+            "medium": {
+              "rank": 4
+            },
+            "unarmored": {
+              "rank": 4
+            }
+          }
+        }
       },
       "folder": null,
       "sort": 0,
@@ -1952,7 +2034,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [
@@ -2013,7 +2095,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -2036,7 +2118,7 @@
       "img": "icons/equipment/shield/heater-steel-worn.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Requirements</strong> You wield a gunblade.</p><p>You adopt the protective posture of Gunnhildr's guard. Gain a +1 circumstance bonus to AC while in this stance. Your damage is unchanged. The stance ends if you cease wielding a gunblade, become unconscious, or combat ends. Your Heart of Stone reaction works with or without the stance. This stance does not force enemies to attack you.</p><p>Apply the linked Royal Guard effect when you enter, and remove it when you leave.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.a74a5130c0f43674]{Royal Guard (Stance)}. Apply manually after recording the action.</p>",
+          "value": "<p><strong>Requirements</strong> You wield a gunblade.</p><p>You adopt the protective posture of Gunnhildr's guard. Gain a +1 circumstance bonus to AC while in this stance, and enemies within 5 feet of you are <strong>Challenged</strong>: they take a –1 circumstance penalty to attack rolls against creatures other than a Gunbreaker in Royal Guard. Your damage is unchanged. The stance ends if you cease wielding a gunblade, become unconscious, or combat ends. Your Heart of Stone reaction works with or without the stance.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.a74a5130c0f43674]{Royal Guard (Stance)}. The Gunbreaker console applies it; its aura challenges enemies automatically.</p>",
           "gm": ""
         },
         "level": {
@@ -2060,7 +2142,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [
@@ -2089,7 +2171,7 @@
       "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Requirements</strong> Your Gnashing Fang combo opening.</p><p>Make a melee gunblade Strike with 1d6 additional slashing damage, increasing by 1d6 at 11th and 17th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, consume the opening and enable Wicked Talon until the end of your next turn. A hit enables Abdomen Tear if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(1+floor((@actor.level-5)/6))d6[slashing]]</p>",
+          "value": "<p><strong>Requirements</strong> Your Gnashing Fang combo opening.</p><p>Make a melee gunblade Strike with 1d6 additional slashing damage, increasing by 1d6 at 12th and 18th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, consume the opening and enable Wicked Talon until the end of your next turn. A hit lets you use Abdomen Tear as a free action immediately afterward if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(1+floor((@actor.level-6)/6))d6[slashing]]</p>",
           "gm": ""
         },
         "level": {
@@ -2113,7 +2195,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [
@@ -2121,7 +2203,7 @@
             "key": "DamageDice",
             "selector": "strike-damage",
             "slug": "gunbreaker-savage-claw",
-            "diceNumber": "1+floor((@actor.level-5)/6)",
+            "diceNumber": "1+floor((@actor.level-6)/6)",
             "dieSize": "d6",
             "damageType": "slashing",
             "predicate": [
@@ -2174,7 +2256,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -2220,7 +2302,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -2276,7 +2358,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [
@@ -2336,7 +2418,7 @@
       "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Requirements</strong> Your Savage Claw combo opening.</p><p>Make a melee gunblade Strike with 2d6 additional slashing damage, increasing by 1d6 at 11th and 17th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, end this sequence. A hit enables Eye Gouge if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(2+floor((@actor.level-5)/6))d6[slashing]]</p>",
+          "value": "<p><strong>Requirements</strong> Your Savage Claw combo opening.</p><p>Make a melee gunblade Strike with 2d6 additional slashing damage, increasing by 1d6 at 12th and 18th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, end this sequence. A hit lets you use Eye Gouge as a free action immediately afterward if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(2+floor((@actor.level-6)/6))d6[slashing]]</p>",
           "gm": ""
         },
         "level": {
@@ -2360,7 +2442,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [
@@ -2368,7 +2450,7 @@
             "key": "DamageDice",
             "selector": "strike-damage",
             "slug": "gunbreaker-wicked-talon",
-            "diceNumber": "2+floor((@actor.level-5)/6)",
+            "diceNumber": "2+floor((@actor.level-6)/6)",
             "dieSize": "d6",
             "damageType": "slashing",
             "predicate": [
@@ -2411,7 +2493,7 @@
           "rarity": "common"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "start": {
@@ -2462,7 +2544,7 @@
           "rarity": "common"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "start": {
@@ -2528,7 +2610,7 @@
           "rarity": "common"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "start": {
@@ -2578,7 +2660,7 @@
           "rarity": "common"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "start": {
@@ -2628,7 +2710,7 @@
           "rarity": "common"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "start": {
@@ -2678,7 +2760,7 @@
           "rarity": "common"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "start": {
@@ -2728,7 +2810,7 @@
           "rarity": "common"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "start": {
@@ -2778,7 +2860,7 @@
           "rarity": "common"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "start": {
@@ -2839,7 +2921,7 @@
           "rarity": "common"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "start": {
@@ -2883,7 +2965,7 @@
       "img": "icons/magic/control/buff-flight-wings-runes-purple.webp",
       "system": {
         "description": {
-          "value": "<p>Status bonus to gunblade Strike damage: +2, +3 at 11, +4 at 17. Lasts until the start of your third subsequent turn. Record the cartridge and Ready to Break in the tracker.</p>",
+          "value": "<p>Status bonus to gunblade Strike damage: +2, +3 at 12th level, +4 at 18th. Lasts until the start of your third subsequent turn. The console loads the cartridge and Ready to Break.</p>",
           "gm": ""
         },
         "level": {
@@ -2896,7 +2978,7 @@
           "rarity": "common"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "start": {
@@ -2919,7 +3001,7 @@
             "key": "FlatModifier",
             "selector": "strike-damage",
             "type": "status",
-            "value": "2+max(0,floor((@actor.level-5)/6))",
+            "value": "2+max(0,floor((@actor.level-6)/6))",
             "predicate": [
               "item:trait:gunbreaker"
             ]
@@ -2957,7 +3039,7 @@
           "rarity": "common"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "start": {
@@ -3008,7 +3090,7 @@
           "rarity": "common"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "start": {
@@ -3059,7 +3141,7 @@
           "rarity": "common"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "start": {
@@ -3110,7 +3192,7 @@
           "rarity": "common"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "start": {
@@ -3161,7 +3243,7 @@
           "rarity": "common"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "start": {
@@ -3212,7 +3294,7 @@
           "rarity": "common"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "start": {
@@ -3263,7 +3345,7 @@
           "rarity": "common"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "start": {
@@ -3293,15 +3375,15 @@
     }
   },
   {
-    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.a74a5130c0f43674",
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.fdc9f71cd9295317",
     "doc": {
-      "_id": "a74a5130c0f43674",
-      "name": "Royal Guard (Stance)",
+      "_id": "fdc9f71cd9295317",
+      "name": "Royal Guard: Challenged",
       "type": "effect",
-      "img": "icons/equipment/shield/heater-steel-worn.webp",
+      "img": "icons/skills/social/intimidation-impressing.webp",
       "system": {
         "description": {
-          "value": "<p>+1 circumstance AC while conscious, wielding a gunblade, and in combat. Remove when any requirement ends. Damage is unchanged.</p>",
+          "value": "<p>A Gunbreaker in Royal Guard is challenging you. You take a –1 circumstance penalty to attack rolls against creatures that aren't in Royal Guard. Applied and removed by the Gunbreaker's Royal Guard aura.</p>",
           "gm": ""
         },
         "level": {
@@ -3314,7 +3396,70 @@
           "rarity": "common"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
+          "remaster": true
+        },
+        "start": {
+          "value": 0,
+          "initiative": null
+        },
+        "duration": {
+          "sustained": false,
+          "value": -1,
+          "unit": "unlimited",
+          "expiry": null
+        },
+        "tokenIcon": {
+          "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [
+          {
+            "key": "FlatModifier",
+            "selector": "attack-roll",
+            "type": "circumstance",
+            "value": -1,
+            "predicate": [
+              {
+                "not": "target:effect:royal-guard-stance"
+              }
+            ]
+          }
+        ],
+        "slug": "royal-guard-challenged"
+      },
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {}
+    }
+  },
+  {
+    "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.a74a5130c0f43674",
+    "doc": {
+      "_id": "a74a5130c0f43674",
+      "name": "Royal Guard (Stance)",
+      "type": "effect",
+      "img": "icons/equipment/shield/heater-steel-worn.webp",
+      "system": {
+        "description": {
+          "value": "<p>+1 circumstance AC while conscious, wielding a gunblade, and in combat. Enemies within 5 feet of you are Challenged: a –1 circumstance penalty to attack rolls against creatures that aren't in Royal Guard. Remove when any requirement ends.</p>",
+          "gm": ""
+        },
+        "level": {
+          "value": 1
+        },
+        "traits": {
+          "value": [
+            "gunbreaker"
+          ],
+          "rarity": "common"
+        },
+        "publication": {
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "start": {
@@ -3357,6 +3502,38 @@
               },
               "gunbreaker:wielding"
             ]
+          },
+          {
+            "key": "Aura",
+            "slug": "royal-guard",
+            "radius": 5,
+            "traits": [
+              "gunbreaker"
+            ],
+            "predicate": [
+              "encounter",
+              {
+                "not": "self:condition:unconscious"
+              },
+              "gunbreaker:wielding"
+            ],
+            "effects": [
+              {
+                "uuid": "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.fdc9f71cd9295317",
+                "affects": "enemies",
+                "removeOnExit": true
+              }
+            ],
+            "appearance": {
+              "border": {
+                "color": "#c9a227",
+                "alpha": 0.6
+              },
+              "highlight": {
+                "color": "#c9a227",
+                "alpha": 0.12
+              }
+            }
           }
         ],
         "slug": "royal-guard-stance"
@@ -3391,7 +3568,7 @@
           "rarity": "common"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "start": {
@@ -3449,7 +3626,7 @@
           "rarity": "uncommon"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "baseItem": "gunblade",
@@ -3551,7 +3728,7 @@
           "rarity": "uncommon"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "baseItem": "gunblade",
@@ -3653,7 +3830,7 @@
           "rarity": "uncommon"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "baseItem": "gunblade",
@@ -3757,7 +3934,7 @@
           "rarity": "uncommon"
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "baseItem": "gunblade",
@@ -3869,7 +4046,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -3915,7 +4092,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -3963,7 +4140,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4017,7 +4194,7 @@
           ]
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4067,7 +4244,7 @@
           ]
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4114,7 +4291,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4165,7 +4342,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4215,7 +4392,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4262,7 +4439,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4312,7 +4489,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4359,7 +4536,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4409,7 +4586,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4455,7 +4632,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4501,7 +4678,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4551,7 +4728,7 @@
           ]
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4598,7 +4775,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4644,7 +4821,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4691,7 +4868,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4741,7 +4918,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [
@@ -4808,7 +4985,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4859,7 +5036,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4910,7 +5087,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4957,7 +5134,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -4984,11 +5161,11 @@
       "img": "icons/magic/control/buff-flight-wings-runes-purple.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Frequency</strong> once per 10 minutes.</p><p>For 3 rounds, until the start of your third subsequent turn, gain a +2 status bonus to gunblade Strike damage; this becomes +3 at 11th level and +4 at 17th. Load 1 cartridge immediately and gain Ready to Break for the same duration, allowing one Sonic Break if you have that feat. Apply No Mercy. This bonus does not affect Continuation or save-based blasts.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.698e269ba38bcb47]{No Mercy}. Apply manually after recording the action.</p>",
+          "value": "<p><strong>Frequency</strong> once per 10 minutes.</p><p>Every Gunbreaker learns No Mercy at 1st level. For 3 rounds, until the start of your third subsequent turn, gain a +2 status bonus to gunblade Strike damage; this becomes +3 at 12th level and +4 at 18th. Load 1 cartridge immediately and gain Ready to Break for the same duration, allowing one Sonic Break if you have that feat. This bonus does not affect Continuation or save-based blasts.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.698e269ba38bcb47]{No Mercy}. The Gunbreaker console applies it.</p>",
           "gm": ""
         },
         "level": {
-          "value": 2
+          "value": 1
         },
         "traits": {
           "value": [
@@ -4997,7 +5174,7 @@
           ],
           "rarity": "uncommon"
         },
-        "category": "class",
+        "category": "classfeature",
         "actionType": {
           "value": "action"
         },
@@ -5008,7 +5185,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -5058,7 +5235,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -5105,7 +5282,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -5155,7 +5332,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -5206,7 +5383,7 @@
           ]
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [
@@ -5277,7 +5454,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -5323,7 +5500,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -5370,7 +5547,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -5420,7 +5597,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -5467,7 +5644,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -5490,7 +5667,7 @@
       "img": "icons/magic/fire/flame-burning-creature-skeleton.webp",
       "system": {
         "description": {
-          "value": "<p><strong>Requirements</strong> Ready to Break from your No Mercy; you wield a gunblade. Consume Ready to Break and make a melee gunblade Strike. On a hit, add 1d6 persistent bleed damage, increasing to 2d6 at 11th level and 3d6 at 17th. Double the persistent damage on a critical hit as part of the Strike. It uses normal recovery checks and does not open Continuation. The opening is consumed even if you miss.</p><p>@Damage[(1+floor((@actor.level-5)/6))d6[persistent,bleed]]</p>",
+          "value": "<p><strong>Requirements</strong> Ready to Break from your No Mercy; you wield a gunblade. Consume Ready to Break and make a melee gunblade Strike. On a hit, add 1d6 persistent bleed damage, increasing to 2d6 at 12th level and 3d6 at 18th. Double the persistent damage on a critical hit as part of the Strike. It uses normal recovery checks and does not open Continuation. The opening is consumed even if you miss.</p><p>@Damage[(1+floor((@actor.level-6)/6))d6[persistent,bleed]]</p>",
           "gm": ""
         },
         "level": {
@@ -5517,7 +5694,7 @@
           ]
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [
@@ -5525,7 +5702,7 @@
             "key": "DamageDice",
             "selector": "strike-damage",
             "slug": "gunbreaker-sonic-break",
-            "diceNumber": "1+floor((@actor.level-5)/6)",
+            "diceNumber": "1+floor((@actor.level-6)/6)",
             "dieSize": "d6",
             "damageType": "bleed",
             "predicate": [
@@ -5580,7 +5757,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -5634,7 +5811,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -5682,7 +5859,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],
@@ -5732,7 +5909,7 @@
           "value": []
         },
         "publication": {
-          "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+          "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
           "remaster": true
         },
         "rules": [],

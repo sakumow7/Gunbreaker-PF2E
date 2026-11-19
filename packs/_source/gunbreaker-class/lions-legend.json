@@ -5,7 +5,7 @@
     "img": "icons/magic/light/explosion-star-glow-yellow.webp",
     "system": {
         "description": {
-            "value": "<p>At the start of each combat encounter you begin with 2 cartridges instead of 1. When you spend a cartridge on Heart of Stone, its resistance increases to 4 + your level. Your weapon proficiency remains master. Reign of Beasts remains an optional feat and is not granted a second time.</p>",
+            "value": "<p>Your proficiency in light and medium armor and unarmored defense increases to legendary. At the start of each combat encounter you begin with 2 cartridges instead of 1. When you spend a cartridge on Heart of Stone, its resistance increases to 2 + twice your level. Reign of Beasts remains an optional feat and is not granted a second time.</p>",
             "gm": ""
         },
         "level": {
@@ -28,11 +28,24 @@
             "value": []
         },
         "publication": {
-            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+            "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
             "remaster": true
         },
         "rules": [],
-        "slug": "lions-legend"
+        "slug": "lions-legend",
+        "subfeatures": {
+            "proficiencies": {
+                "light": {
+                    "rank": 4
+                },
+                "medium": {
+                    "rank": 4
+                },
+                "unarmored": {
+                    "rank": 4
+                }
+            }
+        }
     },
     "folder": null,
     "sort": 0,

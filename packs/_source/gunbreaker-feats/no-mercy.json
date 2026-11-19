@@ -5,11 +5,11 @@
     "img": "icons/magic/control/buff-flight-wings-runes-purple.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Frequency</strong> once per 10 minutes.</p><p>For 3 rounds, until the start of your third subsequent turn, gain a +2 status bonus to gunblade Strike damage; this becomes +3 at 11th level and +4 at 17th. Load 1 cartridge immediately and gain Ready to Break for the same duration, allowing one Sonic Break if you have that feat. Apply No Mercy. This bonus does not affect Continuation or save-based blasts.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.698e269ba38bcb47]{No Mercy}. Apply manually after recording the action.</p>",
+            "value": "<p><strong>Frequency</strong> once per 10 minutes.</p><p>Every Gunbreaker learns No Mercy at 1st level. For 3 rounds, until the start of your third subsequent turn, gain a +2 status bonus to gunblade Strike damage; this becomes +3 at 12th level and +4 at 18th. Load 1 cartridge immediately and gain Ready to Break for the same duration, allowing one Sonic Break if you have that feat. This bonus does not affect Continuation or save-based blasts.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.698e269ba38bcb47]{No Mercy}. The Gunbreaker console applies it.</p>",
             "gm": ""
         },
         "level": {
-            "value": 2
+            "value": 1
         },
         "traits": {
             "value": [
@@ -18,7 +18,7 @@
             ],
             "rarity": "uncommon"
         },
-        "category": "class",
+        "category": "classfeature",
         "actionType": {
             "value": "action"
         },
@@ -29,7 +29,7 @@
             "value": []
         },
         "publication": {
-            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+            "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
             "remaster": true
         },
         "rules": [],

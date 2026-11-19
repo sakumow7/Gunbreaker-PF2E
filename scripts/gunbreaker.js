@@ -13,8 +13,10 @@ import {installRushHooks} from './rush-native.mjs';
 import {installStone} from './stone-native.mjs';
 import {initialState,normalizeState,capacity,transition} from './state.mjs';
 import {catalogue,sourceIds} from './catalogue.mjs';
+import {installFx} from './fx.mjs';
 const MOD='gunbreaker-pf2e',openActors=new Set(),actorQueue=new ActorQueue();
 let nativeRunner,requestActions;
+const fx=installFx(globalThis);
 const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const slug=item=>sourceIds[item.sourceId ?? item.flags?.core?.sourceId] ?? item.slug ?? item.system?.slug;
 const registerTraits=()=>registerGunbreakerTraits(CONFIG.PF2E);
@@ -111,6 +113,6 @@ Hooks.once('ready',()=>{
   installEncounterHooks(contextFor,actorQueue);
   const heartOfStone=installStone(contextFor,actorQueue);
   const maintenance=createMaintenance(actorQueue);
-  game.modules.get(MOD).api={tracker,record,heartOfStone,maintenance,execute:(actor,request)=>requestActions.execute(actor,request),nativeActions:actor=>nativePanel(actor,requestActions,contextFor),adjustCartridges:(actor,delta)=>record(actor,{type:'adjust',delta}),getState:actor=>normalizeState(actor.getFlag(MOD,'tracker'),contextFor(actor))};
+  game.modules.get(MOD).api={tracker,record,heartOfStone,maintenance,execute:(actor,request)=>requestActions.execute(actor,request),nativeActions:actor=>nativePanel(actor,requestActions,contextFor),adjustCartridges:(actor,delta)=>record(actor,{type:'adjust',delta}),getState:actor=>normalizeState(actor.getFlag(MOD,'tracker'),contextFor(actor)),fx:{play:fx.play,missing:()=>fx.player.missing()}};
 });
 // Ordinary rules cards never execute transitions; only bounded explicit request envelopes do.

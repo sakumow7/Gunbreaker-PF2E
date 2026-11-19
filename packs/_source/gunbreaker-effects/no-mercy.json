@@ -5,7 +5,7 @@
     "img": "icons/magic/control/buff-flight-wings-runes-purple.webp",
     "system": {
         "description": {
-            "value": "<p>Status bonus to gunblade Strike damage: +2, +3 at 11, +4 at 17. Lasts until the start of your third subsequent turn. Record the cartridge and Ready to Break in the tracker.</p>",
+            "value": "<p>Status bonus to gunblade Strike damage: +2, +3 at 12th level, +4 at 18th. Lasts until the start of your third subsequent turn. The console loads the cartridge and Ready to Break.</p>",
             "gm": ""
         },
         "level": {
@@ -18,7 +18,7 @@
             "rarity": "common"
         },
         "publication": {
-            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+            "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
             "remaster": true
         },
         "start": {
@@ -41,7 +41,7 @@
                 "key": "FlatModifier",
                 "selector": "strike-damage",
                 "type": "status",
-                "value": "2+max(0,floor((@actor.level-5)/6))",
+                "value": "2+max(0,floor((@actor.level-6)/6))",
                 "predicate": [
                     "item:trait:gunbreaker"
                 ]

@@ -21,7 +21,7 @@ export function createFollowupRunner(deps,queue,steps=createStepService(deps)){
    marker=actor.getFlag(MOD,'execution');
    if(!followupAvailable(state,c,feat)||state.events.at(-1)!==req.id||marker?.id!==req.id||marker.status!=='complete'||marker.reconciliation)return false;
    assert(c.encounterId===trigger.encounterId&&c.round===trigger.round&&c.turn===trigger.turn,'Combat advanced before the optional rider.');
-   assert(actor.items.some(i=>slug(i)===feat&&i.system.publication?.title?.includes('1.4.0')),'Update the optional rider from the v1.4 compendium.');
+   assert(actor.items.some(i=>slug(i)===feat&&i.system.publication?.title?.match(/\b(1\.4|2\.0)\.0/)),'Update the optional rider from the current Gunbreaker compendium.');
    self=actorToken(actor);origin=stepPosition(self);checkpoint={revision:state.revision,encounterId:c.encounterId,round:c.round,turn:c.turn};
    entry={parentId:req.id,feat,status:'prompting',checkpoint};
    await actor.setFlag(MOD,'followup',entry);await actor.setFlag(MOD,'execution',{...marker,status:'committed',followup:feat});return true;

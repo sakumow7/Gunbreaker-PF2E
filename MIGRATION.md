@@ -1,5 +1,11 @@
 # Migrating to the v1.4 development candidate
 
+## 2.0.0-beta.1
+
+Re-import Gunbreaker class features and actions from the compendium so 2.0 numbers and free follow-ups apply; 1.4 copies still run but keep 1.4 text and dice. No Mercy is now granted by the class at level 1: a character who took the No Mercy class feat retrains that feat slot for free and keeps one copy of No Mercy. Add the Royal Guard Stance effect again so it carries the new aura. Tracker state needs no change.
+
+## 1.4
+
 Do not migrate campaign actors until the native candidate passes disposable-character tests. Updating the package alone never rewrites owned items.
 
 1. Export affected actors and back up the world. Finish current combat. Keep an untouched character copy and the prior installed package.

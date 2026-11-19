@@ -12,11 +12,11 @@ test('revised feat identities and native frequency match the approved design',()
  assert.equal(bySlug.get('camouflage').system.frequency.per,'PT1M');assert.equal(bySlug.get('guarded-advance').system.actions.value,2);
 });
 test('Continuation scales at actual breakpoints and uses the weapon snapshot, not level-inferred runes',()=>{
- assert.equal(followupFormula(7,2),'(2d6+2)[fire]');assert.equal(followupFormula(11,2),'(3d6+2)[fire]');assert.equal(followupFormula(17,3,'cold'),'(4d6+3)[cold]');assert.equal(followupFormula(19,1),'(4d6+1)[fire]');
+ assert.equal(followupFormula(7,2),'1d6[fire]');assert.equal(followupFormula(11,2),'1d6[fire]');assert.equal(followupFormula(12,2),'2d6[fire]');assert.equal(followupFormula(17,3,'cold'),'2d6[cold]');assert.equal(followupFormula(18,1),'3d6[fire]');assert.throws(()=>followupFormula(7,0));
 });
 test('Superbolide HP floor and enhanced Stone scale correctly',()=>{
  assert.equal(superbolideHP(2,10),1);assert.equal(superbolideHP(100,10),90);assert.throws(()=>superbolideHP(1,10));
- assert.equal(stoneResistance(7),5);assert.equal(stoneResistance(19,{enhanced:true,legend:true}),23);
+ assert.equal(stoneResistance(7),9);assert.equal(stoneResistance(7,{enhanced:true}),12);assert.equal(stoneResistance(19,{enhanced:true,legend:true}),40);
 });
 test('calibration is limited to the explicit list and leaves excluded damage alone',()=>{
  for(const s of ['burst-strike','fated-brand','saturation-fire','overpowered-round'])assert.equal(damageType(s,'electricity'),'electricity');

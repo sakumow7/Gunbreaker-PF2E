@@ -79,7 +79,7 @@ export function installStone(contextFor,actorQueue){
     const seen=new Set();
     for(const token of canvas.tokens.placeables){
       const actor=token.actor;if(!actor||actor.type!=='character'||seen.has(actor.uuid))continue;seen.add(actor.uuid);
-      if(!actor.items.some(i=>(i.slug??i.system?.slug)==='heart-of-stone'&&i.system.publication?.title?.includes('1.4.0')))continue;
+      if(!actor.items.some(i=>(i.slug??i.system?.slug)==='heart-of-stone'&&i.system.publication?.title?.match(/\b(1\.4|2\.0)\.0/)))continue;
       try{
         const c=context(actor,skeleton),facts=await factsFor(actor,skeleton);if(facts.self)c.selfTargetIds=[attack.target];
         const choices=stoneOptions(actor.getFlag(MOD,'tracker'),c,facts);if(!choices.length)continue;

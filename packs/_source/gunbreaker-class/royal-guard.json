@@ -5,7 +5,7 @@
     "img": "icons/equipment/shield/heater-steel-worn.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Requirements</strong> You wield a gunblade.</p><p>You adopt the protective posture of Gunnhildr's guard. Gain a +1 circumstance bonus to AC while in this stance. Your damage is unchanged. The stance ends if you cease wielding a gunblade, become unconscious, or combat ends. Your Heart of Stone reaction works with or without the stance. This stance does not force enemies to attack you.</p><p>Apply the linked Royal Guard effect when you enter, and remove it when you leave.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.a74a5130c0f43674]{Royal Guard (Stance)}. Apply manually after recording the action.</p>",
+            "value": "<p><strong>Requirements</strong> You wield a gunblade.</p><p>You adopt the protective posture of Gunnhildr's guard. Gain a +1 circumstance bonus to AC while in this stance, and enemies within 5 feet of you are <strong>Challenged</strong>: they take a –1 circumstance penalty to attack rolls against creatures other than a Gunbreaker in Royal Guard. Your damage is unchanged. The stance ends if you cease wielding a gunblade, become unconscious, or combat ends. Your Heart of Stone reaction works with or without the stance.</p><p>Effect: @UUID[Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.a74a5130c0f43674]{Royal Guard (Stance)}. The Gunbreaker console applies it; its aura challenges enemies automatically.</p>",
             "gm": ""
         },
         "level": {
@@ -29,7 +29,7 @@
             "value": []
         },
         "publication": {
-            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+            "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
             "remaster": true
         },
         "rules": [

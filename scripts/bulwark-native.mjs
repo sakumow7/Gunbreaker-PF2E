@@ -10,7 +10,7 @@ export function createBulwarkService(deps,steps=createStepService(deps)){
  };
  return {
   async prepare(actor,w){
-   assert(actor.items.some(i=>(i.slug??i.system?.slug)==='bulwark-protocol'&&i.system.publication?.title?.includes('1.4.0')),'Update Bulwark Protocol from the v1.4 compendium.');
+   assert(actor.items.some(i=>(i.slug??i.system?.slug)==='bulwark-protocol'&&i.system.publication?.title?.match(/\b(1\.4|2\.0)\.0/)),'Update Bulwark Protocol from the current Gunbreaker compendium.');
    const target=(await fromUuid(w.attack.target))?.object,self=deps.actorToken(actor);
    assert(target?.actor&&actor.uuid!==target.actor.uuid&&actor.isAllyOf(target.actor)&&stepPosition(self).elevation===stepPosition(target).elevation&&stepPosition(self).level===stepPosition(target).level,'Bulwark needs another ally on the same elevation and level.');
    const targetPosition=stepPosition(target),beforeDistance=target.distanceTo(self.getCenterPoint(stepPosition(self)));

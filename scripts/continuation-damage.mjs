@@ -18,7 +18,7 @@ export async function applyContinuationDamage(actor,req,c,before,after,deps){
  const recipient=target.actor,origin=position(self),destination=position(target);
  assert(req.continuationSnapshot?.actorUuid===recipient.uuid&&req.continuationSnapshot.origin===origin&&req.continuationSnapshot.destination===destination,'Continuation changed after its preflight.');
  const rawItem=actor.items.find(i=>(i.slug??i.system?.slug)===req.slug);
- assert(rawItem?.system.publication?.title?.includes('1.4.0'),'Update the Continuation action from the v1.4 compendium.');
+ assert(rawItem?.system.publication?.title?.match(/\b(1\.4|2\.0)\.0/),'Update the Continuation action from the current Gunbreaker compendium.');
  const item=calibratedItem(rawItem,req.slug,after.calibration);
  const itemTraits=JSON.stringify(rawItem.system.traits.value);
  const expected={revision:after.revision,encounterId:c.encounterId,round:c.round,turn:c.turn};

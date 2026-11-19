@@ -20,8 +20,8 @@ export function createReignRunner(deps,queue){
     save.authorize(actor,request);
     assert(REIGN_STEPS.has(request.slug),'Unknown Reign action.');
     assert(!['unconscious','paralyzed','stunned'].some(c=>actor.hasCondition(c)),'This character cannot act.');
-    const item=actor.items.find(i=>(i.slug??i.system?.slug)===request.slug&&i.system.publication?.title?.includes('1.4.0'));
-    assert(item,'Update the Reign action from the v1.4 compendium.');
+    const item=actor.items.find(i=>(i.slug??i.system?.slug)===request.slug&&i.system.publication?.title?.match(/\b(1\.4|2\.0)\.0/));
+    assert(item,'Update the Reign action from the current Gunbreaker compendium.');
     assert((game.combat?.turns.filter(t=>t.actor?.uuid===actor.uuid).length??0)===1,'Reign requires exactly one combatant.');
     const self=actorToken(actor),weapon=weaponFor(actor,request.weaponId),reach=actor.getReach({action:'attack',weapon});
     assert(self.document.parent.id===canvas.scene?.id,'The actor must be on the active scene.');

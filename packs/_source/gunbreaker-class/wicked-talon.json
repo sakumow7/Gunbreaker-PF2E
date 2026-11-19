@@ -5,7 +5,7 @@
     "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Requirements</strong> Your Savage Claw combo opening.</p><p>Make a melee gunblade Strike with 2d6 additional slashing damage, increasing by 1d6 at 11th and 17th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, end this sequence. A hit enables Eye Gouge if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(2+floor((@actor.level-5)/6))d6[slashing]]</p>",
+            "value": "<p><strong>Requirements</strong> Your Savage Claw combo opening.</p><p>Make a melee gunblade Strike with 2d6 additional slashing damage, increasing by 1d6 at 12th and 18th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, end this sequence. A hit lets you use Eye Gouge as a free action immediately afterward if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(2+floor((@actor.level-6)/6))d6[slashing]]</p>",
             "gm": ""
         },
         "level": {
@@ -29,7 +29,7 @@
             "value": []
         },
         "publication": {
-            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+            "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
             "remaster": true
         },
         "rules": [
@@ -37,7 +37,7 @@
                 "key": "DamageDice",
                 "selector": "strike-damage",
                 "slug": "gunbreaker-wicked-talon",
-                "diceNumber": "2+floor((@actor.level-5)/6)",
+                "diceNumber": "2+floor((@actor.level-6)/6)",
                 "dieSize": "d6",
                 "damageType": "slashing",
                 "predicate": [

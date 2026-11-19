@@ -5,7 +5,7 @@
     "img": "icons/magic/fire/projectile-fireball-smoke-strong-orange.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Cost</strong> 1 cartridge. <strong>Requirements</strong> You wield a gunblade.</p><p>Release aether in a 5-foot emanation. Each enemy attempts a basic Reflex save against your class DC against 1d6 fire damage per 2 levels, rounded up. This is not a Strike and does not use or increase multiple attack penalty. If at least one enemy fails or critically fails, you may use Fated Brand as your next action this turn.</p><p>@Damage[(ceil(@actor.level/2))d6[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+            "value": "<p><strong>Cost</strong> 1 cartridge. <strong>Requirements</strong> You wield a gunblade.</p><p>Release aether in a 5-foot emanation. Each enemy attempts a basic Reflex save against your class DC against 1d10 fire damage per 2 levels, rounded up. This is not a Strike and does not use or increase multiple attack penalty. If at least one enemy fails or critically fails, you may use Fated Brand as a free action immediately afterward.</p><p>@Damage[(ceil(@actor.level/2))d10[fire]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
             "gm": ""
         },
         "level": {
@@ -29,7 +29,7 @@
             "value": []
         },
         "publication": {
-            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+            "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
             "remaster": true
         },
         "rules": [],

@@ -42,7 +42,7 @@ for(let level=1;level<=20;level++){
  const ranks={...cls.system.attacks,...cls.system.defenses,...cls.system.savingThrows,perception:cls.system.perception,gunbreaker:1};
  for(const d of items)for(const [key,value] of Object.entries(d.system.subfeatures?.proficiencies??{}))ranks[key]=Math.max(ranks[key]??0,value.rank);
  assert.equal(ranks.martial,level>=13?3:level>=5?2:1);
- assert.equal(ranks.medium,level>=15?3:level>=7?2:1);
+ assert.equal(ranks.medium,level>=19?4:level>=15?3:level>=7?2:1);
  assert.equal(ranks.fortitude,level>=9?3:2);assert.equal(ranks.will,level>=17?3:level>=3?2:1);
  assert.equal(ranks.perception,level>=11?3:level>=3?2:1);assert.equal(ranks.gunbreaker,level>=17?3:level>=9?2:1);
 }

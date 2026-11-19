@@ -5,7 +5,7 @@
     "img": "icons/skills/melee/strike-sword-steel-yellow.webp",
     "system": {
         "description": {
-            "value": "<p>You learn Keen Edge, Brutal Shell, Solid Barrel, Burst Strike, Demon Slice, and Demon Slaughter at 1st level. All these actions require you to wield a gunblade. Combo actions can be used only in a combat encounter with a genuine threat.</p><p>You can maintain one combo sequence at a time. Keen Edge opens Brutal Shell, which opens Solid Barrel. Demon Slice opens Demon Slaughter. Each step consumes the previous opening and enables the next until the end of your next turn. Advance the sequence after resolving the action, even on a miss. Starting another sequence replaces the old one. Other actions, including movement, defense, normal Strikes, and cartridge spenders that do not start a sequence, do not interrupt it.</p><p>All Strikes use and increase multiple attack penalty normally. Bonus damage belongs to the Strike and doubles on a critical hit unless specified otherwise. Count only the base weapon damage die and fundamental striking rune dice when a feature refers to weapon damage dice; extra dice from abilities or property runes do not count. No Mercy modifies gunblade Strike damage, not separate save-based blasts or Continuation damage.</p>",
+            "value": "<p>You learn Keen Edge, Brutal Shell, Solid Barrel, Burst Strike, Demon Slice, and Demon Slaughter at 1st level. All these actions require you to wield a gunblade. Combo actions can be used only in a combat encounter with a genuine threat.</p><p>You can maintain one combo sequence at a time. Keen Edge opens Brutal Shell, which opens Solid Barrel. Demon Slice opens Demon Slaughter. Each step consumes the previous opening and enables the next until the end of your next turn. Advance the sequence after resolving the action, even on a miss. Starting another sequence replaces the old one. Other actions, including movement, defense, normal Strikes, and cartridge spenders that do not start a sequence, do not interrupt it.</p><p>All Strikes use and increase multiple attack penalty normally. Bonus damage belongs to the Strike and doubles on a critical hit unless specified otherwise. Count only the base weapon damage die and fundamental striking rune dice when a feature refers to weapon damage dice; extra dice from abilities or property runes do not count. No Mercy, a 1st-level class feature, modifies gunblade Strike damage, not separate save-based blasts or Continuation damage.</p>",
             "gm": ""
         },
         "level": {
@@ -28,7 +28,7 @@
             "value": []
         },
         "publication": {
-            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+            "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
             "remaster": true
         },
         "rules": [

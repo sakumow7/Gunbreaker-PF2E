@@ -16,7 +16,7 @@ export function createSupportRunner(deps,queue){
   const inspect=(actor,req)=>{
     ports.authorize(actor,req);assert(SUPPORT_ACTIONS.has(req.slug),'Unknown support ability.');
     assert(!actor.isDead&&!['unconscious','paralyzed','stunned'].some(c=>actor.hasCondition(c)),'This character cannot act.');
-    assert(actor.items.some(i=>(i.slug??i.system.slug)===req.slug&&i.system.publication?.title?.includes('1.4.0')),'Update the support action from the v1.4 compendium.');
+    assert(actor.items.some(i=>(i.slug??i.system.slug)===req.slug&&i.system.publication?.title?.match(/\b(1\.4|2\.0)\.0/)),'Update the support action from the current Gunbreaker compendium.');
     weaponFor(actor,req.weaponId);const self=actorToken(actor);assert(self.document.parent.id===canvas.scene?.id,'View the source scene.');return self;
   };
   async function execute(actor,req){

@@ -3,8 +3,8 @@ export const catalogue={
   "abdomen-tear": {
     "name": "Abdomen Tear",
     "level": 7,
-    "actionType": "action",
-    "actions": 1,
+    "actionType": "free",
+    "actions": null,
     "prerequisites": [],
     "frequency": {
       "max": 1,
@@ -102,8 +102,8 @@ export const catalogue={
   "eye-gouge": {
     "name": "Eye Gouge",
     "level": 7,
-    "actionType": "action",
-    "actions": 1,
+    "actionType": "free",
+    "actions": null,
     "prerequisites": [],
     "frequency": {
       "max": 1,
@@ -113,8 +113,8 @@ export const catalogue={
   "fated-brand": {
     "name": "Fated Brand",
     "level": 12,
-    "actionType": "action",
-    "actions": 1,
+    "actionType": "free",
+    "actions": null,
     "prerequisites": [],
     "frequency": {
       "max": 1,
@@ -191,8 +191,8 @@ export const catalogue={
   "hypervelocity": {
     "name": "Hypervelocity",
     "level": 7,
-    "actionType": "action",
-    "actions": 1,
+    "actionType": "free",
+    "actions": null,
     "prerequisites": [],
     "frequency": {
       "max": 1,
@@ -202,8 +202,8 @@ export const catalogue={
   "jugular-rip": {
     "name": "Jugular Rip",
     "level": 7,
-    "actionType": "action",
-    "actions": 1,
+    "actionType": "free",
+    "actions": null,
     "prerequisites": [],
     "frequency": {
       "max": 1,
@@ -492,7 +492,7 @@ export const catalogue={
   },
   "no-mercy": {
     "name": "No Mercy",
-    "level": 2,
+    "level": 1,
     "actionType": "action",
     "actions": 1,
     "prerequisites": [],
@@ -676,6 +676,7 @@ export const sourceIds={
   "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.e8d2c7a4b9f01356": "ready-to-reign",
   "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.f94b9d922ff30784": "ready-to-rip",
   "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.14d57475c050642d": "ready-to-tear",
+  "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.fdc9f71cd9295317": "royal-guard-challenged",
   "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.a74a5130c0f43674": "royal-guard-stance",
   "Compendium.gunbreaker-pf2e.gunbreaker-effects.Item.d00ba9863847115e": "superbolide",
   "Compendium.gunbreaker-pf2e.gunbreaker-equipment.Item.b9c89a75351f5198": "gunblade",

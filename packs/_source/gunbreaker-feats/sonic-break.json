@@ -5,7 +5,7 @@
     "img": "icons/magic/fire/flame-burning-creature-skeleton.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Requirements</strong> Ready to Break from your No Mercy; you wield a gunblade. Consume Ready to Break and make a melee gunblade Strike. On a hit, add 1d6 persistent bleed damage, increasing to 2d6 at 11th level and 3d6 at 17th. Double the persistent damage on a critical hit as part of the Strike. It uses normal recovery checks and does not open Continuation. The opening is consumed even if you miss.</p><p>@Damage[(1+floor((@actor.level-5)/6))d6[persistent,bleed]]</p>",
+            "value": "<p><strong>Requirements</strong> Ready to Break from your No Mercy; you wield a gunblade. Consume Ready to Break and make a melee gunblade Strike. On a hit, add 1d6 persistent bleed damage, increasing to 2d6 at 12th level and 3d6 at 18th. Double the persistent damage on a critical hit as part of the Strike. It uses normal recovery checks and does not open Continuation. The opening is consumed even if you miss.</p><p>@Damage[(1+floor((@actor.level-6)/6))d6[persistent,bleed]]</p>",
             "gm": ""
         },
         "level": {
@@ -32,7 +32,7 @@
             ]
         },
         "publication": {
-            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+            "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
             "remaster": true
         },
         "rules": [
@@ -40,7 +40,7 @@
                 "key": "DamageDice",
                 "selector": "strike-damage",
                 "slug": "gunbreaker-sonic-break",
-                "diceNumber": "1+floor((@actor.level-5)/6)",
+                "diceNumber": "1+floor((@actor.level-6)/6)",
                 "dieSize": "d6",
                 "damageType": "bleed",
                 "predicate": [
