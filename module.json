@@ -2,7 +2,7 @@
   "id": "gunbreaker-pf2e",
   "title": "Gunbreaker Class (PF2e)",
   "description": "PF2e Gunbreaker 2.0 rework: No Mercy class feature, free-action Continuation, stronger area combo, Royal Guard enmity aura, cartridge state tracking, native actions, and optional Sequencer/JB2A animations.",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0-beta.2",
   "authors": [
     {
       "name": "Built for Forge VTT"
@@ -101,5 +101,5 @@
   ],
   "url": "https://github.com/sakumow7/Gunbreaker-PF2E",
   "manifest": "https://github.com/sakumow7/Gunbreaker-PF2E/releases/latest/download/module.json",
-  "download": "https://github.com/sakumow7/Gunbreaker-PF2E/releases/download/v2.0.0-beta.1/gunbreaker-pf2e.zip"
+  "download": "https://github.com/sakumow7/Gunbreaker-PF2E/releases/download/v2.0.0-beta.2/gunbreaker-pf2e.zip"
 }

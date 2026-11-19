@@ -1038,7 +1038,23 @@
             "key": "DamageDice",
             "selector": "strike-damage",
             "slug": "gunbreaker-gnashing-fang",
-            "diceNumber": "1+floor((@actor.level-8)/6)",
+            "diceNumber": {
+              "brackets": [
+                {
+                  "end": 13,
+                  "value": 1
+                },
+                {
+                  "start": 14,
+                  "end": 19,
+                  "value": 2
+                },
+                {
+                  "start": 20,
+                  "value": 3
+                }
+              ]
+            },
             "dieSize": "d6",
             "damageType": "slashing",
             "predicate": [
@@ -2203,7 +2219,23 @@
             "key": "DamageDice",
             "selector": "strike-damage",
             "slug": "gunbreaker-savage-claw",
-            "diceNumber": "1+floor((@actor.level-8)/6)",
+            "diceNumber": {
+              "brackets": [
+                {
+                  "end": 13,
+                  "value": 1
+                },
+                {
+                  "start": 14,
+                  "end": 19,
+                  "value": 2
+                },
+                {
+                  "start": 20,
+                  "value": 3
+                }
+              ]
+            },
             "dieSize": "d6",
             "damageType": "slashing",
             "predicate": [
@@ -2450,7 +2482,23 @@
             "key": "DamageDice",
             "selector": "strike-damage",
             "slug": "gunbreaker-wicked-talon",
-            "diceNumber": "2+floor((@actor.level-8)/6)",
+            "diceNumber": {
+              "brackets": [
+                {
+                  "end": 13,
+                  "value": 2
+                },
+                {
+                  "start": 14,
+                  "end": 19,
+                  "value": 3
+                },
+                {
+                  "start": 20,
+                  "value": 4
+                }
+              ]
+            },
             "dieSize": "d6",
             "damageType": "slashing",
             "predicate": [
@@ -3001,7 +3049,23 @@
             "key": "FlatModifier",
             "selector": "strike-damage",
             "type": "status",
-            "value": "2+max(0,floor((@actor.level-8)/6))",
+            "value": {
+              "brackets": [
+                {
+                  "end": 13,
+                  "value": 2
+                },
+                {
+                  "start": 14,
+                  "end": 19,
+                  "value": 3
+                },
+                {
+                  "start": 20,
+                  "value": 4
+                }
+              ]
+            },
             "predicate": [
               "item:trait:gunbreaker"
             ]
@@ -5702,7 +5766,23 @@
             "key": "DamageDice",
             "selector": "strike-damage",
             "slug": "gunbreaker-sonic-break",
-            "diceNumber": "1+floor((@actor.level-8)/6)",
+            "diceNumber": {
+              "brackets": [
+                {
+                  "end": 13,
+                  "value": 1
+                },
+                {
+                  "start": 14,
+                  "end": 19,
+                  "value": 2
+                },
+                {
+                  "start": 20,
+                  "value": 3
+                }
+              ]
+            },
             "dieSize": "d6",
             "damageType": "bleed",
             "predicate": [

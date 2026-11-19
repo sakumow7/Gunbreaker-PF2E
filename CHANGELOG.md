@@ -1,3 +1,7 @@
+# 2.0.0-beta.2 — formula fix
+
+- Gnashing Fang, Savage Claw, Wicked Talon, Sonic Break and No Mercy now scale with level brackets. Their `@actor.level-8` formulas resolved to 0 in PF2e, dropping the extra dice and the No Mercy bonus. Found in live Forge testing.
+
 # 2.0.0-beta.1 — rework and animations
 
 - No Mercy becomes a level 1 class feature; Continuation follow-ups become free actions; area combo and Fated Circle hit harder; scaling steps move to 14 and 20. See docs/DESIGN-v2.0.md.
