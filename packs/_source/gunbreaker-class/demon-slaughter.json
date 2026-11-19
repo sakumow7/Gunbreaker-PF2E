@@ -5,7 +5,7 @@
     "img": "icons/magic/fire/projectile-fireball-smoke-strong-orange.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Requirements</strong> Your Demon Slice combo opening. Sweep your gunblade through a 5-foot emanation. Each enemy in the area attempts a basic Reflex save against your Gunbreaker class DC. Roll the damage once: 1d4 slashing damage per 2 levels, rounded up. This is not a Strike; do not add weapon damage, runes, Strength, or specialization. This activity does not use or increase multiple attack penalty.</p><p>After resolving the saves, end the combo and load 1 cartridge, even if all targets succeed. At least one enemy must be in the area.</p><p>@Damage[(ceil(@actor.level/2))d4[slashing]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
+            "value": "<p><strong>Requirements</strong> Your Demon Slice combo opening. Sweep your gunblade through a 5-foot emanation. Each enemy in the area attempts a basic Reflex save against your Gunbreaker class DC. Roll the damage once: 1d8 slashing damage per 2 levels, rounded up. This is not a Strike; do not add weapon damage, runes, Strength, or specialization. This activity does not use or increase multiple attack penalty.</p><p>After resolving the saves, end the combo and load 1 cartridge, even if all targets succeed. At least one enemy must be in the area.</p><p>@Damage[(ceil(@actor.level/2))d8[slashing]] — @Check[type:reflex|against:gunbreaker|basic:true]</p>",
             "gm": ""
         },
         "level": {
@@ -28,7 +28,7 @@
             "value": []
         },
         "publication": {
-            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+            "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
             "remaster": true
         },
         "rules": [],

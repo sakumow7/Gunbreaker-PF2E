@@ -20,14 +20,16 @@ export function calibratedItem(item,slug,calibration='fire'){
 export function followupFormula(level, weaponDice, type='fire') {
   if(!Number.isInteger(weaponDice)||weaponDice<1||weaponDice>4)throw Error('Opening weapon dice are unavailable.');
   if(!['fire','cold','electricity'].includes(type))throw Error('Invalid damage type.');
-  return `(${level>=17?4:level>=11?3:2}d6+${weaponDice})[${type}]`;
+  // 2.0: a free action dealing 1d6, 2d6 at 12th and 3d6 at 18th. Weapon dice are still
+  // snapshotted and validated for evidence, but no longer add damage.
+  return `${level>=20?3:level>=14?2:1}d6[${type}]`;
 }
 export function superbolideHP(hp, level) {
   if(!Number.isFinite(hp)||hp<2)throw Error('Superbolide requires at least 2 HP.');
   return Math.max(1,hp-level);
 }
 export function stoneResistance(level, {enhanced=false,legend=false}={}) {
-  return enhanced?(legend?4:2)+level:2+Math.floor(level/2);
+  return enhanced?(legend?2+2*level:2+level+Math.floor(level/2)):2+level;
 }
 export function strikeOutcome(degree) {
   if(![0,1,2,3].includes(degree))throw Error('The native attack has no resolved degree of success.');

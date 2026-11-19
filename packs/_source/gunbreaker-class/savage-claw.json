@@ -5,7 +5,7 @@
     "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
     "system": {
         "description": {
-            "value": "<p><strong>Requirements</strong> Your Gnashing Fang combo opening.</p><p>Make a melee gunblade Strike with 1d6 additional slashing damage, increasing by 1d6 at 11th and 17th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, consume the opening and enable Wicked Talon until the end of your next turn. A hit enables Abdomen Tear if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(1+floor((@actor.level-5)/6))d6[slashing]]</p>",
+            "value": "<p><strong>Requirements</strong> Your Gnashing Fang combo opening.</p><p>Make a melee gunblade Strike with 1d6 additional slashing damage, increasing by 1d6 at 14th and 20th levels. You can use only one of Gnashing Fang, Savage Claw, and Wicked Talon per turn. After resolving the Strike, consume the opening and enable Wicked Talon until the end of your next turn. A hit lets you use Abdomen Tear as a free action immediately afterward if you have Continuation.</p><p><strong>Additional Strike damage:</strong> @Damage[(1+floor((@actor.level-8)/6))d6[slashing]]</p>",
             "gm": ""
         },
         "level": {
@@ -29,7 +29,7 @@
             "value": []
         },
         "publication": {
-            "title": "Gunbreaker PF2e Homebrew Playtest 1.4.0-beta.1",
+            "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
             "remaster": true
         },
         "rules": [
@@ -37,7 +37,7 @@
                 "key": "DamageDice",
                 "selector": "strike-damage",
                 "slug": "gunbreaker-savage-claw",
-                "diceNumber": "1+floor((@actor.level-5)/6)",
+                "diceNumber": "1+floor((@actor.level-8)/6)",
                 "dieSize": "d6",
                 "damageType": "slashing",
                 "predicate": [

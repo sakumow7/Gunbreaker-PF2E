@@ -35,7 +35,7 @@ export function planMigration(actor,baseline,revised,{acceptReserved=[]}={}){
     }
     if(Object.keys(update).length>1)updates.push(update);
   }
-  return {version:'1.4.0-beta.1',actorId:actor._id,updates,decisions,conflicts,ready:!decisions.length&&!conflicts.length};
+  return {version:'2.0.0-beta.1',actorId:actor._id,updates,decisions,conflicts,ready:!decisions.length&&!conflicts.length};
 }
 export function actorBackup(actor){
   const copy=structuredClone(actor);

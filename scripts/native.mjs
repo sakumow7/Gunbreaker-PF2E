@@ -82,7 +82,7 @@ export function createNativeRunner(contextFor,queue,ownerChoices){
       if(matches.length>1)throw Error('Multiple combatants share this actor; native execution is blocked.');
       if(!Number.isInteger(c.map)||c.map<0||c.map>2)throw Error('Choose a valid MAP stage.');
       const item=actor.items.find(i=>slug(i)===req.slug);
-      if(!item?.system.publication?.title?.includes('1.4.0'))throw Error('Update this action from the v1.4 compendium before native execution.');
+      if(!item?.system.publication?.title?.match(/\b(1\.4|2\.0)\.0/))throw Error('Update this action from the current Gunbreaker compendium before native execution.');
       if(req.slug==='superbolide')superbolideHP(actor.system.attributes.hp.value,actor.level);
       if(req.slug==='bloodfest'){
         if(c.targetIds.length!==1)throw Error('Select one genuine enemy for Bloodfest.');

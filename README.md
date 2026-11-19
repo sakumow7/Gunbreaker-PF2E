@@ -1,6 +1,6 @@
 # Gunbreaker — PF2e Remaster Playtest
 
-**1.4.0-beta.1 development candidate** implements the approved [v1.4 design](docs/DESIGN-v1.4.md). This branch is a rules revision plus an initial native-action prototype, **not a completed full-automation release**. The campaign remains on 1.3.0 until a separately reviewed install.
+**2.0.0-beta.1** reworks the class ([v2.0 design](docs/DESIGN-v2.0.md), [encounter simulation](SIMULATION.md)): No Mercy at level 1, free-action Continuation, a stronger area combo, a Royal Guard enmity aura, and optional Sequencer/JB2A animations. It builds on the 1.4 candidate below ([v1.4 design](docs/DESIGN-v1.4.md)). This branch is a rules revision plus an initial native-action prototype, **not a completed full-automation release**. The campaign remains on 1.3.0 until a separately reviewed install.
 
 [Complete rules](RULES.html) · [Automation coverage](docs/AUTOMATION.md) · [Migration](MIGRATION.md) · [Live test plan](SMOKE-TEST.md)
 
@@ -67,7 +67,7 @@ npm run check
 npm run balance
 ```
 
-Build generates the catalogue, all five LevelDB packs, RULES.html, migration source snapshots, and `dist/gunbreaker-pf2e-1.4.0-beta.1.zip`. The ZIP has module.json at its root. It is a local candidate; no release assets are published by building it.
+Build generates the catalogue, all five LevelDB packs, RULES.html, migration source snapshots, and `dist/gunbreaker-pf2e-2.0.0-beta.1.zip`. The ZIP has module.json at its root. It is a local candidate; no release assets are published by building it.
 
 Target environment: **Foundry 14 build 369 / PF2e 8.7.0**. Those versions and installed Gunbreaker 1.3.0 were observed in Forge. This candidate itself has not been installed or tested there. Tests use pure transitions, mocked document lifecycle events and mocked native ports; they cannot certify the real Foundry adapter. Follow SMOKE-TEST.md on disposable characters before replacing campaign copies.
 

@@ -1,0 +1,60 @@
+{
+    "_id": "fdc9f71cd9295317",
+    "name": "Royal Guard: Challenged",
+    "type": "effect",
+    "img": "icons/skills/social/intimidation-impressing.webp",
+    "system": {
+        "description": {
+            "value": "<p>A Gunbreaker in Royal Guard is challenging you. You take a –1 circumstance penalty to attack rolls against creatures that aren't in Royal Guard. Applied and removed by the Gunbreaker's Royal Guard aura.</p>",
+            "gm": ""
+        },
+        "level": {
+            "value": 1
+        },
+        "traits": {
+            "value": [
+                "gunbreaker"
+            ],
+            "rarity": "common"
+        },
+        "publication": {
+            "title": "Gunbreaker PF2e Homebrew Playtest 2.0.0-beta.1",
+            "remaster": true
+        },
+        "start": {
+            "value": 0,
+            "initiative": null
+        },
+        "duration": {
+            "sustained": false,
+            "value": -1,
+            "unit": "unlimited",
+            "expiry": null
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "badge": null,
+        "context": null,
+        "rules": [
+            {
+                "key": "FlatModifier",
+                "selector": "attack-roll",
+                "type": "circumstance",
+                "value": -1,
+                "predicate": [
+                    {
+                        "not": "target:effect:royal-guard-stance"
+                    }
+                ]
+            }
+        ],
+        "slug": "royal-guard-challenged"
+    },
+    "folder": null,
+    "sort": 0,
+    "ownership": {
+        "default": 0
+    },
+    "flags": {}
+}

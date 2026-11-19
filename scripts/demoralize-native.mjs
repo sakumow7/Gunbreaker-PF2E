@@ -19,7 +19,7 @@ export function createDemoralizeRunner({authority,contextFor,actorToken,weaponFo
    const inspect=()=>{
     authority(actor,req);weaponFor(actor,req.weaponId);const self=actorToken(actor);
     assert(!actor.isDead&&!['unconscious','paralyzed','stunned'].some(c=>actor.hasCondition(c)),'This character cannot act.');
-    assert(actor.items.some(i=>(i.slug??i.system.slug)===req.slug&&i.system.publication?.title?.includes('1.4.0')),'Update Suppressing Fire from the v1.4 compendium.');
+    assert(actor.items.some(i=>(i.slug??i.system.slug)===req.slug&&i.system.publication?.title?.match(/\b(1\.4|2\.0)\.0/)),'Update Suppressing Fire from the current Gunbreaker compendium.');
     assert(target.document.parent.id===self.document.parent.id&&self.document.parent.id===canvas.scene.id&&!self.document.hidden&&!target.document.hidden&&self.isVisible!==false&&target.isVisible!==false&&actor.isEnemyOf(target.actor)&&!target.actor.isDead&&self.distanceTo(target)<=30,'Choose a visible enemy within 30 feet.');
     assert(!target.actor.hasCondition('blinded'),'The enemy must be able to see you.');
     assert(!immunityActive(target.actor.getFlag(MOD,'demoralizeImmunity'),actor.uuid,game.time.worldTime),'This enemy is immune to your Demoralize.');

@@ -35,7 +35,7 @@ test('native mixed immediate/persistent roll remains eligible; its later ticks a
 });
 test('choices scale resistance and require threat, range, sight and ability to react',()=>{
  const c=context(),raw=transition(initialState(),{type:'start'},c,catalogue),options=stoneOptions(raw,c,facts());
- assert.equal(options.find(o=>o.id==='base-regular').resistance,11);assert.equal(options.find(o=>o.id==='enhanced-regular').resistance,23);
+ assert.equal(options.find(o=>o.id==='base-regular').resistance,21);assert.equal(options.find(o=>o.id==='enhanced-regular').resistance,40);
  for(const patch of [{enemy:false},{ally:false},{conscious:false},{seesBoth:false},{distance:31}])assert.deepEqual(stoneOptions(raw,c,{...facts(),...patch}),[]);
  assert(stoneOptions(raw,c,{...facts(),distance:30}).length);c.learned=c.learned.filter(s=>s!=='guardians-instinct');assert.equal(stoneOptions(raw,c,{...facts(),distance:16}).length,0);
 });
@@ -68,7 +68,7 @@ test('stale attack, turn, permission or reaction costs cause no spend',async()=>
 });
 test('reserved protection works at zero and creates no cartridge',async()=>{
  const h=setup();h.state={...h.state,cartridges:0};await h.runner.choose('window',h.actor,'reserved-regular','owner',0);
- assert.equal(h.state.cartridges,0);assert.equal(h.state.once.reserve,true);assert.equal(h.window.choice.resistance,23);
+ assert.equal(h.state.cartridges,0);assert.equal(h.state.once.reserve,true);assert.equal(h.window.choice.resistance,40);
 });
 test('regular and extra ally reaction pools remain separate',async()=>{
  const h=setup();h.state={...h.state,lastReactionTurn:1};await h.runner.choose('window',h.actor,'base-instinct','owner',0);

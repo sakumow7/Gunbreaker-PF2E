@@ -15,7 +15,7 @@ export function createMovementRunner({authority,contextFor,actorToken,weaponFor,
   assert(d.width===1&&d.height===1&&samePosition(position(self),{...position(self),...self.getSnappedPosition(position(self))}),'Movement automation currently requires a snapped one-square token.');
   assert(!actor.isDead&&!['unconscious','paralyzed','stunned','immobilized','restrained','prone'].some(c=>actor.hasCondition(c)),'This character cannot use the supported ground Stride.');
   assert(!d.hidden&&self.isVisible!==false,'Movement visibility requires GM adjudication.');
-  assert(actor.items.some(i=>slug(i)===req.slug&&i.system.publication?.title?.includes('1.4.0')),'Update this ability from the v1.4 compendium.');
+  assert(actor.items.some(i=>slug(i)===req.slug&&i.system.publication?.title?.match(/\b(1\.4|2\.0)\.0/)),'Update this ability from the current Gunbreaker compendium.');
   assert(Number.isInteger(req.map??0)&&(req.map??0)>=0&&(req.map??0)<=2,'Choose a valid MAP stage.');
   const speed=actor.system.movement?.speeds?.land?.value;assert(Number.isFinite(speed)&&speed>0,'No usable land Speed.');
   assert(typeof self.planMovement==='function'&&typeof d.move==='function'&&typeof d.stopMovement==='function','Foundry v14 movement planning is unavailable.');

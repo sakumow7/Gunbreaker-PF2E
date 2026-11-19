@@ -19,12 +19,13 @@ export function areaPersistentFormula(slug,level){
 export function areaFormula(slug,level,calibration='fire',learned=[]){
   assert(SAVE_ACTIONS.has(slug)&&Number.isInteger(level)&&level>=1&&level<=20,'Invalid area ability or level.');
   if(slug==='relentless-rush')return '8d6[fire]';
-  if(slug.startsWith('demon-'))return `${Math.ceil(level/2)}d4[slashing]`;
+  if(slug.startsWith('demon-'))return `${Math.ceil(level/2)}d8[slashing]`;
   if(slug==='bow-shock')return `${Math.ceil(level/2)}d4[fire]`;
   if(slug==='danger-zone')return `${Math.ceil(level/2)}d${areaProfile(slug,level,learned).upgraded?8:6}[fire]`;
   calibration=damageType(slug,calibration);
   if(slug==='double-down')return `${level>=18?12:10}d6[${calibration}]`;
-  return `${slug==='fated-brand'?(level>=17?3:2):Math.ceil(level/2)}d6[${calibration}]`;
+  if(slug==='fated-circle')return `${Math.ceil(level/2)}d10[${calibration}]`;
+  return `${slug==='fated-brand'?(level>=20?3:2):Math.ceil(level/2)}d6[${calibration}]`;
 }
 export function basicMultiplier(degree){
   assert([0,1,2,3].includes(degree),'Native save has no resolved degree of success.');
