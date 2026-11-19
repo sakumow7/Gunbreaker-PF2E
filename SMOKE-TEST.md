@@ -146,3 +146,8 @@ Use disposable characters and exactly one GM. Disable automatic damage applicati
 5. Demon Slice rolls d8s; Fated Circle rolls d10s.
 6. With Sequencer and JB2A on: a Strike plays a swing and impact on the target; a miss plays a missed swing; Continuation plays a blast; Demon Slice plays a ring around the Gunbreaker; No Mercy and Bloodfest show a burst and a lasting aura; cartridge pips match the tracker during an encounter.
 7. Setting my effects level to Off hides effects and pips on that client only. With Sequencer disabled, actions still resolve with no console errors.
+
+### 2.0.0-beta.1 live results (Forge Testing, Foundry 14.370, PF2e 8.7.1, JB2A Patreon, 2026-11-19)
+
+- Pass: No Mercy granted at level 1 by the class; Burst Strike bonus dice 2/3/3/4 at 13/14/19/20; Royal Guard aura applies Challenged within 5 feet only, and an enemy attacking an ally shows −1 while attacking the Gunbreaker shows none; all animation roles resolve; Strike and effect animations, cartridge pips, No Mercy and Royal Guard auras play; Off hides them; with Sequencer disabled a Strike resolves with no console errors.
+- Found and fixed in 2.0.0-beta.2: Gnashing Fang, Savage Claw, Wicked Talon, Sonic Break and the No Mercy effect used `@actor.level-8`, which PF2e reads as a property named `level-8` (0). Gnashing dice were dropped and No Mercy gave +0. They now use level brackets; verified live as +2/+3/+4 and 1/2/3 (Talon 2/3/4) at 13/14/20.

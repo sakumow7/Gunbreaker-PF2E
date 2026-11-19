@@ -40,7 +40,23 @@
                 "key": "DamageDice",
                 "selector": "strike-damage",
                 "slug": "gunbreaker-sonic-break",
-                "diceNumber": "1+floor((@actor.level-8)/6)",
+                "diceNumber": {
+                    "brackets": [
+                        {
+                            "end": 13,
+                            "value": 1
+                        },
+                        {
+                            "start": 14,
+                            "end": 19,
+                            "value": 2
+                        },
+                        {
+                            "start": 20,
+                            "value": 3
+                        }
+                    ]
+                },
                 "dieSize": "d6",
                 "damageType": "bleed",
                 "predicate": [
