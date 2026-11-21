@@ -1,4 +1,4 @@
-import {writeTracker} from './tracker-storage.mjs';
+import {writeTracker,writeMarker} from './tracker-storage.mjs';
 import {normalizeState,transition} from './state.mjs';
 import {catalogue} from './catalogue.mjs';
 import {assertFreshIntent} from './requests.mjs';
@@ -34,26 +34,26 @@ export function createDemoralizeRunner({authority,contextFor,actorToken,weaponFo
    if(!yes)return {id:req.id,status:'canceled'};
    inspect();assertFreshIntent(checkpoint,contextFor(actor),actor.getFlag(MOD,'tracker'));assert(position(self)===origin&&position(target)===destination,'Positions changed during confirmation.');
    let journal={id:req.id,slug:req.slug,status:'committed',before,target:target.document.uuid,started:c.time};
-   await actor.setFlag(MOD,'execution',journal);
+   await writeMarker(actor,'execution',journal);
    try{
     const action=suppressingAction(game.pf2e.actions.get('demoralize'));
     const results=await action.use({actors:actor,target});
-    if(!results?.length){journal={...journal,status:'canceled'};await actor.setFlag(MOD,'execution',journal);return journal;}
+    if(!results?.length){journal={...journal,status:'canceled'};await writeMarker(actor,'execution',journal);return journal;}
     assert(results.length===1&&results[0].actor.uuid===actor.uuid,'Unexpected Demoralize result.');
     const result=results[0],value=frightenedValue(result.roll.degreeOfSuccess);
-    journal={...journal,degree:result.roll.degreeOfSuccess,messageId:result.message?.id??null};await actor.setFlag(MOD,'execution',journal);
+    journal={...journal,degree:result.roll.degreeOfSuccess,messageId:result.message?.id??null};await writeMarker(actor,'execution',journal);
     authority(actor,req);assertFreshIntent(checkpoint,contextFor(actor),actor.getFlag(MOD,'tracker'));
     assert(position(self)===origin&&position(target)===destination,'Positions changed during the check; reconcile the attempt.');
     await writeTracker(actor,after);
     const old=(target.actor.getFlag(MOD,'demoralizeImmunity')??[]).filter(e=>e.until>c.time);
     assert(!immunityActive(old,actor.uuid,c.time),'Another Demoralize attempt resolved during this check.');
     // Claim immunity and condition application before writing a condition; a failure cannot be retried.
-    journal={...journal,application:'applying'};await actor.setFlag(MOD,'execution',journal);
+    journal={...journal,application:'applying'};await writeMarker(actor,'execution',journal);
     await target.actor.setFlag(MOD,'demoralizeImmunity',[...old,immunityEntry(actor.uuid,c.time,req.id)]);
     const effect=suppressingEffect();
     if(value&&!target.actor.isDead&&!target.actor.isImmuneTo(effect)&&!target.actor.isImmuneTo('frightened'))await setFrightenedAtLeast(target.actor,value);
-    journal={...journal,status:'complete',application:'complete',revision:after.revision};await actor.setFlag(MOD,'execution',journal);return journal;
-   }catch(e){await actor.setFlag(MOD,'execution',{...journal,status:'recovery',error:e.message});throw e;}
+    journal={...journal,status:'complete',application:'complete',revision:after.revision};await writeMarker(actor,'execution',journal);return journal;
+   }catch(e){await writeMarker(actor,'execution',{...journal,status:'recovery',error:e.message});throw e;}
   });
  }};
 }

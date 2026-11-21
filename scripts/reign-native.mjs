@@ -49,7 +49,7 @@ export function createReignRunner(deps,queue){
     }
     if(progress?.primaryDamage){
       const m=game.messages.get(progress.primaryDamage.messageId);
-      assert(m?.isDamageRoll&&same(m.rolls?.[0]?.toJSON(),progress.primaryDamage.roll),'The primary damage evidence changed.');
+      assert(m?.isDamageRoll&&rollFingerprint(m.rolls?.[0])===rollFingerprint(progress.primaryDamage.roll),'The primary damage evidence changed.');
     }
   };
   return new ReignRunner({...save,
@@ -98,9 +98,9 @@ export function createReignRunner(deps,queue){
       if(!roll)return null;
       const cards=[...game.messages.values()].filter(m=>!existing.has(m.id)&&m.isDamageRoll&&m.actor?.uuid===actor.uuid
         &&m.item?.id===prepared.weaponId&&m.flags?.pf2e?.context?.sourceType==='attack'
-        &&m.flags.pf2e.context.target?.token===prepared.primary.uuid&&same(m.rolls?.[0]?.toJSON(),roll.toJSON()));
+        &&m.flags.pf2e.context.target?.token===prepared.primary.uuid&&rollFingerprint(m.rolls?.[0])===rollFingerprint(roll));
       assert(cards.length===1&&roll.options?.degreeOfSuccess===progress.attack.degree,'Native primary Strike damage evidence is unavailable or ambiguous.');
-      return {messageId:cards[0].id,roll:structuredClone(roll.toJSON()),application:'native-card-controls'};
+      return {messageId:cards[0].id,roll:JSON.parse(JSON.stringify(roll.toJSON())),application:'native-card-controls'};
     },
     choose:async(actor,request,c,prepared,progress)=>{
       if(!prepared.candidates.length)return [];

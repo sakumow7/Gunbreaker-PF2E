@@ -1,3 +1,4 @@
+import {writeMarker} from './tracker-storage.mjs';
 import {rollFingerprint} from './roll-evidence.mjs';
 import {calibratedItem,damageType,followupFormula} from './mechanics.mjs';
 import {nativeDamageContext} from './native-damage.mjs';
@@ -45,7 +46,7 @@ export async function applyContinuationDamage(actor,req,c,before,after,deps){
   const journal=actor.getFlag(MOD,'execution');
   assert(journal?.id===req.id&&journal.status==='committed'&&!journal.reconciliation,'Continuation journal changed.');
   Object.assign(entry,patch);
-  await actor.setFlag(MOD,'execution',{...journal,riders:[...(journal.riders??[]).filter(r=>r.kind!=='continuation-damage'),structuredClone(entry)]});
+  await writeMarker(actor,'execution',{...journal,riders:[...(journal.riders??[]).filter(r=>r.kind!=='continuation-damage'),structuredClone(entry)]});
  };
  await mark({});verify();
  const roll=await new DamageRoll(formula).evaluate();roll.options.degreeOfSuccess=null;

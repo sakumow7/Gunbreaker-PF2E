@@ -1,4 +1,4 @@
-import {writeTracker} from './tracker-storage.mjs';
+import {writeTracker,writeMarker} from './tracker-storage.mjs';
 import {nativeDamageContext} from './native-damage.mjs';
 import {assertFreshIntent} from './requests.mjs';
 import {calibratedItem,damageType} from './mechanics.mjs';
@@ -49,10 +49,10 @@ export async function overpoweredRound(actor,request,c,state,primary,weapon){
  for(const target of targets){
   coordinator();
   if(position(primary)!==origin||position(target)!==positions[targets.indexOf(target)]||!request.lockedActors?.includes(target.actor.uuid)||target.actor.isDead||target.document.hidden||target.isVisible===false||primary.distanceTo(target)>5||!actor.isEnemyOf(target.actor))throw Error('A secondary enemy changed before Overpowered Round.');
-  const marker=actor.getFlag(MOD,'execution');await actor.setFlag(MOD,'execution',{...marker,riders:[...(marker.riders??[]),{kind:'overpowered-round',actor:target.actor.uuid,status:'applying'}]});
+  const marker=actor.getFlag(MOD,'execution');await writeMarker(actor,'execution',{...marker,riders:[...(marker.riders??[]),{kind:'overpowered-round',actor:target.actor.uuid,status:'applying'}]});
   const {clone,rollOptions}=await nativeDamageContext(target.actor,{actor,item,flags:{pf2e:{context:{options}}}});
   roll.options.degreeOfSuccess=null;
   await clone.applyDamage({damage:roll,token:target.document,item,rollOptions,skipIWR:false});
-  const updated=actor.getFlag(MOD,'execution');updated.riders.at(-1).status='complete';await actor.setFlag(MOD,'execution',updated);
+  const updated=actor.getFlag(MOD,'execution');updated.riders.at(-1).status='complete';await writeMarker(actor,'execution',updated);
  }
 }

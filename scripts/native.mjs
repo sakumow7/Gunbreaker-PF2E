@@ -1,4 +1,4 @@
-import {writeTracker} from './tracker-storage.mjs';
+import {writeTracker,writeMarker} from './tracker-storage.mjs';
 import {createFollowupRunner,FOLLOWUP_BUSY} from './followup-native.mjs';
 import {createMovementRunner} from './movement-native.mjs';
 import {MOVEMENT_ACTIONS} from './movement.mjs';
@@ -75,7 +75,7 @@ export function createNativeRunner(contextFor,queue,ownerChoices){
       return {...c,weaponDice:nativeWeaponDice(w),weaponId:w.id,map:req.map??0};
     },
     read:actor=>actor.getFlag(MOD,'tracker'),write:(actor,state)=>{authority(actor);return writeTracker(actor,state);},
-    journal:actor=>actor.getFlag(MOD,'execution'),saveJournal:(actor,entry)=>{authority(actor);return actor.setFlag(MOD,'execution',entry);},
+    journal:actor=>actor.getFlag(MOD,'execution'),saveJournal:(actor,entry)=>{authority(actor);return writeMarker(actor,'execution',entry);},
     validate:async(actor,req,c,state)=>{
       if(actor.hasCondition('unconscious')||actor.hasCondition('paralyzed'))throw Error('This character cannot act.');
       const matches=game.combat?.turns.filter(t=>t.actor?.uuid===actor.uuid)??[];

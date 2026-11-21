@@ -1,3 +1,4 @@
+import {writeMarker} from './tracker-storage.mjs';
 import {actorBackup,planMigration,rollbackMigration} from './migration.mjs';
 const MOD='gunbreaker-pf2e';
 const esc=s=>foundry.utils.escapeHTML(String(s));
@@ -22,8 +23,8 @@ export function createMaintenance(queue){
    return queue.run(actor,async()=>{
     gm(actor);stoppedForRecovery(actor);if(effectSnapshot!==JSON.stringify(effects.map(e=>[e.id,actor.items.get(e.id)?.flags[MOD]?.support])))throw Error('Support recovery changed; review it again.');if(JSON.stringify(followup)!==JSON.stringify(actor.getFlag(MOD,'followup'))||JSON.stringify(marker)!==JSON.stringify(actor.getFlag(MOD,'execution'))||JSON.stringify(rush)!==JSON.stringify(actor.getFlag(MOD,'rush')))throw Error('The pending record changed; review it again.');
     const backupId=await backup(actor,'recovery');
-    if(marker)await actor.setFlag(MOD,'execution',{...marker,status:'complete',reconciliation:{note:decision.slice(0,2000),backupId,time:game.time.worldTime}});
-    if(followup&&['prompting','planning','applying','recovery'].includes(followup.status))await actor.setFlag(MOD,'followup',{...followup,status:'reconciled',reconciliation:{note:decision.slice(0,2000),backupId,time:game.time.worldTime}});
+    if(marker)await writeMarker(actor,'execution',{...marker,status:'complete',reconciliation:{note:decision.slice(0,2000),backupId,time:game.time.worldTime}});
+    if(followup&&['prompting','planning','applying','recovery'].includes(followup.status))await writeMarker(actor,'followup',{...followup,status:'reconciled',reconciliation:{note:decision.slice(0,2000),backupId,time:game.time.worldTime}});
     if(rush&&['arming','resolving','recovery'].includes(rush.status))await actor.setFlag(MOD,'rush',{...rush,status:'skipped',reconciliation:backupId});
     for(const effect of effects){const s=effect.flags[MOD].support;await effect.setFlag(MOD,'support',{...s,status:s.kind==='aurora'?'complete':'active',healing:'complete',reconciliation:backupId});}
     return {backupId};

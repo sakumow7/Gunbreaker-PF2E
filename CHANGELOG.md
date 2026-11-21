@@ -1,3 +1,8 @@
+# 2.0.0-beta.3 — journal and Reign fixes
+
+- Execution and follow-up journals are now replaced, not merged. Before, a new action inherited the previous action's riders, so any Continuation after Eye Gouge (or another Continuation) failed with "Continuation damage was already claimed". Found in a live Forge showcase.
+- Reign of Beasts matched its native damage card by exact roll JSON, which Dice So Nice annotations break; it now uses the same roll fingerprint as Continuation. It also no longer structuredClones the damage roll, which failed on rolls carrying predicate functions.
+
 # 2.0.0-beta.2 — formula fix
 
 - Gnashing Fang, Savage Claw, Wicked Talon, Sonic Break and No Mercy now scale with level brackets. Their `@actor.level-8` formulas resolved to 0 in PF2e, dropping the extra dice and the No Mercy bonus. Found in live Forge testing.
