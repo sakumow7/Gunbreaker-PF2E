@@ -1,4 +1,4 @@
-import {writeTracker} from './tracker-storage.mjs';
+import {writeTracker,writeMarker} from './tracker-storage.mjs';
 import {rollFingerprint} from './roll-evidence.mjs';
 import {tempHPEffect} from './riders.mjs';
 import {resolvedOptions} from './options.mjs';
@@ -97,7 +97,7 @@ export function createSavePorts({authority,contextFor,actorToken,weaponFor},{aut
           content:`<p>Gunbreaker action journal: ${esc(j.slug)}. Keep this record for interruption recovery.</p>`,flags:{[MOD]:{areaJournal:j}}});
         if(!log?.id)throw Error('The private area journal could not be created.');privateJournals.add(log.id);
       }
-      await a.setFlag(MOD,'execution',{id:j.id,slug:j.slug,status:j.status,journalId:log.id,revision:j.revision??null});
+      await writeMarker(a,'execution',{id:j.id,slug:j.slug,status:j.status,journalId:log.id,revision:j.revision??null});
     },
     cleanup:async(actor,request,prepared)=>{
       const marker=actor.getFlag(MOD,'execution');

@@ -10,3 +10,7 @@ export function trackerPatch(previous,next){
 export function writeTracker(actor,state){
  return actor.setFlag(MOD,'tracker',trackerPatch(actor.getFlag(MOD,'tracker'),state));
 }
+/** Replace a journal-style flag in one write; a plain setFlag would merge stale keys such as riders from the previous action. */
+export function writeMarker(actor,key,value){
+ return actor.setFlag(MOD,key,trackerPatch(actor.getFlag(MOD,key),value));
+}

@@ -1,4 +1,4 @@
-import {writeTracker} from './tracker-storage.mjs';
+import {writeTracker,writeMarker} from './tracker-storage.mjs';
 import {followupFeat,followupAvailable,commitFollowup} from './followup-riders.mjs';
 import {createStepService,stepPosition} from './step-native.mjs';
 import {tempHPEffect} from './riders.mjs';
@@ -24,7 +24,7 @@ export function createFollowupRunner(deps,queue,steps=createStepService(deps)){
    assert(actor.items.some(i=>slug(i)===feat&&i.system.publication?.title?.match(/\b(1\.4|2\.0)\.0/)),'Update the optional rider from the current Gunbreaker compendium.');
    self=actorToken(actor);origin=stepPosition(self);checkpoint={revision:state.revision,encounterId:c.encounterId,round:c.round,turn:c.turn};
    entry={parentId:req.id,feat,status:'prompting',checkpoint};
-   await actor.setFlag(MOD,'followup',entry);await actor.setFlag(MOD,'execution',{...marker,status:'committed',followup:feat});return true;
+   await writeMarker(actor,'followup',entry);await writeMarker(actor,'execution',{...marker,status:'committed',followup:feat});return true;
   });
   if(!started)return parent;
   const fresh=()=>{
@@ -35,7 +35,7 @@ export function createFollowupRunner(deps,queue,steps=createStepService(deps)){
    assert(same(origin,stepPosition(self)),'The source moved after its triggering action.');
   };
   const finish=async(status)=>queue.run(actor,async()=>{
-   fresh();await actor.setFlag(MOD,'followup',{...entry,status});await actor.setFlag(MOD,'execution',{...marker,status:'complete',followup:{feat,status},revision:actor.getFlag(MOD,'tracker').revision});return {...parent,revision:actor.getFlag(MOD,'tracker').revision};
+   fresh();await writeMarker(actor,'followup',{...entry,status});await writeMarker(actor,'execution',{...marker,status:'complete',followup:{feat,status},revision:actor.getFlag(MOD,'tracker').revision});return {...parent,revision:actor.getFlag(MOD,'tracker').revision};
   });
   try{
    const candidates=feat==='continued-assault'&&guard(actor)?allies(actor,self):[];
@@ -51,7 +51,7 @@ export function createFollowupRunner(deps,queue,steps=createStepService(deps)){
    if(!choice)return await finish('declined');
    fresh();let plan=null,target=null;
    if(choice.kind==='step'){
-    entry={...entry,status:'planning',kind:'step'};await actor.setFlag(MOD,'followup',entry);
+    entry={...entry,status:'planning',kind:'step'};await writeMarker(actor,'followup',entry);
     plan=await steps.prepare(actor,req);if(!plan)return await finish('declined');
    }else{
     assert(choice.kind==='barrier'&&feat==='continued-assault'&&guard(actor),'Invalid optional rider choice.');
@@ -61,7 +61,7 @@ export function createFollowupRunner(deps,queue,steps=createStepService(deps)){
     fresh();if(plan)steps.validate(actor,req,plan);
     if(target)assert(guard(actor)&&allies(actor,self).includes(target),'The stance or recipient changed.');
     entry={...entry,status:'applying',kind:choice.kind,target:target?.document.uuid??null,...(plan?{plan:steps.evidence(plan)}:{})};
-    await actor.setFlag(MOD,'followup',entry);
+    await writeMarker(actor,'followup',entry);
     const after=commitFollowup(actor.getFlag(MOD,'tracker'),c,feat,req.id);await writeTracker(actor,after);checkpoint={...checkpoint,revision:after.revision};
     if(target)await target.actor.createEmbeddedDocuments('Item',[tempHPEffect('Continued Assault',actor,c,Math.max(1,Math.floor(c.level/2)),req.id)]);
    });
@@ -69,7 +69,7 @@ export function createFollowupRunner(deps,queue,steps=createStepService(deps)){
    if(plan){await steps.move(actor,req,plan);origin=stepPosition(self);}
    return await finish('complete');
   }catch(e){
-   await queue.run(actor,async()=>{const current=actor.getFlag(MOD,'followup');if(current?.parentId===req.id&&FOLLOWUP_BUSY.has(current.status)){await actor.setFlag(MOD,'followup',{...current,status:'recovery',error:e.message});const execution=actor.getFlag(MOD,'execution');if(execution?.id===req.id&&!execution.reconciliation)await actor.setFlag(MOD,'execution',{...execution,status:'recovery',error:e.message});}});
+   await queue.run(actor,async()=>{const current=actor.getFlag(MOD,'followup');if(current?.parentId===req.id&&FOLLOWUP_BUSY.has(current.status)){await writeMarker(actor,'followup',{...current,status:'recovery',error:e.message});const execution=actor.getFlag(MOD,'execution');if(execution?.id===req.id&&!execution.reconciliation)await writeMarker(actor,'execution',{...execution,status:'recovery',error:e.message});}});
    throw e;
   }
  }};
